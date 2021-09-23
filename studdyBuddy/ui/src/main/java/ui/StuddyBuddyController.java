@@ -1,11 +1,12 @@
 package ui;
 
+import java.io.FileNotFoundException;
+
 import core.StuddyBuddy;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 
 public class StuddyBuddyController {
     
@@ -39,7 +40,7 @@ public class StuddyBuddyController {
 		//StuddyBuddy student = new StuddyBuddy();
         createRegistration();
         // TODO: kobling til fillagring
-        studdyBuddyFileHandler = new StuddyBuddyFileHandler(this);
+        studdyBuddyFileHandler = new StuddyBuddyFileHandler();
 
 	}
 
@@ -117,7 +118,7 @@ public class StuddyBuddyController {
         return (!getInputName().isBlank() | !getInputRoom().isBlank() | !getInputCourse().isBlank() | !getInputStartTime().isBlank() | !getInputEndTime().isBlank());
     }
 
-    private StuddyBuddy registerStuddyBuddy(){
+    private void registerStuddyBuddy(){
         this.studdyBuddy.getName();
         this.studdyBuddy.getRoom();
         this.studdyBuddy.getCourse();
@@ -126,11 +127,11 @@ public class StuddyBuddyController {
     }
 
     @FXML
-    public void handleRegister(){
+    public void handleRegister() throws FileNotFoundException{ // try, catch
         registerStuddyBuddy();
         if(hasInput()){
             // the info is saved to file
-            saveRegistrationToFIle(this.studdyBuddy);
+            studdyBuddyFileHandler.saveRegistrationToFile(this.studdyBuddy);
             messageText.setText("Your registration was successfull!");
             messageText.setStyle("-fx-background-color: #7DDF64"); // Light green-color
         }
