@@ -8,17 +8,17 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class StudyBuddyApp extends Application {
+public class StuddyBuddyApp extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("StudyBuddy.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("StuddyBuddy.fxml"));
         Parent parent = fxmlLoader.load();
         stage.setScene(new Scene(parent));
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(StudyBuddyApp.class);
+        launch(StuddyBuddyApp.class);
     }
 }
