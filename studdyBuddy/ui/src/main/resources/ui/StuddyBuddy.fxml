@@ -39,13 +39,13 @@
         <Label text="Endtime:"
         GridPane.columnIndex="0" GridPane.rowIndex="6"/>
  
-    	<TextField fx:id="endTImeField" 
+    	<TextField fx:id="endTimeField" 
         GridPane.columnIndex="1" GridPane.rowIndex="6"/>
         
         <Button text="Register" onAction="#handleRegister"
         GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
-        <Label text="messageText"
+        <Label text="" fx:id="messageText"
         GridPane.columnIndex="0" GridPane.rowIndex="8"/>
 
 

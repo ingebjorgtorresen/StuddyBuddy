@@ -37,7 +37,7 @@ public class StuddyBuddyController {
 	
 	
 	public void initialize() {
-		//StuddyBuddy student = new StuddyBuddy();
+		studdyBuddy = new StuddyBuddy();
         createRegistration();
         // TODO: kobling til fillagring
         studdyBuddyFileHandler = new StuddyBuddyFileHandler();
@@ -121,11 +121,11 @@ public class StuddyBuddyController {
     }
 
     private void registerStuddyBuddy(){
-        this.studdyBuddy.getName();
-        this.studdyBuddy.getRoom();
-        this.studdyBuddy.getCourse();
-        this.studdyBuddy.getStartTime();
-        this.studdyBuddy.getEndTime();
+        this.studdyBuddy.setName(nameField.getText());
+        this.studdyBuddy.setRoom(roomField.getText());
+        this.studdyBuddy.setCourse(courseField.getText());
+        this.studdyBuddy.setStartTime(startTimeField.getText());
+        this.studdyBuddy.setEndTime(endTimeField.getText());
     }
 
     @FXML
