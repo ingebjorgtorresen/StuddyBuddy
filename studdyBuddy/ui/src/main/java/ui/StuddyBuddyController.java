@@ -45,12 +45,14 @@ public class StuddyBuddyController {
 	}
 
     private void createRegistration(){
-        registration.getChildren().clear();
-        //Pane pane = new Pane();
-        //pane.setStyle("-fx-background-color: white;");
-        messageText.setVisible(false);
-        messageText.setStyle("-fx-background-color: #ed4d6e"); // Paradise pink-color
-        
+
+        if (this.registration != null) {
+            registration.getChildren().clear();
+            //Pane pane = new Pane();
+            //pane.setStyle("-fx-background-color: white;");
+            messageText.setVisible(false);
+            messageText.setStyle("-fx-background-color: #ed4d6e"); // Paradise pink-color
+        }
     }
 
     @FXML
