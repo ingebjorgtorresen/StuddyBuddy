@@ -12,7 +12,7 @@ import java.io.File;
 
 public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
 
-    private static final String REGISTRATION_STRING = "modules-template/ui/src/main/resources/ui/Registrations.txt"; 
+    private static final String REGISTRATION_STRING = "/workspace/gr2144/studdyBuddy/ui/src/main/resources/ui/Registrations.txt"; 
 
     @Override
     public void saveRegistrationToFile(StuddyBuddy studdybuddy) throws FileNotFoundException {
@@ -27,7 +27,7 @@ public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
         try(PrintWriter writer = new PrintWriter(new FileWriter(REGISTRATION_STRING, true))) { 
             writer.println(registration);
 
-        } catch (IOException e) {   
+        } catch (IOException e) {  
             e.getStackTrace();
         }
     }
