@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 
 public class StuddyBuddyController {
     
@@ -35,12 +36,13 @@ public class StuddyBuddyController {
     @FXML
     private Label messageText;
 	
+    @FXML 
+    private Label feedbackText;
 	
 	public void initialize() {
 		studdyBuddy = new StuddyBuddy();
         createRegistration();
         studdyBuddyFileHandler = new StuddyBuddyFileHandler();
-
 	}
 
     private void createRegistration(){
@@ -133,6 +135,9 @@ public class StuddyBuddyController {
         messageText.setText("Your registration was successfull!");
         messageText.setStyle("-fx-background-color: #7DDF64"); // Light green-color
         messageText.setVisible(true);
+        feedbackText.setText(studdyBuddyFileHandler.readRegistrationFromFile());
+        feedbackText.setStyle("-fx-background-color: #C0DF85");
+        feedbackText.setVisible(true);
         nameField.clear();
         roomField.clear();
         courseField.clear();
