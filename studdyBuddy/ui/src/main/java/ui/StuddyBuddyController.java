@@ -33,13 +33,12 @@ public class StuddyBuddyController {
 	private TextField endTimeField;
 
     @FXML
-    private Label messageText; // skal være de ulike feilmeldingene som kastes ut, usikker på om dette kommer til å fungere
+    private Label messageText;
 	
 	
 	public void initialize() {
 		studdyBuddy = new StuddyBuddy();
         createRegistration();
-        // TODO: kobling til fillagring
         studdyBuddyFileHandler = new StuddyBuddyFileHandler();
 
 	}
@@ -48,21 +47,21 @@ public class StuddyBuddyController {
 
         if (this.registration != null) {
             registration.getChildren().clear();
-            //Pane pane = new Pane();
-            //pane.setStyle("-fx-background-color: white;");
-            messageText.setVisible(false);
-            messageText.setStyle("-fx-background-color: #ed4d6e"); // Paradise pink-color
         }
+
+        messageText.setVisible(false);
+        messageText.setStyle("-fx-background-color: #ED4D6E"); // Paradise pink-color
     }
 
     @FXML
     public String getInputName() {
         String nameString = nameField.getText();
         try{
-        this.studdyBuddy.setName(nameString);
+            this.studdyBuddy.setName(nameString);
         }
         catch(IllegalArgumentException e){
-        messageText.setText("Name can not include any characthers but letters and ' ', you wrote: " + nameString);
+            messageText.setText("Name can not include any characthers but letters and ' ', you wrote: " + nameString);
+            messageText.setVisible(true);
         }
         return nameString;
     }
@@ -74,7 +73,8 @@ public class StuddyBuddyController {
             this.studdyBuddy.setRoom(roomString);
         }
         catch (IllegalArgumentException e){
-        messageText.setText("Can not use other characters than letters, digits, '-' and ' '. You wrote: " + roomString);
+            messageText.setText("Can not use other characters than letters, digits, '-' and ' '. You wrote: " + roomString);
+            messageText.setVisible(true);
         }
         return roomString;
     }
@@ -83,10 +83,11 @@ public class StuddyBuddyController {
     public String getInputCourse() {
         String courseString = courseField.getText();
         try{
-        this.studdyBuddy.setCourse(courseString);
+            this.studdyBuddy.setCourse(courseString);
         }
         catch(IllegalArgumentException e){
-        messageText.setText("Can not use other characters than letters, digits, '-' and ' '. You wrote: " + courseString);
+            messageText.setText("Can not use other characters than letters, digits, '-' and ' '. You wrote: " + courseString);
+            messageText.setVisible(true);
         }
         return courseString;
     }
@@ -95,10 +96,11 @@ public class StuddyBuddyController {
     public String getInputStartTime() {
         String startTimeString = startTimeField.getText();
         try{
-        this.studdyBuddy.setStartTime(startTimeString);
+            this.studdyBuddy.setStartTime(startTimeString);
         }
         catch(IllegalArgumentException e){
-        messageText.setText("Starttime must be on format 'HH:mm' "); // usikker på hva slags feilmelding som skal sendes ut her
+            messageText.setText("Starttime must be on format 'HH:mm' ");
+            messageText.setVisible(true);
         }
         return startTimeString;
     }
@@ -107,36 +109,29 @@ public class StuddyBuddyController {
     public String getInputEndTime() {
         String endTimeSting = endTimeField.getText();
         try{
-        this.studdyBuddy.setEndTime(endTimeSting);
+            this.studdyBuddy.setEndTime(endTimeSting);
         }
         catch(IllegalArgumentException e){
-        messageText.setText("EndTime must be on format 'HH:mm' "); // usikker på hva slags feilmelding som skal sendes ut her
+            messageText.setText("EndTime must be on format 'HH:mm' and after StartTime");
+            messageText.setVisible(true);
         }
         return endTimeSting;
     }
 
-    // must be input in every textfield in order to register
-    private boolean hasInput(){
-        return (!getInputName().isBlank() | !getInputRoom().isBlank() | !getInputCourse().isBlank() | !getInputStartTime().isBlank() | !getInputEndTime().isBlank());
-    }
-
     private void registerStuddyBuddy(){
-        this.studdyBuddy.setName(nameField.getText());
-        this.studdyBuddy.setRoom(roomField.getText());
-        this.studdyBuddy.setCourse(courseField.getText());
-        this.studdyBuddy.setStartTime(startTimeField.getText());
-        this.studdyBuddy.setEndTime(endTimeField.getText());
+        this.studdyBuddy.setName(getInputName());
+        this.studdyBuddy.setRoom(getInputRoom());
+        this.studdyBuddy.setCourse(getInputCourse());
+        this.studdyBuddy.setStartTime(getInputStartTime());
+        this.studdyBuddy.setEndTime(getInputEndTime());
     }
 
     @FXML
     public void handleRegister() throws FileNotFoundException{ // try, catch
         registerStuddyBuddy();
-        if(hasInput()){
-            // the info is saved to file
-            studdyBuddyFileHandler.saveRegistrationToFile(this.studdyBuddy);
-            messageText.setText("Your registration was successfull!");
-            messageText.setStyle("-fx-background-color: #7DDF64"); // Light green-color
-        }
+        studdyBuddyFileHandler.saveRegistrationToFile(this.studdyBuddy);
+        messageText.setText("Your registration was successfull!");
+        messageText.setStyle("-fx-background-color: #7DDF64"); // Light green-color
         messageText.setVisible(true);
     }
 

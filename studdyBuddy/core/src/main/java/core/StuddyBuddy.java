@@ -16,7 +16,7 @@ public class StuddyBuddy {
 	public void setName(String name) {
 		checkNotNull(name);
 		
-		if(checkName(name) == false) {
+		if(!checkName(name)) {
 			throw new IllegalArgumentException("Name can not include any characthers but letters and ' ', you wrote: " + name);
 		}
 		this.name = name;
