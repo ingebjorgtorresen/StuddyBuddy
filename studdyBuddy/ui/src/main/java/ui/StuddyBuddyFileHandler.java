@@ -35,29 +35,26 @@ public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
     @Override
     public String readRegistrationFromFile() throws FileNotFoundException {
         Scanner scanner = new Scanner(new File(REGISTRATION_STRING));
+        StringBuilder registration = new StringBuilder();
 
-        for(int x = 0; x < 1; x++) {
-            if(scanner.hasNextLine()) {
-                String line = scanner.nextLine();
+        while(scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+
+            if(!scanner.hasNextLine()) {
                 String[] registrations = line.split(",");
 
-                StringBuilder registration = new StringBuilder();
-                registration.append("Your registration is completed.");
-                registration.append("/n");
                 registration.append("Name: " + registrations[0]);
-                registration.append("/n");
+                registration.append("\n");
                 registration.append("Room: " + registrations[1]);
-                registration.append("/n");
+                registration.append("\n");
                 registration.append("Course: " + registrations[2]);
-                registration.append("/n");
+                registration.append("\n");
                 registration.append("Start time: " + registrations[3]);
-                registration.append("/n");
+                registration.append("\n");
                 registration.append("End time: " + registrations[4]);
-
-                return registration.toString();
             }
-            scanner.close();
         }
-        return "Could not register.";
+        scanner.close();
+        return registration.toString();
     }
 }
