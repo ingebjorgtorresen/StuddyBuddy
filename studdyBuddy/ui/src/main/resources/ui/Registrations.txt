@@ -3,3 +3,8 @@ Selma,a3,tdt4109,19:00,20:00
 Anette,a4,tdt4110,10:00,20:00
 Tuva,a10,it4110,11:00,20:00
 Selma,a4,tdt2109,12:00,12:37
+Tuva,R2,Algdat,08:00,15:00
+Tuva,R92,Diskmat,12:00,18:00
+Anette,F1,Datdig,14:00,17:00
+Tuva,F2,ITGK,15:00,21:00
+Selma,R2,Algdat,09:00,12:00
