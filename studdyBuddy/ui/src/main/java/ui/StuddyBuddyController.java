@@ -133,6 +133,11 @@ public class StuddyBuddyController {
         messageText.setText("Your registration was successfull!");
         messageText.setStyle("-fx-background-color: #7DDF64"); // Light green-color
         messageText.setVisible(true);
+        nameField.clear();
+        roomField.clear();
+        courseField.clear();
+        startTimeField.clear();
+        endTimeField.clear();
     }
 
 }
