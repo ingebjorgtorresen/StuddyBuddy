@@ -130,6 +130,12 @@ public class StuddyBuddyController {
 
     @FXML
     public void handleRegister() throws FileNotFoundException{ // try, catch
+
+        if (feedbackText.isVisible()) {
+            feedbackText.setVisible(false);
+            messageText.setStyle("-fx-background-color: #ED4D6E"); // Paradise pink-color
+        }
+
         registerStuddyBuddy();
         studdyBuddyFileHandler.saveRegistrationToFile(this.studdyBuddy);
         messageText.setText("Your registration was successfull!");
