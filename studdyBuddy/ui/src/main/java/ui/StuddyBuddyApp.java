@@ -15,6 +15,7 @@ public class StuddyBuddyApp extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("StuddyBuddy.fxml"));
         Parent parent = fxmlLoader.load();
         stage.setScene(new Scene(parent));
+        stage.setTitle("StuddyBuddy");
         stage.show();
     }
 
