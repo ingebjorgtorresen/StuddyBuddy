@@ -42,7 +42,7 @@
         <Button text="Register" onAction="#handleRegister"
         GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
-        <Label text="" fx:id="messageText" 
+        <Label text="" fx:id="messageText" prefHeight="75"
         GridPane.columnIndex="0" GridPane.rowIndex="8" />
 
          <Label text="" fx:id="feedbackText"
