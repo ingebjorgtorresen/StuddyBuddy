@@ -9,9 +9,6 @@
 <GridPane prefHeight="400" prefWidth="400" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.StuddyBuddyController"
          alignment="CENTER" hgap="10.0" vgap="10.0" >
          
-         <Label text="StuddyBuddy"
-        GridPane.columnIndex="0" GridPane.rowIndex="1"/>
-         
          <Label text="Name:"
         GridPane.columnIndex="0" GridPane.rowIndex="2"/>
  
@@ -45,8 +42,8 @@
         <Button text="Register" onAction="#handleRegister"
         GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
-        <Label text="" fx:id="messageText"
-        GridPane.columnIndex="0" GridPane.rowIndex="8"/>
+        <Label text="" fx:id="messageText" 
+        GridPane.columnIndex="0" GridPane.rowIndex="8" />
 
          <Label text="" fx:id="feedbackText"
         GridPane.columnIndex="0" GridPane.rowIndex="9" prefHeight="100" prefWidth="200"/>

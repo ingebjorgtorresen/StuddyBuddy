@@ -52,7 +52,7 @@ public class StuddyBuddyController {
         }
 
         messageText.setVisible(false);
-        messageText.setStyle("-fx-background-color: #ED4D6E"); // Paradise pink-color
+        messageText.setTextFill(Color.web("#ED4D6E"));
     }
 
     @FXML
@@ -62,7 +62,7 @@ public class StuddyBuddyController {
             this.studdyBuddy.setName(nameString);
         }
         catch(IllegalArgumentException e){
-            messageText.setText("Name can not include any characthers but letters and ' ', you wrote: " + nameString);
+            messageText.setText("Name can not include any \ncharacthers but letters and \n' ', you wrote: " + nameString);
             messageText.setVisible(true);
         }
         return nameString;
@@ -75,7 +75,7 @@ public class StuddyBuddyController {
             this.studdyBuddy.setRoom(roomString);
         }
         catch (IllegalArgumentException e){
-            messageText.setText("Can not use other characters than letters, digits, '-' and ' '. You wrote: " + roomString);
+            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + roomString);
             messageText.setVisible(true);
         }
         return roomString;
@@ -88,7 +88,7 @@ public class StuddyBuddyController {
             this.studdyBuddy.setCourse(courseString);
         }
         catch(IllegalArgumentException e){
-            messageText.setText("Can not use other characters than letters, digits, '-' and ' '. You wrote: " + courseString);
+            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + courseString);
             messageText.setVisible(true);
         }
         return courseString;
@@ -101,7 +101,7 @@ public class StuddyBuddyController {
             this.studdyBuddy.setStartTime(startTimeString);
         }
         catch(IllegalArgumentException e){
-            messageText.setText("Starttime must be on format 'HH:mm' ");
+            messageText.setText("Starttime must be on format \n'HH:mm' ");
             messageText.setVisible(true);
         }
         return startTimeString;
@@ -114,7 +114,7 @@ public class StuddyBuddyController {
             this.studdyBuddy.setEndTime(endTimeSting);
         }
         catch(IllegalArgumentException e){
-            messageText.setText("EndTime must be on format 'HH:mm' and after StartTime");
+            messageText.setText("EndTime must be on format \n'HH:mm' and after StartTime");
             messageText.setVisible(true);
         }
         return endTimeSting;
@@ -133,13 +133,13 @@ public class StuddyBuddyController {
 
         if (feedbackText.isVisible()) {
             feedbackText.setVisible(false);
-            messageText.setStyle("-fx-background-color: #ED4D6E"); // Paradise pink-color
+            messageText.setTextFill(Color.web("#ED4D6E"));
         }
 
         registerStuddyBuddy();
         studdyBuddyFileHandler.saveRegistrationToFile(this.studdyBuddy);
-        messageText.setText("Your registration was successfull!");
-        messageText.setStyle("-fx-background-color: #7DDF64"); // Light green-color
+        messageText.setText("Registration was successfull!");
+        messageText.setTextFill(Color.web("#7DDF64"));
         messageText.setVisible(true);
         feedbackText.setText(studdyBuddyFileHandler.readRegistrationFromFile());
         feedbackText.setStyle("-fx-background-color: #C0DF85");
