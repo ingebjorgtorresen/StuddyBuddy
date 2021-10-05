@@ -13,6 +13,9 @@ public class StuddyBuddy {
 	private String room;
 	private String course;
 	
+	/**
+	 * @param name 
+	 */
 	public void setName(String name) {
 		checkNotNull(name);
 		
@@ -21,7 +24,12 @@ public class StuddyBuddy {
 		}
 		this.name = name;
 	}
-	
+	/**
+	 * checks that the name has the correct format.
+	 * The name can only consist of letters and space.
+	 * @param name the name to check
+	 * @return true if the formate is correct and false if it is incorrect
+	 */
 	private boolean checkName(String name) {
 		char[] chars = name.toCharArray();
 		
@@ -45,6 +53,11 @@ public class StuddyBuddy {
 		return name;
 	}
 	
+	/**
+	 * sets the start time.
+	 * @param startTime
+	 * @throws IllegalArgumentException if the format is incorrect
+	 */
 	public void setStartTime(String startTime) {
 		checkNotNull(startTime);
 		checkTimeFormat(startTime);
@@ -57,6 +70,11 @@ public class StuddyBuddy {
 		return startTime;
 	}
 	
+	/**
+	 * sets the end time.
+	 * @param endTime
+	 * @throws IllegalArgumentException if the format is incorrect or if startTime is before endTime
+	 */
 	public void setEndTime(String endTime) {
 		checkNotNull(endTime);
 		checkTimeFormat(endTime);
@@ -74,6 +92,12 @@ public class StuddyBuddy {
 		return endTime;
 	}
 	
+	/**
+	 * check the format of the time parameter
+	 * the time must be in format("HH:mm") and not null
+	 * @param time
+	 * @throws IllegalArgumentException if the format is incorrect
+	 */
 	private void checkTimeFormat(String time) {	
 		checkNotNull(time);
 		
@@ -87,6 +111,11 @@ public class StuddyBuddy {
 		
 	}
 	
+	/**
+	 * @param startTime
+	 * @param endTime
+	 * @return false if end time is before start time and true if it is after
+	 */
 	private boolean checkStartTimeBeforeEndTime(String startTime, String endTime) {
 		if((startTime == null) || (endTime== null)) {
 			throw new IllegalArgumentException("Time can not be null/nothing. Starttime was " + startTime + " endtime was: " + endTime);
@@ -102,7 +131,10 @@ public class StuddyBuddy {
 		return true;
 	
 	}
-	
+	/**
+	 * @param room
+	 * @throws IllegalArgumentException if the format is incorrect.
+	 */
 	public void setRoom(String room) {
 		checkNotNull(room);
 		
@@ -116,6 +148,11 @@ public class StuddyBuddy {
 		return room;
 	}
 	
+	/**
+	 * checks if the room is in the correct format
+	 * the room must consist of letters, numbers, "-" or spaces
+	 * @return true if the format is coorect and false if it is incorrect
+	 */
 	private boolean checkRoom(String room) {
 	char[] chars = room.toCharArray();
 		
@@ -128,6 +165,11 @@ public class StuddyBuddy {
 		return true;
 	}
 	
+	/**
+	 * sets course
+	 * @param course
+	 * @throws IllegalArgumentException if the format of the course param is wrong.
+	 */
 	public void setCourse(String course) {
 		checkNotNull(course);
 		
@@ -141,6 +183,11 @@ public class StuddyBuddy {
 		return course;
 	}
 	
+	/**
+	 * checks if the course is in the correct format
+	 * the course must consist of letters, numbers, "-" or spaces
+	 * @return true if the format is coorect and false if it is incorrect
+	 */
 	private boolean checkCourse(String course) {
 		char[] chars = course.toCharArray();
 		
