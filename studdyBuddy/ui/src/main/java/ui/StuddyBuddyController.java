@@ -163,10 +163,13 @@ public class StuddyBuddyController {
     }
 
     /**
-	 * sets the feedback text to be Paradise Pink color
-	 * saves this registration to file
-     * sets message and feedback to be visable 
-	 * @return the start time from input
+	 * sets the feedback text to not be visable and to have Paradise Pink color
+	 * saves this registration to file registration was successful
+     * sets message to be visable
+     * sets feedback to be visable if registration was successful
+     * sets message text to be Amazon color if registration was successful
+     * sets feedback text to have Yellow Green Crayola color if registration was successful
+	 * clears the texfields if registration was successful
 	 */
     @FXML
     public void handleRegister() throws FileNotFoundException{ // try, catch
