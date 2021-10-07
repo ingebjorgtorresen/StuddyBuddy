@@ -45,6 +45,11 @@ public class StuddyBuddyController {
         studdyBuddyFileHandler = new StuddyBuddyFileHandler();
 	}
 
+    /**
+	 * creates a new registration
+	 * if the registration is not null, the pane is cleared
+     * meassage text is set to not be visable and in Paradise Pink color
+	 */
     private void createRegistration(){
 
         if (this.registration != null) {
@@ -55,6 +60,11 @@ public class StuddyBuddyController {
         messageText.setTextFill(Color.web("#ED4D6E"));
     }
 
+    /**
+	 * sets the name to be the input in nameField
+	 * the name can only consist of letters and space.
+	 * @return the name from input
+	 */
     @FXML
     public String getInputName() {
         String nameString = nameField.getText();
@@ -68,6 +78,11 @@ public class StuddyBuddyController {
         return nameString;
     }
 
+    /**
+	 * sets the room to be the input in roomField
+	 * the room can only consist of letters, "-" and space.
+	 * @return the room from input
+	 */
     @FXML
     public String getInputRoom() {
         String roomString = roomField.getText();
@@ -81,6 +96,11 @@ public class StuddyBuddyController {
         return roomString;
     }
 
+    /**
+	 * sets the course to be the input in courseField
+	 * the room can only consist of letters, "-" and space.
+	 * @return the course from input
+	 */
     @FXML
     public String getInputCourse() {
         String courseString = courseField.getText();
@@ -94,6 +114,11 @@ public class StuddyBuddyController {
         return courseString;
     }
 
+    /**
+	 * sets the start time to be the input in startTimeField
+	 * the start time must be on format 'HH:mm'
+	 * @return the start time from input
+	 */
     @FXML
     public String getInputStartTime() {
         String startTimeString = startTimeField.getText();
@@ -107,6 +132,11 @@ public class StuddyBuddyController {
         return startTimeString;
     }
 
+    /**
+	 * sets the end time to be the input in endTimeField
+	 * the end time must be on format 'HH:mm' and after StartTime
+	 * @return the end time from input
+	 */
     @FXML
     public String getInputEndTime() {
         String endTimeSting = endTimeField.getText();
@@ -120,6 +150,10 @@ public class StuddyBuddyController {
         return endTimeSting;
     }
 
+    /**
+	 * register a new StuddyBuddy
+	 * sets the name, room, course, start time and end time
+	 */
     private void registerStuddyBuddy(){
         this.studdyBuddy.setName(getInputName());
         this.studdyBuddy.setRoom(getInputRoom());
@@ -128,6 +162,12 @@ public class StuddyBuddyController {
         this.studdyBuddy.setEndTime(getInputEndTime());
     }
 
+    /**
+	 * sets the feedback text to be Paradise Pink color
+	 * saves this registration to file
+     * sets message and feedback to be visable 
+	 * @return the start time from input
+	 */
     @FXML
     public void handleRegister() throws FileNotFoundException{ // try, catch
 
