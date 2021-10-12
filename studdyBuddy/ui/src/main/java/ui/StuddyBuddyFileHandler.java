@@ -14,6 +14,7 @@ public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
 
     private static final String REGISTRATION_STRING = "/workspace/gr2144/studdyBuddy/ui/src/main/resources/ui/Registrations.txt"; 
 
+    //saves registration to file
     @Override
     public void saveRegistrationToFile(StuddyBuddy studdybuddy) throws FileNotFoundException {
         String name = studdybuddy.getName();
@@ -31,6 +32,8 @@ public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
             e.getStackTrace();
         }
     }
+
+    //read registration from file and turn it into string
 
     @Override
     public String readRegistrationFromFile() throws FileNotFoundException {
