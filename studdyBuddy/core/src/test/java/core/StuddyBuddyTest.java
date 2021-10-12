@@ -13,6 +13,7 @@ public class StuddyBuddyTest {
 		studdyBuddy = new StuddyBuddy();
 	}
 	
+
 	@Test
 	public void testName() {
 		studdyBuddy.setName("Turi");
@@ -42,6 +43,7 @@ public class StuddyBuddyTest {
 		Assertions.assertEquals("Statistikk", studdyBuddy.getCourse());
 	}
 	
+	//test the format of name
 	@Test
 	public void testNameFormat() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -52,6 +54,7 @@ public class StuddyBuddyTest {
 		});
 	}
 	
+	//test the format of time
 	@Test
 	public void testTimeFormat() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -74,6 +77,7 @@ public class StuddyBuddyTest {
 		});	
 	}
 	
+	//test the format of room
 	@Test
 	public void testRoomFormat() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
@@ -88,6 +92,7 @@ public class StuddyBuddyTest {
 		
 	}
 	
+	//test the format of course
 	@Test
 	public void testCourseFormat() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {
