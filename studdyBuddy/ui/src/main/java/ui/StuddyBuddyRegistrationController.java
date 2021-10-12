@@ -2,24 +2,16 @@ package ui;
 
 import java.io.FileNotFoundException;
 
-import core.StuddyBuddy;
+import core.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
 public class StuddyBuddyRegistrationController {
     
-    private StuddyBuddy studdyBuddy;
-
-    private StuddyBuddyFileHandler studdyBuddyFileHandler;
-
-    @FXML
-    Pane registration;
-
-	@FXML 
-	private TextField nameField;
+    private StuddyBuddyRegistration registration;
+    private StuddyBuddyFileHandler fileHandler;
 	
 	@FXML 
 	private TextField roomField;
@@ -40,9 +32,9 @@ public class StuddyBuddyRegistrationController {
     private Label feedbackText;
 	
 	public void initialize() {
-		studdyBuddy = new StuddyBuddy();
+		registration = new StuddyBuddyRegistration();
         createRegistration();
-        studdyBuddyFileHandler = new StuddyBuddyFileHandler();
+        fileHandler = new StuddyBuddyFileHandler();
 	}
 
     /**
@@ -51,31 +43,12 @@ public class StuddyBuddyRegistrationController {
      * meassage text is set to not be visable and in Paradise Pink color
 	 */
     private void createRegistration(){
-
-        if (this.registration != null) {
-            registration.getChildren().clear();
-        }
-
         messageText.setVisible(false);
         messageText.setTextFill(Color.web("#ED4D6E"));
     }
 
-    /**
-	 * sets the name to be the input in nameField
-	 * the name can only consist of letters and space.
-	 * @return the name from input
-	 */
-    @FXML
-    public String getInputName() {
-        String nameString = nameField.getText();
-        try{
-            this.studdyBuddy.setName(nameString);
-        }
-        catch(IllegalArgumentException e){
-            messageText.setText("Name can not include any \ncharacthers but letters and \n' ', you wrote: " + nameString);
-            messageText.setVisible(true);
-        }
-        return nameString;
+    public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
+        registration.setStuddyBuddy(studdyBuddy);
     }
 
     /**
@@ -87,7 +60,7 @@ public class StuddyBuddyRegistrationController {
     public String getInputRoom() {
         String roomString = roomField.getText();
         try{
-            this.studdyBuddy.setRoom(roomString);
+            registration.setRoom(roomString);
         }
         catch (IllegalArgumentException e){
             messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + roomString);
@@ -105,7 +78,7 @@ public class StuddyBuddyRegistrationController {
     public String getInputCourse() {
         String courseString = courseField.getText();
         try{
-            this.studdyBuddy.setCourse(courseString);
+            registration.setCourse(courseString);
         }
         catch(IllegalArgumentException e){
             messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + courseString);
@@ -123,7 +96,7 @@ public class StuddyBuddyRegistrationController {
     public String getInputStartTime() {
         String startTimeString = startTimeField.getText();
         try{
-            this.studdyBuddy.setStartTime(startTimeString);
+            registration.setStartTime(startTimeString);
         }
         catch(IllegalArgumentException e){
             messageText.setText("Starttime must be on format \n'HH:mm' ");
@@ -141,7 +114,7 @@ public class StuddyBuddyRegistrationController {
     public String getInputEndTime() {
         String endTimeSting = endTimeField.getText();
         try{
-            this.studdyBuddy.setEndTime(endTimeSting);
+            registration.setEndTime(endTimeSting);
         }
         catch(IllegalArgumentException e){
             messageText.setText("EndTime must be on format \n'HH:mm' and after StartTime");
@@ -155,11 +128,10 @@ public class StuddyBuddyRegistrationController {
 	 * sets the name, room, course, start time and end time
 	 */
     private void registerStuddyBuddy(){
-        this.studdyBuddy.setName(getInputName());
-        this.studdyBuddy.setRoom(getInputRoom());
-        this.studdyBuddy.setCourse(getInputCourse());
-        this.studdyBuddy.setStartTime(getInputStartTime());
-        this.studdyBuddy.setEndTime(getInputEndTime());
+        registration.setRoom(getInputRoom());
+        registration.setCourse(getInputCourse());
+        registration.setStartTime(getInputStartTime());
+        registration.setEndTime(getInputEndTime());
     }
 
     /**
@@ -180,14 +152,13 @@ public class StuddyBuddyRegistrationController {
         }
 
         registerStuddyBuddy();
-        studdyBuddyFileHandler.saveRegistrationToFile(this.studdyBuddy);
+        fileHandler.saveRegistrationToFile(registration);
         messageText.setText("Registration was successfull!");
         messageText.setTextFill(Color.web("#7DDF64"));
         messageText.setVisible(true);
-        feedbackText.setText(studdyBuddyFileHandler.readRegistrationFromFile());
+        feedbackText.setText(fileHandler.readRegistrationFromFile());
         feedbackText.setStyle("-fx-background-color: #C0DF85");
         feedbackText.setVisible(true);
-        nameField.clear();
         roomField.clear();
         courseField.clear();
         startTimeField.clear();

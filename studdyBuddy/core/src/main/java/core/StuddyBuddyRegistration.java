@@ -13,6 +13,18 @@ public class StuddyBuddyRegistration {
 	private String room;
 	private String course;
 
+	public void setStuddyBuddy(StuddyBuddy studdyBuddy) {
+		this.studdyBuddy = studdyBuddy;
+	}
+
+	public StuddyBuddy getStuddyBuddy() {
+		return studdyBuddy;
+	}
+
+	public String getUsername() {
+		return studdyBuddy.getName();
+	}
+
 	/**
 	 * checks that the argument is not null
 	 * @param string string to check
