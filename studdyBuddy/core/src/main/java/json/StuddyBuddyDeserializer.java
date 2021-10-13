@@ -1,31 +1,36 @@
 package json;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.TreeNode;
-import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JsonDeserializer;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.databind.node.TextNode;
+import core.StuddyBuddy;
 
+public class StuddyBuddyDeserializer extends JsonSerializer<StuddyBuddy> {
 
+        /*
+            formatet vi ønsker at StuddyBuddy-objektene skal se ut:
+            {   
+                "Name": "..."
+            }
+        */
 
-class TodoItemDeserializer extends JsonDeserializer<TodoItem> {
+//public class StuddyBuddyDeserializer<JsonParser> extends JsonDeserializer<TodoItem> {
 
     @Override
-    public TodoItem deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public StuddyBuddy deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
     TreeNode treeNode = parser.getCodec().readTree(parser);
-    if (treeNode instanceOf ObjectNode){ // if treeNode is '{'
-        ObjectNode objectNode = (ObjectNode) treeNode;
+    return deserialize((JsonNode) treeNode);
+  }
+
+// deserialize help-method (useful in StuddyBuddyRegistrationDeserializer)
+public StuddyBuddy deserialize(JsonNode jsonNode) {
+    if (jsonNode instanceof ObjectNode) {
+        ObjectNode objectNode = (ObjectNode) jsonNode;
         StuddyBuddy studdyBuddy = new StuddyBuddy(); 
         JsonNode nameNode = objectNode.get("Name");
-        if ( nameNode instanceOf TextNode){
+        if ( nameNode instanceof TextNode){
             studdyBuddy.setName(((TextNode) nameNode).asText()); // usikker på om det er .setName() vi skal bruke
         }
         return studdyBuddy;
     }
-        return deserialize((JsonNode) treeNode);
+    return null;
   }
 
 }
