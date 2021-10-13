@@ -11,7 +11,28 @@ import java.io.File;
 
 public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
 
-    private static final String REGISTRATION_STRING = "/workspace/gr2144/studdyBuddy/ui/src/main/resources/ui/Registrations.txt";
+    private static final String REGISTRATION_STRING = "/workspace/gr2144/studdyBuddy/ui/src/main/resources/ui/Registrations.txt"; 
+
+    //saves registration to file
+    @Override
+    public void saveRegistrationToFile(StuddyBuddy studdybuddy) throws FileNotFoundException {
+        String name = studdybuddy.getName();
+        String room = studdybuddy.getRoom();
+        String course = studdybuddy.getCourse();
+        String startTime = studdybuddy.getStartTime();
+        String endTime = studdybuddy.getEndTime();
+
+        String registration = name + "," + room + "," + course + "," + startTime + "," + endTime;
+
+        try(PrintWriter writer = new PrintWriter(new FileWriter(REGISTRATION_STRING, true))) { 
+            writer.println(registration);
+
+        } catch (IOException e) {  
+            e.getStackTrace();
+        }
+    }
+
+    //read registration from file and turn it into string
 
     @Override
     public String readRegistrationFromFile() throws FileNotFoundException {
