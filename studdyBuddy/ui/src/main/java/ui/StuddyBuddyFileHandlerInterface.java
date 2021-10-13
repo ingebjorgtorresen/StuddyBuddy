@@ -2,10 +2,10 @@ package ui;
 
 import java.io.FileNotFoundException;
 
-import core.StuddyBuddy;
+import core.*;
 
 public interface StuddyBuddyFileHandlerInterface {
 
-    void saveRegistrationToFile(StuddyBuddy studdybuddy) throws FileNotFoundException;
+    void saveRegistrationToFile(StuddyBuddyRegistration registration) throws FileNotFoundException;
     String readRegistrationFromFile() throws FileNotFoundException; 
 }
