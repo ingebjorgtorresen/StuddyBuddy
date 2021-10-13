@@ -1,7 +1,6 @@
 package ui;
 
-import core.StuddyBuddy;
-
+import core.*;
 
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -40,10 +39,10 @@ public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
         Scanner scanner = new Scanner(new File(REGISTRATION_STRING));
         StringBuilder registration = new StringBuilder();
 
-        while(scanner.hasNextLine()) {
+        while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
 
-            if(!scanner.hasNextLine()) {
+            if (!scanner.hasNextLine()) {
                 String[] registrations = line.split(",");
 
                 registration.append("Name: " + registrations[0]);
@@ -59,5 +58,23 @@ public class StuddyBuddyFileHandler implements StuddyBuddyFileHandlerInterface {
         }
         scanner.close();
         return registration.toString();
+    }
+
+    @Override
+    public void saveRegistrationToFile(StuddyBuddyRegistration registration) throws FileNotFoundException {
+        String name = registration.getUsername();
+        String room = registration.getRoom();
+        String course = registration.getCourse();
+        String startTime = registration.getStartTime();
+        String endTime = registration.getEndTime();
+
+        String registrationAsString = name + "," + room + "," + course + "," + startTime + "," + endTime;
+
+        try (PrintWriter writer = new PrintWriter(new FileWriter(REGISTRATION_STRING, true))) {
+            writer.println(registrationAsString);
+
+        } catch (IOException e) {
+            e.getStackTrace();
+        }
     }
 }
