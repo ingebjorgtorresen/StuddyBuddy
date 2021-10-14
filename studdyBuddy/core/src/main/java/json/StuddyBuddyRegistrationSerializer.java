@@ -23,7 +23,8 @@ public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBudd
     jGen.writeStringField("Room " + registration.getRoom());
     jGen.writeStringField("Course " + registration.getCourse());
     jGen.writeStringField("Start time " + registration.getStartTime());
-    jGen.writeStringField("End time " + registration.getEndTime());
+    jGen.writeStringField("End time " + registration.getEndTime()
+    );
     jGen.writeEndObject();
   }
 }
