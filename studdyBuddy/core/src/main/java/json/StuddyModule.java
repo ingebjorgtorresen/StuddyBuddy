@@ -1,7 +1,9 @@
 package json;
 
-import core.StuddyBuddy;
-import core.StuddyBuddyRegistration;
+import core.*;
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.core.util.VersionUtil;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class StuddyModule extends SimpleModule {
   private static final String NAME = "StuddyModule";

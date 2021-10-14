@@ -1,4 +1,5 @@
 module studdyBuddy.ui {
+    requires com.fasterxml.jackson.databind;
     requires studdyBuddy.core;
     requires javafx.controls;
     requires javafx.fxml;
