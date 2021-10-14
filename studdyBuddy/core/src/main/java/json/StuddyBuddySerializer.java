@@ -12,7 +12,7 @@ public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
         /*
             formatet vi ønsker at StuddyBuddy-objektene skal se ut:
             {   
-                "Name": "..."
+                "Name": "...", "Registrations" : [...]
             }
         */
 
@@ -22,6 +22,11 @@ public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
                         SerializerProvider serializerProvider) throws IOException {
     jGen.writeStartObject(); 
     jGen.writeStringField("Name", studdyBuddy.getName()); // endre 'start' til å navnet, hentet ut med .getName() (??)
+    jGen.writeArrayFieldStart("Registrations");
+    for(StuddyBuddyRegistration registration : studdyBuddy.getList()) {
+      jGen.writeStringField(registration.toString());
+    }
+    jGen.writeEndArray();
     jGen.writeEndObject(); 
   }
 }

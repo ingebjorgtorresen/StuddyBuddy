@@ -1,9 +1,15 @@
 package core;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class StuddyBuddy {
 
 	private String name;
-	// TODO: add password
+	//TODO: add password
+
+ 	private List<StuddyBuddyRegistration> registrations= new ArrayList<>();
 
 	/**
 	 * @param name
@@ -45,6 +51,22 @@ public class StuddyBuddy {
 
 	public String getName() {
 		return name;
+	}
+
+	public Iterator<StuddyBuddyRegistration> iterator() {
+		return registrations.iterator();
+	}
+
+	public void addRegistration(StuddyBuddyRegistration registration) {
+		registrations.add(registration);
+	}
+
+	public void removeRegistration(StuddyBuddyRegistration registration) {
+		registrations.remove(registration);
+	}
+
+	public List<StuddyBuddyRegistration> getList() {
+		return registrations;
 	}
 
 }

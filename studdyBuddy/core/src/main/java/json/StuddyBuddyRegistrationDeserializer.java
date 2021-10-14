@@ -14,7 +14,7 @@ import com.fasterxml.jackson.databind.node.TextNode;
 
 public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<StuddyBuddyRegistration> {
 
-    private StuddyBuddyDeserializer suddyBuddyDeserializer = new StuddyBuddyDeserializer();
+    private StuddyBuddyDeserializer studdyBuddyDeserializer = new StuddyBuddyDeserializer();
 
     /*
         formatet vi ønsker at StuddyBuddy-objektene skal se ut:
@@ -30,9 +30,9 @@ public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<Studdy
         ObjectNode objectNode = (ObjectNode) treeNode;
         StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration(); 
         JsonNode registrationsNode = objectNode.get("Registrations");
-        if (registrationsNode instanceof ArrayNode){
+        if (registrationsNode instanceof ArrayNode arrayNode){
             for (JsonNode regNode : ((ArrayNode) registrationsNode)) {
-                StuddyBuddyRegistration registration = suddyBuddyDeserializer.deserialize(regNode);
+                StuddyBuddyRegistration registration = studdyBuddyDeserializer.deserialize(regNode);
                 if(regNode != null){
                     studdyBuddyRegistration.addRegistration(regNode);
                 }

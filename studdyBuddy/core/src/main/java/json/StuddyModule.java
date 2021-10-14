@@ -3,6 +3,7 @@ package json;
 import core.*;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.core.util.VersionUtil;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class StuddyModule extends SimpleModule {
@@ -19,6 +20,7 @@ public class StuddyModule extends SimpleModule {
     addDeserializer(StuddyBuddyRegistration.class, new StuddyBuddyRegistrationDeserializer());
   }
 
+  /*
   public static void main(String[] args){
     ObjectMapper mapper = new ObjectMapper();
     mapper.registerModule(new StuddyModule());
@@ -34,4 +36,5 @@ public class StuddyModule extends SimpleModule {
       e.printStackTrace();
     }
   }
+  */
 }

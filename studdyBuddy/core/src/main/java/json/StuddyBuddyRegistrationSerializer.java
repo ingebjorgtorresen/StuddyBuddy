@@ -11,7 +11,7 @@ public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBudd
         /*
             formatet vi ønsker at StuddyBuddy-objektene skal se ut:
             {   
-                "Registrations": [ ... ]
+                "Room" : "...", "Course" : "...", "Start time" : "...", "End time" : "..."
             }
         */
 
@@ -20,12 +20,10 @@ public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBudd
                         JsonGenerator jGen,
                         SerializerProvider serializerProvider) throws IOException {
     jGen.writeStartObject(); 
-    jGen.writeArrayFieldStart("Registrations"); // ikke garantert at dette fungerer, i todo-list brukes .writeArrayFieldStart("... ")
-    // skrive en metode for å hente ut de ulike registreringene til den aktuelle personen
-    // Todo-list har brukt iterator til å gå gjennom, vi kan kanskje også gjøre det
-    // kan være en for-løkke som går gjennom registreringene til personen (hvis vi lagrer det i en array og bruker iterator)
-      // jGen.writeObject('regsitreringen'); 
-    jGen.writeEndArray(); // ikke garantert at dette fungerer, i todo-list brukes .writeEndArray()
+    jGen.writeStringField("Room " + registration.getRoom());
+    jGen.writeStringField("Course " + registration.getCourse());
+    jGen.writeStringField("Start time " + registration.getStartTime());
+    jGen.writeStringField("End time " + registration.getEndTime());
     jGen.writeEndObject();
   }
 }
