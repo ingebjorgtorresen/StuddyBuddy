@@ -11,6 +11,7 @@
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
         <skipTests>false</skipTests>
+        <jackson.version>2.12.5</jackson.version>
     </properties>
 
     <dependencyManagement>

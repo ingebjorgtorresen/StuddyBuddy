@@ -182,4 +182,12 @@ public class StuddyBuddyRegistration {
 		
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Room: " + getRoom() + "\n" +
+				"Course:" + getCourse() + "\n" +
+				"Start time: " + getStartTime() + "\n" +
+				"End time: " + getEndTime();
+	}
 }
