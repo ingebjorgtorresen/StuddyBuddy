@@ -13,4 +13,3 @@ Selma,R5,itp,10:00,10:02
 selma,a2,tdt4109,12:00,13:00
 Tuva,A3,ITP,08:00,14:00
 Tuva,A3,Algdat,13:00,17:00
-Selma,A3,ITP,12:00,13:00
