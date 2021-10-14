@@ -8,13 +8,10 @@ import com.fasterxml.jackson.core.TreeNode;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 
 public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<StuddyBuddyRegistration> {
-
-    private StuddyBuddyDeserializer studdyBuddyDeserializer = new StuddyBuddyDeserializer();
 
     /*
         formatet vi ønsker at StuddyBuddy-objektene skal se ut:
@@ -23,24 +20,40 @@ public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<Studdy
         }
     */
 
-    @Override
-    public StuddyBuddyRegistration deserialize(JsonParser parser, DeserializationContext ctxt) throws IOException, JsonProcessingException {
-    TreeNode treeNode = parser.getCodec().readTree(parser);
-    if (treeNode instanceof ObjectNode){ // if treeNode is '{'
-        ObjectNode objectNode = (ObjectNode) treeNode;
+    public StuddyBuddyRegistration deserialize(JsonNode node) throws IOException, JsonProcessingException {
+    if (node instanceof ObjectNode){
+        ObjectNode objectNode = (ObjectNode) node;
         StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration(); 
-        JsonNode registrationsNode = objectNode.get("Registrations");
-        if (registrationsNode instanceof ArrayNode arrayNode){
-            for (JsonNode regNode : ((ArrayNode) registrationsNode)) {
-                StuddyBuddyRegistration registration = studdyBuddyDeserializer.deserialize(regNode);
-                if(regNode != null){
-                    studdyBuddyRegistration.addRegistration(regNode);
-                }
-            }
-        }        
+        
+        JsonNode courseNode = objectNode.get("Course");
+        if (courseNode instanceof TextNode){
+            studdyBuddyRegistration.setCourse(courseNode.asText());
+        }
+        
+        JsonNode roomNode = objectNode.get("Room");
+        if (courseNode instanceof TextNode){
+            studdyBuddyRegistration.setRoom(roomNode.asText());
+        }    
+
+        JsonNode startNode = objectNode.get("Start time");
+        if (startNode instanceof TextNode){
+            studdyBuddyRegistration.setStartTime(startNode.asText());
+        } 
+
+        JsonNode endNode = objectNode.get("End time");
+        if (endNode instanceof TextNode){
+            studdyBuddyRegistration.setEndTime(endNode.asText());
+        }
+
         return studdyBuddyRegistration;
     }
     return null;
   }
+
+    @Override
+    public StuddyBuddyRegistration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+        TreeNode treeNode = p.getCodec().readTree(p);
+        return deserialize((JsonNode) treeNode);
+    }
 
 }

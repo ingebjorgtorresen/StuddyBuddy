@@ -21,10 +21,10 @@ public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
                         JsonGenerator jGen,
                         SerializerProvider serializerProvider) throws IOException {
     jGen.writeStartObject(); 
-    jGen.writeStringField("Name", studdyBuddy.getName()); // endre 'start' til å navnet, hentet ut med .getName() (??)
+    jGen.writeStringField("Name", studdyBuddy.getName());
     jGen.writeArrayFieldStart("Registrations");
     for(StuddyBuddyRegistration registration : studdyBuddy.getList()) {
-      jGen.writeStringField(registration.toString());
+      jGen.writeObject(registration);
     }
     jGen.writeEndArray();
     jGen.writeEndObject(); 
