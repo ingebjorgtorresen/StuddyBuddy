@@ -3,16 +3,16 @@ package ui;
 import org.junit.jupiter.api.BeforeEach;
 //import java.io.IOException;
 //import java.io.InputStreamReader;
-//import java.util.Iterator;
+import java.util.Iterator;
 //import java.util.concurrent.TimeUnit;
 //import java.util.concurrent.TimeoutException;
 //import java.util.function.Predicate;
-//import javafx.fxml.FXMLLoader;
+import javafx.fxml.FXMLLoader;
 //import javafx.scene.Node;
-//import javafx.scene.Parent;
-//import javafx.scene.Scene;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 //import javafx.scene.control.ListView;
-//import javafx.stage.Stage;
+import javafx.stage.Stage;
 //import static org.junit.jupiter.api.Assertions.assertNotNull;
 //import static org.junit.jupiter.api.Assertions.assertTrue;
 //import static org.junit.jupiter.api.Assertions.fail;
@@ -31,7 +31,7 @@ import org.testfx.framework.junit5.ApplicationTest;
 //import StuddyBuddy.json.TodoPersistence;
 
 import core.StuddyBuddy;
-
+import core.StuddyBuddyRegistration;
 
 public class StuddyBuddyControllerTest extends ApplicationTest {
 
@@ -49,11 +49,16 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
 
     //private TodoPersistence todoPersistence = new TodoPersistence();
     private StuddyBuddy studdyBuddy;
-    private StuddyBuddyRegistration reg1, reg2, reg3;
+    private StuddyBuddyRegistration reg1;
+    private StuddyBuddyRegistration reg2;
+    private StuddyBuddyRegistration reg3;
   
     @BeforeEach
     public void setUpRegistrations(){
       Iterator<StuddyBuddyRegistration> registrations = studdyBuddy.iterator();
+      //reg1 = new StuddyBuddyRegistration().as(registrations.next());
+      //reg2.registerStuddyBuddy();
+      //reg3.registerStuddyBuddy();
       studdyBuddy.addRegistration(reg1);
       studdyBuddy.addRegistration(reg2);
       studdyBuddy.addRegistration(reg3);
