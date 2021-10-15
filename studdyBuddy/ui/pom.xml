@@ -43,7 +43,7 @@
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-params</artifactId>
         </dependency>
-
+        
         <!-- test javafx with TextFX -->
 		<dependency>
 			<groupId>org.testfx</groupId>
