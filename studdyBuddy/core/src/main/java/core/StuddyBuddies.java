@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 
 public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
-    private List<StuddyBuddy> studdybuddies = new ArrayList<>();
+    private List<StuddyBuddy> studdyBuddies = new ArrayList<>();
 
     /**
      * Empty constructor that initializes the instance. This will load
@@ -31,7 +31,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @return StuddyBuddy if it exists or else null
      */
     public StuddyBuddy getStuddyBuddy(String name) {
-        for (StuddyBuddy studdyBuddy : this.studdybuddies) {
+        for (StuddyBuddy studdyBuddy : this.studdyBuddies) {
             if (studdyBuddy.getName().equals(name)) {
                 return studdyBuddy;
             }
@@ -62,7 +62,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     public void addStuddyBuddy(StuddyBuddy studdyBuddy) {
         if (checkIfStuddyBuddyExists(studdyBuddy.getName()) == false) {
             StuddyBuddy newStuddyBuddy = (StuddyBuddy) studdyBuddy;
-            this.studdybuddies.add(newStuddyBuddy);
+            this.studdyBuddies.add(newStuddyBuddy);
         }
 
         else {
@@ -76,7 +76,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @param studdyBuddy StuddyBuddy object we want to remove
      */
     public void removeStuddyBuddy(StuddyBuddy studdyBuddy) {
-        this.studdybuddies.remove(studdyBuddy);
+        this.studdyBuddies.remove(studdyBuddy);
     }
 
     /**
@@ -84,7 +84,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      */
     @Override
     public Iterator<StuddyBuddy> iterator() {
-        return studdybuddies.iterator();
+        return studdyBuddies.iterator();
     }
 
     /**
@@ -93,7 +93,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @return List over StuddyBuddy-objects.
      */
     public List<StuddyBuddy> getStuddyBuddies() {
-        return studdybuddies;
+        return studdyBuddies;
     }
 
     /**
@@ -101,7 +101,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      */
     @Override
     public String toString() {
-        return "" + studdybuddies.stream().map(studdyBuddy -> studdyBuddy.toString()).collect(Collectors.toList());
+        return "" + studdyBuddies.stream().map(studdyBuddy -> studdyBuddy.toString()).collect(Collectors.toList());
     }
 
 }
