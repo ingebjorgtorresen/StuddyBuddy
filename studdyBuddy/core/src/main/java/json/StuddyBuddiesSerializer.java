@@ -24,8 +24,8 @@ public class StuddyBuddiesSerializer extends JsonSerializer<StuddyBuddies> {
         }
         gen.writeEndArray();
         gen.writeEndObject(); 
-      }
-        
     }
-
+        
 }
+
+
