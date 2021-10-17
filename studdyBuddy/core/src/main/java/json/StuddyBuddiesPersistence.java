@@ -1,8 +1,5 @@
 package json;
 
-import com.fasterxml.jackson.core.JsonGenerationException;
-import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
 import java.io.Writer;
@@ -20,15 +17,15 @@ public class StuddyBuddiesPersistence {
         mapper.registerModule(new StuddyModule());
     }
 
-    public void writeStuddyBuddies(StuddyBuddies studdyBuddies, Writer writer) throws JsonGenerationException, JsonMappingException, IOException {
+    public void writeStuddyBuddies(StuddyBuddies studdyBuddies, Writer writer) throws IOException {
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, studdyBuddies);
     }
 
-    public StuddyBuddies readStuddyBuddies(File file) throws JsonParseException, JsonMappingException, IOException {
+    public StuddyBuddies readStuddyBuddies(File file) throws IOException {
         return mapper.readValue(file, StuddyBuddies.class);
     }
 
-    public StuddyBuddies readStuddyBuddies(Reader reader) throws JsonParseException, JsonMappingException, IOException {
+    public StuddyBuddies readStuddyBuddies(Reader reader) throws IOException {
         return mapper.readValue(reader, StuddyBuddies.class);
     }    
 

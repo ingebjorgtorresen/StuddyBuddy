@@ -8,6 +8,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.io.InputStreamReader;
 import java.io.FileWriter;
+import java.io.IOException;
 
     /**
      * Class that works with data locally. (Using predefined StuddyBuddy object or read from file.)
@@ -57,7 +58,7 @@ public class LocalDataAccess {
                 Writer writer = new FileWriter(url.getFile(), StandardCharsets.UTF_8);
                 studdyBuddiesPersistence.writeStuddyBuddies(studdyBuddies, writer);
                 writer.close();
-            } catch (Exception e) {
+            } catch (IOException e) {
                 e.printStackTrace();
                 throw new IllegalStateException("Unable to write from " + this.jsonFilename + ".");
             }
