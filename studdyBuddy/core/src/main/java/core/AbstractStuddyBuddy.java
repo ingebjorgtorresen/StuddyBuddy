@@ -1,9 +1,7 @@
-package ui;
+package core;
 
 import java.util.Collections;
 import java.util.Iterator;
-
-import core.StuddyBuddyRegistration;
 
 public class AbstractStuddyBuddy implements Iterable<StuddyBuddyRegistration> {
 
