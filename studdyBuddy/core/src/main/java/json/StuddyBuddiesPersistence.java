@@ -9,10 +9,10 @@ import java.io.Writer;
 import java.io.IOException;
 import java.io.Reader;
 
-import core.StuddyBuddy;
+import core.StuddyBuddies;
 
 public class StuddyBuddiesPersistence {
-    // skal endre denne til å ta inn StuddyBuddies objekt!
+  
     private ObjectMapper mapper;
 
     public StuddyBuddiesPersistence() {
@@ -20,16 +20,16 @@ public class StuddyBuddiesPersistence {
         mapper.registerModule(new StuddyModule());
     }
 
-    public void writeStuddyBuddy(StuddyBuddy studdyBuddy, Writer writer) throws JsonGenerationException, JsonMappingException, IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, studdyBuddy);
+    public void writeStuddyBuddies(StuddyBuddies studdyBuddies, Writer writer) throws JsonGenerationException, JsonMappingException, IOException {
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, studdyBuddies);
     }
 
-    public StuddyBuddy readStuddyBuddy(File file) throws JsonParseException, JsonMappingException, IOException {
-        return mapper.readValue(file, StuddyBuddy.class);
+    public StuddyBuddies readStuddyBuddies(File file) throws JsonParseException, JsonMappingException, IOException {
+        return mapper.readValue(file, StuddyBuddies.class);
     }
 
-    public StuddyBuddy readStuddyBuddy(Reader reader) throws JsonParseException, JsonMappingException, IOException {
-        return mapper.readValue(reader, StuddyBuddy.class);
+    public StuddyBuddies readStuddyBuddies(Reader reader) throws JsonParseException, JsonMappingException, IOException {
+        return mapper.readValue(reader, StuddyBuddies.class);
     }    
 
 }
