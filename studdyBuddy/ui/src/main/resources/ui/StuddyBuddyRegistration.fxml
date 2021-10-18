@@ -33,7 +33,7 @@
     	<TextField fx:id="endTimeField" 
         GridPane.columnIndex="1" GridPane.rowIndex="6"/>
         
-        <Button text="Register" onAction="#handleRegister"
+        <Button text="Register" fx:id="register" onAction="#handleRegister"
         GridPane.columnIndex="0" GridPane.rowIndex="7"/>
 
         <Label text="" fx:id="messageText" prefHeight="75"
