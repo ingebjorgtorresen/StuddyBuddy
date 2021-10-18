@@ -1,20 +1,17 @@
 package ui;
 
+import core.*;
+import json.*;
 import java.io.FileNotFoundException;
 import java.io.Reader;
 import java.io.Writer;
-import java.net.URL;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import core.*;
-import json.*;
+import java.nio.charset.StandardCharsets;
+import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -24,10 +21,10 @@ public class StuddyBuddyRegistrationController {
     
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
+    private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
     private String sampleStuddyBuddyResource = "sample-studdybuddymodel.json";
     //TODO: Set String to match a user path
     private String userStuddyBuddyPath = null;
-    private ObjectMapper mapper = new ObjectMapper();
 
 	@FXML 
 	private TextField roomField;
@@ -48,7 +45,6 @@ public class StuddyBuddyRegistrationController {
     private Label feedbackText;
 	
     private void initializeStuddyBuddy() {
-        mapper.registerModule(new StuddyModule());
         Reader reader = null;
 
         // Try to read file from users home folder first
@@ -90,15 +86,6 @@ public class StuddyBuddyRegistrationController {
 		registration = new StuddyBuddyRegistration();
         createRegistration();
 	}
-
-    public void saveStuddyBuddy() {
-        try {
-            Writer writer = new FileWriter(sampleStuddyBuddyResource, StandardCharsets.UTF_8);
-            mapper.writerWithDefaultPrettyPrinter().writeValue(writer, buddy);
-        } catch (IOException e) {
-            System.err.println("Couldn´t write to the sample file.");
-        }
-    }
 
     /**
 	 * creates a new registration
@@ -197,6 +184,16 @@ public class StuddyBuddyRegistrationController {
         registration.setEndTime(getInputEndTime());
     }
 
+    private void saveStuddyBuddy() {
+        try {
+            Writer writer = new FileWriter(sampleStuddyBuddyResource, StandardCharsets.UTF_8);
+            persistence.writeStuddyBuddy(buddy, writer);
+        } catch (IOException e) {
+            messageText.setText("Couldn't save your registration.");
+            messageText.setVisible(true);
+        }
+    }
+
     /**
 	 * sets the feedback text to not be visable and to have Paradise Pink color
 	 * saves this registration to file registration was successful
@@ -221,6 +218,7 @@ public class StuddyBuddyRegistrationController {
         messageText.setText("Registration was successfull!");
         messageText.setTextFill(Color.web("#7DDF64"));
         messageText.setVisible(true);
+        // TODO: Update line under to work with JSON
         // feedbackText.setText(fileHandler.readRegistrationFromFile());
         feedbackText.setStyle("-fx-background-color: #C0DF85");
         feedbackText.setVisible(true);
