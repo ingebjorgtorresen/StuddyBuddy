@@ -27,8 +27,6 @@ public class StuddyBuddyRegistrationController {
     private String sampleStuddyBuddyResource = "sample-studdybuddymodel.json";
     //TODO: Set String to match a user path
     private String userStuddyBuddyPath = null;
-	// StuddyBuddyFileHandler skal slettes til R2
-    private StuddyBuddyFileHandler fileHandler;
     private ObjectMapper mapper = new ObjectMapper();
 
 	@FXML 
@@ -91,7 +89,6 @@ public class StuddyBuddyRegistrationController {
         initializeStuddyBuddy();
 		registration = new StuddyBuddyRegistration();
         createRegistration();
-        fileHandler = new StuddyBuddyFileHandler();
 	}
 
     public void saveStuddyBuddy() {
@@ -218,14 +215,13 @@ public class StuddyBuddyRegistrationController {
         }
 
         registerStuddyBuddy();
-        fileHandler.saveRegistrationToFile(registration);
         buddy = registration.getStuddyBuddy();
         buddy.addRegistration(registration);
         saveStuddyBuddy();
         messageText.setText("Registration was successfull!");
         messageText.setTextFill(Color.web("#7DDF64"));
         messageText.setVisible(true);
-        feedbackText.setText(fileHandler.readRegistrationFromFile());
+        // feedbackText.setText(fileHandler.readRegistrationFromFile());
         feedbackText.setStyle("-fx-background-color: #C0DF85");
         feedbackText.setVisible(true);
         roomField.clear();
