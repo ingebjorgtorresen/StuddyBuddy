@@ -124,6 +124,15 @@ public class StuddyBuddyRegistrationController {
     }
 
     /**
+	 * Get the text printed from the label messageText
+	 * 
+	 * @return text messageText from label
+	 */
+	public String getMessageText(){
+		return messageText.getText();
+	}
+
+    /**
 	 * register a new StuddyBuddy
 	 * sets the name, room, course, start time and end time
 	 */
