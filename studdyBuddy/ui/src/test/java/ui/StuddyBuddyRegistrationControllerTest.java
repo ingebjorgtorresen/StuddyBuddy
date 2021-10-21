@@ -8,8 +8,10 @@ import javafx.stage.Stage;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import org.junit.jupiter.api.Test;
 import core.StuddyBuddy;
 import core.StuddyBuddyRegistration;
@@ -20,9 +22,7 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     private StuddyBuddyRegistrationController controller;
 
     private StuddyBuddy studdyBuddy;
-    
-    private StuddyBuddyRegistration reg1;
-    
+        
     private String successfullRegistration = "Registration was successfull!";
 
     @Override
@@ -50,7 +50,7 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
         reg1.setStartTime("11:00");
         reg1.setEndTime("12:00");
         studdyBuddy.addRegistration(reg1);
-        return studdyBuddy;
+        return this.studdyBuddy = studdyBuddy;
     }
 
     /**
@@ -86,14 +86,54 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     }
 
     /**
-     * Ckeck that the label messageText don´t prints the successfull-message
+     * Checks that the registration is not successfull when the input
+     * in roomField is invalid.
+     */
+    @Test
+    public void testRoom(){
+      clickOn("#roomField").write("$chool");
+      assertNotEquals(successfullRegistration, controller.getMessageText());
+    }
+
+     /**
+     * Checks that the registration is not successfull when the input
+     * in courseField is invalid.
+     */
+    @Test
+    public void testCourse(){
+      clickOn("#courseField").write("3");
+      assertNotEquals(successfullRegistration, controller.getMessageText());
+    }
+
+     /**
+     * Checks that the registration is not successfull when the input
+     * in startTimeField is invalid.
+     */
+    @Test
+    public void testStartTime(){
+      clickOn("#startTimeField").write("123:00");
+      assertNotEquals(successfullRegistration, controller.getMessageText());
+    }
+
+     /**
+     * Checks that the registration is not successfull when the input
+     * in endTimeField is invalid.
+     */
+    @Test
+    public void testEndTime(){
+      clickOn("#endTimeField").write("24:000");
+      assertNotEquals(successfullRegistration, controller.getMessageText());
+    }
+
+    /**
+     * Ckeck that the label feedbackText is not visable
      * when the registration is unsuccessfull.
      */
     @Test
     public void checkUnsuccessfullRegistration(){
-        clickOn("#roomField").write("$chool");
-        checkRegister();
-        assertNotEquals(controller.getMessageText(), successfullRegistration);
+      if(successfullRegistration.equals(controller.getMessageText())){
+        assertFalse(controller.getFeedbackLabel().isVisible());
+      }
     }
 
     /**
@@ -103,7 +143,4 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     public void checkRegister(){
         clickOn("#register");
     }
-
-    // TODO: testing av lagringen? (skal kanskje ikke gjøre i denne test-klassen)
-
 }
