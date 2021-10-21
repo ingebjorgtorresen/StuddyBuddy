@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.net.URL;
@@ -22,9 +23,8 @@ public class StuddyBuddyRegistrationController {
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
     private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
-    private String sampleStuddyBuddyResource = "sample-studdybuddymodel.json";
-    //TODO: Set String to match a user path
-    private String userStuddyBuddyPath = null;
+    private String sampleStuddyBuddyResource = System.getProperty("user.dir") + "/src/main/resources/ui/sample-studdybuddymodel.json";
+    private Path userStuddyBuddyPath = Paths.get(System.getProperty("user.dir"), "Registrations.txt");
 
 	@FXML 
 	private TextField roomField;
@@ -50,7 +50,7 @@ public class StuddyBuddyRegistrationController {
         // Try to read file from users home folder first
         if (userStuddyBuddyPath != null) {
             try {
-                reader = new FileReader(Paths.get(System.getProperty("user.home"), userStuddyBuddyPath).toFile(), StandardCharsets.UTF_8);
+                reader = new FileReader(userStuddyBuddyPath.toFile(), StandardCharsets.UTF_8);
             } catch (IOException e) {
                 System.err.println("Couldn't find " + userStuddyBuddyPath + "at user.home.");
             }

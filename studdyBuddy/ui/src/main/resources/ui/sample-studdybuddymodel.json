@@ -1,9 +1,19 @@
 {
-  "Name" : "kuhj",
+  "Name" : "hvkewj",
   "Registrations" : [ {
-    "Room" : "ghj",
-    "Course" : "hj",
+    "Room" : "funker",
+    "Course" : "det",
     "Start time" : "12:00",
-    "End time" : "12:01"
+    "End time" : "14:00"
+  }, {
+    "Room" : "funker",
+    "Course" : "det",
+    "Start time" : "12:00",
+    "End time" : "14:00"
+  }, {
+    "Room" : "funker",
+    "Course" : "det",
+    "Start time" : "12:00",
+    "End time" : "14:00"
   } ]
 }
