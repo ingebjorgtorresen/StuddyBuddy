@@ -23,8 +23,8 @@ public class StuddyBuddyRegistrationController {
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
     private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
-    private String sampleStuddyBuddyResource = System.getProperty("user.dir") + "/src/main/resources/ui/sample-studdybuddymodel.json";
-    private Path userStuddyBuddyPath = Paths.get(System.getProperty("user.dir"), "Registrations.txt");
+    private String sampleStuddyBuddyResource = "sample-studdybuddymodel.json";
+    private Path userStuddyBuddyPath = Paths.get(System.getProperty("user.home"), "StuddyBuddyRegistrations.txt");
 
 	@FXML 
 	private TextField roomField;
@@ -48,11 +48,11 @@ public class StuddyBuddyRegistrationController {
         Reader reader = null;
 
         // Try to read file from users home folder first
-        if (userStuddyBuddyPath != null) {
+        if (userStuddyBuddyPath.toFile().exists()) {
             try {
                 reader = new FileReader(userStuddyBuddyPath.toFile(), StandardCharsets.UTF_8);
             } catch (IOException e) {
-                System.err.println("Couldn't find " + userStuddyBuddyPath + "at user.home.");
+                System.err.println("Couldn't find " + userStuddyBuddyPath + " at user.home.");
             }
         }
 
@@ -186,7 +186,8 @@ public class StuddyBuddyRegistrationController {
 
     private void saveStuddyBuddy() {
         try {
-            Writer writer = new FileWriter(sampleStuddyBuddyResource, StandardCharsets.UTF_8);
+            Writer writer = new FileWriter(userStuddyBuddyPath.toFile(), StandardCharsets.UTF_8);
+            System.out.println(userStuddyBuddyPath.toFile());
             persistence.writeStuddyBuddy(buddy, writer);
         } catch (IOException e) {
             messageText.setText("Couldn't save your registration.");
