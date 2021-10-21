@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import core.StuddyBuddy;
 import core.StuddyBuddyRegistration;
+import org.junit.jupiter.api.Assertions;
 
 public class StuddyBuddyControllerTest extends ApplicationTest {
 
@@ -37,7 +38,7 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
     }
   
     @BeforeEach
-    public void setUpRegistrations(){
+    public void setUpRegistrations() {
       studdyBuddy = new StuddyBuddy();
       reg1 = new StuddyBuddyRegistration();
       reg2 = new StuddyBuddyRegistration();
@@ -72,6 +73,15 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
         afterClickRoot = window.getScene().getRoot();
       }
       assertNotEquals(afterClickRoot, beforeClickRoot);
+    }
+    
+    @Test
+    public void testTextfield() {
+      String newNameText = "New name";
+      clickOn("#nameField").write(newNameText);
+      //clickOn("#logInButton");
+      //StuddyBuddy newName = new StuddyBuddy().name(newNameText);
+      Assertions.assertEquals(newNameText, this.controller.getInputName());
     }
 }
   
