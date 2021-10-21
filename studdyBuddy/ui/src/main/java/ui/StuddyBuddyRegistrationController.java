@@ -133,6 +133,15 @@ public class StuddyBuddyRegistrationController {
 	}
 
     /**
+	 * Get the text printed from the label feedbackText
+	 * 
+	 * @return text feedbackText from label
+	 */
+	public Label getFeedbackLabel(){
+		return feedbackText;
+	}
+
+    /**
 	 * register a new StuddyBuddy
 	 * sets the name, room, course, start time and end time
 	 */
