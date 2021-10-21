@@ -3,16 +3,10 @@ package ui;
 import core.*;
 import json.*;
 import java.io.FileNotFoundException;
-import java.io.Reader;
 import java.io.Writer;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
-import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -23,8 +17,7 @@ public class StuddyBuddyRegistrationController {
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
     private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
-    private String sampleStuddyBuddyResource = "sample-studdybuddymodel.json";
-    private Path userStuddyBuddyPath = Paths.get(System.getProperty("user.home"), "StuddyBuddyRegistrations.txt");
+    private String registrationsFileName = "registrations.json";
 
 	@FXML 
 	private TextField roomField;
@@ -43,46 +36,8 @@ public class StuddyBuddyRegistrationController {
 	
     @FXML 
     private Label feedbackText;
-	
-    private void initializeStuddyBuddy() {
-        Reader reader = null;
-
-        // Try to read file from users home folder first
-        if (userStuddyBuddyPath.toFile().exists()) {
-            try {
-                reader = new FileReader(userStuddyBuddyPath.toFile(), StandardCharsets.UTF_8);
-            } catch (IOException e) {
-                System.err.println("Couldn't find " + userStuddyBuddyPath + " at user.home.");
-            }
-        }
-
-        // Try to read file from resources instead
-        if (reader == null && sampleStuddyBuddyResource != null) {
-            URL url = getClass().getResource(sampleStuddyBuddyResource);
-            if (url != null) {
-                try {
-                    reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
-                } catch (IOException e) {
-                    System.err.println("Couldn't read from " + sampleStuddyBuddyResource + ".");
-                }
-            }
-            else {
-                System.err.println("Coulcn't find built in " + sampleStuddyBuddyResource + ".");
-            }
-        }
-
-        if (reader != null) {
-            try {
-                reader.close();
-            } catch (IOException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-    }
 
 	public void initialize() {
-        initializeStuddyBuddy();
 		registration = new StuddyBuddyRegistration();
         createRegistration();
 	}
@@ -184,11 +139,10 @@ public class StuddyBuddyRegistrationController {
         registration.setEndTime(getInputEndTime());
     }
 
-    private void saveStuddyBuddy() {
-        try {
-            Writer writer = new FileWriter(userStuddyBuddyPath.toFile(), StandardCharsets.UTF_8);
-            System.out.println(userStuddyBuddyPath.toFile());
+    private void saveStuddyBuddyToFile() {
+        try (Writer writer = new FileWriter(registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddy(buddy, writer);
+            writer.flush();
         } catch (IOException e) {
             messageText.setText("Couldn't save your registration.");
             messageText.setVisible(true);
@@ -215,7 +169,7 @@ public class StuddyBuddyRegistrationController {
         registerStuddyBuddy();
         buddy = registration.getStuddyBuddy();
         buddy.addRegistration(registration);
-        saveStuddyBuddy();
+        saveStuddyBuddyToFile();
         messageText.setText("Registration was successfull!");
         messageText.setTextFill(Color.web("#7DDF64"));
         messageText.setVisible(true);

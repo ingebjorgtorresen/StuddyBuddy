@@ -1,0 +1,14 @@
+{
+  "Name" : "selmaAAA",
+  "Registrations" : [ {
+    "Room" : "prøver",
+    "Course" : "igjen",
+    "Start time" : "12:00",
+    "End time" : "13:00"
+  }, {
+    "Room" : "prøver",
+    "Course" : "igjen",
+    "Start time" : "12:00",
+    "End time" : "13:00"
+  } ]
+}
