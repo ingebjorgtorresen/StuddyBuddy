@@ -1,3 +1,5 @@
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2144/gr2144) 
+
 # Group gr2144 repository 
 
 The StuddyBuddy-project consists of a folder called "studdyBuddy" that makes up the coding project. Within this folder there are three folders; "core", "docs" and "ui", in addition there is a pom.xml-file. At root-level there is a .gitpod.Dockerfile-file, -gitpod.yml-file and a README-file named "userstory.md".
