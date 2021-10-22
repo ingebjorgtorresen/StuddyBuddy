@@ -23,7 +23,7 @@ public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
     jGen.writeStartObject(); 
     jGen.writeStringField("Name", studdyBuddy.getName());
     jGen.writeArrayFieldStart("Registrations");
-    for(StuddyBuddyRegistration registration : studdyBuddy.getList()) {
+    for(StuddyBuddyRegistration registration : studdyBuddy.getRegistrations()) {
       jGen.writeObject(registration);
     }
     jGen.writeEndArray();
