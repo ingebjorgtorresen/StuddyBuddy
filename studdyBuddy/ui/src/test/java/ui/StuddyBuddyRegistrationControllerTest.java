@@ -188,7 +188,7 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
       assertEquals("12:00", controller.getEndTime().getText());
 
       assertEquals(studdyBuddy, registration.getStuddyBuddy());
-      assertTrue(studdyBuddy.getList().contains(registration));
+      assertTrue(studdyBuddy.getRegistrations().contains(registration));
 
     }
 
