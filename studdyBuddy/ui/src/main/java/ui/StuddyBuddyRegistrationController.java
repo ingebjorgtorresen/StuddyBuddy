@@ -124,18 +124,56 @@ public class StuddyBuddyRegistrationController {
     }
 
     /**
+	 * @return roomField
+	 */
+    public TextField getRoom(){
+        return roomField;
+    }
+
+    /**
+	 * @return courseField
+	 */
+    public TextField getCourse(){
+        return courseField;
+    }
+
+    /**
+	 * @return startTimeField
+	 */
+    public TextField getStartTime(){
+        return startTimeField;
+    }
+
+    /**
+	 * @return endTimeField
+	 */
+    public TextField getEndTime(){
+        return endTimeField;
+    }
+
+
+    /**
 	 * Get the text printed from the label messageText
 	 * 
-	 * @return text messageText from label
+	 * @return messageText from label
 	 */
 	public String getMessageText(){
 		return messageText.getText();
 	}
 
     /**
-	 * Get the text printed from the label feedbackText
+	 * Get the label messageText
 	 * 
-	 * @return text feedbackText from label
+	 * @return the label messageText 
+	 */
+	public Label getMessageTextLabel(){
+		return messageText;
+	}
+
+    /**
+	 * Get the label feedbackText
+	 * 
+	 * @return the label feedbackText 
 	 */
 	public Label getFeedbackLabel(){
 		return feedbackText;
