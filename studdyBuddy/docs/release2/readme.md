@@ -1,6 +1,15 @@
-# Group gr2144 repository 
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.stud.ntnu.no/#https://gitlab.stud.idi.ntnu.no/it1901/groups-2021/gr2144/gr2144) 
 
-The StuddyBuddy-project consists of a folder called "studdyBuddy" that makes up the coding project. Within this folder there are three folders; "core", "docs" and "ui", in addition there is a pom.xml-file. At root-level there is a .gitpod.Dockerfile-file, -gitpod.yml-file and a README-file named "userstory.md".
+# Building and running of the project
+
+The project uses maven to build and run the project.
+
+To build the project, run mvn install from root-project (studdyBuddy-folder). This will run all the tests and qualitychecks.
+
+The project must run from the ui_module, either with mvn -pl ui javafx:run or first run cd ui and then mavn javafx:run. Know that mvn install must have been ran beforhand on the modules that the ui-module is depending on.
+
+# Group gr2144 repository 
+The StuddyBuddy-project consists of a folder called "studdyBuddy" that makes up the coding project. Within this folder there are three folders; "core", "docs" and "ui", in addition there is a pom.xml-file. At root-level there is a .gitpod.Dockerfile-file, -gitpod.yml-file and a README-file.
 
 ## core-folder
 The core-folder consists of src/main/java/core and src/test/java/core. In addition to these folders there is a pom.xml-file.
