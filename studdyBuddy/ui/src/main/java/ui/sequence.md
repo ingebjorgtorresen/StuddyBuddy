@@ -1,1 +1,1 @@
-![Image] (/workspace/gr2144/out/studdyBuddy/ui/src/main/java/ui/sequence/sequence.png)
+![Image] (/workspace/gr2144/studdyBuddy/ui/src/main/java/ui/sequence/sequence.png)
