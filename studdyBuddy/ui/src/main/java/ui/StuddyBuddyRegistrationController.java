@@ -1,8 +1,14 @@
 package ui;
 
-import java.io.FileNotFoundException;
-
 import core.*;
+import json.*;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.Writer;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -11,8 +17,10 @@ import javafx.scene.paint.Color;
 public class StuddyBuddyRegistrationController {
     
     private StuddyBuddyRegistration registration;
-    private StuddyBuddyFileHandler fileHandler;
-	
+    private StuddyBuddy buddy;
+    private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
+    private String registrationsFileName = "/registrations.json";
+
 	@FXML 
 	private TextField roomField;
 	
@@ -30,11 +38,10 @@ public class StuddyBuddyRegistrationController {
 	
     @FXML 
     private Label feedbackText;
-	
+
 	public void initialize() {
 		registration = new StuddyBuddyRegistration();
         createRegistration();
-        fileHandler = new StuddyBuddyFileHandler();
 	}
 
     /**
@@ -134,6 +141,46 @@ public class StuddyBuddyRegistrationController {
         registration.setEndTime(getInputEndTime());
     }
 
+    private void saveStuddyBuddyToFile() {
+        try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
+            persistence.writeStuddyBuddy(buddy, writer);
+            writer.flush();
+        } catch (IOException e) {
+            messageText.setText("Couldn't save your registration.");
+            messageText.setVisible(true);
+        }
+    }
+
+    public StuddyBuddy getRedigsteredStuddyBuddy() {
+        StuddyBuddy registeredBuddy = null;
+        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
+            registeredBuddy = persistence.readStuddyBuddy(reader);
+        } catch (IOException e) {
+            System.err.println("Couldn't read from file.");
+            e.printStackTrace();
+        } 
+        return registeredBuddy;
+    }
+
+    public void displayRegistration() {
+        StuddyBuddy registeredBuddy = getRedigsteredStuddyBuddy();
+        if (registeredBuddy == null) {
+            messageText.setText("Couldn't register. Try again.");
+        } else {
+            messageText.setText("Registration was successfull!");
+            messageText.setTextFill(Color.web("#7DDF64"));
+            feedbackText.setText(buddy.getRegistrations().get(0).toString());
+            feedbackText.setStyle("-fx-background-color: #C0DF85");
+            feedbackText.setVisible(true);
+        }
+
+        messageText.setVisible(true);
+        roomField.clear();
+        courseField.clear();
+        startTimeField.clear();
+        endTimeField.clear();
+    }
+
     /**
 	 * sets the feedback text to not be visable and to have Paradise Pink color
 	 * saves this registration to file registration was successful
@@ -152,17 +199,10 @@ public class StuddyBuddyRegistrationController {
         }
 
         registerStuddyBuddy();
-        fileHandler.saveRegistrationToFile(registration);
-        messageText.setText("Registration was successfull!");
-        messageText.setTextFill(Color.web("#7DDF64"));
-        messageText.setVisible(true);
-        feedbackText.setText(fileHandler.readRegistrationFromFile());
-        feedbackText.setStyle("-fx-background-color: #C0DF85");
-        feedbackText.setVisible(true);
-        roomField.clear();
-        courseField.clear();
-        startTimeField.clear();
-        endTimeField.clear();
+        buddy = registration.getStuddyBuddy();
+        buddy.addRegistration(registration);
+        saveStuddyBuddyToFile();
+        displayRegistration();
     }
 
 }

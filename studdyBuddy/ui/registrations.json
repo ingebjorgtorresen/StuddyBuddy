@@ -1,0 +1,9 @@
+{
+  "Name" : "selma",
+  "Registrations" : [ {
+    "Room" : "a3",
+    "Course" : "itp",
+    "Start time" : "12:00",
+    "End time" : "19:00"
+  } ]
+}
