@@ -19,7 +19,7 @@ public class StuddyBuddyRegistrationController {
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
     private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
-    private String registrationsFileName = "registrations.json";
+    private String registrationsFileName = "/registrations.json";
 
 	@FXML 
 	private TextField roomField;
@@ -142,7 +142,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     private void saveStuddyBuddyToFile() {
-        try (Writer writer = new FileWriter(registrationsFileName, StandardCharsets.UTF_8)) {
+        try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddy(buddy, writer);
             writer.flush();
         } catch (IOException e) {
@@ -153,7 +153,7 @@ public class StuddyBuddyRegistrationController {
 
     public StuddyBuddy getRedigsteredStuddyBuddy() {
         StuddyBuddy registeredBuddy = null;
-        try (Reader reader = new FileReader(registrationsFileName, StandardCharsets.UTF_8)) {
+        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             registeredBuddy = persistence.readStuddyBuddy(reader);
         } catch (IOException e) {
             System.err.println("Couldn't read from file.");
