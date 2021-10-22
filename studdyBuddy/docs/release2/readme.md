@@ -32,3 +32,12 @@ Within src/main/resources you can find the file module-info.java. Within src/mai
 
 ## userstory
 The userstory have information that describes the application and what it is meant to do. It contains screenshots of the application´s GUI which makes it easier to understand the function of the application. In addition there is a user story for the current functionality of the application StuddyBuddy.
+
+## work documentation 
+We started the work process by getting an overview over what had to be done. Then we made issues to every task and assigned them between the group members. Even though only one person had responsibility for a task we usually sat together and helped each other. In some cases we also worked together in pairs with the programming. Each issue was handled on a separate branch and was then merged to the master-branch when the issue was finished. Before merging we always made sure to get the work approved by another group member. 
+
+The quality of the code has been the highest priority throughout the work process. Therefore we chose a simple design to begin with. For the first deliverable we chose to only make a registration function. We also made sure that everything was working properly before implementing more functions. 
+
+We used a number of programs to check the code quality. We used “Spotbugs” to look for bugs in the code. To make sure that the style of the code was done right and continuous we used the program “checkstyle”, which we found very useful.
+
+We made a test for every class to make sure that code was working correctly. We used “Jacoco” to help us keep track of the test coverage.  
