@@ -11,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import core.*;
 
-public class StuddyModuleTest {
+public class StuddyPersistenceTest {
     
     private static StuddyBuddyPersistence persistence;
     private static String testFileName = "testPersistence.json";

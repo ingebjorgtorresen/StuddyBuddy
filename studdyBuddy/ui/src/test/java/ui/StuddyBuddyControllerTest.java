@@ -56,7 +56,7 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
       for(Window window : beforeClick){
         beforeClickRoot = window.getScene().getRoot();
       }
-      clickOn("#login");
+      clickOn("#logInButton");
       try {
         Thread.sleep(5000);
       } catch (Exception e) {
