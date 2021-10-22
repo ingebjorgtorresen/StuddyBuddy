@@ -3,9 +3,11 @@ package ui;
 import core.*;
 import json.*;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.Writer;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -149,6 +151,36 @@ public class StuddyBuddyRegistrationController {
         }
     }
 
+    public StuddyBuddy getRedigsteredStuddyBuddy() {
+        StuddyBuddy registeredBuddy = null;
+        try (Reader reader = new FileReader(registrationsFileName, StandardCharsets.UTF_8)) {
+            registeredBuddy = persistence.readStuddyBuddy(reader);
+        } catch (IOException e) {
+            System.err.println("Couldn't read from file.");
+            e.printStackTrace();
+        } 
+        return registeredBuddy;
+    }
+
+    public void displayRegistration() {
+        StuddyBuddy registeredBuddy = getRedigsteredStuddyBuddy();
+        if (registeredBuddy == null) {
+            messageText.setText("Couldn't register. Try again.");
+        } else {
+            messageText.setText("Registration was successfull!");
+            messageText.setTextFill(Color.web("#7DDF64"));
+            feedbackText.setText(buddy.getRegistrations().get(0).toString());
+            feedbackText.setStyle("-fx-background-color: #C0DF85");
+            feedbackText.setVisible(true);
+        }
+
+        messageText.setVisible(true);
+        roomField.clear();
+        courseField.clear();
+        startTimeField.clear();
+        endTimeField.clear();
+    }
+
     /**
 	 * sets the feedback text to not be visable and to have Paradise Pink color
 	 * saves this registration to file registration was successful
@@ -170,17 +202,7 @@ public class StuddyBuddyRegistrationController {
         buddy = registration.getStuddyBuddy();
         buddy.addRegistration(registration);
         saveStuddyBuddyToFile();
-        messageText.setText("Registration was successfull!");
-        messageText.setTextFill(Color.web("#7DDF64"));
-        messageText.setVisible(true);
-        // TODO: Update line under to work with JSON
-        // feedbackText.setText(fileHandler.readRegistrationFromFile());
-        feedbackText.setStyle("-fx-background-color: #C0DF85");
-        feedbackText.setVisible(true);
-        roomField.clear();
-        courseField.clear();
-        startTimeField.clear();
-        endTimeField.clear();
+        displayRegistration();
     }
 
 }

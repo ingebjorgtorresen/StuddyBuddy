@@ -58,14 +58,14 @@ public class StuddyBuddy {
 	}
 
 	public void addRegistration(StuddyBuddyRegistration registration) {
-		registrations.add(registration);
+		registrations.add(0, registration);
 	}
 
 	public void removeRegistration(StuddyBuddyRegistration registration) {
 		registrations.remove(registration);
 	}
 
-	public List<StuddyBuddyRegistration> getList() {
+	public List<StuddyBuddyRegistration> getRegistrations() {
 		return registrations;
 	}
 
