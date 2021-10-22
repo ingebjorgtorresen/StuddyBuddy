@@ -6,15 +6,20 @@ The project uses maven to build and run the project.
 
 To build the project, run mvn install from root-project (studdyBuddy-folder). This will run all the tests and qualitychecks.
 
-The project must run from the ui_module, either with mvn -pl ui javafx:run or first run cd ui and then mavn javafx:run. Know that mvn install must have been ran beforhand on the modules that the ui-module is depending on.
+The project must run from the ui_module, either with mvn -pl ui javafx:run or first run cd ui and then mvn javafx:run. Know that mvn install must have been ran beforhand on the modules that the ui-module is depending on.
 
 # Group gr2144 repository 
-The StuddyBuddy-project consists of a folder called "studdyBuddy" that makes up the coding project. Within this folder there are three folders; "core", "docs" and "ui", in addition there is a pom.xml-file. At root-level there is a .gitpod.Dockerfile-file, -gitpod.yml-file and a README-file.
+The StuddyBuddy-project consists of a folder called "studdyBuddy" that makes up the coding project. Within this folder there are five folders; "config" , "core", "docs" and "ui", in addition there is a pom.xml-file and a userstory. At root-level there is a .gitpod.Dockerfile-file, -gitpod.yml-file and a README-file.
+
+## config
+the config-folder consists of checkstyle and spotbugs that are tools to help to configure the style and check for bugs in our code.
 
 ## core-folder
-The core-folder consists of src/main/java/core and src/test/java/core. In addition to these folders there is a pom.xml-file.
+The core-folder consists of src/main/java/core, src/main/java/json and src/test/java/core. In addition to these folders there is a pom.xml-file and a target-folder.
 
-Within src/main/java/core you can find the classes AbstractStuddyBuddy.java, StuddyBuddy.java, StuddyBuddyRegistration.java and StuddyBuddyModel. 
+Within src/main/java/core you can find the classes StuddyBuddy.java, StuddyBuddyRegistration.java and StuddyBuddyModel. 
+
+within src/main/java/json you can find the classes StuddyBuddyDeserializer.java, StuddyBuddyPersistence.java, StuddyBuddyRegistrationDeserializer.java, StuddyBuddyRegistrationSerializer.java, StuddyBuddySerializer.java and StuddyModule.java.
 
 Within src/test/java/core you can fint the test-classes StuddyBuddyTest.java and StuddyBuddyRegistrationTest.java which tests the Studdybuddy-class and the StuddyBuddyRegistration-class. 
 
@@ -24,7 +29,7 @@ The docs folder consists of release1/resources and release1/resources. The image
 ## ui-folder
 The ui-folder consists of src/main and src/test/java/ui. In addition to these folders there is a pom.xml-file.
 
-Within src/main/java/ui you can find the folders java/ui and resources/ui. Within src/main/java/ui you can find the files SuddyBuddyApp.java, StuddyBuddyController.java, StuddyBuddyFileHandler.java, StuddyBuddyFileHandlerInterface.java and StuddyBuddyRegistrationController.java.
+Within src/main/java/ui you can find the folders java/ui and resources/ui. Within src/main/java/ui you can find the files SuddyBuddyApp.java, StuddyBuddyController.java, and StuddyBuddyRegistrationController.java.
 
 within src/test you can find the classes test-classes StuddyBuddyControllerTest.java and StuddyBuddyRegistrationControllerTest.java which tests the two controllers.
 
