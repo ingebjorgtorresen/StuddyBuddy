@@ -16,7 +16,6 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 import core.StuddyBuddy;
-import core.StuddyBuddyRegistration;
 import org.junit.jupiter.api.Assertions;
 
 public class StuddyBuddyControllerTest extends ApplicationTest {
@@ -25,8 +24,6 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
 
     //private StuddyPersistence studdyPersistence = new studdyPersistence();
     private StuddyBuddy studdyBuddy;
-    private StuddyBuddyRegistration reg1;
-    private StuddyBuddyRegistration reg2;
   
     @Override
     public void start(final Stage stage) throws Exception {
@@ -40,8 +37,6 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
     @BeforeEach
     public void setUpRegistrations() {
       studdyBuddy = new StuddyBuddy();
-      reg1 = new StuddyBuddyRegistration();
-      reg2 = new StuddyBuddyRegistration();
     }
     
     @Test
