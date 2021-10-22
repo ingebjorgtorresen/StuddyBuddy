@@ -4,10 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -22,6 +24,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     private StuddyBuddyRegistrationController controller;
 
     private StuddyBuddy studdyBuddy;
+
+    private StuddyBuddyRegistration registration;
         
     private String successfullRegistration = "Registration was successfull!";
 
@@ -50,6 +54,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
         reg1.setStartTime("11:00");
         reg1.setEndTime("12:00");
         studdyBuddy.addRegistration(reg1);
+        reg1.setStuddyBuddy(studdyBuddy);
+        this.registration = reg1;
         return this.studdyBuddy = studdyBuddy;
     }
 
@@ -143,4 +149,47 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     public void checkRegister(){
         clickOn("#register");
     }
+
+    /**
+     * Click that the registration is displayed correctly
+     */
+    @Test
+    public void testDisplayRegistration(){
+      
+      if (this.studdyBuddy == null){
+        assertEquals("Couldn't register. Try again.", controller.getMessageText());
+      }
+
+      else{
+        checkSuccessfullRegistration();
+        assertEquals(Color.web("#7DDF64"), controller.getMessageTextLabel().getTextFill());
+        //assertEquals("Name: Test" + "\n" + "Room: A3-138" + "\n" + "Course: ITP" + "\n" + "Start time: 11:00" + "\n" + "End time: 12:00", controller.getFeedbackLabel().getText());
+        assertEquals("-fx-background-color: #C0DF85", controller.getFeedbackLabel().getStyle());
+        assertTrue(controller.getFeedbackLabel().isVisible());
+      }
+
+      assertTrue(controller.getMessageTextLabel().isVisible());
+      assertTrue(controller.getRoom().getText().equals(""));
+      assertTrue(controller.getCourse().getText().equals(""));
+      assertTrue(controller.getStartTime().getText().equals(""));
+      assertTrue(controller.getEndTime().getText().equals(""));
+    }
+
+    @Test
+    public void testHandleRegistration(){
+      if (controller.getFeedbackLabel().isVisible()){
+        assertEquals(Color.web("#ED4D6E"), controller.getMessageTextLabel().getTextFill());
+      }
+
+      //Check that the registration is correct
+      assertEquals("A3-138", controller.getRoom().getText());
+      assertEquals("ITP", controller.getCourse().getText());
+      assertEquals("11:00", controller.getStartTime().getText());
+      assertEquals("12:00", controller.getEndTime().getText());
+
+      assertEquals(studdyBuddy, registration.getStuddyBuddy());
+      assertTrue(studdyBuddy.getList().contains(registration));
+
+    }
+
 }
