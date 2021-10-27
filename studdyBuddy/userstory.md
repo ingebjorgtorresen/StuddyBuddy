@@ -19,7 +19,7 @@ The StuddyBuddy application tries to connect students by having a registration p
 
 
 
-# User story
+# User story 1 - Registrating schoolwork
 As a student I would like to be updated and informed when fellow students are on campus and also what they are working on.
 
 The user is in need of knowing when fellow students, specifically their friends, are on campus, at the library or other school-related places. It is practical to be able to register name, course, time period and room, in order to enhance collaboration amongst students. The registration should just consist of a simple text, but it is desirable that every field is used, in order to make the registration as informative and organized as possible. 
@@ -33,3 +33,20 @@ The user is in need of knowing when fellow students, specifically their friends,
 ## Important to be able to do:
 - write text in registration-field
 - have several chances to write a valid input in all fields
+
+# User story 2 - Profile with overview of registrations
+As both a private person and student I wish to have an overview of my own attendance at school as well as what I am working on. This to make it easier to know how much time I spend on schoolwork and with which course. 
+
+The user is in need of having a personal page/profile where he/she can register their attendance at school, with information about time, room and course. 
+
+## Important to be able to see:
+- The personal page
+- Log in
+- Username/name
+- Fields for registration
+- What is registered and that it is complete
+
+## Important to be able to do:
+- Be able to log in
+- Be transferred from log in/profile to page for registration
+- Write registration
