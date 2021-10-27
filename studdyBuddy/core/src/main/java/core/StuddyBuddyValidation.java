@@ -5,7 +5,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
 
-public class StuddyBuddyValidation {
+public abstract class StuddyBuddyValidation {
 
     /**
 	 * checks that the name has the correct format. The name can only consist of
