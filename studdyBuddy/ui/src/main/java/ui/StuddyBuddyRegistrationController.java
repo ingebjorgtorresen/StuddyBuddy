@@ -199,7 +199,7 @@ public class StuddyBuddyRegistrationController {
 
     private void saveStuddyBuddyToFile() {
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
-            persistence.writeStuddyBuddy(buddy, writer);
+            persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
         } catch (IOException e) {
             messageText.setText("Couldn't save your registration.");
@@ -210,7 +210,7 @@ public class StuddyBuddyRegistrationController {
     public StuddyBuddy getRedigsteredStuddyBuddy() {
         StuddyBuddy registeredBuddy = null;
         try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
-            registeredBuddy = persistence.readStuddyBuddy(reader);
+            registeredBuddy = persistence.readStuddyBuddies(reader).getStuddyBuddy(buddy.getName());
         } catch (IOException e) {
             System.err.println("Couldn't read from file.");
             e.printStackTrace();

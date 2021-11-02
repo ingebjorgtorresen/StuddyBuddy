@@ -16,6 +16,7 @@ import java.net.URL;
 public class StuddyBuddyController {
 
     private StuddyBuddy studdyBuddy;
+    private StuddyBuddies buddies;
 
     @FXML
     private TextField nameField;
@@ -25,6 +26,7 @@ public class StuddyBuddyController {
 
     public void initialize() {
         studdyBuddy = new StuddyBuddy();
+        buddies = new StuddyBuddies();
     }
 
     /**
@@ -60,6 +62,8 @@ public class StuddyBuddyController {
             StuddyBuddyRegistrationController registrationController = loader.getController();
             studdyBuddy.setName(getInputName());
             nameField.clear();
+            buddies.addStuddyBuddy(studdyBuddy);
+            studdyBuddy.setStuddyBuddies(buddies);
             registrationController.setStuddyBuddyFromLogin(studdyBuddy);
             Stage registrationStage = new Stage();
             registrationStage.setTitle("Registration");

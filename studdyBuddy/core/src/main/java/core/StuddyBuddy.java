@@ -6,10 +6,19 @@ import java.util.Iterator;
 
 public class StuddyBuddy {
 
+	private StuddyBuddies buddies;
 	private String name;
 	//TODO: add password
 
  	private List<StuddyBuddyRegistration> registrations= new ArrayList<>();
+
+	public void setStuddyBuddies(StuddyBuddies buddies) {
+		this.buddies = buddies;
+	}
+
+	public StuddyBuddies getStuddyBuddies() {
+		return this.buddies;
+	}
 
 	/**
 	 * @param name

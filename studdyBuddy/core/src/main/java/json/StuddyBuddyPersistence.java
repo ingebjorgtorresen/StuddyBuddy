@@ -14,12 +14,12 @@ public class StuddyBuddyPersistence {
         mapper.registerModule(new StuddyModule());
     }
 
-    public void writeStuddyBuddy(StuddyBuddy buddy, Writer writer) throws IOException {
-        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, buddy);
+    public void writeStuddyBuddies(StuddyBuddies buddies, Writer writer) throws IOException {
+        mapper.writerWithDefaultPrettyPrinter().writeValue(writer, buddies);
     }
 
-    public StuddyBuddy readStuddyBuddy(Reader reader) throws IOException {
-        return mapper.readValue(reader, StuddyBuddy.class);
+    public StuddyBuddies readStuddyBuddies(Reader reader) throws IOException {
+        return mapper.readValue(reader, StuddyBuddies.class);
     }
 
 }
