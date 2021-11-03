@@ -9,9 +9,15 @@
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.StuddyBuddyController" prefHeight="640.0" prefWidth="350.0">
     <Label text="Name:" layoutX="10.0" layoutY="200.0"/>
 
-    <TextField fx:id="nameField" promptText="Username" layoutX="60.0" layoutY="200.0"/>
+    <TextField fx:id="nameField" promptText="Username" layoutX="120.0" layoutY="200.0"/>
+
+    <Label text="Password:" layoutX="10.0" layoutY="250.0"/>
+
+    <TextField fx:id="passwordField" promptText="Password" layoutX="120.0" layoutY="250.0"/>
         
-    <Button text="Login" fx:id="login" onAction="#handleLogin" layoutX="170.0" layoutY="300.0"/>
+    <Button text="Login" fx:id="login" onAction="#handleLogin" layoutX="235.0" layoutY="300.0"/>
 
     <Label text="" fx:id="errorMessage" layoutX="20.0" layoutY="450.0"/>
+
+    <Button text="Register user" fx:id="register" onAction="#handleRegisterUser" layoutX="235.0" layoutY="350.0"/>
 </AnchorPane>
