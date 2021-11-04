@@ -70,6 +70,7 @@ public class StuddyBuddyController {
         return true;
     }
 
+
     /**
      * IKKE FERDIG Sends the username to the next controller and loads a new window
      */
@@ -86,19 +87,20 @@ public class StuddyBuddyController {
             checkInputName();
             checkInputPassword();
 
-            if(!(checkInputPassword() && checkInputName())) {
+            if(((!checkInputPassword()) && (!checkInputName()))) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+
             }
     
-            if(!checkInputName()) {
+            else if(!checkInputName()) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 passwordField.setText(getInputPassword());
 
             }
     
-            if(!checkInputPassword()) {
+            else if(!checkInputPassword()) {
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 nameField.setText(getInputName());
@@ -138,7 +140,9 @@ public class StuddyBuddyController {
             thisStage.close();
 
         } catch (IOException e) {
-            errorMessage.setText("Could not load window.");
+            //errorMessage.setText("Could not load window.");
+            errorMessage.setText(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
