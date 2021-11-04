@@ -45,7 +45,6 @@ public class StuddyBuddyController {
         return nameString;
     }
 
-    // Denne metoden må endres etterhvert, fordi den bli overskrevet av nameField om det også er av feil format.
     @FXML
     public String getInputPassword() {
         String passwordString = passwordField.getText();
@@ -72,7 +71,7 @@ public class StuddyBuddyController {
 
 
     /**
-     * IKKE FERDIG Sends the username to the next controller and loads a new window
+     * Sends the username and password to the next controller and loads a new window
      */
     @FXML
     public void handleLogin() {
@@ -122,7 +121,7 @@ public class StuddyBuddyController {
             }
         
         } catch (IOException e) {
-            e.printStackTrace();
+            errorMessage.setText("Could not Log in. Try again.");
         }
     }
 
@@ -140,9 +139,7 @@ public class StuddyBuddyController {
             thisStage.close();
 
         } catch (IOException e) {
-            //errorMessage.setText("Could not load window.");
-            errorMessage.setText(e.getMessage());
-            throw new IllegalArgumentException(e.getMessage());
+            errorMessage.setText("Could not load window.");
         }
     }
 
