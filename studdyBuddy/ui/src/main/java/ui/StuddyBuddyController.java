@@ -3,13 +3,10 @@ package ui;
 import java.io.IOException;
 
 import core.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -45,15 +42,6 @@ public class StuddyBuddyController {
     @FXML
     public String getInputName() {
         String nameString = nameField.getText();
-        try {
-            this.studdyBuddy.setName(nameString);
-        } catch (IllegalArgumentException e) {
-            nameField.setText("Invalid name.");
-            nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-            //errorMessage.setText("Name can not include any \ncharacthers but letters and \n' ', you wrote: " + nameString);
-            //errorMessage.setTextFill(Color.web("#ED4D6E"));
-            //errorMessage.setVisible(true);
-        }
         return nameString;
     }
 
@@ -61,16 +49,25 @@ public class StuddyBuddyController {
     @FXML
     public String getInputPassword() {
         String passwordString = passwordField.getText();
-        try {
-            this.studdyBuddy.setPassword(passwordString);
-        } catch (IllegalArgumentException e) {
-            passwordField.setText("Invalid name.");
-            passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-            //errorMessage.setText("Please set a valid password with at least 8 characters consisting of digits and letters.");
-            //errorMessage.setTextFill(Color.web("#ED4D6E"));
-            //errorMessage.setVisible(true);
-        }
         return passwordString;
+    }
+
+    private boolean checkInputName() {
+        try {
+            this.studdyBuddy.setName(getInputName());
+        } catch(IllegalArgumentException e) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean checkInputPassword() {
+        try {
+            this.studdyBuddy.setPassword(getInputPassword());
+        } catch(IllegalArgumentException e) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -85,18 +82,43 @@ public class StuddyBuddyController {
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             StuddyBuddyRegistrationController registrationController = loader.getController();
-            studdyBuddy.setName(getInputName());
-            studdyBuddy.setPassword(getInputPassword());
-            nameField.clear();
-            passwordField.clear();
-            registrationController.setStuddyBuddyFromLogin(studdyBuddy);
-            Stage registrationStage = new Stage();
-            registrationStage.setTitle("Registration");
-            registrationStage.setScene(new Scene(parent));
-            registrationStage.show();
-            Stage thisStage = (Stage) nameField.getScene().getWindow();
-            thisStage.close();
 
+            checkInputName();
+            checkInputPassword();
+
+            if(!(checkInputPassword() && checkInputName())) {
+                nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+            }
+    
+            if(!checkInputName()) {
+                nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+                passwordField.setText(getInputPassword());
+
+            }
+    
+            if(!checkInputPassword()) {
+                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+                nameField.setText(getInputName());
+            }
+
+            else {
+                studdyBuddy.setName(getInputName());
+                studdyBuddy.setPassword(getInputPassword());
+                nameField.clear();
+                passwordField.clear();
+                registrationController.setStuddyBuddyFromLogin(studdyBuddy);
+                
+                Stage registrationStage = new Stage();
+                registrationStage.setTitle("Registration");
+                registrationStage.setScene(new Scene(parent));
+                registrationStage.show();
+                Stage thisStage = (Stage) nameField.getScene().getWindow();
+                thisStage.close();
+            }
+        
         } catch (IOException e) {
             e.printStackTrace();
         }
