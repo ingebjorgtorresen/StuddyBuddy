@@ -6,11 +6,11 @@ import java.io.Writer;
 import java.io.Reader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class StuddyBuddyPersistence {
+public class StuddyBuddiesPersistence {
 
     private ObjectMapper mapper = new ObjectMapper();
 
-    public StuddyBuddyPersistence() {
+    public StuddyBuddiesPersistence() {
         mapper.registerModule(new StuddyModule());
     }
 

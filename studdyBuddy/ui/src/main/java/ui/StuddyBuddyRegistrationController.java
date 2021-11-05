@@ -18,7 +18,7 @@ public class StuddyBuddyRegistrationController {
     
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
-    private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
+    private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
 	@FXML 

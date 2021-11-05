@@ -8,12 +8,6 @@ import java.util.stream.Collectors;
 public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     List<StuddyBuddy> studdyBuddies = new ArrayList<>();
-    
-    /**
-     * Emtpy constructor.
-     */
-    public StuddyBuddies() {
-    }
 
     /**
     * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it exists.
@@ -50,6 +44,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
         if(checkIfStuddyBuddyExists(buddy.getName()) == false) {
             StuddyBuddy newStuddyBuddy = (StuddyBuddy) buddy;
             this.studdyBuddies.add(newStuddyBuddy);
+            buddy.setStuddyBuddies(this);
         }
         else {
             throw new IllegalArgumentException("Already user existing with name: " + buddy.getName());
@@ -93,10 +88,30 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     /**
      * Method for string representation of a list over StuddyBuddy objects.
      */
-    @Override
-    public String toString() {
-        return "" + studdyBuddies.stream().map(studdybuddy -> studdybuddy.toString()).collect(Collectors.toList());
+    public List<String> getListOfStuddyBuddys() {
+        return studdyBuddies.stream().map(studdybuddy -> studdybuddy.toString()).collect(Collectors.toList());
     }
 
+    public static void main(String[] args) {
+        StuddyBuddies buddies;
+        StuddyBuddy buddy;
+        StuddyBuddyRegistration registration;
+        buddies = new StuddyBuddies();
+
+        buddy = new StuddyBuddy();
+        buddy.setName("Name");
+
+        registration = new StuddyBuddyRegistration();
+        registration.setRoom("Room");
+        registration.setCourse("Course");
+        registration.setStartTime("08:00");
+        registration.setEndTime("12:00");
+
+        buddy.addRegistration(registration);
+        buddies.addStuddyBuddy(buddy);
+
+        System.out.println("JKNHJB;DBK");
+        System.out.println(buddy.toString());
+    }
 
 }

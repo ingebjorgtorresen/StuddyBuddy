@@ -13,7 +13,7 @@ import core.*;
 
 public class StuddyPersistenceTest {
     
-    private static StuddyBuddyPersistence persistence;
+    private static StuddyBuddiesPersistence persistence;
     private static String testFileName = "testPersistence.json";
     private static StuddyBuddies buddies;
     private static StuddyBuddy buddy;
@@ -24,17 +24,20 @@ public class StuddyPersistenceTest {
     @BeforeEach
     public void setup() {
         buddies = new StuddyBuddies();
-        persistence = new StuddyBuddyPersistence();
+        persistence = new StuddyBuddiesPersistence();
+
         buddy = new StuddyBuddy();
-        buddy.setName("Test");
+        buddy.setName("Name");
+
         registration = new StuddyBuddyRegistration();
-        registration.setRoom("A3");
-        registration.setCourse("itp");
+        registration.setRoom("Room");
+        registration.setCourse("Course");
         registration.setStartTime("08:00");
         registration.setEndTime("12:00");
+
         buddy.addRegistration(registration);
         buddies.addStuddyBuddy(buddy);
-        buddy.setStuddyBuddies(buddies);
+        
         try {
             writer = new FileWriter(testFileName, StandardCharsets.UTF_8);
             reader = new FileReader(testFileName, StandardCharsets.UTF_8);
