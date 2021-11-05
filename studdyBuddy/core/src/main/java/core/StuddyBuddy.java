@@ -1,6 +1,7 @@
 package core;
 
 import java.util.List;
+import java.util.TooManyListenersException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -51,6 +52,12 @@ public class StuddyBuddy {
 
 	public List<StuddyBuddyRegistration> getRegistrations() {
 		return registrations;
+	}
+
+	// Return a studdyBuddy object by its name
+	@Override
+	public String toString() {
+		return getName();
 	}
 
 }

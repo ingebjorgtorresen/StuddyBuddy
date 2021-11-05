@@ -1,9 +1,9 @@
 {
   "Studdybuddies" : [ {
-    "Name" : "Test",
+    "Name" : "Name",
     "Registrations" : [ {
-      "Room" : "A3",
-      "Course" : "itp",
+      "Room" : "Room",
+      "Course" : "Course",
       "Start time" : "08:00",
       "End time" : "12:00"
     } ]
