@@ -16,8 +16,10 @@ public class StuddyPersistenceTest {
     private static StuddyBuddiesPersistence persistence;
     private static String testFileName = "testPersistence.json";
     private static StuddyBuddies buddies;
-    private static StuddyBuddy buddy;
-    private static StuddyBuddyRegistration registration;
+    private static StuddyBuddy buddy1;
+    private static StuddyBuddy buddy2;
+    private static StuddyBuddyRegistration registration1;
+    private static StuddyBuddyRegistration registration2;
     private static Writer writer;
     private static Reader reader;
     
@@ -26,17 +28,26 @@ public class StuddyPersistenceTest {
         buddies = new StuddyBuddies();
         persistence = new StuddyBuddiesPersistence();
 
-        buddy = new StuddyBuddy();
-        buddy.setName("Name");
+        buddy1 = new StuddyBuddy();
+        buddy1.setName("FirstBuddy");
+        registration1 = new StuddyBuddyRegistration();
+        registration1.setRoom("TestRoom1");
+        registration1.setCourse("TestCourse1");
+        registration1.setStartTime("08:00");
+        registration1.setEndTime("12:00");
 
-        registration = new StuddyBuddyRegistration();
-        registration.setRoom("Room");
-        registration.setCourse("Course");
-        registration.setStartTime("08:00");
-        registration.setEndTime("12:00");
+        buddy2 = new StuddyBuddy();
+        buddy2.setName("SecondBuddy");
+        registration2 = new StuddyBuddyRegistration();
+        registration2.setRoom("TestRoom2");
+        registration2.setCourse("TestCourse2");
+        registration2.setStartTime("10:00");
+        registration2.setEndTime("14:00");
 
-        buddy.addRegistration(registration);
-        buddies.addStuddyBuddy(buddy);
+        buddy1.addRegistration(registration1);
+        buddy2.addRegistration(registration2);
+        buddies.addStuddyBuddy(buddy1);
+        buddies.addStuddyBuddy(buddy2);
         
         try {
             writer = new FileWriter(testFileName, StandardCharsets.UTF_8);
@@ -50,6 +61,7 @@ public class StuddyPersistenceTest {
     @Test
     public void testPersistence() {
         StuddyBuddies testBuddies = null;
+        System.out.println(testBuddies);
         try {
             persistence.writeStuddyBuddies(buddies, writer);
             testBuddies = persistence.readStuddyBuddies(reader);
@@ -59,11 +71,11 @@ public class StuddyPersistenceTest {
             System.err.println("Couldn't write/read to/from test file.");
         }
 
-        //Assertions.assertEquals(buddy, testBuddies.getStuddyBuddy(buddy.getName()));
-        StuddyBuddyRegistration testRegistration = testBuddies.getStuddyBuddy(buddy.getName()).getRegistrations().get(0);
-        Assertions.assertEquals(registration.getCourse(), testRegistration.getCourse());
-        Assertions.assertEquals(registration.getRoom(), testRegistration.getRoom());
-        Assertions.assertEquals(registration.getStartTime(), testRegistration.getStartTime());
-        Assertions.assertEquals(registration.getEndTime(), testRegistration.getEndTime());
+        Assertions.assertEquals(buddy1, testBuddies.getStuddyBuddy(buddy1.getName()));
+        StuddyBuddyRegistration testRegistration = testBuddies.getStuddyBuddy(buddy2.getName()).getRegistrations().get(0);
+        Assertions.assertEquals(registration2.getCourse(), testRegistration.getCourse());
+        Assertions.assertEquals(registration2.getRoom(), testRegistration.getRoom());
+        Assertions.assertEquals(registration2.getStartTime(), testRegistration.getStartTime());
+        Assertions.assertEquals(registration2.getEndTime(), testRegistration.getEndTime());
     }
 }

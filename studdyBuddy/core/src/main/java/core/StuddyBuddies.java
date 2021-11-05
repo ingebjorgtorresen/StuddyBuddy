@@ -87,10 +87,25 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method for string representation of a list over StuddyBuddy objects.
-     */
+    */
     @Override
     public String toString() {
-        return "" + studdyBuddies.stream().map(studdybuddy -> studdybuddy.toString()).collect(Collectors.toList());
+        String buddiesString = "Buddies: ";
+        for (StuddyBuddy buddy : studdyBuddies) {
+            buddiesString += "\n" + buddy.getName();
+        }
+        return buddiesString;
     }
+
+
+    /*
+    @Override
+    public String toString() {
+        String buddies = "";
+        for (StuddyBuddy buddy : studdyBuddies) {
+            buddies += buddy.getName() + "\n";
+        }
+        return buddies;
+    }*/
 
 }

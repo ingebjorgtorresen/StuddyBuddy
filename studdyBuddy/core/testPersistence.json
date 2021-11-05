@@ -1,11 +1,19 @@
 {
   "Studdybuddies" : [ {
-    "Name" : "Name",
+    "Name" : "FirstBuddy",
     "Registrations" : [ {
-      "Room" : "Room",
-      "Course" : "Course",
+      "Room" : "TestRoom1",
+      "Course" : "TestCourse1",
       "Start time" : "08:00",
       "End time" : "12:00"
+    } ]
+  }, {
+    "Name" : "SecondBuddy",
+    "Registrations" : [ {
+      "Room" : "TestRoom2",
+      "Course" : "TestCourse2",
+      "Start time" : "10:00",
+      "End time" : "14:00"
     } ]
   } ]
 }
