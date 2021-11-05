@@ -51,7 +51,7 @@ public class StuddyBuddyController {
         return passwordString;
     }
 
-    private boolean checkInputName() {
+    public boolean checkInputName() {
         try {
             this.studdyBuddy.setName(getInputName());
         } catch(IllegalArgumentException e) {
@@ -60,7 +60,7 @@ public class StuddyBuddyController {
         return true;
     }
 
-    private boolean checkInputPassword() {
+    public boolean checkInputPassword() {
         try {
             this.studdyBuddy.setPassword(getInputPassword());
         } catch(IllegalArgumentException e) {

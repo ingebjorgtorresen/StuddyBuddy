@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -48,15 +49,84 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
     /**
      * Ckeck that the UI changes window and scene when clicking on the
      * login button in UI
-     *
+     */
     @Test
-    public void testLoginButton(){
+    public void testLoginButtonSwitchesWindow(){
+      clickOn("#nameField").write("Tuva");
+      clickOn("#passwordField").write("12345678");
+      
+      if((this.controller.checkInputName() == true) && (this.controller.checkInputPassword() == true)) {
+        List<Window> beforeClick = Window.getWindows();
+        Parent beforeClickRoot = null;
+        for(Window window : beforeClick){
+          beforeClickRoot = window.getScene().getRoot();
+        }
+        clickOn("#logInButton");
+        try {
+          Thread.sleep(5000);
+        } catch (Exception e) {
+          fail();
+        }
+        List<Window> afterClick = Window.getWindows();
+        Parent afterClickRoot = null;
+        for(Window window : afterClick){
+          afterClickRoot = window.getScene().getRoot();
+        }
+        assertNotEquals(afterClickRoot, beforeClickRoot);
+      }
+    }
+
+    @Test
+    public void testLoginButtonNotSwitchesWindow() {
+      clickOn("#nameField").write("Tuva");
+      clickOn("#passwordField").write("12345678");
+
+      if(((this.controller.checkInputName() == false) || (this.controller.checkInputPassword() == false))
+          || ((this.controller.checkInputName() == false) && (this.controller.checkInputPassword() == false))) {
+        List<Window> beforeClick = Window.getWindows();
+        Parent beforeClickRoot = null;
+        for(Window window : beforeClick){
+          beforeClickRoot = window.getScene().getRoot();
+        }
+        clickOn("#logInButton");
+        try {
+          Thread.sleep(5000);
+        } catch (Exception e) {
+          fail();
+        }
+        List<Window> afterClick = Window.getWindows();
+        Parent afterClickRoot = null;
+        for(Window window : afterClick){
+          afterClickRoot = window.getScene().getRoot();
+        }
+        assertEquals(afterClickRoot, beforeClickRoot);
+      }
+    }
+    
+    @Test
+    public void testNameTextfield() throws InterruptedException {
+      Thread.sleep(1000);
+      String newNameText = "New name";
+      clickOn("#nameField").write(newNameText);
+      Assertions.assertEquals(newNameText, this.controller.getInputName());
+    }
+
+    @Test
+    public void testPasswordTextField() throws InterruptedException {
+      Thread.sleep(1000);
+      String newPasswordText = "12345678";
+      clickOn("#passwordField").write(newPasswordText);
+      Assertions.assertEquals(newPasswordText, this.controller.getInputPassword());
+    }
+
+    @Test
+    public void testRegisterUserButton() {
       List<Window> beforeClick = Window.getWindows();
       Parent beforeClickRoot = null;
       for(Window window : beforeClick){
         beforeClickRoot = window.getScene().getRoot();
       }
-      clickOn("#logInButton");
+      clickOn("#register");
       try {
         Thread.sleep(5000);
       } catch (Exception e) {
@@ -68,15 +138,6 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
         afterClickRoot = window.getScene().getRoot();
       }
       assertNotEquals(afterClickRoot, beforeClickRoot);
-    }
-    */
-    @Test
-    public void testTextfield() {
-      String newNameText = "New name";
-      clickOn("#nameField").write(newNameText);
-      //clickOn("#logInButton");
-      //StuddyBuddy newName = new StuddyBuddy().name(newNameText);
-      Assertions.assertEquals(newNameText, this.controller.getInputName());
     }
 }
   
