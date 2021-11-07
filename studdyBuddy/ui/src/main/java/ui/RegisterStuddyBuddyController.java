@@ -50,7 +50,7 @@ public class RegisterStuddyBuddyController {
         return nameString;
     }
 
-    private boolean checkInputName() {
+    public boolean checkInputName() {
         try {
             this.buddy.setName(getInputName());
         } catch (IllegalArgumentException e) {
@@ -71,7 +71,7 @@ public class RegisterStuddyBuddyController {
         return passwordString;
     }
 
-    private boolean checkInputPassword() {
+    public boolean checkInputPassword() {
         try {
              this.buddy.setPassword(getInputPassword());
         } catch (IllegalArgumentException e) {
@@ -80,7 +80,7 @@ public class RegisterStuddyBuddyController {
         return true;
     }
 
-    private boolean checkPasswordsMatch() {
+    public boolean checkPasswordsMatch() {
         if(!(getInputPassword().equals(getInputPasswordCheck()))) {
             return false;
         }
