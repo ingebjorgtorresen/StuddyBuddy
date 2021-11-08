@@ -61,17 +61,15 @@ public class StuddyPersistenceTest {
     @Test
     public void testPersistence() {
         StuddyBuddies testBuddies = null;
-        System.out.println(testBuddies);
         try {
             persistence.writeStuddyBuddies(buddies, writer);
             testBuddies = persistence.readStuddyBuddies(reader);
-            System.out.println(testBuddies);
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("Couldn't write/read to/from test file.");
         }
 
-        Assertions.assertEquals(buddy1, testBuddies.getStuddyBuddy(buddy1.getName()));
+        Assertions.assertEquals(buddy1.getName(), testBuddies.getStuddyBuddy(buddy1.getName()).getName());
         StuddyBuddyRegistration testRegistration = testBuddies.getStuddyBuddy(buddy2.getName()).getRegistrations().get(0);
         Assertions.assertEquals(registration2.getCourse(), testRegistration.getCourse());
         Assertions.assertEquals(registration2.getRoom(), testRegistration.getRoom());
