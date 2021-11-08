@@ -7,11 +7,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.net.URL;
+
+/**
+ * Controller class for Log in to a StuddyBuddy account.
+ */
 
 public class StuddyBuddyController {
 
@@ -22,6 +25,9 @@ public class StuddyBuddyController {
 
     @FXML
     private Label errorMessage;
+
+    @FXML
+    private TextField passwordField;
 
     public void initialize() {
         studdyBuddy = new StuddyBuddy();
@@ -36,18 +42,36 @@ public class StuddyBuddyController {
     @FXML
     public String getInputName() {
         String nameString = nameField.getText();
-        try {
-            this.studdyBuddy.setName(nameString);
-        } catch (IllegalArgumentException e) {
-            errorMessage.setText("Name can not include any \ncharacthers but letters and \n' ', you wrote: " + nameString);
-            errorMessage.setTextFill(Color.web("#ED4D6E"));
-            errorMessage.setVisible(true);
-        }
         return nameString;
     }
 
+    @FXML
+    public String getInputPassword() {
+        String passwordString = passwordField.getText();
+        return passwordString;
+    }
+
+    public boolean checkInputName() {
+        try {
+            this.studdyBuddy.setName(getInputName());
+        } catch(IllegalArgumentException e) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkInputPassword() {
+        try {
+            this.studdyBuddy.setPassword(getInputPassword());
+        } catch(IllegalArgumentException e) {
+            return false;
+        }
+        return true;
+    }
+
+
     /**
-     * IKKE FERDIG Sends the username to the next controller and loads a new window
+     * Sends the username and password to the next controller and loads a new window
      */
     @FXML
     public void handleLogin() {
@@ -58,18 +82,65 @@ public class StuddyBuddyController {
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             StuddyBuddyRegistrationController registrationController = loader.getController();
-            studdyBuddy.setName(getInputName());
-            nameField.clear();
-            registrationController.setStuddyBuddyFromLogin(studdyBuddy);
-            Stage registrationStage = new Stage();
-            registrationStage.setTitle("Registration");
-            registrationStage.setScene(new Scene(parent));
-            registrationStage.show();
+
+            checkInputName();
+            checkInputPassword();
+
+            if(((!checkInputPassword()) && (!checkInputName()))) {
+                nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+
+            }
+    
+            else if(!checkInputName()) {
+                nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+                passwordField.setText(getInputPassword());
+
+            }
+    
+            else if(!checkInputPassword()) {
+                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+                nameField.setText(getInputName());
+            }
+
+            else {
+                studdyBuddy.setName(getInputName());
+                studdyBuddy.setPassword(getInputPassword());
+                nameField.clear();
+                passwordField.clear();
+                registrationController.setStuddyBuddyFromLogin(studdyBuddy);
+                
+                Stage registrationStage = new Stage();
+                registrationStage.setTitle("Registration");
+                registrationStage.setScene(new Scene(parent));
+                registrationStage.show();
+                Stage thisStage = (Stage) nameField.getScene().getWindow();
+                thisStage.close();
+            }
+        
+        } catch (IOException e) {
+            errorMessage.setText("Could not Log in. Try again.");
+        }
+    }
+
+    @FXML
+    public void handleRegisterUser() {
+        try { 
+            URL file = getClass().getResource("RegisterStuddyBuddy.fxml");
+            FXMLLoader loader = new FXMLLoader(file);
+            Parent parent = (Parent) loader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Register user");
+            stage.setScene(new Scene(parent));
+            stage.show();
             Stage thisStage = (Stage) nameField.getScene().getWindow();
             thisStage.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            errorMessage.setText("Could not load window.");
         }
     }
+
 }
