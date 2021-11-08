@@ -4,8 +4,26 @@ import java.time.DateTimeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
+import java.util.regex.Pattern;
 
+/**
+ * Validation class for all classes in package core. 
+ */
 public abstract class StuddyBuddyValidation {
+
+	/**
+	 * Method for checking if password is on right format. 
+	 * Right format is 8 characters or more that is either letters or digits. 
+	 * 
+	 * @param password password to check
+	 * @return true if format is correct, else return false
+	 */
+	public static boolean checkPassword(String password) {
+		if(Pattern.matches("\\w{8,}", password)) {
+			return true;
+		}
+		return false;
+	}
 
     /**
 	 * checks that the name has the correct format. The name can only consist of
