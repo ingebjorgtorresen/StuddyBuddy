@@ -1,9 +1,19 @@
 {
-  "Name" : "Test",
-  "Registrations" : [ {
-    "Room" : "A3",
-    "Course" : "itp",
-    "Start time" : "08:00",
-    "End time" : "12:00"
+  "StuddyBuddies" : [ {
+    "Name" : "FirstBuddy",
+    "Registrations" : [ {
+      "Room" : "TestRoom1",
+      "Course" : "TestCourse1",
+      "Start time" : "08:00",
+      "End time" : "12:00"
+    } ]
+  }, {
+    "Name" : "SecondBuddy",
+    "Registrations" : [ {
+      "Room" : "TestRoom2",
+      "Course" : "TestCourse2",
+      "Start time" : "10:00",
+      "End time" : "14:00"
+    } ]
   } ]
 }

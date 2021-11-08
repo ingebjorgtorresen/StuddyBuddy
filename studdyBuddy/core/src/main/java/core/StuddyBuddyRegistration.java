@@ -102,6 +102,6 @@ public class StuddyBuddyRegistration {
 		return "Room: " + getRoom() + "\n" +
 				"Course: " + getCourse() + "\n" +
 				"Start time: " + getStartTime() + "\n" +
-				"End time: " + getEndTime();
+				"End time: " + getEndTime() + "\n ";
 	}
 }

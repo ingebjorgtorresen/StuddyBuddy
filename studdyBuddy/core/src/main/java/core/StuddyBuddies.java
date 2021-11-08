@@ -5,19 +5,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Class for all StuddyBuddies/users. Has a list of all StuddyBuddy objects. 
+ */
+
 public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     List<StuddyBuddy> studdyBuddies = new ArrayList<>();
-    
-    /**
-     * Emtpy constructor.
-     */
-    public StuddyBuddies() {
-    }
 
     /**
     * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it exists.
     * Else return null.
+    *
     * @param name name of the user we want to get
     * @return StuddyBuddy if it exists or null
     */
@@ -32,6 +31,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method that checks if StuddyBuddy exitst by name.
+     * 
      * @param name name of the user
      * @return true if user exists, else null
      */
@@ -44,12 +44,14 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method for adding a new StuddyBuddy to StuddyBuddies.
+     * 
      * @param buddy StuddyBuddy we want to add.
      */
     public void addStuddyBuddy(StuddyBuddy buddy) {
         if(checkIfStuddyBuddyExists(buddy.getName()) == false) {
             StuddyBuddy newStuddyBuddy = (StuddyBuddy) buddy;
             this.studdyBuddies.add(newStuddyBuddy);
+            buddy.setStuddyBuddies(this);
         }
         else {
             throw new IllegalArgumentException("Already user existing with name: " + buddy.getName());
@@ -58,6 +60,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     }
     /**
      * Method for adding many StuddyBuddy objects at once.
+     * 
      * @param buddies StuddyBuddy Objects we want to add.
      */
     public void addStuddyBuddies(StuddyBuddy...buddies) {
@@ -68,6 +71,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method that removes StudyBuddy if it exists.
+     * 
      * @param buddy StuddyBuddy to remove.
      */
     public void removeStuddyBuddy(StuddyBuddy buddy) {
@@ -84,6 +88,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method for getting list over all StuddyBuddy objects.
+     * 
      * @return the list that contains StuddyBuddy objects.
      */
     public List<StuddyBuddy> getStuddyBuddies() {
@@ -92,11 +97,25 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method for string representation of a list over StuddyBuddy objects.
-     */
+    */
     @Override
     public String toString() {
-        return "" + studdyBuddies.stream().map(studdybuddy -> studdybuddy.toString()).collect(Collectors.toList());
+        String buddiesString = "Buddies: ";
+        for (StuddyBuddy buddy : studdyBuddies) {
+            buddiesString += "\n" + buddy.getName();
+        }
+        return buddiesString;
     }
 
+
+    /*
+    @Override
+    public String toString() {
+        String buddies = "";
+        for (StuddyBuddy buddy : studdyBuddies) {
+            buddies += buddy.getName() + "\n";
+        }
+        return buddies;
+    }*/
 
 }

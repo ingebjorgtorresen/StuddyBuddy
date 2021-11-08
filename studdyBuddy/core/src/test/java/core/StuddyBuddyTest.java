@@ -41,4 +41,25 @@ public class StuddyBuddyTest {
         });
     }
 
+    /**
+     * Method for testing setter for password
+     */
+    public void testPassword() {
+        studdyBuddy.setPassword("12345678");
+        Assertions.assertEquals("12345678", studdyBuddy.getPassword());
+    }
+
+    /**
+     * Method for testing password format. 
+     */
+    @Test
+    public void testPassswordFormat() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            studdyBuddy.setName("PASS1");
+        });
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            studdyBuddy.setName(null);
+        });
+    }
+
 }

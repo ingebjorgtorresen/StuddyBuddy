@@ -24,7 +24,7 @@ public class StuddyBuddiesSerializer extends JsonSerializer<StuddyBuddies> {
     @Override
     public void serialize(StuddyBuddies buddies, JsonGenerator JGen, SerializerProvider serializerProvider) throws IOException {
         JGen.writeStartObject();
-        JGen.writeArrayFieldStart("Studdybuddies");
+        JGen.writeArrayFieldStart("StuddyBuddies");
         for(StuddyBuddy buddy : buddies) {
             JGen.writeObject(buddy);
         }
