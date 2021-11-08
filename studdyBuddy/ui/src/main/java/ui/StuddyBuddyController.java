@@ -19,7 +19,7 @@ import java.net.URL;
 public class StuddyBuddyController {
 
     private StuddyBuddy studdyBuddy;
-    private StuddyBuddies buddies;
+    //private StuddyBuddies buddies;
 
     @FXML
     private TextField nameField;
@@ -32,7 +32,7 @@ public class StuddyBuddyController {
 
     public void initialize() {
         studdyBuddy = new StuddyBuddy();
-        buddies = new StuddyBuddies();
+        //buddies = new StuddyBuddies();
     }
 
     /**

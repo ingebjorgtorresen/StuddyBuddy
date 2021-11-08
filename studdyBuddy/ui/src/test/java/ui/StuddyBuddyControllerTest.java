@@ -49,9 +49,11 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
     /**
      * Ckeck that the UI changes window and scene when clicking on the
      * login button in UI
+     * @throws InterruptedException
      */
     @Test
-    public void testLoginButtonSwitchesWindow(){
+    public void testLoginButtonSwitchesWindow() throws InterruptedException{
+      Thread.sleep(5000);
       clickOn("#nameField").write("Tuva");
       clickOn("#passwordField").write("12345678");
       
@@ -77,7 +79,8 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void testLoginButtonNotSwitchesWindow() {
+    public void testLoginButtonNotSwitchesWindow() throws InterruptedException {
+      Thread.sleep(5000);
       clickOn("#nameField").write("Tuva");
       clickOn("#passwordField").write("12345678");
 
@@ -120,7 +123,8 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
     }
 
     @Test
-    public void testRegisterUserButton() {
+    public void testRegisterUserButton() throws InterruptedException {
+      Thread.sleep(5000);
       List<Window> beforeClick = Window.getWindows();
       Parent beforeClickRoot = null;
       for(Window window : beforeClick){
