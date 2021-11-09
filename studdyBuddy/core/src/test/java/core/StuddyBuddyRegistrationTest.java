@@ -1,6 +1,10 @@
 package core;
 
 import org.junit.jupiter.api.Test;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
@@ -17,6 +21,19 @@ public class StuddyBuddyRegistrationTest {
 	@BeforeEach
 	public void setup() {
 		registration = new StuddyBuddyRegistration();
+	}
+
+	/**
+	 * Method for testing setter for date.
+	 */
+	@Test
+	public void testDate() {
+		LocalDate date;
+		date = LocalDate.of(2022,12,12);
+		registration.setDate(date);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		String formattedString = date.format(formatter);
+		Assertions.assertEquals(formattedString, registration.getDate());
 	}
 
 	/**
