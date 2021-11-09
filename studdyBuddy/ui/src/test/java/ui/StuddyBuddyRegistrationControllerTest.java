@@ -1,6 +1,5 @@
 package ui;
 
-/*
 import org.junit.jupiter.api.BeforeEach;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,6 +10,9 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -18,10 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import core.StuddyBuddy;
 import core.StuddyBuddyRegistration;
-*/
 
-public class StuddyBuddyRegistrationControllerTest {
-    /*
+public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
+
     private StuddyBuddyRegistrationController controller;
 
     private StuddyBuddy studdyBuddy;
@@ -40,16 +41,19 @@ public class StuddyBuddyRegistrationControllerTest {
       stage.show();
     }
 
-    /**
+    /** 
      * Set up for testing StuddyBuddyRegistrationController.java
      * 
      * @return StuddyBuddy-instance for use in testing
-     *
+     */
     private StuddyBuddy generateTestStuddyBuddy(){
         StuddyBuddy studdyBuddy = new StuddyBuddy();
         studdyBuddy.setName("Test");
         StuddyBuddyRegistration reg1 = new StuddyBuddyRegistration();
         reg1 = new StuddyBuddyRegistration();
+        LocalDate date1;
+        date1 = LocalDate.of(2022,10,10);
+        reg1.setDate(date1);
         reg1.setRoom("A3-138");
         reg1.setCourse("ITP");
         reg1.setStartTime("11:00");
@@ -65,10 +69,13 @@ public class StuddyBuddyRegistrationControllerTest {
      * Clicking on the textFields and filling them with information.
      * 
      * @throws InterruptedException if Thread.sleep() fails
-     *
+     */
     @BeforeEach
     public void setUpRegistrations() throws InterruptedException{
       Thread.sleep(1500);
+      String dateString = ("10/10/2022");
+      clickOn("#datepicker").write(dateString);
+      Thread.sleep(100);
       clickOn("#roomField").write("A3-138");
       clickOn("#courseField").write("ITP");
       clickOn("#startTimeField").write("11:00");
@@ -85,7 +92,7 @@ public class StuddyBuddyRegistrationControllerTest {
     /**
      * Ckeck that the label messageText prints the correct message
      * when the registration is successfull.
-     *
+     */
     @Test
     public void checkSuccessfullRegistration(){
         checkRegister();
@@ -95,9 +102,9 @@ public class StuddyBuddyRegistrationControllerTest {
     /**
      * Checks that the registration is not successfull when the input
      * in roomField is invalid.
-     *
+     */
     @Test
-    public void testRoom(){
+    public void testRoom() {
       clickOn("#roomField").write("$chool");
       assertNotEquals(successfullRegistration, controller.getMessageText());
     }
@@ -105,7 +112,7 @@ public class StuddyBuddyRegistrationControllerTest {
      /**
      * Checks that the registration is not successfull when the input
      * in courseField is invalid.
-     *
+     */
     @Test
     public void testCourse(){
       clickOn("#courseField").write("3");
@@ -115,7 +122,7 @@ public class StuddyBuddyRegistrationControllerTest {
      /**
      * Checks that the registration is not successfull when the input
      * in startTimeField is invalid.
-     *
+     */
     @Test
     public void testStartTime(){
       clickOn("#startTimeField").write("123:00");
@@ -125,7 +132,7 @@ public class StuddyBuddyRegistrationControllerTest {
      /**
      * Checks that the registration is not successfull when the input
      * in endTimeField is invalid.
-     *
+     */
     @Test
     public void testEndTime(){
       clickOn("#endTimeField").write("24:000");
@@ -135,7 +142,7 @@ public class StuddyBuddyRegistrationControllerTest {
     /**
      * Ckeck that the label feedbackText is not visable
      * when the registration is unsuccessfull.
-     *
+     */
     @Test
     public void checkUnsuccessfullRegistration(){
       if(successfullRegistration.equals(controller.getMessageText())){
@@ -145,7 +152,7 @@ public class StuddyBuddyRegistrationControllerTest {
 
     /**
      * Click register-button
-     *
+     */
     @Test
     public void checkRegister(){
         clickOn("#register");
@@ -153,7 +160,7 @@ public class StuddyBuddyRegistrationControllerTest {
 
     /**
      * Click that the registration is displayed correctly
-     *
+     */
     @Test
     public void testDisplayRegistration(){
       
@@ -192,6 +199,5 @@ public class StuddyBuddyRegistrationControllerTest {
       assertTrue(studdyBuddy.getRegistrations().contains(registration));
 
     }
-    */
 
 }
