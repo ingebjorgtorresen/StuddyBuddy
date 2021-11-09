@@ -30,7 +30,7 @@ public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<Studdy
         
         JsonNode dateNode = objectNode.get("Date");
         if (dateNode instanceof TextNode){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
             LocalDate date = LocalDate.parse(dateNode.asText(), formatter);
             studdyBuddyRegistration.setDate(date);
         }
