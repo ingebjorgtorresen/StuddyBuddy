@@ -20,6 +20,7 @@ public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBudd
                         JsonGenerator jGen,
                         SerializerProvider serializerProvider) throws IOException {
     jGen.writeStartObject(); 
+    jGen.writeStringField("Date", registration.getDate());
     jGen.writeStringField("Room", registration.getRoom());
     jGen.writeStringField("Course", registration.getCourse());
     jGen.writeStringField("Start time", registration.getStartTime());
