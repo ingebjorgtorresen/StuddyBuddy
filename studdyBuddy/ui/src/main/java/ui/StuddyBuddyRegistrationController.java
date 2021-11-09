@@ -240,7 +240,7 @@ public class StuddyBuddyRegistrationController {
         }
     }
 
-    public StuddyBuddy getRedigsteredStuddyBuddy() {
+    public StuddyBuddy getRegisteredStuddyBuddy() {
         StuddyBuddy registeredBuddy = null;
         try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             registeredBuddy = persistence.readStuddyBuddies(reader).getStuddyBuddy(buddy.getName());
@@ -252,7 +252,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     public void displayRegistration() {
-        StuddyBuddy registeredBuddy = getRedigsteredStuddyBuddy();
+        StuddyBuddy registeredBuddy = getRegisteredStuddyBuddy();
         if (registeredBuddy == null) {
             messageText.setText("Couldn't register. Try again.");
         } else {
