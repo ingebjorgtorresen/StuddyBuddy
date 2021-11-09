@@ -102,4 +102,11 @@ public class StuddyBuddyRegistrationTest {
 			registration.setCourse("$tatistikk");
 		});
 	}
+
+	@Test
+	public void testDateFormat() {
+		Assertions.assertThrows(IllegalArgumentException.class, () -> {
+			registration.setDate(null);
+		});
+	}
 }

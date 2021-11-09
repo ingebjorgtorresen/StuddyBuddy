@@ -29,7 +29,7 @@ public class StuddyBuddyRegistration {
 	}
 
 	public void setDate(LocalDate date) {
-		//StuddyBuddyValidation.checkDateNotNull(date);
+		StuddyBuddyValidation.checkDateNotNull(date);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
 		String formattedString = date.format(formatter);
 		this.date = formattedString;
