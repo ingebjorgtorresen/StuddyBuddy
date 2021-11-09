@@ -9,7 +9,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -21,7 +23,10 @@ public class StuddyBuddyRegistrationController {
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
-	@FXML 
+    @FXML
+    private DatePicker datepicker;
+
+    @FXML 
 	private TextField roomField;
 	
 	@FXML 
@@ -57,6 +62,33 @@ public class StuddyBuddyRegistrationController {
     public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
         registration.setStuddyBuddy(studdyBuddy);
     }
+
+    /**
+     * sets the date to be the input in roomField
+     * @return the date from input
+     */
+    @FXML
+    public LocalDate getInputDate() {
+        LocalDate inputDate = datepicker.getValue();
+        try {
+            registration.setDate(inputDate);
+        }
+        catch (IllegalArgumentException e) {
+            messageText.setText("Date can not be null");
+            messageText.setVisible(true);
+        }
+        return inputDate;
+    }
+
+    /**
+     * 
+     * @return the input date as String
+     */
+    public String getInputDateString() {
+        String dateString = getInputDate().toString();
+        return dateString;
+    }
+    
 
     /**
 	 * sets the room to be the input in roomField
@@ -188,13 +220,14 @@ public class StuddyBuddyRegistrationController {
 
     /**
 	 * register a new StuddyBuddy
-	 * sets the name, room, course, start time and end time
+	 * sets the room, course, start time, end time and date
 	 */
     private void registerStuddyBuddy(){
         registration.setRoom(getInputRoom());
         registration.setCourse(getInputCourse());
         registration.setStartTime(getInputStartTime());
         registration.setEndTime(getInputEndTime());
+        registration.setDate(getInputDate());
     }
 
     private void saveStuddyBuddyToFile() {
