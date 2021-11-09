@@ -42,7 +42,8 @@ public class RegisterStuddyBuddyControllerTest extends ApplicationTest{
     }
 
     @Test
-    public void testRegisterButtonSwitchesWindow() {
+    public void testRegisterButtonSwitchesWindow() throws InterruptedException {
+      Thread.sleep(5000);
       clickOn("#nameField").write("Tuva");
       clickOn("#passwordField").write("12345678");
       clickOn("#passwordCheckField").write("12345678");
@@ -70,7 +71,8 @@ public class RegisterStuddyBuddyControllerTest extends ApplicationTest{
     }
 
     @Test
-    public void testRegisterButtonNotSwitchesWindom() {
+    public void testRegisterButtonNotSwitchesWindom() throws InterruptedException {
+      Thread.sleep(5000);
       clickOn("#nameField").write("Tuva0");
       clickOn("#passwordField").write("12345678");
       clickOn("#passwordCheckField").write("12345");

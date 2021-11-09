@@ -100,11 +100,11 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     */
     @Override
     public String toString() {
-        String buddiesString = "Buddies: ";
+        StringBuilder builder = new StringBuilder("Buddies: ");
         for (StuddyBuddy buddy : studdyBuddies) {
-            buddiesString += "\n" + buddy.getName();
+            builder.append("\n" + buddy.getName());
         }
-        return buddiesString;
+        return builder.toString();
     }
 
 

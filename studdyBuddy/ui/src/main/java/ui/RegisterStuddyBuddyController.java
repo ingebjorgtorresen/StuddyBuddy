@@ -9,7 +9,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import json.StuddyBuddyPersistence;
+import json.*;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -24,8 +24,9 @@ import java.nio.charset.StandardCharsets;
 
 public class RegisterStuddyBuddyController {
 
+    private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddy buddy;
-    private StuddyBuddyPersistence persistence = new StuddyBuddyPersistence();
+    private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String userRegistrationFileName = "/userRegistration.json";
 
     @FXML
@@ -42,6 +43,7 @@ public class RegisterStuddyBuddyController {
 
     public void initialize() {
         buddy = new StuddyBuddy();
+        buddies.addStuddyBuddy(buddy);
     }
 
     @FXML
@@ -112,7 +114,7 @@ public class RegisterStuddyBuddyController {
 
     private void saveStuddyBuddyToFile() throws IOException {
         try (Writer writer = new FileWriter(System.getProperty("user.home") + userRegistrationFileName, StandardCharsets.UTF_8)) {
-            persistence.writeStuddyBuddy(buddy, writer);
+            persistence.writeStuddyBuddies(buddies, writer);
             writer.flush();
         } catch (IOException e) {
             throw new IOException("Could not save registration.");
