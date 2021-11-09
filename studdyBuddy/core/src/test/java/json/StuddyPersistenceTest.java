@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,6 +33,8 @@ public class StuddyPersistenceTest {
         buddy1 = new StuddyBuddy();
         buddy1.setName("FirstBuddy");
         registration1 = new StuddyBuddyRegistration();
+        LocalDate date1 = getValidDate();
+        registration1.setDate(date1);
         registration1.setRoom("TestRoom1");
         registration1.setCourse("TestCourse1");
         registration1.setStartTime("08:00");
@@ -39,6 +43,8 @@ public class StuddyPersistenceTest {
         buddy2 = new StuddyBuddy();
         buddy2.setName("SecondBuddy");
         registration2 = new StuddyBuddyRegistration();
+        LocalDate date2 = getValidDate();
+        registration2.setDate(date2);
         registration2.setRoom("TestRoom2");
         registration2.setCourse("TestCourse2");
         registration2.setStartTime("10:00");
@@ -71,9 +77,15 @@ public class StuddyPersistenceTest {
 
         Assertions.assertEquals(buddy1.getName(), testBuddies.getStuddyBuddy(buddy1.getName()).getName());
         StuddyBuddyRegistration testRegistration = testBuddies.getStuddyBuddy(buddy2.getName()).getRegistrations().get(0);
+        Assertions.assertEquals(registration2.getDate(), testRegistration.getDate());
         Assertions.assertEquals(registration2.getCourse(), testRegistration.getCourse());
         Assertions.assertEquals(registration2.getRoom(), testRegistration.getRoom());
         Assertions.assertEquals(registration2.getStartTime(), testRegistration.getStartTime());
         Assertions.assertEquals(registration2.getEndTime(), testRegistration.getEndTime());
     }
+
+    private LocalDate getValidDate() {
+        LocalDate date = LocalDate.now().plusDays(1);
+        return date;
+      }
 }
