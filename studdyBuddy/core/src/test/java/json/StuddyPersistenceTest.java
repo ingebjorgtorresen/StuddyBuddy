@@ -33,7 +33,8 @@ public class StuddyPersistenceTest {
         buddy1 = new StuddyBuddy();
         buddy1.setName("FirstBuddy");
         registration1 = new StuddyBuddyRegistration();
-        LocalDate date1 = getValidDate();
+        LocalDate date1;
+        date1 = LocalDate.of(2022,10,10);
         registration1.setDate(date1);
         registration1.setRoom("TestRoom1");
         registration1.setCourse("TestCourse1");
@@ -43,7 +44,8 @@ public class StuddyPersistenceTest {
         buddy2 = new StuddyBuddy();
         buddy2.setName("SecondBuddy");
         registration2 = new StuddyBuddyRegistration();
-        LocalDate date2 = getValidDate();
+        LocalDate date2;
+        date2 = LocalDate.of(2022,12,12);
         registration2.setDate(date2);
         registration2.setRoom("TestRoom2");
         registration2.setCourse("TestCourse2");
@@ -83,9 +85,4 @@ public class StuddyPersistenceTest {
         Assertions.assertEquals(registration2.getStartTime(), testRegistration.getStartTime());
         Assertions.assertEquals(registration2.getEndTime(), testRegistration.getEndTime());
     }
-
-    private LocalDate getValidDate() {
-        LocalDate date = LocalDate.now().plusDays(1);
-        return date;
-      }
 }
