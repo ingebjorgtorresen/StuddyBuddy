@@ -18,6 +18,7 @@ public class StuddyBuddyRegistrationController {
     
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
+    private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
@@ -198,6 +199,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     private void saveStuddyBuddyToFile() {
+        buddies.addStuddyBuddy(buddy);
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
@@ -221,7 +223,7 @@ public class StuddyBuddyRegistrationController {
     public void displayRegistration() {
         StuddyBuddy registeredBuddy = getRedigsteredStuddyBuddy();
         if (registeredBuddy == null) {
-            messageText.setText("Couldn't register. Try again.");
+            messageText.setText("Couldn't register. Registered buddy was null.");
         } else {
             messageText.setText("Registration was successfull!");
             messageText.setTextFill(Color.web("#7DDF64"));
