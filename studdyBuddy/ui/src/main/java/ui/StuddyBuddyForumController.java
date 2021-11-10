@@ -21,7 +21,6 @@ import json.StuddyBuddiesPersistence;
 public class StuddyBuddyForumController {
 
     private StuddyBuddy studdyBuddy;
-    private StuddyBuddies studdyBuddies;
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
@@ -38,7 +37,7 @@ public class StuddyBuddyForumController {
     private Button logOut;
 
     @FXML
-    private Button addRegistration;
+    private Button addRegistrationButton;
     
     @FXML
     private Label studdyBuddyUser;
@@ -51,22 +50,19 @@ public class StuddyBuddyForumController {
 
 
     public void initialize() {
-        // usikker på om det er riktig å opprette et StuddyBuddies objekt her
-        studdyBuddies = new StuddyBuddies();
-        createForum();
+        //createForum();
     }
 
-    private void createForum() {
-        setStuddyBuddyFromLogin();
+    public void handleAddRegistration() {
+        System.out.println("Skal ta brukeren til registreringssiden");
+    }
+
+    /*private void createForum() {
         username.setText(studdyBuddy.getName());
     }
 
-    private void setStuddyBuddy(StuddyBuddy studdyBuddy) {
+    public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
         this.studdyBuddy = studdyBuddy;
-    }
-
-    public void setStuddyBuddyFromLogin() {
-        setStuddyBuddy(studdyBuddy);
     }
 
     @FXML
@@ -103,7 +99,7 @@ public class StuddyBuddyForumController {
             e.printStackTrace();
         }
         return registeredBuddies;
-    }
+    } */
 /**
     public void displayRegistrations() {
         StuddyBuddies registeredBuddies = getRegistratedStuddyBuddies();
