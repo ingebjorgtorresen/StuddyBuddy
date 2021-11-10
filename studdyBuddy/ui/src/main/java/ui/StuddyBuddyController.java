@@ -112,7 +112,7 @@ public class StuddyBuddyController {
                 studdyBuddy.setPassword(getInputPassword());
                 nameField.clear();
                 passwordField.clear();
-                // forumController.setStuddyBuddyFromLogin(studdyBuddy);
+                forumController.setStuddyBuddyFromLogin(studdyBuddy);
                 
                 Stage forumStage = new Stage();
                 forumStage.setTitle("Forum");
