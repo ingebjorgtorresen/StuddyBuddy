@@ -48,6 +48,7 @@ public class StuddyBuddyRegistrationController {
     private Label feedbackText;
 
 	public void initialize() {
+        datepicker.getEditor().setDisable(true);
 		registration = new StuddyBuddyRegistration();
         createRegistration();
 	}
