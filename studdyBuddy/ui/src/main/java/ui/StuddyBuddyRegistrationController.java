@@ -13,6 +13,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import java.net.URL;
 
 public class StuddyBuddyRegistrationController {
     
@@ -57,6 +63,7 @@ public class StuddyBuddyRegistrationController {
 
     public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
         registration.setStuddyBuddy(studdyBuddy);
+        //this.buddy = studdyBuddy;
     }
 
     /**
@@ -251,16 +258,30 @@ public class StuddyBuddyRegistrationController {
     @FXML
     public void handleRegister() throws FileNotFoundException{ // try, catch
 
-        if (feedbackText.isVisible()) {
+        /**if (feedbackText.isVisible()) {
             feedbackText.setVisible(false);
             messageText.setTextFill(Color.web("#ED4D6E"));
-        }
+        }*/
 
         registerStuddyBuddy();
         buddy = registration.getStuddyBuddy();
         buddy.addRegistration(registration);
         saveStuddyBuddyToFile();
-        displayRegistration();
+        //displayRegistration();
+
+        try {
+
+            URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlFile);
+            Parent parent = (Parent) loader.load();
+            Stage registrationStage = new Stage();
+            registrationStage.setTitle("Forum");
+            registrationStage.setScene(new Scene(parent));
+            registrationStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
