@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -20,6 +22,7 @@ public class StuddyBuddyRegistrationController {
     
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
+    private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
@@ -63,6 +66,7 @@ public class StuddyBuddyRegistrationController {
         registration.setStuddyBuddy(studdyBuddy);
     }
 
+
     /**
      * sets the date to be the input in roomField
      * @return the date from input
@@ -74,7 +78,7 @@ public class StuddyBuddyRegistrationController {
             registration.setDate(inputDate);
         }
         catch (IllegalArgumentException e) {
-            messageText.setText("Date can not be null");
+            messageText.setText("Use the calender to choose date!");
             messageText.setVisible(true);
         }
         return inputDate;
@@ -85,8 +89,10 @@ public class StuddyBuddyRegistrationController {
      * @return the input date as String
      */
     public String getInputDateString() {
-        String dateString = getInputDate().toString();
-        return dateString;
+        //String dateString = getInputDate().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		String formattedString = getInputDate().format(formatter);
+        return formattedString;
     }
     
 
@@ -162,6 +168,14 @@ public class StuddyBuddyRegistrationController {
         return endTimeSting;
     }
 
+   /**
+    * 
+    * @return datepicker
+    */
+    public DatePicker getDate() {
+        return datepicker;
+    }
+
     /**
 	 * @return roomField
 	 */
@@ -231,6 +245,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     private void saveStuddyBuddyToFile() {
+        buddies.addStuddyBuddy(buddy);
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
