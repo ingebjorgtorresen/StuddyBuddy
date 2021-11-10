@@ -1,6 +1,7 @@
 package core;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.ResolverStyle;
@@ -51,6 +52,16 @@ public abstract class StuddyBuddyValidation {
 	
 	public static void checkNotNull(String string) {
 		if(string == null) {
+			throw new IllegalArgumentException("Input can not be null/nothing.");
+		}
+	}
+
+	/**
+	 * checks that the LocalDate-argument is not null
+	 * @param date to check
+	 */
+	public static void checkDateNotNull(LocalDate date) {
+		if(date == null) {
 			throw new IllegalArgumentException("Input can not be null/nothing.");
 		}
 	}

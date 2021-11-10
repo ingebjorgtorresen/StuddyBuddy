@@ -2,6 +2,9 @@ package json;
 
 import core.*;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -23,7 +26,14 @@ public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<Studdy
     public StuddyBuddyRegistration deserialize(JsonNode node) throws IOException, JsonProcessingException {
     if (node instanceof ObjectNode){
         ObjectNode objectNode = (ObjectNode) node;
-        StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration(); 
+        StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration();
+        
+        JsonNode dateNode = objectNode.get("Date");
+        if (dateNode instanceof TextNode){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate date = LocalDate.parse(dateNode.asText(), formatter);
+            studdyBuddyRegistration.setDate(date);
+        }
         
         JsonNode courseNode = objectNode.get("Course");
         if (courseNode instanceof TextNode){

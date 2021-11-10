@@ -9,7 +9,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javafx.fxml.FXML;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
@@ -18,10 +22,14 @@ public class StuddyBuddyRegistrationController {
     
     private StuddyBuddyRegistration registration;
     private StuddyBuddy buddy;
+    private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
-	@FXML 
+    @FXML
+    private DatePicker datepicker;
+
+    @FXML 
 	private TextField roomField;
 	
 	@FXML 
@@ -57,6 +65,36 @@ public class StuddyBuddyRegistrationController {
     public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
         registration.setStuddyBuddy(studdyBuddy);
     }
+
+
+    /**
+     * sets the date to be the input in roomField
+     * @return the date from input
+     */
+    @FXML
+    public LocalDate getInputDate() {
+        LocalDate inputDate = datepicker.getValue();
+        try {
+            registration.setDate(inputDate);
+        }
+        catch (IllegalArgumentException e) {
+            messageText.setText("Use the calender to choose date!");
+            messageText.setVisible(true);
+        }
+        return inputDate;
+    }
+
+    /**
+     * 
+     * @return the input date as String
+     */
+    public String getInputDateString() {
+        //String dateString = getInputDate().toString();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+		String formattedString = getInputDate().format(formatter);
+        return formattedString;
+    }
+    
 
     /**
 	 * sets the room to be the input in roomField
@@ -130,6 +168,14 @@ public class StuddyBuddyRegistrationController {
         return endTimeSting;
     }
 
+   /**
+    * 
+    * @return datepicker
+    */
+    public DatePicker getDate() {
+        return datepicker;
+    }
+
     /**
 	 * @return roomField
 	 */
@@ -188,16 +234,18 @@ public class StuddyBuddyRegistrationController {
 
     /**
 	 * register a new StuddyBuddy
-	 * sets the name, room, course, start time and end time
+	 * sets the room, course, start time, end time and date
 	 */
     private void registerStuddyBuddy(){
         registration.setRoom(getInputRoom());
         registration.setCourse(getInputCourse());
         registration.setStartTime(getInputStartTime());
         registration.setEndTime(getInputEndTime());
+        registration.setDate(getInputDate());
     }
 
     private void saveStuddyBuddyToFile() {
+        buddies.addStuddyBuddy(buddy);
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
@@ -207,7 +255,7 @@ public class StuddyBuddyRegistrationController {
         }
     }
 
-    public StuddyBuddy getRedigsteredStuddyBuddy() {
+    public StuddyBuddy getRegisteredStuddyBuddy() {
         StuddyBuddy registeredBuddy = null;
         try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             registeredBuddy = persistence.readStuddyBuddies(reader).getStuddyBuddy(buddy.getName());
@@ -219,7 +267,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     public void displayRegistration() {
-        StuddyBuddy registeredBuddy = getRedigsteredStuddyBuddy();
+        StuddyBuddy registeredBuddy = getRegisteredStuddyBuddy();
         if (registeredBuddy == null) {
             messageText.setText("Couldn't register. Try again.");
         } else {
