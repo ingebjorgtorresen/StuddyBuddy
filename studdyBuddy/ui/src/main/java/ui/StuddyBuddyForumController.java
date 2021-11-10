@@ -53,11 +53,7 @@ public class StuddyBuddyForumController {
         //createForum();
     }
 
-    public void handleAddRegistration() {
-        System.out.println("Skal ta brukeren til registreringssiden");
-    }
-
-    /*private void createForum() {
+    private void createForum() {
         username.setText(studdyBuddy.getName());
     }
 
@@ -67,7 +63,6 @@ public class StuddyBuddyForumController {
 
     @FXML
     public void handleAddRegistration() {
-        
         try {
 
             URL fxmlFile = getClass().getResource("StuddyBuddyRegistration.fxml");
@@ -87,7 +82,19 @@ public class StuddyBuddyForumController {
 
     @FXML
     public void handleLogOut(){
-        // TODO
+        try {
+
+            URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");
+            FXMLLoader loader = new FXMLLoader(fxmlFile);
+            Parent parent = (Parent) loader.load();
+            Stage registrationStage = new Stage();
+            registrationStage.setTitle("StuddyBuddy");
+            registrationStage.setScene(new Scene(parent));
+            registrationStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public StuddyBuddies getRegistratedStuddyBuddies(){
@@ -99,14 +106,14 @@ public class StuddyBuddyForumController {
             e.printStackTrace();
         }
         return registeredBuddies;
-    } */
-/**
+    } 
+
     public void displayRegistrations() {
         StuddyBuddies registeredBuddies = getRegistratedStuddyBuddies();
         if (registeredBuddies != null){
-            allRegistrationsText.setText(studdyBuddies.getStuddyBuddies().toString());
+            allRegistrationsText.setText(registeredBuddies.getStuddyBuddies().toString());
         }
-    }*/
+    }
 
 
 }
