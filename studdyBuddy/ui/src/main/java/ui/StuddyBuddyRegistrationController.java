@@ -67,20 +67,25 @@ public class StuddyBuddyRegistrationController {
 
 
     /**
-     * sets the date to be the input in roomField
      * @return the date from input
      */
     @FXML
-    public LocalDate getInputDate(StuddyBuddyRegistration registration) {
-        LocalDate inputDate = datepicker.getValue();
+    public LocalDate getInputDate() {
+        return datepicker.getValue();
+    }
+
+    /**
+     * sets the date to a registration
+     */
+
+    public void setDateFromInput(StuddyBuddyRegistration registration) {
         try {
-            registration.setDate(inputDate);
+            registration.setDate(getInputDate());
         }
         catch (IllegalArgumentException e) {
             messageText.setText("Use the calender to choose date!");
             messageText.setVisible(true);
         }
-        return inputDate;
     }
 
     /**
@@ -90,81 +95,99 @@ public class StuddyBuddyRegistrationController {
     public String getInputDateString(StuddyBuddyRegistration registration) {
         //String dateString = getInputDate().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-		String formattedString = getInputDate(registration).format(formatter);
+		String formattedString = getInputDate().format(formatter);
         return formattedString;
     }
     
 
     /**
-	 * sets the room to be the input in roomField
 	 * the room can only consist of letters, "-" and space.
 	 * @return the room from input
 	 */
     @FXML
-    public String getInputRoom(StuddyBuddyRegistration registration) {
-        String roomString = roomField.getText();
-        try{
-            registration.setRoom(roomString);
-        }
-        catch (IllegalArgumentException e){
-            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + roomString);
-            messageText.setVisible(true);
-        }
-        return roomString;
+    public String getInputRoom() {
+        return roomField.getText();
     }
 
     /**
-	 * sets the course to be the input in courseField
+	 * sets the room to be the input in roomField
+	 */
+    public void setRoomFromInput(StuddyBuddyRegistration registration) {
+        try{
+            registration.setRoom(getInputRoom());
+        }
+        catch (IllegalArgumentException e){
+            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + getInputRoom());
+            messageText.setVisible(true);
+        }
+    }
+
+    /**
 	 * the room can only consist of letters, "-" and space.
 	 * @return the course from input
 	 */
     @FXML
-    public String getInputCourse(StuddyBuddyRegistration registration) {
-        String courseString = courseField.getText();
-        try{
-            registration.setCourse(courseString);
-        }
-        catch(IllegalArgumentException e){
-            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + courseString);
-            messageText.setVisible(true);
-        }
-        return courseString;
+    public String getInputCourse() {
+        return courseField.getText();
     }
 
     /**
-	 * sets the start time to be the input in startTimeField
+	 * sets the course to be the input in courseField
+	 */
+    public void setCourseFromInput(StuddyBuddyRegistration registration) {
+        try{
+            registration.setCourse(getInputCourse());
+        }
+        catch(IllegalArgumentException e){
+            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + getInputCourse());
+            messageText.setVisible(true);
+        }
+    }
+
+    /**
 	 * the start time must be on format 'HH:mm'
 	 * @return the start time from input
 	 */
     @FXML
-    public String getInputStartTime(StuddyBuddyRegistration registration) {
-        String startTimeString = startTimeField.getText();
+    public String getInputStartTime() {
+        return startTimeField.getText();
+    }
+
+    /**
+	 * sets the start time to be the input in startTimeField
+	 */
+    @FXML
+    public void setStartTimeFromInput(StuddyBuddyRegistration registration) {
         try{
-            registration.setStartTime(startTimeString);
+            registration.setStartTime(getInputStartTime());
         }
         catch(IllegalArgumentException e){
             messageText.setText("Starttime must be on format \n'HH:mm' ");
             messageText.setVisible(true);
         }
-        return startTimeString;
     }
 
     /**
-	 * sets the end time to be the input in endTimeField
 	 * the end time must be on format 'HH:mm' and after StartTime
 	 * @return the end time from input
 	 */
     @FXML
-    public String getInputEndTime(StuddyBuddyRegistration registration) {
-        String endTimeSting = endTimeField.getText();
+    public String getInputEndTime() {
+        return endTimeField.getText();
+    }
+
+    /**
+	 * sets the end time to be the input in endTimeField
+	 */
+    @FXML
+    public void setEndTimeFromInput(StuddyBuddyRegistration registration) {
         try{
-            registration.setEndTime(endTimeSting);
+            registration.setEndTime(getInputEndTime());
         }
         catch(IllegalArgumentException e){
             messageText.setText("EndTime must be on format \n'HH:mm' and after StartTime");
             messageText.setVisible(true);
         }
-        return endTimeSting;
     }
 
    /**
@@ -237,11 +260,11 @@ public class StuddyBuddyRegistrationController {
 	 */
     private void registerStuddyBuddy(){
         StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
-        registration.setRoom(getInputRoom(registration));
-        registration.setCourse(getInputCourse(registration));
-        registration.setStartTime(getInputStartTime(registration));
-        registration.setEndTime(getInputEndTime(registration));
-        registration.setDate(getInputDate(registration));
+        setRoomFromInput(registration);
+        setCourseFromInput(registration);
+        setStartTimeFromInput(registration);
+        setEndTimeFromInput(registration);
+        setDateFromInput(registration);
         buddy.addRegistration(registration);
     }
 
