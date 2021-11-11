@@ -114,7 +114,7 @@ public class StuddyBuddyRegistration {
 
 	@Override
 	public String toString() {
-		return 	"date: " + getDate() + "\n" + 
+		return 	"Date: " + getDate() + "\n" + 
 				"Room: " + getRoom() + "\n" +
 				"Course: " + getCourse() + "\n" +
 				"Start time: " + getStartTime() + "\n" +
