@@ -1,8 +1,12 @@
 package core;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class StuddyBuddyRegistration {
     
     private StuddyBuddy studdyBuddy;
+	private String date;
 	private String startTime;
 	private String endTime;
 	private String room;
@@ -16,8 +20,19 @@ public class StuddyBuddyRegistration {
 		return studdyBuddy;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
 	public String getUsername() {
 		return studdyBuddy.getName();
+	}
+
+	public void setDate(LocalDate date) {
+		StuddyBuddyValidation.checkDateNotNull(date);
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+		String formattedString = date.format(formatter);
+		this.date = formattedString;
 	}
 	
 	/**
@@ -99,7 +114,8 @@ public class StuddyBuddyRegistration {
 
 	@Override
 	public String toString() {
-		return "Room: " + getRoom() + "\n" +
+		return 	"date: " + getDate() + "\n" + 
+				"Room: " + getRoom() + "\n" +
 				"Course: " + getCourse() + "\n" +
 				"Start time: " + getStartTime() + "\n" +
 				"End time: " + getEndTime() + "\n ";

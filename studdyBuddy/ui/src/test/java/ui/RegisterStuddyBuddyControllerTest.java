@@ -42,32 +42,27 @@ public class RegisterStuddyBuddyControllerTest extends ApplicationTest{
     }
 
     @Test
-    public void testRegisterButtonSwitchesWindow() throws InterruptedException {
-      Thread.sleep(5000);
-      clickOn("#nameField").write("Tuva");
-      clickOn("#passwordField").write("12345678");
-      clickOn("#passwordCheckField").write("12345678");
-      
-      if((this.controller.checkInputName() == true) && (this.controller.checkInputPassword() == true) 
-      && (this.controller.checkPasswordsMatch() == true)) {
-        List<Window> beforeClick = Window.getWindows();
-        Parent beforeClickRoot = null;
-        for(Window window : beforeClick){
-          beforeClickRoot = window.getScene().getRoot();
-        }
-        clickOn("#register");
-        try {
-          Thread.sleep(5000);
-        } catch (Exception e) {
-          fail();
-        }
-        List<Window> afterClick = Window.getWindows();
-        Parent afterClickRoot = null;
-        for(Window window : afterClick){
-          afterClickRoot = window.getScene().getRoot();
-        }
-        assertNotEquals(afterClickRoot, beforeClickRoot);
-      }
+    public void testNameTextfield() throws InterruptedException {
+      Thread.sleep(1000);
+      String newNameText = "New name";
+      clickOn("#nameField").write(newNameText);
+      assertEquals(newNameText, this.controller.getInputName());
+    }
+
+    @Test
+    public void testPasswordTextField() throws InterruptedException {
+      Thread.sleep(1000);
+      String newPasswordText = "12345678";
+      clickOn("#passwordField").write(newPasswordText);
+      assertEquals(newPasswordText, this.controller.getInputPassword());
+    }
+
+    @Test
+    public void testCheckPasswordTextfield() throws InterruptedException {
+      Thread.sleep(1000);
+      String newCheckPasswordString = "12345678";
+      clickOn("#passwordCheckField").write(newCheckPasswordString);
+      assertEquals(newCheckPasswordString, this.controller.getInputPasswordCheck());
     }
 
     @Test
@@ -101,27 +96,32 @@ public class RegisterStuddyBuddyControllerTest extends ApplicationTest{
     }
 
     @Test
-    public void testNameTextfield() throws InterruptedException {
-      Thread.sleep(1000);
-      String newNameText = "New name";
-      clickOn("#nameField").write(newNameText);
-      assertEquals(newNameText, this.controller.getInputName());
-    }
-
-    @Test
-    public void testPasswordTextField() throws InterruptedException {
-      Thread.sleep(1000);
-      String newPasswordText = "12345678";
-      clickOn("#passwordField").write(newPasswordText);
-      assertEquals(newPasswordText, this.controller.getInputPassword());
-    }
-
-    @Test
-    public void testCheckPasswordTextfield() throws InterruptedException {
-      Thread.sleep(1000);
-      String newCheckPasswordString = "12345678";
-      clickOn("#passwordCheckField").write(newCheckPasswordString);
-      assertEquals(newCheckPasswordString, this.controller.getInputPasswordCheck());
+    public void testRegisterButtonSwitchesWindow() throws InterruptedException {
+      Thread.sleep(5000);
+      clickOn("#nameField").write("Tuva");
+      clickOn("#passwordField").write("12345678");
+      clickOn("#passwordCheckField").write("12345678");
+      
+      if((this.controller.checkInputName() == true) && (this.controller.checkInputPassword() == true) 
+      && (this.controller.checkPasswordsMatch() == true)) {
+        List<Window> beforeClick = Window.getWindows();
+        Parent beforeClickRoot = null;
+        for(Window window : beforeClick){
+          beforeClickRoot = window.getScene().getRoot();
+        }
+        clickOn("#register");
+        try {
+          Thread.sleep(5000);
+        } catch (Exception e) {
+          fail();
+        }
+        List<Window> afterClick = Window.getWindows();
+        Parent afterClickRoot = null;
+        for(Window window : afterClick){
+          afterClickRoot = window.getScene().getRoot();
+        }
+        assertNotEquals(afterClickRoot, beforeClickRoot);
+      }
     }
 
     
