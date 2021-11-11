@@ -19,8 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 public class StuddyBuddyRegistrationController {
-    
-    private StuddyBuddyRegistration registration;
+ 
     private StuddyBuddy buddy;
     private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
@@ -49,7 +48,6 @@ public class StuddyBuddyRegistrationController {
 
 	public void initialize() {
         datepicker.getEditor().setDisable(true);
-		registration = new StuddyBuddyRegistration();
         createRegistration();
 	}
 
@@ -64,7 +62,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
-        registration.setStuddyBuddy(studdyBuddy);
+        this.buddy = studdyBuddy;
     }
 
 
@@ -73,7 +71,7 @@ public class StuddyBuddyRegistrationController {
      * @return the date from input
      */
     @FXML
-    public LocalDate getInputDate() {
+    public LocalDate getInputDate(StuddyBuddyRegistration registration) {
         LocalDate inputDate = datepicker.getValue();
         try {
             registration.setDate(inputDate);
@@ -89,10 +87,10 @@ public class StuddyBuddyRegistrationController {
      * 
      * @return the input date as String
      */
-    public String getInputDateString() {
+    public String getInputDateString(StuddyBuddyRegistration registration) {
         //String dateString = getInputDate().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-		String formattedString = getInputDate().format(formatter);
+		String formattedString = getInputDate(registration).format(formatter);
         return formattedString;
     }
     
@@ -103,7 +101,7 @@ public class StuddyBuddyRegistrationController {
 	 * @return the room from input
 	 */
     @FXML
-    public String getInputRoom() {
+    public String getInputRoom(StuddyBuddyRegistration registration) {
         String roomString = roomField.getText();
         try{
             registration.setRoom(roomString);
@@ -121,7 +119,7 @@ public class StuddyBuddyRegistrationController {
 	 * @return the course from input
 	 */
     @FXML
-    public String getInputCourse() {
+    public String getInputCourse(StuddyBuddyRegistration registration) {
         String courseString = courseField.getText();
         try{
             registration.setCourse(courseString);
@@ -139,7 +137,7 @@ public class StuddyBuddyRegistrationController {
 	 * @return the start time from input
 	 */
     @FXML
-    public String getInputStartTime() {
+    public String getInputStartTime(StuddyBuddyRegistration registration) {
         String startTimeString = startTimeField.getText();
         try{
             registration.setStartTime(startTimeString);
@@ -157,7 +155,7 @@ public class StuddyBuddyRegistrationController {
 	 * @return the end time from input
 	 */
     @FXML
-    public String getInputEndTime() {
+    public String getInputEndTime(StuddyBuddyRegistration registration) {
         String endTimeSting = endTimeField.getText();
         try{
             registration.setEndTime(endTimeSting);
@@ -238,11 +236,13 @@ public class StuddyBuddyRegistrationController {
 	 * sets the room, course, start time, end time and date
 	 */
     private void registerStuddyBuddy(){
-        registration.setRoom(getInputRoom());
-        registration.setCourse(getInputCourse());
-        registration.setStartTime(getInputStartTime());
-        registration.setEndTime(getInputEndTime());
-        registration.setDate(getInputDate());
+        StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
+        registration.setRoom(getInputRoom(registration));
+        registration.setCourse(getInputCourse(registration));
+        registration.setStartTime(getInputStartTime(registration));
+        registration.setEndTime(getInputEndTime(registration));
+        registration.setDate(getInputDate(registration));
+        buddy.addRegistration(registration);
     }
 
     private void saveStuddyBuddyToFile() {
@@ -251,6 +251,11 @@ public class StuddyBuddyRegistrationController {
         }
         
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
+            System.out.println();
+            System.out.println();
+            System.out.println(buddy.getRegistrations());
+            System.out.println();
+            System.out.println();
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
         } catch (IOException e) {
@@ -307,8 +312,8 @@ public class StuddyBuddyRegistrationController {
         }
 
         registerStuddyBuddy();
-        buddy = registration.getStuddyBuddy();
-        buddy.addRegistration(registration);
+        //buddy = registration.getStuddyBuddy();
+        //buddy.addRegistration(registration);
         saveStuddyBuddyToFile();
         displayRegistration();
     }
