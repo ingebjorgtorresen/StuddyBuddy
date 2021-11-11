@@ -246,7 +246,10 @@ public class StuddyBuddyRegistrationController {
     }
 
     private void saveStuddyBuddyToFile() {
-        buddies.addStuddyBuddy(buddy);
+        if (buddies.getStuddyBuddy(buddy.getName()) == null) {
+            buddies.addStuddyBuddy(buddy);
+        }
+        
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
