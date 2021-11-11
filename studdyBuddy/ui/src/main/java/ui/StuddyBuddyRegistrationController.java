@@ -251,11 +251,6 @@ public class StuddyBuddyRegistrationController {
         }
         
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
-            System.out.println();
-            System.out.println();
-            System.out.println(buddy.getRegistrations());
-            System.out.println();
-            System.out.println();
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
         } catch (IOException e) {
@@ -312,8 +307,6 @@ public class StuddyBuddyRegistrationController {
         }
 
         registerStuddyBuddy();
-        //buddy = registration.getStuddyBuddy();
-        //buddy.addRegistration(registration);
         saveStuddyBuddyToFile();
         displayRegistration();
     }
