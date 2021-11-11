@@ -1,7 +1,6 @@
 package core;
 
 import java.util.List;
-import java.util.TooManyListenersException;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -105,6 +104,13 @@ public class StuddyBuddy {
 	 */
 	public List<StuddyBuddyRegistration> getRegistrations() {
 		return registrations;
+	}
+
+	public void updateStuddyBuddyObject(StuddyBuddy buddy) {
+		this.name = buddy.name;
+		this.password = buddy.password;
+		this.registrations = buddy.registrations;
+
 	}
 
 	// Return a studdyBuddy object by its name
