@@ -123,7 +123,8 @@ public class StuddyBuddyController {
             }
         
         } catch (IOException e) {
-            errorMessage.setText("Could not Log in. Try again.");
+            errorMessage.setText("Could not log in. Try again.");
+            e.printStackTrace();
         }
     }
 

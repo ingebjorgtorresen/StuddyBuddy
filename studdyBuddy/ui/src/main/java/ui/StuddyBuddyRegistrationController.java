@@ -19,8 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
 public class StuddyBuddyRegistrationController {
-    
-    private StuddyBuddyRegistration registration;
+ 
     private StuddyBuddy buddy;
     private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
@@ -49,7 +48,6 @@ public class StuddyBuddyRegistrationController {
 
 	public void initialize() {
         datepicker.getEditor().setDisable(true);
-		registration = new StuddyBuddyRegistration();
         createRegistration();
 	}
 
@@ -64,32 +62,37 @@ public class StuddyBuddyRegistrationController {
     }
 
     public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
-        registration.setStuddyBuddy(studdyBuddy);
+        this.buddy = studdyBuddy;
     }
 
 
     /**
-     * sets the date to be the input in roomField
      * @return the date from input
      */
     @FXML
     public LocalDate getInputDate() {
-        LocalDate inputDate = datepicker.getValue();
+        return datepicker.getValue();
+    }
+
+    /**
+     * sets the date to a registration
+     */
+
+    public void setDateFromInput(StuddyBuddyRegistration registration) {
         try {
-            registration.setDate(inputDate);
+            registration.setDate(getInputDate());
         }
         catch (IllegalArgumentException e) {
             messageText.setText("Use the calender to choose date!");
             messageText.setVisible(true);
         }
-        return inputDate;
     }
 
     /**
      * 
      * @return the input date as String
      */
-    public String getInputDateString() {
+    public String getInputDateString(StuddyBuddyRegistration registration) {
         //String dateString = getInputDate().toString();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		String formattedString = getInputDate().format(formatter);
@@ -98,75 +101,93 @@ public class StuddyBuddyRegistrationController {
     
 
     /**
-	 * sets the room to be the input in roomField
 	 * the room can only consist of letters, "-" and space.
 	 * @return the room from input
 	 */
     @FXML
     public String getInputRoom() {
-        String roomString = roomField.getText();
-        try{
-            registration.setRoom(roomString);
-        }
-        catch (IllegalArgumentException e){
-            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + roomString);
-            messageText.setVisible(true);
-        }
-        return roomString;
+        return roomField.getText();
     }
 
     /**
-	 * sets the course to be the input in courseField
+	 * sets the room to be the input in roomField
+	 */
+    public void setRoomFromInput(StuddyBuddyRegistration registration) {
+        try{
+            registration.setRoom(getInputRoom());
+        }
+        catch (IllegalArgumentException e){
+            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + getInputRoom());
+            messageText.setVisible(true);
+        }
+    }
+
+    /**
 	 * the room can only consist of letters, "-" and space.
 	 * @return the course from input
 	 */
     @FXML
     public String getInputCourse() {
-        String courseString = courseField.getText();
-        try{
-            registration.setCourse(courseString);
-        }
-        catch(IllegalArgumentException e){
-            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + courseString);
-            messageText.setVisible(true);
-        }
-        return courseString;
+        return courseField.getText();
     }
 
     /**
-	 * sets the start time to be the input in startTimeField
+	 * sets the course to be the input in courseField
+	 */
+    public void setCourseFromInput(StuddyBuddyRegistration registration) {
+        try{
+            registration.setCourse(getInputCourse());
+        }
+        catch(IllegalArgumentException e){
+            messageText.setText("Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " + getInputCourse());
+            messageText.setVisible(true);
+        }
+    }
+
+    /**
 	 * the start time must be on format 'HH:mm'
 	 * @return the start time from input
 	 */
     @FXML
     public String getInputStartTime() {
-        String startTimeString = startTimeField.getText();
+        return startTimeField.getText();
+    }
+
+    /**
+	 * sets the start time to be the input in startTimeField
+	 */
+    @FXML
+    public void setStartTimeFromInput(StuddyBuddyRegistration registration) {
         try{
-            registration.setStartTime(startTimeString);
+            registration.setStartTime(getInputStartTime());
         }
         catch(IllegalArgumentException e){
             messageText.setText("Starttime must be on format \n'HH:mm' ");
             messageText.setVisible(true);
         }
-        return startTimeString;
     }
 
     /**
-	 * sets the end time to be the input in endTimeField
 	 * the end time must be on format 'HH:mm' and after StartTime
 	 * @return the end time from input
 	 */
     @FXML
     public String getInputEndTime() {
-        String endTimeSting = endTimeField.getText();
+        return endTimeField.getText();
+    }
+
+    /**
+	 * sets the end time to be the input in endTimeField
+	 */
+    @FXML
+    public void setEndTimeFromInput(StuddyBuddyRegistration registration) {
         try{
-            registration.setEndTime(endTimeSting);
+            registration.setEndTime(getInputEndTime());
         }
         catch(IllegalArgumentException e){
             messageText.setText("EndTime must be on format \n'HH:mm' and after StartTime");
             messageText.setVisible(true);
         }
-        return endTimeSting;
     }
 
    /**
@@ -238,15 +259,20 @@ public class StuddyBuddyRegistrationController {
 	 * sets the room, course, start time, end time and date
 	 */
     private void registerStuddyBuddy(){
-        registration.setRoom(getInputRoom());
-        registration.setCourse(getInputCourse());
-        registration.setStartTime(getInputStartTime());
-        registration.setEndTime(getInputEndTime());
-        registration.setDate(getInputDate());
+        StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
+        setRoomFromInput(registration);
+        setCourseFromInput(registration);
+        setStartTimeFromInput(registration);
+        setEndTimeFromInput(registration);
+        setDateFromInput(registration);
+        buddy.addRegistration(registration);
     }
 
     private void saveStuddyBuddyToFile() {
-        buddies.addStuddyBuddy(buddy);
+        if (buddies.getStuddyBuddy(buddy.getName()) == null) {
+            buddies.addStuddyBuddy(buddy);
+        }
+        
         try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
@@ -304,8 +330,6 @@ public class StuddyBuddyRegistrationController {
         }
 
         registerStuddyBuddy();
-        buddy = registration.getStuddyBuddy();
-        buddy.addRegistration(registration);
         saveStuddyBuddyToFile();
         displayRegistration();
     }
