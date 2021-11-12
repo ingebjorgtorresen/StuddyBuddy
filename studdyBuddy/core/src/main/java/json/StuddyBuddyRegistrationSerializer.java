@@ -8,18 +8,15 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 
 public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBuddyRegistration> {
 
-        /*
-            formatet vi ønsker at StuddyBuddy-objektene skal se ut:
-            {   
-                "Room" : "...", "Course" : "...", "Start time" : "...", "End time" : "..."
-            }
-        */
+  /*
+   * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Room" : "...",
+   * "Course" : "...", "Start time" : "...", "End time" : "..." }
+   */
 
   @Override
-  public void serialize(StuddyBuddyRegistration registration,
-                        JsonGenerator jGen,
-                        SerializerProvider serializerProvider) throws IOException {
-    jGen.writeStartObject(); 
+  public void serialize(StuddyBuddyRegistration registration, JsonGenerator jGen, SerializerProvider serializerProvider)
+      throws IOException {
+    jGen.writeStartObject();
     jGen.writeStringField("Date", registration.getDate());
     jGen.writeStringField("Room", registration.getRoom());
     jGen.writeStringField("Course", registration.getCourse());

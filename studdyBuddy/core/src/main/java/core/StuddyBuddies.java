@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Class for all StuddyBuddies/users. Has a list of all StuddyBuddy objects. 
+ * Class for all StuddyBuddies/users. Has a list of all StuddyBuddy objects.
  */
 
 public class StuddyBuddies implements Iterable<StuddyBuddy> {
@@ -13,15 +13,15 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     List<StuddyBuddy> studdyBuddies = new ArrayList<>();
 
     /**
-    * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it exists.
-    * Else return null.
-    *
-    * @param name name of the user we want to get
-    * @return StuddyBuddy if it exists or null
-    */
+     * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it
+     * exists. Else return null.
+     *
+     * @param name name of the user we want to get
+     * @return StuddyBuddy if it exists or null
+     */
     public StuddyBuddy getStuddyBuddy(String name) {
-        for(StuddyBuddy buddy : this.studdyBuddies) {
-            if(buddy.getName().equals(name)) {
+        for (StuddyBuddy buddy : this.studdyBuddies) {
+            if (buddy.getName().equals(name)) {
                 return buddy;
             }
         }
@@ -35,7 +35,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @return true if user exists, else null
      */
     private boolean checkIfStuddyBuddyExists(String name) {
-        if(getStuddyBuddy(name) != null) {
+        if (getStuddyBuddy(name) != null) {
             return true;
         }
         return false;
@@ -47,23 +47,23 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @param buddy StuddyBuddy we want to add.
      */
     public void addStuddyBuddy(StuddyBuddy buddy) {
-        if(checkIfStuddyBuddyExists(buddy.getName()) == false) {
+        if (checkIfStuddyBuddyExists(buddy.getName()) == false) {
             StuddyBuddy newStuddyBuddy = (StuddyBuddy) buddy;
             this.studdyBuddies.add(newStuddyBuddy);
             buddy.setStuddyBuddies(this);
-        }
-        else {
+        } else {
             throw new IllegalArgumentException("Already user existing with name: " + buddy.getName());
         }
 
     }
+
     /**
      * Method for adding many StuddyBuddy objects at once.
      * 
      * @param buddies StuddyBuddy Objects we want to add.
      */
-    public void addStuddyBuddies(StuddyBuddy...buddies) {
-        for(StuddyBuddy buddy : buddies) {
+    public void addStuddyBuddies(StuddyBuddy... buddies) {
+        for (StuddyBuddy buddy : buddies) {
             addStuddyBuddy(buddy);
         }
     }
@@ -78,7 +78,8 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     }
 
     /**
-     * Method that return this object as an iterator, and it enables (studdyBuddy : studdyBuddies).
+     * Method that return this object as an iterator, and it enables (studdyBuddy :
+     * studdyBuddies).
      */
     @Override
     public Iterator<StuddyBuddy> iterator() {
@@ -96,26 +97,22 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
     /**
      * Method for string representation of a list over StuddyBuddy objects.
-    */
+     */
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder("Buddies: ");
         for (StuddyBuddy buddy : studdyBuddies) {
-            builder.append("\n" + buddy.getName() + "\n" + buddy.getRegistrations() + "\n-----------------------------------------");
-            //builder.append("\n" + buddy.getRegistrations());
+            builder.append("\n" + buddy.getName() + "\n" + buddy.getRegistrations()
+                    + "\n-----------------------------------------");
+            // builder.append("\n" + buddy.getRegistrations());
         }
         return builder.toString();
     }
 
-
     /*
-    @Override
-    public String toString() {
-        String buddies = "";
-        for (StuddyBuddy buddy : studdyBuddies) {
-            buddies += buddy.getName() + "\n";
-        }
-        return buddies;
-    }*/
+     * @Override public String toString() { String buddies = ""; for (StuddyBuddy
+     * buddy : studdyBuddies) { buddies += buddy.getName() + "\n"; } return buddies;
+     * }
+     */
 
 }

@@ -17,16 +17,16 @@ import java.io.IOException;
 import java.net.URL;
 // import java.nio.charset.StandardCharsets;
 
-
 /**
- * Controller class for registering new StuddyBuddy/user. 
+ * Controller class for registering new StuddyBuddy/user.
  */
 
 public class RegisterStuddyBuddyController {
 
     private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddy buddy;
-    // private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
+    // private StuddyBuddiesPersistence persistence = new
+    // StuddyBuddiesPersistence();
     // private String userRegistrationFileName = "/userRegistration.json";
 
     @FXML
@@ -38,7 +38,7 @@ public class RegisterStuddyBuddyController {
     @FXML
     private TextField passwordCheckField;
 
-    @FXML 
+    @FXML
     private Label messageBox;
 
     public void initialize() {
@@ -75,15 +75,15 @@ public class RegisterStuddyBuddyController {
 
     public boolean checkInputPassword() {
         try {
-             this.buddy.setPassword(getInputPassword());
+            this.buddy.setPassword(getInputPassword());
         } catch (IllegalArgumentException e) {
-                return false;
+            return false;
         }
         return true;
     }
 
     public boolean checkPasswordsMatch() {
-        if(!(getInputPassword().equals(getInputPasswordCheck()))) {
+        if (!(getInputPassword().equals(getInputPasswordCheck()))) {
             return false;
         }
         return true;
@@ -96,7 +96,7 @@ public class RegisterStuddyBuddyController {
     }
 
     private void changeScene(ActionEvent event) throws IOException {
-        try { 
+        try {
             URL file = getClass().getResource("StuddyBuddy.fxml");
             FXMLLoader loader = new FXMLLoader(file);
             Parent parent = (Parent) loader.load();
@@ -112,16 +112,15 @@ public class RegisterStuddyBuddyController {
         }
     }
 
-    /*private void saveStuddyBuddyToFile() throws IOException {
-        try (Writer writer = new FileWriter(System.getProperty("user.home") + userRegistrationFileName, StandardCharsets.UTF_8)) {
-            persistence.writeStuddyBuddies(buddies, writer);
-            writer.flush();
-        } catch (IOException e) {
-            throw new IOException("Could not save registration.");
-        }
-    }*/
+    /*
+     * private void saveStuddyBuddyToFile() throws IOException { try (Writer writer
+     * = new FileWriter(System.getProperty("user.home") + userRegistrationFileName,
+     * StandardCharsets.UTF_8)) { persistence.writeStuddyBuddies(buddies, writer);
+     * writer.flush(); } catch (IOException e) { throw new
+     * IOException("Could not save registration."); } }
+     */
 
-    @FXML 
+    @FXML
     public void handleRegisterUser(ActionEvent event) throws IOException {
         try {
 
@@ -129,13 +128,13 @@ public class RegisterStuddyBuddyController {
             checkInputPassword();
             checkPasswordsMatch();
 
-            if(((!checkInputName()) && (!checkInputPassword()) && (!checkPasswordsMatch()))) {
+            if (((!checkInputName()) && (!checkInputPassword()) && (!checkPasswordsMatch()))) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
             }
 
-            else if((!checkInputName()) && (!checkInputPassword())) {
+            else if ((!checkInputName()) && (!checkInputPassword())) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
@@ -147,7 +146,7 @@ public class RegisterStuddyBuddyController {
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
             }
 
-            else if(!(checkInputName())) {
+            else if (!(checkInputName())) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
@@ -155,14 +154,14 @@ public class RegisterStuddyBuddyController {
                 passwordCheckField.setText(getInputPasswordCheck());
             }
 
-            else if(!(checkInputPassword())) {
+            else if (!(checkInputPassword())) {
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 nameField.setText(getInputName());
             }
 
-            else if(!(checkPasswordsMatch())) {
+            else if (!(checkPasswordsMatch())) {
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
@@ -175,9 +174,10 @@ public class RegisterStuddyBuddyController {
                 passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
 
-                //denne brukeren bør så legges til i listen over brukere når det er implementert riktig
+                // denne brukeren bør så legges til i listen over brukere når det er
+                // implementert riktig
                 createNewStuddyBuddy();
-                //saveStuddyBuddyToFile();
+                // saveStuddyBuddyToFile();
                 messageBox.setText("Registering new user was sucessfull.");
                 changeScene(event);
             }
@@ -187,5 +187,5 @@ public class RegisterStuddyBuddyController {
         }
 
     }
-    
+
 }

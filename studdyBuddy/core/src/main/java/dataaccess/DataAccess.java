@@ -2,6 +2,10 @@ package dataaccess;
 
 import core.*;
 
+/**
+ * Interface for methods GET, PUT and POST methods used in DataAccess classes.
+ */
+
 public interface DataAccess {
 
     /**
@@ -28,7 +32,7 @@ public interface DataAccess {
     public void putStuddyBuddy(StuddyBuddy buddy);
 
     /**
-     * Method for updating a StuddyBuddy object in the server if it exists there. 
+     * Method for updating a StuddyBuddy object in the server if it exists there.
      */
     public void postStuddyBuddy(StuddyBuddy buddy);
 }

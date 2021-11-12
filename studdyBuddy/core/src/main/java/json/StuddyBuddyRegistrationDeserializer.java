@@ -17,51 +17,50 @@ import com.fasterxml.jackson.databind.node.TextNode;
 public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<StuddyBuddyRegistration> {
 
     /*
-        formatet vi ønsker at StuddyBuddy-objektene skal se ut:
-        {   
-            "Registrations": [ ... ]
-        }
-    */
+     * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Registrations": [
+     * ... ] }
+     */
 
     public StuddyBuddyRegistration deserialize(JsonNode node) throws IOException, JsonProcessingException {
-    if (node instanceof ObjectNode){
-        ObjectNode objectNode = (ObjectNode) node;
-        StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration();
-        
-        JsonNode dateNode = objectNode.get("Date");
-        if (dateNode instanceof TextNode){
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-            LocalDate date = LocalDate.parse(dateNode.asText(), formatter);
-            studdyBuddyRegistration.setDate(date);
-        }
-        
-        JsonNode courseNode = objectNode.get("Course");
-        if (courseNode instanceof TextNode){
-            studdyBuddyRegistration.setCourse(courseNode.asText());
-        }
-        
-        JsonNode roomNode = objectNode.get("Room");
-        if (courseNode instanceof TextNode){
-            studdyBuddyRegistration.setRoom(roomNode.asText());
-        }    
+        if (node instanceof ObjectNode) {
+            ObjectNode objectNode = (ObjectNode) node;
+            StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration();
 
-        JsonNode startNode = objectNode.get("Start time");
-        if (startNode instanceof TextNode){
-            studdyBuddyRegistration.setStartTime(startNode.asText());
-        } 
+            JsonNode dateNode = objectNode.get("Date");
+            if (dateNode instanceof TextNode) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                LocalDate date = LocalDate.parse(dateNode.asText(), formatter);
+                studdyBuddyRegistration.setDate(date);
+            }
 
-        JsonNode endNode = objectNode.get("End time");
-        if (endNode instanceof TextNode){
-            studdyBuddyRegistration.setEndTime(endNode.asText());
+            JsonNode courseNode = objectNode.get("Course");
+            if (courseNode instanceof TextNode) {
+                studdyBuddyRegistration.setCourse(courseNode.asText());
+            }
+
+            JsonNode roomNode = objectNode.get("Room");
+            if (courseNode instanceof TextNode) {
+                studdyBuddyRegistration.setRoom(roomNode.asText());
+            }
+
+            JsonNode startNode = objectNode.get("Start time");
+            if (startNode instanceof TextNode) {
+                studdyBuddyRegistration.setStartTime(startNode.asText());
+            }
+
+            JsonNode endNode = objectNode.get("End time");
+            if (endNode instanceof TextNode) {
+                studdyBuddyRegistration.setEndTime(endNode.asText());
+            }
+
+            return studdyBuddyRegistration;
         }
-
-        return studdyBuddyRegistration;
+        return null;
     }
-    return null;
-  }
 
     @Override
-    public StuddyBuddyRegistration deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JsonProcessingException {
+    public StuddyBuddyRegistration deserialize(JsonParser p, DeserializationContext ctxt)
+            throws IOException, JsonProcessingException {
         TreeNode treeNode = p.getCodec().readTree(p);
         return deserialize((JsonNode) treeNode);
     }

@@ -11,17 +11,18 @@ import core.*;
 import json.StuddyModule;
 
 /**
- * Class for communcating with and accessing server.
- * Has methods for GET, PUT, POST that uses HttpRequest.
+ * Class for communcating with and accessing server. Has methods for GET, PUT,
+ * POST that uses HttpRequest.
  */
 public class RemoteDataAcess implements DataAccess {
 
-    // These fields are set to public to make it easier to access them in other classes
+    // These fields are set to public to make it easier to access them in other
+    // classes
     public StuddyBuddy buddy;
     public URI baseURI;
 
     /**
-     * Constructor for setting default base URI for gitpod. 
+     * Constructor for setting default base URI for gitpod.
      */
     public RemoteDataAcess() {
         this.baseURI = URI.create("http://localhost:6080/api/");
@@ -29,6 +30,7 @@ public class RemoteDataAcess implements DataAccess {
 
     /**
      * Constructor for setting default base URI with custom port.
+     * 
      * @param port
      */
     public RemoteDataAcess(String port) {
@@ -43,20 +45,21 @@ public class RemoteDataAcess implements DataAccess {
         buddy = null;
         try {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "user/" + name))
-            .header("Accept", "application/json").GET().build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
+                    .header("Accept", "application/json").GET().build();
+            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
             final String responseString = response.body();
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new StuddyModule());
             this.buddy = mapper.readValue(responseString, StuddyBuddy.class);
-            if(response.statusCode() == 404) { // HTTP 404 is a not found message, that means that the server could not fin what was asked for.
+            if (response.statusCode() == 404) { // HTTP 404 is a not found message, that means that the server could not
+                                                // find what was asked for.
                 throw new IllegalArgumentException("The user does not exist.");
             }
             return buddy;
         } catch (IOException | InterruptedException e) {
-            throw new IllegalArgumentException("Could not get user by name: " + name +
-            ". Something went wrong with the server.");
+            throw new IllegalArgumentException(
+                    "Could not get user by name: " + name + ". Something went wrong with the server.");
         }
     }
 
@@ -67,10 +70,10 @@ public class RemoteDataAcess implements DataAccess {
     public String getStuddyBuddyPasswordByName(String name) {
         try {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + name + "/password"))
-            .header("Accept", "application/json").header("Content-Type", "application/json").GET().build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
-            if(response.statusCode() != 200) { // HTTP 200 OK is code that indicates that the request has suceeded.
+                    .header("Accept", "application/json").header("Content-Type", "application/json").GET().build();
+            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) { // HTTP 200 OK is code that indicates that the request has suceeded.
                 throw new IllegalArgumentException("User does not exist.");
             }
             String responseString = response.body();
@@ -81,7 +84,7 @@ public class RemoteDataAcess implements DataAccess {
     }
 
     /**
-     * Method for sending a StudyBuddy object to server. 
+     * Method for sending a StudyBuddy object to server.
      */
     @Override
     public void putStuddyBuddy(StuddyBuddy buddy) {
@@ -90,16 +93,17 @@ public class RemoteDataAcess implements DataAccess {
             mapper.registerModule(new StuddyModule());
             String jsonString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + buddy.getName() + "/password"))
-            .header("Accept", "application/json").header("Content-Type", "application/json").PUT(BodyPublishers.ofString(jsonString)).build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
-            if(response.statusCode() != 200) {
+                    .header("Accept", "application/json").header("Content-Type", "application/json")
+                    .PUT(BodyPublishers.ofString(jsonString)).build();
+            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
                 throw new IllegalArgumentException("Could not save user-object to server.");
             }
         } catch (InterruptedException | IOException e) {
             throw new IllegalArgumentException("Could not save user-object to server.");
         }
-        
+
     }
 
     /**
@@ -112,14 +116,15 @@ public class RemoteDataAcess implements DataAccess {
             mapper.registerModule(new StuddyModule());
             String jsonString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + buddy.getName() + "/password"))
-            .header("Accept", "application/json").header("Content-Type", "application/json").POST(BodyPublishers.ofString(jsonString)).build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
-            if(response.statusCode() != 200) {
+                    .header("Accept", "application/json").header("Content-Type", "application/json")
+                    .POST(BodyPublishers.ofString(jsonString)).build();
+            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() != 200) {
                 throw new IllegalArgumentException("Could not save user-object to server.");
             }
         } catch (InterruptedException | IOException e) {
             throw new IllegalArgumentException("Could not save user-object to server.");
-        }    
+        }
     }
 }

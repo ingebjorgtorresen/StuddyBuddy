@@ -17,12 +17,11 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
 
     private StuddyBuddyDeserializer studdyBuddyeserializer = new StuddyBuddyDeserializer();
 
-
     @Override
     public StuddyBuddies deserialize(JsonParser parser, DeserializationContext ctxt)
             throws IOException, JsonProcessingException {
-                TreeNode treeNode = parser.getCodec().readTree(parser);
-                return deserialize((JsonNode) treeNode);
+        TreeNode treeNode = parser.getCodec().readTree(parser);
+        return deserialize((JsonNode) treeNode);
     }
 
     public StuddyBuddies deserialize(JsonNode node) throws JsonProcessingException, IOException {
@@ -30,11 +29,11 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
             ObjectNode objectNode = (ObjectNode) node;
             StuddyBuddies buddies = new StuddyBuddies();
             JsonNode buddiesNode = objectNode.get("StuddyBuddies");
-    
+
             if (buddiesNode instanceof ArrayNode) {
-                for(JsonNode buddyNode : ((ArrayNode) buddiesNode)) {
+                for (JsonNode buddyNode : ((ArrayNode) buddiesNode)) {
                     StuddyBuddy buddy = studdyBuddyeserializer.deserialize(buddyNode);
-                    if(buddy != null) {
+                    if (buddy != null) {
                         buddies.addStuddyBuddy(buddy);
                     }
                 }
@@ -44,5 +43,4 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
         return null;
     }
 
-    
 }
