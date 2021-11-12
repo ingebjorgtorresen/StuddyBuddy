@@ -83,7 +83,7 @@ public class StuddyBuddyController {
             URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            StuddyBuddyForumController forumController = loader.getController();
+            // StuddyBuddyForumController forumController = loader.getController();
 
             checkInputName();
             checkInputPassword();
@@ -112,7 +112,7 @@ public class StuddyBuddyController {
                 studdyBuddy.setPassword(getInputPassword());
                 nameField.clear();
                 passwordField.clear();
-                forumController.setStuddyBuddyFromLogin(studdyBuddy);
+                // forumController.setStuddyBuddyFromLogin(studdyBuddy);
                 
                 Stage forumStage = new Stage();
                 forumStage.setTitle("Forum");

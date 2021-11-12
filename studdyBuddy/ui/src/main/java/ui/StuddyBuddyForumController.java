@@ -22,7 +22,6 @@ import json.StuddyBuddiesPersistence;
 
 public class StuddyBuddyForumController {
 
-    private StuddyBuddy studdyBuddy;
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
     private String registrationsFileName = "/registrations.json";
 
@@ -40,7 +39,7 @@ public class StuddyBuddyForumController {
 
     @FXML
     private Button addRegistrationButton;
-    
+
     @FXML
     private Label studdyBuddyUser;
 
@@ -50,18 +49,8 @@ public class StuddyBuddyForumController {
     @FXML
     private Label allRegistrationsText;
 
-
     public void initialize() {
-        //createForum();
         display();
-    }
-
-    /**private void createForum() {
-        username.setText(studdyBuddy.getName());
-    }*/
-
-    public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
-        this.studdyBuddy = studdyBuddy;
     }
 
     @FXML
@@ -84,7 +73,7 @@ public class StuddyBuddyForumController {
     }
 
     @FXML
-    public void handleLogOut(){
+    public void handleLogOut() {
         try {
 
             URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");
@@ -100,31 +89,31 @@ public class StuddyBuddyForumController {
         }
     }
 
-    public StuddyBuddies getRegistratedStuddyBuddies(){
+    public StuddyBuddies getRegistratedStuddyBuddies() {
         StuddyBuddies registeredBuddies = null;
-        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
-                registeredBuddies = persistence.readStuddyBuddies(reader);
+        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName,
+                StandardCharsets.UTF_8)) {
+            registeredBuddies = persistence.readStuddyBuddies(reader);
         } catch (Exception e) {
             System.err.println("Couldn´t read from file");
             e.printStackTrace();
         }
         return registeredBuddies;
-    } 
+    }
 
-    /**public void displayRegistrations() {
-        StuddyBuddies registeredBuddies = getRegistratedStuddyBuddies();
-        if (registeredBuddies != null){
-            allRegistrationsText.setText(registeredBuddies.getStuddyBuddies().toString());
-        }
-    }*/
-    
+    /**
+     * public void displayRegistrations() { StuddyBuddies registeredBuddies =
+     * getRegistratedStuddyBuddies(); if (registeredBuddies != null){
+     * allRegistrationsText.setText(registeredBuddies.getStuddyBuddies().toString());
+     * } }
+     */
+
     private StuddyBuddies buddies = new StuddyBuddies();
 
     /**
-     * Method to set ut the studdyBuddies that will be displayed
-     * on the forum-page
+     * Method to set ut the studdyBuddies that will be displayed on the forum-page
      */
-    private void setUpBuddies(){
+    private void setUpBuddies() {
 
         StuddyBuddy buddy1 = new StuddyBuddy();
         StuddyBuddy buddy2 = new StuddyBuddy();
@@ -187,10 +176,9 @@ public class StuddyBuddyForumController {
     }
 
     @FXML
-    public void display(){
+    public void display() {
         setUpBuddies();
         allRegistrationsText.setText(buddies.toString());
     }
-
 
 }
