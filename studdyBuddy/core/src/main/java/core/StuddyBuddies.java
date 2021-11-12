@@ -3,7 +3,6 @@ package core;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Class for all StuddyBuddies/users. Has a list of all StuddyBuddy objects. 
@@ -102,7 +101,8 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     public String toString() {
         StringBuilder builder = new StringBuilder("Buddies: ");
         for (StuddyBuddy buddy : studdyBuddies) {
-            builder.append("\n" + buddy.getName());
+            builder.append("\n" + buddy.getName() + "\n" + buddy.getRegistrations() + "\n-----------------------------------------");
+            //builder.append("\n" + buddy.getRegistrations());
         }
         return builder.toString();
     }
