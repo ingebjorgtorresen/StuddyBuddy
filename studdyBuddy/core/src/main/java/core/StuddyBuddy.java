@@ -106,6 +106,13 @@ public class StuddyBuddy {
 		return registrations;
 	}
 
+	public void updateStuddyBuddyObject(StuddyBuddy buddy) {
+		this.name = buddy.name;
+		this.password = buddy.password;
+		this.registrations = buddy.registrations;
+
+	}
+
 	// Return a studdyBuddy object by its name
 	@Override
 	public String toString() {
