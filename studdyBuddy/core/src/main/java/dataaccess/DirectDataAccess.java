@@ -11,6 +11,11 @@ import java.nio.charset.StandardCharsets;
 import core.*;
 import json.StuddyBuddiesPersistence;
 
+/**
+ * Class that works locally with data. Can use pre-defined StuddyBuddy object,
+ * or read from file.
+ */
+
 public class DirectDataAccess implements DataAccess {
 
     private StuddyBuddies buddies;
@@ -26,8 +31,8 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Constructor that creates an instance that reads from the json.file 
-     * specified as a parameter. 
+     * Constructor that creates an instance that reads from the json.file specified
+     * as a parameter.
      * 
      * @param file the filename of the json file to write to
      */
@@ -37,12 +42,13 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Method for reading from json-file with reasource from field: studdybuddiesFilename
+     * Method for reading from json-file with reasource from field:
+     * studdybuddiesFilename
      * 
      * @return a StuddyBuddies object
      */
     public StuddyBuddies readStuddyBuddies() {
-        if(studdybuddiesFilename != null) {
+        if (studdybuddiesFilename != null) {
             try {
                 URL url = getClass().getResource(studdybuddiesFilename);
                 Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
@@ -55,26 +61,26 @@ public class DirectDataAccess implements DataAccess {
             }
         }
         return null;
-    } 
+    }
 
     /**
-     * Method for writing a StuddyBuddy object serialized as a json-string to file in the 
-     * resource file.
+     * Method for writing a StuddyBuddy object serialized as a json-string to file
+     * in the resource file.
      * 
      * @param buddies StuddyBuddies object to save
      */
     public void writeStuddyBuddies(StuddyBuddies buddies) {
-        if(studdybuddiesFilename != null) {
+        if (studdybuddiesFilename != null) {
             try {
                 URL url = getClass().getResource(studdybuddiesFilename);
                 Writer writer = new FileWriter(url.getFile(), StandardCharsets.UTF_8);
                 buddiesPersistence.writeStuddyBuddies(buddies, writer);
                 try {
                     writer.close();
-                } catch(IOException e) {
+                } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            } catch (IOException e) {
+            } catch (IOException | RuntimeException e) {
                 throw new IllegalStateException("Could not write to file: " + studdybuddiesFilename);
             }
         }
@@ -90,7 +96,7 @@ public class DirectDataAccess implements DataAccess {
     @Override
     public StuddyBuddy getStuddyBuddyByName(String name) {
         StuddyBuddy buddy = buddies.getStuddyBuddy(name);
-        if(buddy == null) {
+        if (buddy == null) {
             throw new IllegalArgumentException("The user does not exist.");
         }
         return buddy;
@@ -107,10 +113,11 @@ public class DirectDataAccess implements DataAccess {
         try {
             this.buddies.addStuddyBuddy(buddy);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("User already exist in the server, and the user can therefore not be created");
+            throw new IllegalArgumentException(
+                    "User already exist in the server, and the user can therefore not be created");
         }
-        //This is for testing 
-        if(persistence) {
+        // This is for testing
+        if (persistence) {
             writeStuddyBuddies();
         }
     }
@@ -119,16 +126,18 @@ public class DirectDataAccess implements DataAccess {
     public void postStuddyBuddy(StuddyBuddy buddy) {
         this.readStuddyBuddies();
         try {
-            this.buddies.getStuddyBuddy(buddy.getName()).updateStuddyBuddyObject(buddy);;
+            this.buddies.getStuddyBuddy(buddy.getName()).updateStuddyBuddyObject(buddy);
+            ;
         } catch (NullPointerException e) {
-            throw new IllegalArgumentException("User does not exist in the server, and the user can therefore not be updated.");
+            throw new IllegalArgumentException(
+                    "User does not exist in the server, and the user can therefore not be updated.");
         }
-        //This is for testing
-        if(persistence) {
+        // This is for testing
+        if (persistence) {
             writeStuddyBuddies();
         }
-        
-    } 
+
+    }
 
     /**
      * Method for setting StuddyBuddies objects.
@@ -138,7 +147,7 @@ public class DirectDataAccess implements DataAccess {
     public void setStuddyBuddies(StuddyBuddies buddies) {
         this.buddies = buddies;
     }
-    
+
     /**
      * Method for setting studdybuddiesFilename
      * 
@@ -158,8 +167,8 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Method for writing a empty StuddyBuddy object to the json-file. 
-     * This is used for testing when one wants to clear the document before testing.
+     * Method for writing a empty StuddyBuddy object to the json-file. This is used
+     * for testing when one wants to clear the document before testing.
      */
     public void writeEmptyStuddyBuddyToDocument() {
         writeStuddyBuddies(new StuddyBuddies());

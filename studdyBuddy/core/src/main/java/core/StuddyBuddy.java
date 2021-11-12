@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Class for StuddyBuddy, which is the user class. Each user has a name and a password. 
+ * Class for StuddyBuddy, which is the user class. Each user has a name and a
+ * password.
  */
 
 public class StuddyBuddy {
@@ -14,7 +15,7 @@ public class StuddyBuddy {
 	private String name;
 	private String password;
 
- 	private List<StuddyBuddyRegistration> registrations= new ArrayList<>();
+	private List<StuddyBuddyRegistration> registrations = new ArrayList<>();
 
 	public void setStuddyBuddies(StuddyBuddies buddies) {
 		this.buddies = buddies;
@@ -25,7 +26,7 @@ public class StuddyBuddy {
 	}
 
 	/**
-	 * Method for setting name of the user if it is a valid name. 
+	 * Method for setting name of the user if it is a valid name.
 	 * 
 	 * @param name the name to set.
 	 */
@@ -48,30 +49,31 @@ public class StuddyBuddy {
 	}
 
 	/**
-	 * Method for setting password if it is valid. A valid password has at least 8 characters, and
-	 * consists of only digits and letters. Also throws exeption if password is invalid. 
+	 * Method for setting password if it is valid. A valid password has at least 8
+	 * characters, and consists of only digits and letters. Also throws exeption if
+	 * password is invalid.
 	 * 
-	 * @param password the password the user wishes to set. 
+	 * @param password the password the user wishes to set.
 	 */
 	public void setPassword(String password) {
 		StuddyBuddyValidation.checkNotNull(password);
-		if(!StuddyBuddyValidation.checkPassword(password)) {
+		if (!StuddyBuddyValidation.checkPassword(password)) {
 			throw new IllegalArgumentException("Please write a valid password.");
-		} 
+		}
 		this.password = password;
 	}
 
 	/**
 	 * Method for getting the password connected to the user.
 	 * 
-	 * @return the password of the user. 
+	 * @return the password of the user.
 	 */
 	public String getPassword() {
 		return password;
 	}
 
 	/**
-	 * Method for making an iterator over StuddyBuddyRegistration objects. 
+	 * Method for making an iterator over StuddyBuddyRegistration objects.
 	 * 
 	 * @return iterator over StudduBuddyregistration objects.
 	 */
@@ -91,7 +93,7 @@ public class StuddyBuddy {
 	/**
 	 * Method for removing an element in the list over registrations if it exists.
 	 * 
-	 * @param registration the registration we want to remove. 
+	 * @param registration the registration we want to remove.
 	 */
 	public void removeRegistration(StuddyBuddyRegistration registration) {
 		registrations.remove(registration);
@@ -100,7 +102,7 @@ public class StuddyBuddy {
 	/**
 	 * Method for getting the list over this users registrations.
 	 * 
-	 * @return the list over registrations. 
+	 * @return the list over registrations.
 	 */
 	public List<StuddyBuddyRegistration> getRegistrations() {
 		return registrations;

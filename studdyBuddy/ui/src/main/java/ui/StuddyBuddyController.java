@@ -19,7 +19,7 @@ import java.net.URL;
 public class StuddyBuddyController {
 
     private StuddyBuddy studdyBuddy;
-    //private StuddyBuddies buddies;
+    // private StuddyBuddies buddies;
 
     @FXML
     private TextField nameField;
@@ -32,7 +32,7 @@ public class StuddyBuddyController {
 
     public void initialize() {
         studdyBuddy = new StuddyBuddy();
-        //buddies = new StuddyBuddies();
+        // buddies = new StuddyBuddies();
     }
 
     /**
@@ -56,7 +56,7 @@ public class StuddyBuddyController {
     public boolean checkInputName() {
         try {
             this.studdyBuddy.setName(getInputName());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return false;
         }
         return true;
@@ -65,12 +65,11 @@ public class StuddyBuddyController {
     public boolean checkInputPassword() {
         try {
             this.studdyBuddy.setPassword(getInputPassword());
-        } catch(IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             return false;
         }
         return true;
     }
-
 
     /**
      * Sends the username and password to the next controller and loads a new window
@@ -88,20 +87,20 @@ public class StuddyBuddyController {
             checkInputName();
             checkInputPassword();
 
-            if(((!checkInputPassword()) && (!checkInputName()))) {
+            if (((!checkInputPassword()) && (!checkInputName()))) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
 
             }
-    
-            else if(!checkInputName()) {
+
+            else if (!checkInputName()) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 passwordField.setText(getInputPassword());
 
             }
-    
-            else if(!checkInputPassword()) {
+
+            else if (!checkInputPassword()) {
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 nameField.setText(getInputName());
@@ -113,7 +112,7 @@ public class StuddyBuddyController {
                 nameField.clear();
                 passwordField.clear();
                 // forumController.setStuddyBuddyFromLogin(studdyBuddy);
-                
+
                 Stage forumStage = new Stage();
                 forumStage.setTitle("Forum");
                 forumStage.setScene(new Scene(parent));
@@ -121,7 +120,7 @@ public class StuddyBuddyController {
                 Stage thisStage = (Stage) nameField.getScene().getWindow();
                 thisStage.close();
             }
-        
+
         } catch (IOException e) {
             errorMessage.setText("Could not Log in. Try again.");
             e.printStackTrace();
@@ -130,7 +129,7 @@ public class StuddyBuddyController {
 
     @FXML
     public void handleRegisterUser() {
-        try { 
+        try {
             URL file = getClass().getResource("RegisterStuddyBuddy.fxml");
             FXMLLoader loader = new FXMLLoader(file);
             Parent parent = (Parent) loader.load();
