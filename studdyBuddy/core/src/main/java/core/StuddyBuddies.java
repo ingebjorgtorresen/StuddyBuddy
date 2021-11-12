@@ -101,7 +101,8 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     public String toString() {
         StringBuilder builder = new StringBuilder("Buddies: ");
         for (StuddyBuddy buddy : studdyBuddies) {
-            builder.append("\n" + buddy.getName());
+            builder.append("\n" + buddy.getName() + "\n" + buddy.getRegistrations() + "\n-----------------------------------------");
+            //builder.append("\n" + buddy.getRegistrations());
         }
         return builder.toString();
     }

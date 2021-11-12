@@ -80,10 +80,10 @@ public class StuddyBuddyController {
 
         try {
 
-            URL fxmlFile = getClass().getResource("StuddyBuddyRegistration.fxml");
+            URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            StuddyBuddyRegistrationController registrationController = loader.getController();
+            // StuddyBuddyForumController forumController = loader.getController();
 
             checkInputName();
             checkInputPassword();
@@ -112,18 +112,18 @@ public class StuddyBuddyController {
                 studdyBuddy.setPassword(getInputPassword());
                 nameField.clear();
                 passwordField.clear();
-                registrationController.setStuddyBuddyFromLogin(studdyBuddy);
+                // forumController.setStuddyBuddyFromLogin(studdyBuddy);
                 
-                Stage registrationStage = new Stage();
-                registrationStage.setTitle("Registration");
-                registrationStage.setScene(new Scene(parent));
-                registrationStage.show();
+                Stage forumStage = new Stage();
+                forumStage.setTitle("Forum");
+                forumStage.setScene(new Scene(parent));
+                forumStage.show();
                 Stage thisStage = (Stage) nameField.getScene().getWindow();
                 thisStage.close();
             }
         
         } catch (IOException e) {
-            errorMessage.setText("Could not log in. Try again.");
+            errorMessage.setText("Could not Log in. Try again.");
             e.printStackTrace();
         }
     }
