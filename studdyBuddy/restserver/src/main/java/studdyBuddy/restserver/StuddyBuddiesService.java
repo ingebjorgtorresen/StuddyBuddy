@@ -54,7 +54,7 @@ public class StuddyBuddiesService {
   public void autoSaveStuddyBuddies() {
     if (studdyBuddiesPersistence != null) {
       try {
-        todoPersistence.SaveStuddyBuddies(this.studdyBuddies);
+        StuddyBuddiesPersistence.SaveStuddyBuddies(this.studdyBuddies);
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save StuddyBuddies: " + e);
       }
