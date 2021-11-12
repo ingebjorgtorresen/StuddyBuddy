@@ -16,7 +16,7 @@ import todolist.core.*;
 @RequestMapping(StuddyBuddiesController.STUDDY_BUDDIES_SERVICE_PATH)
 public class StuddyBuddiesController {
 
-    public static final String STUDDY_BUDDIES_SERVICE_PATH = "springboot/studdyBuddy";
+    public static final String STUDDY_BUDDIES_SERVICE_PATH = "restserver/studdyBuddy";
 
     @Autowired
     private StuddyBuddiesService studdyBuddiesService;
