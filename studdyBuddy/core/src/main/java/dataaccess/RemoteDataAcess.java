@@ -16,9 +16,8 @@ import json.StuddyModule;
  */
 public class RemoteDataAcess implements DataAccess {
 
-    // This fields are set to public to make it easier to access them in other classes
+    // These fields are set to public to make it easier to access them in other classes
     public StuddyBuddy buddy;
-    public StuddyBuddies buddies;
     public URI baseURI;
 
     /**
@@ -55,7 +54,7 @@ public class RemoteDataAcess implements DataAccess {
                 throw new IllegalArgumentException("The user does not exist.");
             }
             return buddy;
-        } catch (Exception e) {
+        } catch (IOException | InterruptedException e) {
             throw new IllegalArgumentException("Could not get user by name: " + name +
             ". Something went wrong with the server.");
         }

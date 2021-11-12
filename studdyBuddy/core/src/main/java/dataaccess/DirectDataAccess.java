@@ -69,7 +69,11 @@ public class DirectDataAccess implements DataAccess {
                 URL url = getClass().getResource(studdybuddiesFilename);
                 Writer writer = new FileWriter(url.getFile(), StandardCharsets.UTF_8);
                 buddiesPersistence.writeStuddyBuddies(buddies, writer);
-                writer.close();
+                try {
+                    writer.close();
+                } catch(IOException e) {
+                    throw new RuntimeException(e);
+                }
             } catch (IOException e) {
                 throw new IllegalStateException("Could not write to file: " + studdybuddiesFilename);
             }
