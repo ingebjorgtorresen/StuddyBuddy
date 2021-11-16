@@ -12,8 +12,10 @@ public class StuddyModule extends SimpleModule {
     super(NAME, Version.unknownVersion());
     addSerializer(StuddyBuddy.class, new StuddyBuddySerializer());
     addDeserializer(StuddyBuddy.class, new StuddyBuddyDeserializer());
+
     addSerializer(StuddyBuddyRegistration.class, new StuddyBuddyRegistrationSerializer());
     addDeserializer(StuddyBuddyRegistration.class, new StuddyBuddyRegistrationDeserializer());
+    
     addSerializer(StuddyBuddies.class, new StuddyBuddiesSerializer());
     addDeserializer(StuddyBuddies.class, new StuddyBuddiesDeserializer());
 
