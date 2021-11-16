@@ -1,0 +1,10 @@
+actor User
+User -> "~#LogIn: Button" as LogIn: click
+LogIn -> StuddyBuddyController: handleLogin()
+StuddyBuddyController -> StuddyBuddyRegistrationController: handleLogin()
+StuddyBuddyRegistrationController -> "~#RoomText: TextField" as RoomText: getInputRoom()
+StuddyBuddyRegistrationController -> "~#CourseText: TextField" as CourseText: getInputCourse()
+StuddyBuddyRegistrationController -> "~#StartTimeText: TextField" as StartTimeText: getInputStartTime()
+StuddyBuddyRegistrationController -> "~#EndTimeText: TextField" as EndTimeText: getInputEndTime()
+StuddyBuddyRegistrationController -> "~#Register: Button" as Register: click
+Register -> StuddyBuddyRegistrationController: handleRegister()
