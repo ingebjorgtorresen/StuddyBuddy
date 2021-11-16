@@ -19,14 +19,14 @@ public class StuddyBuddiesService {
   public StuddyBuddiesService(StuddyBuddies studdyBuddies) {
     this.studdyBuddies = studdyBuddies;
     this.studdyBuddiesPersistence = new StuddyBuddiesPersistence();
-    studdyBuddiesPersistence.setSaveFile("springbootserver-studdyBuddy.json");
+    studdyBuddiesPersistence.setSaveFilePath("springbootserver-studdyBuddy.json");
   }
 
   public StuddyBuddiesService() {
     this(createDefaultStuddyBuddies());
   }
 
-  public TodoModel getStuddyBuddies() {
+  public StuddyBuddies getStuddyBuddies() {
     return studdyBuddies;
   }
 
@@ -46,15 +46,19 @@ public class StuddyBuddiesService {
       }
     }
     StuddyBuddies studdyBuddies = new StuddyBuddies();
-    studdyBuddies.addStuddyBuddy(new StuddyBuddy("studdyBudyy1"));
-    studdyBuddies.addStuddyBuddy(new StuddyBuddy("studdyBudyy2"));
+    StuddyBuddy studdyBuddy1 = new StuddyBuddy();
+    studdyBuddy1.setName("studdyBuddy1");
+    studdyBuddies.addStuddyBuddy(studdyBuddy1);
+    StuddyBuddy studdyBuddy2 = new StuddyBuddy();
+    studdyBuddy2.setName("studdyBuddy2");
+    studdyBuddies.addStuddyBuddy(studdyBuddy2);
     return studdyBuddies;
   }
 
   public void autoSaveStuddyBuddies() {
     if (studdyBuddiesPersistence != null) {
       try {
-        StuddyBuddiesPersistence.SaveStuddyBuddies(this.studdyBuddies);
+        studdyBuddiesPersistence.saveStuddyBuddies(this.studdyBuddies);
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save StuddyBuddies: " + e);
       }
