@@ -24,4 +24,16 @@ public interface DataAccess {
      */
     public String getStuddyBuddyPasswordByName(String name);
 
+    /**
+     * Method for adding a StuddyBuddy object to server.
+     */
+    public void putStuddyBuddy(StuddyBuddy buddy);
+
+    /**
+     * Method for updating by adding a StuddyBuddyc object when changed.
+     * 
+     * @param buddy the StuddyBuddy to save
+     */
+    public void postStuddyBuddy(StuddyBuddy buddy);
+
 }
