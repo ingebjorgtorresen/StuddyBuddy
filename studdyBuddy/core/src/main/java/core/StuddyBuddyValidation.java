@@ -83,7 +83,7 @@ public abstract class StuddyBuddyValidation {
 			LocalTime.parse(time, formatter).toString();
 		} catch (DateTimeException e) {
 			e.printStackTrace();
-			throw new IllegalArgumentException("Feil format, eller kunne ikke parse.");
+			throw new IllegalArgumentException("Wrong format, or could not parse.");
 		}
 	}
 
