@@ -17,7 +17,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
  * Class for communcating with and accessing server. Has methods for GET, PUT,
  * POST that uses HttpRequest.
  */
-public class RemoteDataAcess implements DataAccess {
+public class RemoteDataAccess implements DataAccess {
 
     // These fields are set to public to make it easier to access them in other
     // classes
@@ -28,8 +28,8 @@ public class RemoteDataAcess implements DataAccess {
     /**
      * Constructor for setting default base URI for gitpod.
      */
-    public RemoteDataAcess(URI baseURI) {
-        this.baseURI = baseURI;
+    public RemoteDataAccess() {
+        this.baseURI = URI.create("http://localhost:8080/studdybuddy/");
         mapper = StuddyBuddiesPersistence.createObjectMapper();
     }
      
@@ -76,6 +76,7 @@ public class RemoteDataAcess implements DataAccess {
     /**
      * Method for sending a StudyBuddy object to server.
      */
+    @Override
     public void putStuddyBuddy(StuddyBuddy buddy) {
         try {
             String jsonString = mapper.writeValueAsString(buddy);
@@ -97,6 +98,7 @@ public class RemoteDataAcess implements DataAccess {
     /**
      * Method for updating a StuddyBuddy object on server.
      */
+    @Override
     public void postStuddyBuddy(StuddyBuddy buddy) {
         try {
             String jsonString = mapper.writeValueAsString(buddy);
