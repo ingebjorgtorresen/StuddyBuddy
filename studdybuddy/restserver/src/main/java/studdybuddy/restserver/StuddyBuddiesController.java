@@ -50,6 +50,20 @@ public class StuddyBuddiesController {
   }
 
   /**
+   * Gets the corresponding password.
+   *
+   * @param name the name of the StuddyBuddy
+   * @return the corresponding password
+   */
+  @GetMapping(path = "/{name}/pw")
+  public String getPasswordByName(@PathVariable("name") String name) {
+    StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
+    String password = studdyBuddy.getPassword();
+    checkStuddyBuddy(studdyBuddy, name);
+    return password;
+  }
+
+  /**
    * Adds a StuddyBuddy if it does not already exist.
    *
    * @param name the name of the StuddyBuddy
@@ -59,46 +73,19 @@ public class StuddyBuddiesController {
   @PutMapping(path = "/{name}")
   public boolean putStuddyBuddy(@PathVariable("name") String name,
       @RequestBody StuddyBuddy studdyBuddy) {
-        //TODO make a replacement for the getStuddyBuddy() that can be used below. (a method that adds a studdyBuddy)
-    boolean added = getStuddyBuddies().getStuddyBuddy(name) == null;
+    boolean added = getStuddyBuddies().putStuddyBuddy(name) == null;
     autoSaveStuddyBuddies();
     return added;
   }
 
-   /**
-   * Renames the StuddyBuddy.
-   *
-   * @param name the name of the StuddyBuddy
-   * @param newName the new name
-   */
-  @PostMapping(path = "/{name}/rename")
-  public boolean renameStuddyBuddy(@PathVariable("name") String name,
-      @RequestParam("newName") String newName) {
-    StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
-    checkStuddyBuddy(studdyBuddy, name);
-    if (getStuddyBuddies().getStuddyBuddy(newName) != null) {
-      throw new IllegalArgumentException("A StuddyBuddy named \"" + newName + "\" already exists");
-    }
-    studdyBuddy.setName(newName);
+ @PostMapping(path = "/{name}")
+  public boolean postStuddyBuddy(@PathVariable("name") String name,
+     @RequestBody StuddyBuddy studdyBuddy) {
+    boolean updated = getStuddyBuddies().getStuddyBuddy(name) == null;
     autoSaveStuddyBuddies();
-    return true;
+    return updated;
   }
 
-  /**
-   * Removes the StuddyBuddy.
-   *
-   * @param name the name of the studdyBuddy
-   */
-  @DeleteMapping(path = "/{name}")
-  public boolean removeStuddyBuddy(@PathVariable("name") String name) {
-    StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
-    checkStuddyBuddy(studdyBuddy, name);
-    getStuddyBuddies().removeStuddyBuddy(studdyBuddy);
-    autoSaveStuddyBuddies();
-    return true;
-  }
-
-  
 }
 
 
