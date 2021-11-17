@@ -34,7 +34,13 @@ public class DirectDataAccess implements DataAccess {
         return getStuddyBuddyByName(name).getPassword();
     }  
 
-    public void addStuddyBuddy(StuddyBuddy buddy) {
+    @Override
+    public void putStuddyBuddy(StuddyBuddy buddy) {
+        buddies.addStuddyBuddy(buddy);
+    }
+
+    @Override
+    public void postStuddyBuddy(StuddyBuddy buddy) {
         buddies.addStuddyBuddy(buddy);
     }
 
