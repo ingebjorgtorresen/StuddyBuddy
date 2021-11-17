@@ -9,7 +9,7 @@ import studdybuddy.dataaccess.*;
 
 abstract class DataAccessController {
 
-    private DataAccess access = new RemoteDataAcess();
+    private DataAccess access;
 
     /**
      * Method for setting a data access instance

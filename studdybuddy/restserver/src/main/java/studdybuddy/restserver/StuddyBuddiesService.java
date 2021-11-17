@@ -47,10 +47,10 @@ public class StuddyBuddiesService {
     }
     StuddyBuddies studdyBuddies = new StuddyBuddies();
     StuddyBuddy studdyBuddy1 = new StuddyBuddy();
-    studdyBuddy1.setName("studdyBuddy1");
+    studdyBuddy1.setName("Anette");
     studdyBuddies.addStuddyBuddy(studdyBuddy1);
     StuddyBuddy studdyBuddy2 = new StuddyBuddy();
-    studdyBuddy2.setName("studdyBuddy2");
+    studdyBuddy2.setName("Tuva");
     studdyBuddies.addStuddyBuddy(studdyBuddy2);
     return studdyBuddies;
   }
