@@ -58,6 +58,22 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     }
 
     /**
+    * Method that adds and return a StuddyBuddy, if it can't be added it returnn null.
+    *
+    * @param name the name of the StuddyBuddy we want to add.
+    * @return buddy if it was added or else null
+    */
+    public StuddyBuddy putStuddyBuddy(String name) {
+        StuddyBuddy buddy = getStuddyBuddy(name);
+        try {
+            addStuddyBuddy(buddy);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+        return buddy; 
+    }
+
+    /**
      * Method for adding many StuddyBuddy objects at once.
      * 
      * @param buddies StuddyBuddy Objects we want to add.
