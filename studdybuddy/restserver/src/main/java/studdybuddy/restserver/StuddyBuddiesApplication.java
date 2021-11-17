@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.Module;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import studdyBuddy.core.*;
+import studdybuddy.json.*;
 
 
 @SpringBootApplication
@@ -12,7 +12,7 @@ public class StuddyBuddiesApplication {
 
 @Bean
   public Module objectMapperModule() {
-    return new StuddyBuddiesModule();
+    return new StuddyModule();
   }
 
   public static void main(String[] args) {
