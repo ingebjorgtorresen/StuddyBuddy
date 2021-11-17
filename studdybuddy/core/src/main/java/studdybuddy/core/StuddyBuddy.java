@@ -84,20 +84,13 @@ public class StuddyBuddy {
 	/**
 	 * Method for adding a registration to the users registration object.
 	 * 
-	 * @param registration the registration we wnat to add.
+	 * @param registration the registration we want to add.
 	 */
 	public void addRegistration(StuddyBuddyRegistration registration) {
 		registrations.add(0, registration);
 	}
 
-	/**
-	 * Method for removing an element in the list over registrations if it exists.
-	 * 
-	 * @param registration the registration we want to remove.
-	 */
-	public void removeRegistration(StuddyBuddyRegistration registration) {
-		registrations.remove(registration);
-	}
+
 
 	/**
 	 * Method for getting the list over this users registrations.
@@ -106,13 +99,6 @@ public class StuddyBuddy {
 	 */
 	public List<StuddyBuddyRegistration> getRegistrations() {
 		return registrations;
-	}
-
-	public void updateStuddyBuddyObject(StuddyBuddy buddy) {
-		this.name = buddy.name;
-		this.password = buddy.password;
-		this.registrations = buddy.registrations;
-
 	}
 
 	// Return a studdyBuddy object by its name
