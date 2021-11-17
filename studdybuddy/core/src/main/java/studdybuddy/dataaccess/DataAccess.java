@@ -24,15 +24,4 @@ public interface DataAccess {
      */
     public String getStuddyBuddyPasswordByName(String name);
 
-    /**
-     * Method for adding a new studdybuddy to the server if it does not exist.
-     * 
-     * @param buddy
-     */
-    public void putStuddyBuddy(StuddyBuddy buddy);
-
-    /**
-     * Method for updating a StuddyBuddy object in the server if it exists there.
-     */
-    public void postStuddyBuddy(StuddyBuddy buddy);
 }
