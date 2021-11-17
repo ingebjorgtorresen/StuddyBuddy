@@ -2,13 +2,16 @@ package studdybuddy.dataaccess;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
+import java.nio.charset.StandardCharsets;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
 import studdybuddy.core.*;
-import studdybuddy.json.StuddyModule;
+import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
  * Class for communcating with and accessing server. Has methods for GET, PUT,
@@ -18,113 +21,117 @@ public class RemoteDataAcess implements DataAccess {
 
     // These fields are set to public to make it easier to access them in other
     // classes
-    public StuddyBuddy buddy;
-    public URI baseURI;
+    private StuddyBuddies buddies;
+    private final URI baseURI;
+    private ObjectMapper mapper;
 
     /**
      * Constructor for setting default base URI for gitpod.
      */
-    public RemoteDataAcess() {
-        this.baseURI = URI.create("http://localhost:6080/api/");
+    public RemoteDataAcess(URI baseURI) {
+        this.baseURI = baseURI;
+        mapper = StuddyBuddiesPersistence.createObjectMapper();
+    }
+     
+    public StuddyBuddies getStuddyBuddies() {
+        if (buddies == null) {
+             HttpRequest request = HttpRequest.newBuilder(baseURI)
+                .header("Accept", "application/json").GET().build();
+            try {
+                final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                    HttpResponse.BodyHandlers.ofString());
+                this.buddies = mapper.readValue(response.body(), StuddyBuddies.class);
+            } catch (IOException | InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return buddies;
+    }
+    
+    private String URIParam(String s) {
+        return URLEncoder.encode(s, StandardCharsets.UTF_8);
     }
 
-    /**
-     * Constructor for setting default base URI with custom port.
-     * 
-     * @param port
-     */
-    public RemoteDataAcess(String port) {
-        this.baseURI = URI.create("http://localhost:" + port + "/api/");
+    private URI studdybuddyURI(String name) {
+        return baseURI.resolve("user").resolve(URIParam(name));
     }
 
-    /**
-     * Method for getting a studdybuddy by its name from server.
-     */
     @Override
     public StuddyBuddy getStuddyBuddyByName(String name) {
-        buddy = null;
+        StuddyBuddy buddy;
         try {
-            HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "user/" + name))
-                    .header("Accept", "application/json").GET().build();
+            HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(name))
+            .header("Accept", "application/json").GET().build();
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            final String responseString = response.body();
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new StuddyModule());
-            this.buddy = mapper.readValue(responseString, StuddyBuddy.class);
-            if (response.statusCode() == 404) { // HTTP 404 is a not found message, that means that the server could not
-                                                // find what was asked for.
-                throw new IllegalArgumentException("The user does not exist.");
-            }
-            return buddy;
-        } catch (IOException | InterruptedException e) {
-            throw new IllegalArgumentException(
-                    "Could not get user by name: " + name + ". Something went wrong with the server.");
-        }
-    }
-
-    /**
-     * Method for getting a users password by its name on server.
-     */
-    @Override
-    public String getStuddyBuddyPasswordByName(String name) {
-        try {
-            HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + name + "/password"))
-                    .header("Accept", "application/json").header("Content-Type", "application/json").GET().build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200) { // HTTP 200 OK is code that indicates that the request has suceeded.
-                throw new IllegalArgumentException("User does not exist.");
-            }
+                HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
-            return responseString;
-        } catch (InterruptedException | IOException e) {
-            throw new IllegalArgumentException("Could not load password from server.");
+            System.out.println("getStuddyBuddy("+ name + ") response: " + responseString);
+            buddy = mapper.readValue(responseString, StuddyBuddy.class);
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
+        return buddy;
     }
 
     /**
      * Method for sending a StudyBuddy object to server.
      */
-    @Override
     public void putStuddyBuddy(StuddyBuddy buddy) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new StuddyModule());
             String jsonString = mapper.writeValueAsString(buddy);
-            HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + buddy.getName() + "/password"))
-                    .header("Accept", "application/json").header("Content-Type", "application/json")
-                    .PUT(BodyPublishers.ofString(jsonString)).build();
+            HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
+                .header("Accept", "application/json").header("Content-Type", "application/json")
+                .PUT(BodyPublishers.ofString(jsonString)).build();
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200) {
-                throw new IllegalArgumentException("Could not save user-object to server.");
+                HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+            Boolean added = mapper.readValue(responseString, Boolean.class);
+            if(added != null) {
+                buddies.putStuddyBuddy(buddy.getName());
             }
         } catch (InterruptedException | IOException e) {
             throw new IllegalArgumentException("Could not save user-object to server.");
         }
-
     }
 
     /**
      * Method for updating a StuddyBuddy object on server.
      */
-    @Override
     public void postStuddyBuddy(StuddyBuddy buddy) {
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            mapper.registerModule(new StuddyModule());
             String jsonString = mapper.writeValueAsString(buddy);
-            HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + buddy.getName() + "/password"))
-                    .header("Accept", "application/json").header("Content-Type", "application/json")
-                    .POST(BodyPublishers.ofString(jsonString)).build();
+            HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
+                .header("Accept", "application/json").header("Content-Type", "application/json")
+                // only thing different frokm putStuddyBuddy is that this uses POST method
+                .POST(BodyPublishers.ofString(jsonString)).build();
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() != 200) {
-                throw new IllegalArgumentException("Could not save user-object to server.");
+                HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+            Boolean added = mapper.readValue(responseString, Boolean.class);
+            if(added != null) {
+                buddies.putStuddyBuddy(buddy.getName());
             }
         } catch (InterruptedException | IOException e) {
             throw new IllegalArgumentException("Could not save user-object to server.");
+        }
+    }
+        
+    private URI passwordURI(String name) {
+        return baseURI.resolve("user").resolve(URIParam(name)).resolve("pw");
+    }
+
+    @Override
+    public String getStuddyBuddyPasswordByName(String name) {
+        try {
+            HttpRequest request = HttpRequest.newBuilder(passwordURI(name))
+            .header("Accept", "application/json").GET().build();
+            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
+                HttpResponse.BodyHandlers.ofString());
+            String responseString = response.body();
+            System.out.println("getStuddyBuddyPasswordByName("+ name + ") response: " + responseString);
+            return responseString;
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 }
