@@ -3,6 +3,7 @@ package studdybuddy.ui;
 import java.io.IOException;
 
 import studdybuddy.core.*;
+import studdybuddy.dataaccess.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -18,8 +19,8 @@ import java.net.URL;
 
 public class StuddyBuddyController {
 
+    private DataAccess dataAccess;
     private StuddyBuddy studdyBuddy;
-    // private StuddyBuddies buddies;
 
     @FXML
     private TextField nameField;
@@ -30,9 +31,11 @@ public class StuddyBuddyController {
     @FXML
     private TextField passwordField;
 
-    public void initialize() {
-        studdyBuddy = new StuddyBuddy();
-        // buddies = new StuddyBuddies();
+    @FXML
+    private RegisterStuddyBuddyController registerViewController;
+
+    public void setDataAccess(DataAccess access) {
+        this.dataAccess = access;
     }
 
     /**
@@ -53,22 +56,21 @@ public class StuddyBuddyController {
         return passwordString;
     }
 
-    public boolean checkInputName() {
+    public boolean checkIfUserExist() {
         try {
-            this.studdyBuddy.setName(getInputName());
-        } catch (IllegalArgumentException e) {
+            dataAccess.getStuddyBuddyByName(getInputName());
+        } catch( RuntimeException e) {
             return false;
         }
         return true;
     }
 
-    public boolean checkInputPassword() {
-        try {
-            this.studdyBuddy.setPassword(getInputPassword());
-        } catch (IllegalArgumentException e) {
-            return false;
+    public boolean checkPasswordsMacthes() {
+        if(checkIfUserExist() == true) {
+            if(getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName())));
+                return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -84,31 +86,24 @@ public class StuddyBuddyController {
             Parent parent = (Parent) loader.load();
             // StuddyBuddyForumController forumController = loader.getController();
 
-            checkInputName();
-            checkInputPassword();
+            checkIfUserExist();
+            checkPasswordsMacthes();
 
-            if (((!checkInputPassword()) && (!checkInputName()))) {
+            if (!checkIfUserExist()) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+                errorMessage.setText("User does not exist.");
 
             }
 
-            else if (!checkInputName()) {
-                nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-                passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-                passwordField.setText(getInputPassword());
-
-            }
-
-            else if (!checkInputPassword()) {
-                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+            else if (!checkPasswordsMacthes()) {
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 nameField.setText(getInputName());
             }
 
             else {
-                studdyBuddy.setName(getInputName());
-                studdyBuddy.setPassword(getInputPassword());
+                studdyBuddy = dataAccess.getStuddyBuddyByName(getInputName());
                 nameField.clear();
                 passwordField.clear();
                 // forumController.setStuddyBuddyFromLogin(studdyBuddy);
@@ -130,6 +125,9 @@ public class StuddyBuddyController {
     @FXML
     public void handleRegisterUser() {
         try {
+
+            registerViewController.setDataAccess(dataAccess);
+
             URL file = getClass().getResource("RegisterStuddyBuddy.fxml");
             FXMLLoader loader = new FXMLLoader(file);
             Parent parent = (Parent) loader.load();
