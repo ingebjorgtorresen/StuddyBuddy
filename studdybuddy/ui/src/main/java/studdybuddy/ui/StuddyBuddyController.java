@@ -132,12 +132,13 @@ public class StuddyBuddyController {
     @FXML
     public void handleRegisterUser() {
         try {
-
-            registerViewController.setDataAccess(dataAccess);
-
             URL file = getClass().getResource("RegisterStuddyBuddy.fxml");
             FXMLLoader loader = new FXMLLoader(file);
             Parent parent = (Parent) loader.load();
+
+            registerViewController = new RegisterStuddyBuddyController();
+            registerViewController.setDataAccess(dataAccess);
+
             Stage stage = new Stage();
             stage.setTitle("Register user");
             stage.setScene(new Scene(parent));
