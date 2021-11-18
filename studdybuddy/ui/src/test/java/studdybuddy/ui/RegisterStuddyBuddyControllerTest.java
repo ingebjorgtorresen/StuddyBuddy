@@ -72,7 +72,7 @@ public class RegisterStuddyBuddyControllerTest extends ApplicationTest{
       clickOn("#passwordField").write("12345678");
       clickOn("#passwordCheckField").write("12345");
       
-      if((this.controller.checkInputName() == false) || (this.controller.checkInputPassword() == false) 
+      if((this.controller.checkName() == false) || (this.controller.checkPassword() == false) 
       || (this.controller.checkPasswordsMatch() == false)) {
         List<Window> beforeClick = Window.getWindows();
         Parent beforeClickRoot = null;
@@ -102,7 +102,7 @@ public class RegisterStuddyBuddyControllerTest extends ApplicationTest{
       clickOn("#passwordField").write("12345678");
       clickOn("#passwordCheckField").write("12345678");
       
-      if((this.controller.checkInputName() == true) && (this.controller.checkInputPassword() == true) 
+      if((this.controller.checkName() == true) && (this.controller.checkPassword() == true) 
       && (this.controller.checkPasswordsMatch() == true)) {
         List<Window> beforeClick = Window.getWindows();
         Parent beforeClickRoot = null;

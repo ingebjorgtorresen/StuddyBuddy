@@ -58,7 +58,7 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
       clickOn("#nameField").write("Tuva");
       clickOn("#passwordField").write("12345678");
       
-      if((this.controller.checkInputName() == true) && (this.controller.checkInputPassword() == true)) {
+      if((this.controller.checkIfUserExist() == true) && (this.controller.checkPasswordsMacthes() == true)) {
         List<Window> beforeClick = Window.getWindows();
         Parent beforeClickRoot = null;
         for(Window window : beforeClick){
@@ -85,8 +85,8 @@ public class StuddyBuddyControllerTest extends ApplicationTest {
       clickOn("#nameField").write("Tuva");
       clickOn("#passwordField").write("12345678");
 
-      if(((this.controller.checkInputName() == false) || (this.controller.checkInputPassword() == false))
-          || ((this.controller.checkInputName() == false) && (this.controller.checkInputPassword() == false))) {
+      if(((this.controller.checkIfUserExist() == false) || (this.controller.checkPasswordsMacthes() == false))
+          || ((this.controller.checkIfUserExist() == false) && (this.controller.checkPasswordsMacthes() == false))) {
         List<Window> beforeClick = Window.getWindows();
         Parent beforeClickRoot = null;
         for(Window window : beforeClick){
