@@ -66,11 +66,18 @@ public class StuddyBuddyController {
     }
 
     public boolean checkPasswordsMacthes() {
-        if(checkIfUserExist() == true) {
-            if(getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName())));
+        if(getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName()))) {
                 return true;
         }
         return false;
+    }
+
+    public void setStuddyBuddyFromServer() {
+        studdyBuddy = dataAccess.getStuddyBuddyByName(getInputName());
+    }
+
+    public StuddyBuddy getStuddyBuddy() {
+        return studdyBuddy;
     }
 
     /**
@@ -84,7 +91,7 @@ public class StuddyBuddyController {
             URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            // StuddyBuddyForumController forumController = loader.getController();
+            //StuddyBuddyForumController forumController = loader.getController();
 
             checkIfUserExist();
             checkPasswordsMacthes();
@@ -103,10 +110,10 @@ public class StuddyBuddyController {
             }
 
             else {
-                studdyBuddy = dataAccess.getStuddyBuddyByName(getInputName());
+                setStuddyBuddyFromServer();
                 nameField.clear();
                 passwordField.clear();
-                // forumController.setStuddyBuddyFromLogin(studdyBuddy);
+                //forumController.setStuddyBuddyFromLogin(studdyBuddy);
 
                 Stage forumStage = new Stage();
                 forumStage.setTitle("Forum");
