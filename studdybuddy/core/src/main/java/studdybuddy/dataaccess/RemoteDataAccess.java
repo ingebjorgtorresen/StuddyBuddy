@@ -19,17 +19,15 @@ import studdybuddy.json.StuddyBuddiesPersistence;
  */
 public class RemoteDataAccess implements DataAccess {
 
-    // These fields are set to public to make it easier to access them in other
-    // classes
     private StuddyBuddies buddies;
     private final URI baseURI;
     private ObjectMapper mapper;
 
     /**
-     * Constructor for setting default base URI for gitpod.
+     * Constructor that sets base URI for gitpod and mapper.
      */
-    public RemoteDataAccess() {
-        this.baseURI = URI.create("http://localhost:8080/studdybuddy/");
+    public RemoteDataAccess(URI baseURI) {
+        this.baseURI = baseURI;
         mapper = StuddyBuddiesPersistence.createObjectMapper();
     }
      
