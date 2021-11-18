@@ -48,9 +48,11 @@ public class StuddyBuddiesService {
     StuddyBuddies studdyBuddies = new StuddyBuddies();
     StuddyBuddy studdyBuddy1 = new StuddyBuddy();
     studdyBuddy1.setName("Anette");
+    studdyBuddy1.setPassword("Anette123");
     studdyBuddies.addStuddyBuddy(studdyBuddy1);
     StuddyBuddy studdyBuddy2 = new StuddyBuddy();
     studdyBuddy2.setName("Tuva");
+    studdyBuddy2.setPassword("Tuva1234");
     studdyBuddies.addStuddyBuddy(studdyBuddy2);
     return studdyBuddies;
   }
