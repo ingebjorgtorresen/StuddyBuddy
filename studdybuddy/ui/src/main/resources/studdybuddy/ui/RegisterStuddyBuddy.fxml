@@ -5,7 +5,7 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RegisterStuddyBuddyController" prefHeight="640.0" prefWidth="350.0">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studdybuddy.ui.RegisterStuddyBuddyController" prefHeight="640.0" prefWidth="350.0">
 
     <Label text="Name:" layoutX="10.0" layoutY="200.0"/>
 
