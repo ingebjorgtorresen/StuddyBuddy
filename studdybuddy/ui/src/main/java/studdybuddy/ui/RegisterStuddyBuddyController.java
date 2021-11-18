@@ -1,6 +1,7 @@
 package studdybuddy.ui;
 
 import studdybuddy.core.*;
+import studdybuddy.dataaccess.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,13 +10,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-// import json.*;
 
-// import java.io.FileWriter;
 import java.io.IOException;
-// import java.io.Writer;
 import java.net.URL;
-// import java.nio.charset.StandardCharsets;
 
 /**
  * Controller class for registering new StuddyBuddy/user.
@@ -23,11 +20,8 @@ import java.net.URL;
 
 public class RegisterStuddyBuddyController {
 
-    private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddy buddy;
-    // private StuddyBuddiesPersistence persistence = new
-    // StuddyBuddiesPersistence();
-    // private String userRegistrationFileName = "/userRegistration.json";
+    private DataAccess dataAccess;
 
     @FXML
     private TextField nameField;
@@ -41,24 +35,10 @@ public class RegisterStuddyBuddyController {
     @FXML
     private Label messageBox;
 
-    public void initialize() {
-        buddy = new StuddyBuddy();
-        buddies.addStuddyBuddy(buddy);
-    }
-
     @FXML
     public String getInputName() {
         String nameString = nameField.getText();
         return nameString;
-    }
-
-    public boolean checkInputName() {
-        try {
-            this.buddy.setName(getInputName());
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-        return true;
     }
 
     @FXML
@@ -73,14 +53,41 @@ public class RegisterStuddyBuddyController {
         return passwordString;
     }
 
-    public boolean checkInputPassword() {
+    public void setDataAccess(DataAccess access) {
+        this.dataAccess = access;
+    }
+
+    private boolean checkNotNull() {
         try {
-            this.buddy.setPassword(getInputPassword());
+            StuddyBuddyValidation.checkNotNull(getInputName());
         } catch (IllegalArgumentException e) {
             return false;
         }
         return true;
     }
+
+    private boolean checkInputName() {
+        return StuddyBuddyValidation.checkName(getInputName());
+    }
+
+    private boolean checkInputPassword() {
+        return StuddyBuddyValidation.checkPassword(getInputPassword());
+    }
+
+    public boolean checkName() {
+        if((checkNotNull() == false) || (checkInputName() == false)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean checkPassword() {
+        if((checkNotNull() == false) || (checkInputPassword() == false)) {
+            return false;
+        }
+        return true;
+    }
+    
 
     public boolean checkPasswordsMatch() {
         if (!(getInputPassword().equals(getInputPasswordCheck()))) {
@@ -90,6 +97,7 @@ public class RegisterStuddyBuddyController {
     }
 
     private StuddyBuddy createNewStuddyBuddy() {
+        buddy = new StuddyBuddy();
         buddy.setName(getInputName());
         buddy.setPassword(getInputPassword());
         return buddy;
@@ -112,41 +120,33 @@ public class RegisterStuddyBuddyController {
         }
     }
 
-    /*
-     * private void saveStuddyBuddyToFile() throws IOException { try (Writer writer
-     * = new FileWriter(System.getProperty("user.home") + userRegistrationFileName,
-     * StandardCharsets.UTF_8)) { persistence.writeStuddyBuddies(buddies, writer);
-     * writer.flush(); } catch (IOException e) { throw new
-     * IOException("Could not save registration."); } }
-     */
-
     @FXML
     public void handleRegisterUser(ActionEvent event) throws IOException {
         try {
 
-            checkInputName();
-            checkInputPassword();
+            checkName();
+            checkPassword();
             checkPasswordsMatch();
 
-            if (((!checkInputName()) && (!checkInputPassword()) && (!checkPasswordsMatch()))) {
+            if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
             }
 
-            else if ((!checkInputName()) && (!checkInputPassword())) {
+            else if ((!checkName()) && (!checkPassword())) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
             }
 
-            else if ((!checkInputName()) && (!checkPasswordsMatch())) {
+            else if ((!checkName()) && (!checkPasswordsMatch())) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
             }
 
-            else if (!(checkInputName())) {
+            else if (!(checkName())) {
                 nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
@@ -154,7 +154,7 @@ public class RegisterStuddyBuddyController {
                 passwordCheckField.setText(getInputPasswordCheck());
             }
 
-            else if (!(checkInputPassword())) {
+            else if (!(checkPassword())) {
                 passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
@@ -174,15 +174,13 @@ public class RegisterStuddyBuddyController {
                 passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
 
-                // denne brukeren bør så legges til i listen over brukere når det er
-                // implementert riktig
                 createNewStuddyBuddy();
-                // saveStuddyBuddyToFile();
+                dataAccess.putStuddyBuddy(buddy);
                 messageBox.setText("Registering new user was sucessfull.");
                 changeScene(event);
             }
         } catch (IOException e) {
-            messageBox.setText("Could not save registration.");
+            messageBox.setText("Could not register user. Try again.");
             e.printStackTrace();
         }
 
