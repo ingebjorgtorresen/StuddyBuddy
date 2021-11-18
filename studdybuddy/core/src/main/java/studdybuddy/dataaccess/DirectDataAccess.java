@@ -11,7 +11,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class DirectDataAccess implements DataAccess {
 
     private final StuddyBuddies buddies;
-    private StuddyBuddiesPersistence buddiesPersistence = new StuddyBuddiesPersistence();
+    private StuddyBuddiesPersistence buddiesPersistence = null;
 
     /**
      * Constructor that creates an instance of StuddyBuddies
@@ -44,6 +44,10 @@ public class DirectDataAccess implements DataAccess {
         buddies.addStuddyBuddy(buddy);
     }
 
+    public void setPersistence(StuddyBuddiesPersistence persistence) {
+      this.buddiesPersistence = persistence;
+    }
+  
     public void autoSaveStuddyBuddies() {
         try {
             buddiesPersistence.saveStuddyBuddies(buddies);
