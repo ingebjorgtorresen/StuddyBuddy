@@ -65,6 +65,9 @@ public class StuddyBuddiesController {
 
     @FXML
     public void initialize() {
+        System.out.println();
+        System.out.println("Den kjører initialize i StuddyBuddiesController.java");
+        System.out.println();
         display();
     }
 

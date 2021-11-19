@@ -50,7 +50,7 @@ public class AppController {
   String sampleStuddyBuddyResource;
 
   @FXML
-  StuddyBuddyController studdyBuddyViewController;
+  StuddyBuddiesController studdyBuddiesViewController;
 
   private StuddyBuddiesPersistence persistence;
 
@@ -140,6 +140,9 @@ public class AppController {
       directAccess.setPersistence(persistence);
       access = directAccess;
     }
-    studdyBuddyViewController.setDataAccess(access);
+    System.out.println();
+    System.out.println("KONTROLLEREN ER " + studdyBuddiesViewController);
+    System.out.println();
+    studdyBuddiesViewController.setDataAccess(access);
   }
 }
