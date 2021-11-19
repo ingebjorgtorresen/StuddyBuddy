@@ -36,13 +36,6 @@ public class RegisterStuddyBuddyController {
     private Label messageBox;
 
     @FXML
-    public void initialize() {
-        System.out.println();
-        System.out.println("KJØRER INITIALIZE I REGISTER");
-        System.out.println();
-    }
-
-    @FXML
     public String getInputName() {
         String nameString = nameField.getText();
         return nameString;
@@ -203,9 +196,6 @@ public class RegisterStuddyBuddyController {
      * @param dataAccess dataAccess for this controller
      */
     public void transferDataAccess(DataAccess dataAccess) {
-        System.out.println();
-        System.out.println("TRANSFERDATAACCESS KJØRES OG DATAACCESS ER: " + dataAccess);
-        System.out.println();
         this.dataAccess = dataAccess;
     }
 
