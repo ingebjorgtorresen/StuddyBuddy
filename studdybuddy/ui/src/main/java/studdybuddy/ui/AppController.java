@@ -11,6 +11,11 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.stage.Stage;
 import studdybuddy.json.*;
 import studdybuddy.core.*;
 import studdybuddy.dataaccess.*;
@@ -50,9 +55,11 @@ public class AppController {
   String sampleStuddyBuddyResource;
 
   @FXML
-  StuddyBuddyController studdyBuddyViewController;
+  private Button getStartedButton;
 
   private StuddyBuddiesPersistence persistence;
+
+  private DataAccess dataAccess;
 
   /**
    * Method that first tries to read file from home folder. If StuddyBuddies
@@ -122,24 +129,43 @@ public class AppController {
 
   @FXML
   public void initialize() {
-    DataAccess access = null;
     if(endpointUri != null) {
       RemoteDataAccess remoteAccess;
       try {
         System.out.println("Using remote endpoint @ " + endpointUri);
         remoteAccess = new RemoteDataAccess(new URI(endpointUri));
-        access = remoteAccess;
+        dataAccess = remoteAccess;
       } catch(URISyntaxException e) {
         System.err.println(e);
       }
     }
-    if(access == null) {
+    if(dataAccess == null) {
       this.persistence = new StuddyBuddiesPersistence();
       persistence.setSaveFilePath(userStuddyBuddyPath);
       DirectDataAccess directAccess = new DirectDataAccess(getInitialStuddyBuddies());
       directAccess.setPersistence(persistence);
-      access = directAccess;
+      dataAccess = directAccess;
     }
-    studdyBuddyViewController.setDataAccess(access);
   }
+
+  @FXML
+  public void handleGetStarted() {
+    try {
+      // Bytter til registreringssiden, hvertfall foreløpig
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterStuddyBuddy.fxml"));
+      Parent parent = (Parent) loader.load();
+      RegisterStuddyBuddyController registerController = loader.getController();
+      registerController.transferDataAccess(dataAccess);
+      Stage registrationStage = new Stage();
+      registrationStage.setTitle("Register buddy");
+      registrationStage.setScene(new Scene(parent));
+      registrationStage.show();
+      Stage thisStage = (Stage) getStartedButton.getScene().getWindow();
+			thisStage.close();
+
+  } catch (IOException e) {
+      e.printStackTrace();
+  }
+  }
+
 }

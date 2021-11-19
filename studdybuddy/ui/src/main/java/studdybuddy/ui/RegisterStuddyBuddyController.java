@@ -186,4 +186,17 @@ public class RegisterStuddyBuddyController {
 
     }
 
+    /**
+     * Method for transering dataAccess
+     * between classes
+     * 
+     * Is used in the class that opens an FXML
+     * that uses this controller
+     * 
+     * @param dataAccess dataAccess for this controller
+     */
+    public void transferDataAccess(DataAccess dataAccess) {
+        this.dataAccess = dataAccess;
+    }
+
 }

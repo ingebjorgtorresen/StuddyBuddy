@@ -136,8 +136,8 @@ public class StuddyBuddyController {
             FXMLLoader loader = new FXMLLoader(file);
             Parent parent = (Parent) loader.load();
 
-            registerViewController = new RegisterStuddyBuddyController();
-            registerViewController.setDataAccess(dataAccess);
+            // registerViewController = new RegisterStuddyBuddyController();
+            // registerViewController.setDataAccess(dataAccess);
 
             Stage stage = new Stage();
             stage.setTitle("Register user");
