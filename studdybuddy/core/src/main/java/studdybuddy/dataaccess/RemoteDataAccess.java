@@ -89,6 +89,7 @@ public class RemoteDataAccess implements DataAccess {
                 buddies.putStuddyBuddy(buddy.getName());
             }
         } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
             throw new IllegalArgumentException("Could not save user-object to server.");
         }
     }

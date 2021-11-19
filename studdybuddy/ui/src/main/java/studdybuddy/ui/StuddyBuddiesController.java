@@ -25,7 +25,8 @@ import studdybuddy.dataaccess.*;
  */
 public class StuddyBuddiesController {
     
-    private DataAccess dataAccess;
+    // Commented out while working on other classes
+    /*private DataAccess dataAccess;
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
 
     @FXML
@@ -58,7 +59,7 @@ public class StuddyBuddiesController {
     * so data can come from different sources.
     *
     * @param dataAccess the new dataAccess
-    */
+    
     public void setDataAccess(DataAccess dataAccess) {
         this.dataAccess = dataAccess;
     }
@@ -117,7 +118,7 @@ public class StuddyBuddiesController {
             System.err.println("Couldn´t read from file");
             e.printStackTrace();
         }
-        return registeredBuddies;*/
+        return registeredBuddies;
         return null;
     }
 
@@ -126,6 +127,6 @@ public class StuddyBuddiesController {
         // setUpBuddies();
         //allRegistrationsText.setText(buddies.toString());
         allRegistrationsText.setText("HEIHEI:))");
-    }
+    } */
 
 }
