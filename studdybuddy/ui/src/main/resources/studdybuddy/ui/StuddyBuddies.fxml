@@ -31,6 +31,4 @@
         </content>
     </ScrollPane> 
 
-    <fx:include fx:id="studdyBuddyView" source="StuddyBuddy.fxml"/>
-
 </AnchorPane>
