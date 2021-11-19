@@ -8,5 +8,5 @@
         <String fx:id="userStuddyBuddyPath" fx:value="studdybuddy.json"/>
         <String fx:id="sampleStuddyBuddyResource" fx:value="sample-studdybuddy.json"/>
     </fx:define>
-    <fx:include fx:id="studdybuddyView" source="StuddyBuddy.fxml"/>
+    <fx:include fx:id="studdyBuddiesView" source="StuddyBuddies.fxml"/>
 </VBox>

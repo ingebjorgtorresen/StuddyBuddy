@@ -23,4 +23,6 @@
 
     <Label text="" fx:id="messageBox" layoutX="10.0" layoutY="500.0"/>
 
+    <fx:include fx:id="studdyBuddiesView" source="StuddyBuddies.fxml"/>
+
 </AnchorPane>

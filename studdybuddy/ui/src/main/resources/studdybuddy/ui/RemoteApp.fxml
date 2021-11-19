@@ -7,5 +7,5 @@
     <fx:define>
         <String fx:id="endpointUri" fx:value="http://localhost:8080/studdybuddy/"/>
     </fx:define>
-    <fx:include fx:id="studdybuddyView" source="StuddyBuddy.fxml"/>
+    <fx:include fx:id="studdyBuddiesView" source="StuddyBuddies.fxml"/>
 </VBox>
