@@ -84,13 +84,12 @@ public class RemoteDataAccess implements DataAccess {
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                 HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
-            Boolean added = mapper.readValue(responseString, Boolean.class);
+            StuddyBuddy added = mapper.readValue(responseString, StuddyBuddy.class);
             if(added != null) {
                 buddies.putStuddyBuddy(buddy.getName());
             }
         } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
-            throw new IllegalArgumentException("Could not save user-object to server.");
+            throw new IllegalArgumentException("Could not save user-object to server.", e);
         }
     }
 
