@@ -12,5 +12,7 @@ module studdybuddy.restserver {
 
     requires studdybuddy.core;
 
+    exports studdybuddy.restserver;
+
     opens studdybuddy.restserver to spring.beans, spring.context, spring.web;
 }

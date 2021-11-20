@@ -10,18 +10,17 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 
 public class DirectDataAccess implements DataAccess {
 
-    private final StuddyBuddies buddies;
     private StuddyBuddiesPersistence buddiesPersistence = null;
 
     /**
      * Constructor that creates an instance of StuddyBuddies
      */
     public DirectDataAccess(StuddyBuddies buddies) {
-        this.buddies = buddies;
+        //TODO
     }
 
     @Override
-    public StuddyBuddy getStuddyBuddyByName(String name) {
+    public StuddyBuddy getStuddyBuddyByName(String name , StuddyBuddies buddies) {
         StuddyBuddy buddy = buddies.getStuddyBuddy(name);
         if (buddy == null) {
             throw new IllegalArgumentException("The user does not exist.");
@@ -30,17 +29,17 @@ public class DirectDataAccess implements DataAccess {
     }
 
     @Override
-    public String getStuddyBuddyPasswordByName(String name) {
-        return getStuddyBuddyByName(name).getPassword();
+    public String getStuddyBuddyPasswordByName(String name, StuddyBuddies buddies) {
+        return getStuddyBuddyByName(name, buddies).getPassword();
     }  
 
     @Override
-    public void putStuddyBuddy(StuddyBuddy buddy) {
+    public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
         buddies.addStuddyBuddy(buddy);
     }
 
     @Override
-    public void postStuddyBuddy(StuddyBuddy buddy) {
+    public void postStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
         buddies.addStuddyBuddy(buddy);
     }
 
@@ -48,7 +47,7 @@ public class DirectDataAccess implements DataAccess {
       this.buddiesPersistence = persistence;
     }
   
-    public void autoSaveStuddyBuddies() {
+    public void autoSaveStuddyBuddies(StuddyBuddies buddies) {
         try {
             buddiesPersistence.saveStuddyBuddies(buddies);
         } catch (Exception e) {

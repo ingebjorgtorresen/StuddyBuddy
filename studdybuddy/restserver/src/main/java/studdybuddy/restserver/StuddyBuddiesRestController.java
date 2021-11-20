@@ -8,24 +8,26 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import studdybuddy.core.*;
+
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
 
 @RestController
-@RequestMapping(StuddyBuddiesController.STUDDY_BUDDIES_SERVICE_PATH)
-public class StuddyBuddiesController {
+@RequestMapping(StuddyBuddiesRestController.STUDDY_BUDDIES_SERVICE_PATH)
+public class StuddyBuddiesRestController {
 
-    public static final String STUDDY_BUDDIES_SERVICE_PATH = "restserver/studdyBuddy";
+    public static final String STUDDY_BUDDIES_SERVICE_PATH = "/studdbuddy";
 
     @Autowired
-    private StuddyBuddiesService studdyBuddiesService;
+    private StuddyBuddiesService buddiesService;
   
     @GetMapping
     public StuddyBuddies getStuddyBuddies() {
-      return studdyBuddiesService.getStuddyBuddies();
+      return buddiesService.getStuddyBuddies();
     }
   
     private void autoSaveStuddyBuddies() {
-        studdyBuddiesService.autoSaveStuddyBuddies();
+      buddiesService.autoSaveStuddyBuddies();
     }
 
     private void checkStuddyBuddy(StuddyBuddy studdyBuddy, String name) {

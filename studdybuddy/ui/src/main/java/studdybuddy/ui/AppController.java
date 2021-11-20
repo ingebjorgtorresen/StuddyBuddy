@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import studdybuddy.json.*;
 import studdybuddy.core.*;
 import studdybuddy.dataaccess.*;
+import studdybuddy.restserver.*;
 
 public class AppController {
 
@@ -60,6 +61,8 @@ public class AppController {
   private StuddyBuddiesPersistence persistence;
 
   private DataAccess dataAccess;
+
+  private StuddyBuddies buddies;
 
   /**
    * Method that first tries to read file from home folder. If StuddyBuddies
@@ -129,12 +132,11 @@ public class AppController {
 
   @FXML
   public void initialize() {
+    buddies = new StuddyBuddies();
     if(endpointUri != null) {
-      RemoteDataAccess remoteAccess;
       try {
         System.out.println("Using remote endpoint @ " + endpointUri);
-        remoteAccess = new RemoteDataAccess(new URI(endpointUri));
-        dataAccess = remoteAccess;
+        dataAccess = new RemoteDataAccess(new URI(endpointUri));
       } catch(URISyntaxException e) {
         System.err.println(e);
       }
@@ -155,7 +157,7 @@ public class AppController {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterStuddyBuddy.fxml"));
       Parent parent = (Parent) loader.load();
       RegisterStuddyBuddyController registerController = loader.getController();
-      registerController.transferDataAccess(dataAccess);
+      registerController.transferData(dataAccess, buddies);
       Stage registrationStage = new Stage();
       registrationStage.setTitle("Register buddy");
       registrationStage.setScene(new Scene(parent));

@@ -19,7 +19,6 @@ import studdybuddy.json.StuddyBuddiesPersistence;
  */
 public class RemoteDataAccess implements DataAccess {
 
-    private StuddyBuddies buddies;
     private final URI baseURI;
     private ObjectMapper mapper;
 
@@ -31,14 +30,14 @@ public class RemoteDataAccess implements DataAccess {
         mapper = StuddyBuddiesPersistence.createObjectMapper();
     }
      
-    public StuddyBuddies getStuddyBuddies() {
+    public StuddyBuddies getStuddyBuddies(StuddyBuddies buddies) {
         if (buddies == null) {
              HttpRequest request = HttpRequest.newBuilder(baseURI)
                 .header("Accept", "application/json").GET().build();
             try {
                 final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                     HttpResponse.BodyHandlers.ofString());
-                this.buddies = mapper.readValue(response.body(), StuddyBuddies.class);
+                buddies = mapper.readValue(response.body(), StuddyBuddies.class);
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -55,7 +54,7 @@ public class RemoteDataAccess implements DataAccess {
     }
 
     @Override
-    public StuddyBuddy getStuddyBuddyByName(String name) {
+    public StuddyBuddy getStuddyBuddyByName(String name, StuddyBuddies buddies) {
         StuddyBuddy buddy;
         try {
             HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(name))
@@ -75,16 +74,31 @@ public class RemoteDataAccess implements DataAccess {
      * Method for sending a StudyBuddy object to server.
      */
     @Override
-    public void putStuddyBuddy(StuddyBuddy buddy) {
+    public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
         try {
-            String jsonString = mapper.writeValueAsString(buddy);
+            String byddyAsString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
-                .header("Accept", "application/json").header("Content-Type", "application/json")
-                .PUT(BodyPublishers.ofString(jsonString)).build();
+                .header("Accept", "application/json")
+                .header("Content-Type", "application/json")
+                .PUT(BodyPublishers.ofString(byddyAsString)).build();
+
+            System.out.println();
+            System.out.println("request");
+            System.out.println(request.toString());
+            System.out.println();
+            
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                 HttpResponse.BodyHandlers.ofString());
             String responseString = response.body();
+            System.out.println();
+            System.out.println("respnseString");
+            System.out.println(responseString);
+            System.out.println();
             StuddyBuddy added = mapper.readValue(responseString, StuddyBuddy.class);
+            System.out.println();
+            System.out.println("added");
+            System.out.println(added);
+            System.out.println();
             if(added != null) {
                 buddies.putStuddyBuddy(buddy.getName());
             }
@@ -97,7 +111,7 @@ public class RemoteDataAccess implements DataAccess {
      * Method for updating a StuddyBuddy object on server.
      */
     @Override
-    public void postStuddyBuddy(StuddyBuddy buddy) {
+    public void postStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
         try {
             String jsonString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
@@ -121,7 +135,7 @@ public class RemoteDataAccess implements DataAccess {
     }
 
     @Override
-    public String getStuddyBuddyPasswordByName(String name) {
+    public String getStuddyBuddyPasswordByName(String name, StuddyBuddies buddies) {
         try {
             HttpRequest request = HttpRequest.newBuilder(passwordURI(name))
             .header("Accept", "application/json").GET().build();

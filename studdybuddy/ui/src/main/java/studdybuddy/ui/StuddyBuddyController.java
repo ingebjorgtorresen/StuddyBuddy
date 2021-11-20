@@ -1,6 +1,6 @@
 package studdybuddy.ui;
 
-import java.io.IOException;
+/*import java.io.IOException;
 
 import studdybuddy.core.*;
 import studdybuddy.dataaccess.*;
@@ -11,7 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.net.URL;
+import java.net.URL;*/
 
 /**
  * Controller class for Log in to a StuddyBuddy account.
@@ -19,6 +19,7 @@ import java.net.URL;
 
 public class StuddyBuddyController {
 
+    /*
     private DataAccess dataAccess;
     private StuddyBuddy studdyBuddy;
 
@@ -43,7 +44,7 @@ public class StuddyBuddyController {
      * letters and space.
      * 
      * @return the name from input
-     */
+     *
     @FXML
     public String getInputName() {
         String nameString = nameField.getText();
@@ -58,7 +59,7 @@ public class StuddyBuddyController {
 
     public boolean checkIfUserExist() {
         try {
-            dataAccess.getStuddyBuddyByName(getInputName());
+            //dataAccess.getStuddyBuddyByName(getInputName());
         } catch( RuntimeException e) {
             return false;
         }
@@ -67,7 +68,7 @@ public class StuddyBuddyController {
 
     public boolean checkPasswordsMacthes() {
         if(getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName()))) {
-                return true;
+            return true;
         }
         return false;
     }
@@ -82,7 +83,7 @@ public class StuddyBuddyController {
 
     /**
      * Sends the username and password to the next controller and loads a new window
-     */
+     *
     @FXML
     public void handleLogin() {
 
@@ -149,6 +150,6 @@ public class StuddyBuddyController {
         } catch (IOException e) {
             errorMessage.setText("Could not load window.");
         }
-    }
+    } */
 
 }
