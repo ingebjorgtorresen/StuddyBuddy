@@ -13,15 +13,13 @@ import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 
 @RestController
-@RequestMapping(StuddyBuddiesRestController.STUDDY_BUDDIES_SERVICE_PATH)
+@RequestMapping("/studdybuddy")
 public class StuddyBuddiesRestController {
-
-    public static final String STUDDY_BUDDIES_SERVICE_PATH = "/studdbuddy";
 
     @Autowired
     private StuddyBuddiesService buddiesService;
   
-    @GetMapping
+    @GetMapping("")
     public StuddyBuddies getStuddyBuddies() {
       return buddiesService.getStuddyBuddies();
     }
