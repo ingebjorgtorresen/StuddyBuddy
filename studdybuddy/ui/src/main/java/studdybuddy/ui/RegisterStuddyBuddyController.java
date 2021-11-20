@@ -21,6 +21,7 @@ import java.net.URL;
 public class RegisterStuddyBuddyController {
 
     private StuddyBuddy buddy;
+    
     private DataAccess dataAccess;
 
     @FXML
@@ -174,8 +175,8 @@ public class RegisterStuddyBuddyController {
                 passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
                 nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
 
-                createNewStuddyBuddy();
-                dataAccess.putStuddyBuddy(buddy);
+            
+                dataAccess.putStuddyBuddy(createNewStuddyBuddy());
                 messageBox.setText("Registering new user was sucessfull.");
                 changeScene(event);
             }
