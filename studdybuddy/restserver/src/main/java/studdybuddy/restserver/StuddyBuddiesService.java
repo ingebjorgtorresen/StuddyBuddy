@@ -1,5 +1,6 @@
 package studdybuddy.restserver;
 
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -9,7 +10,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import org.springframework.stereotype.Service;
 import studdybuddy.core.*;
 import studdybuddy.json.*;
@@ -21,49 +21,21 @@ public class StuddyBuddiesService {
   private StuddyBuddies buddies;
   private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();;
   private String buddiesJsonFileName = "buddies.json";
-  private String initialBuddiesFile = "initial_buddies.json";
-
-  public StuddyBuddiesService(StuddyBuddies buddies) {
-    this.buddies = buddies;
-    persistence.setSaveFilePath("springbootserver-studdyBuddy.json");
-  }
+  private String initialBuddiesFileName = "initial_buddies.json";
 
   public StuddyBuddiesService() {
     putInitialStuddyBuddiesObject();
     getInitialStuddyBuddiesObject();
+    persistence.setSaveFilePath(buddiesJsonFileName);
   }
 
   public StuddyBuddies getStuddyBuddies() {
-    //TODO: FIKS DENNE METODEN SLIK AT DEN RETURNERER DET INSTANSIERTE BUDDIES OBJEKTET
-    return buddies;
+    return readBuddies();
   }
 
   public void setStuddyBuddies(StuddyBuddies buddies) {
     this.buddies = buddies;
   }
-
-  /*private static StuddyBuddies createDefaultStuddyBuddies() {
-    StuddyBuddiesPersistence studdyBuddiesPersistence = new StuddyBuddiesPersistence();
-    URL url = StuddyBuddiesService.class.getResource("default-studdyBuddies.json");
-    if (url != null) {
-      try (Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8)) {
-        return studdyBuddiesPersistence.readStuddyBuddies(reader);
-      } catch (IOException e) {
-        System.out.println("Couldn't read default-studdyBuddies.json, so rigging studdyBuddies manually ("
-            + e + ")");
-      }
-    }
-    StuddyBuddies studdyBuddies = new StuddyBuddies();
-    StuddyBuddy studdyBuddy1 = new StuddyBuddy();
-    studdyBuddy1.setName("Anette");
-    studdyBuddy1.setPassword("Anette123");
-    studdyBuddies.addStuddyBuddy(studdyBuddy1);
-    StuddyBuddy studdyBuddy2 = new StuddyBuddy();
-    studdyBuddy2.setName("Tuva");
-    studdyBuddy2.setPassword("Tuva1234");
-    studdyBuddies.addStuddyBuddy(studdyBuddy2);
-    return studdyBuddies;
-  }*/
 
   public void autoSaveStuddyBuddies() {
     if (persistence != null) {
@@ -90,9 +62,9 @@ public class StuddyBuddiesService {
    * @return a StuddyBuddies object
    */
   private StuddyBuddies getInitialStuddyBuddiesObject() {
-    if (initialBuddiesFile != null) {
+    if (initialBuddiesFileName != null) {
       try {
-        URL url = getClass().getResource(initialBuddiesFile);
+        URL url = getClass().getResource(initialBuddiesFileName);
         System.out.println();
         System.out.println("url: " + url);
         System.out.println();
@@ -102,7 +74,7 @@ public class StuddyBuddiesService {
       } catch (IOException | NullPointerException e) {
         e.printStackTrace();
         throw new IllegalStateException(
-          "Unable to read from '" + initialBuddiesFile + "'.");
+          "Unable to read from '" + initialBuddiesFileName + "'.");
       }
     }
     return null;
@@ -125,4 +97,28 @@ public class StuddyBuddiesService {
       }
     }
   }
+
+  /**
+   * Method for reading a StuddyBuddies object from a json-file. 
+   *
+   * @return the StuddyBuddies object
+   */
+  public StuddyBuddies readBuddies() {
+    if (buddiesJsonFileName != null) {
+      Path path = Paths.get(System.getProperty("user.home"), buddiesJsonFileName);
+      if (path != null && path.toFile().exists())
+      try (Reader reader = new FileReader(path.toFile(), StandardCharsets.UTF_8)){
+        putInitialStuddyBuddiesObject();
+        StuddyBuddies buddies = persistence.readStuddyBuddies(reader);
+        return buddies;
+      } catch (IOException e) {
+        e.printStackTrace();
+        throw new IllegalStateException(
+            "Unable to read from '" + Paths.get(System.getProperty("user.home"), 
+            buddiesJsonFileName) + "'.");
+      }
+    }
+    return null;
+  }
+
 }
