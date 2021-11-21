@@ -65,9 +65,6 @@ public class StuddyBuddiesService {
     if (initialBuddiesFileName != null) {
       try {
         URL url = getClass().getResource(initialBuddiesFileName);
-        System.out.println();
-        System.out.println("url: " + url);
-        System.out.println();
         Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
         StuddyBuddies buddies = persistence.readStuddyBuddies(reader);
         return buddies;

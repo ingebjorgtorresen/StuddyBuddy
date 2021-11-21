@@ -69,11 +69,11 @@ public class StuddyBuddiesRestController {
    * @return true if it was added, false if it was replaced
    */
   @PutMapping(path = "/{name}")
-  public boolean putStuddyBuddy(@PathVariable("name") String name,
+  public StuddyBuddy putStuddyBuddy(@PathVariable("name") String name,
       @RequestBody StuddyBuddy studdyBuddy) {
-    boolean added = getStuddyBuddies().putStuddyBuddy(name) == null;
+    //boolean added = getStuddyBuddies().putStuddyBuddy(name) == null;
     autoSaveStuddyBuddies();
-    return added;
+    return studdyBuddy;
   }
 
  @PostMapping(path = "/{name}")

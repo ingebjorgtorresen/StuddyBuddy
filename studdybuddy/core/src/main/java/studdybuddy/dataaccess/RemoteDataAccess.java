@@ -75,30 +75,17 @@ public class RemoteDataAccess implements DataAccess {
      */
     @Override
     public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
-        System.out.println();
-        System.out.println("Denne metoden kjøres");
-        System.out.println();
         try {
             String byddyAsString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .PUT(BodyPublishers.ofString(byddyAsString)).build();
-            System.out.println("Funker før response");
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                 HttpResponse.BodyHandlers.ofString());
-            System.out.println("Funker etter response");
-            String responseString = response.body();
-            System.out.println();
-            System.out.println("respnseString");
-            System.out.println(responseString);
-            System.out.println();
-            StuddyBuddy added = mapper.readValue(responseString, StuddyBuddy.class);
-            System.out.println();
-            System.out.println("added");
-            System.out.println(added);
-            System.out.println();
-            if(added != null) {
+            String responseBuddyString = response.body();
+            StuddyBuddy addedBuddy = mapper.readValue(responseBuddyString, StuddyBuddy.class);
+            if(addedBuddy != null) {
                 buddies.putStuddyBuddy(buddy.getName());
             }
         } catch (InterruptedException | IOException e) {
