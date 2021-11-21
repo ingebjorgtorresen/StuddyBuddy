@@ -75,20 +75,19 @@ public class RemoteDataAccess implements DataAccess {
      */
     @Override
     public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
+        System.out.println();
+        System.out.println("Denne metoden kjøres");
+        System.out.println();
         try {
             String byddyAsString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .PUT(BodyPublishers.ofString(byddyAsString)).build();
-
-            System.out.println();
-            System.out.println("request");
-            System.out.println(request.toString());
-            System.out.println();
-            
+            System.out.println("Funker før response");
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                 HttpResponse.BodyHandlers.ofString());
+            System.out.println("Funker etter response");
             String responseString = response.body();
             System.out.println();
             System.out.println("respnseString");
@@ -103,7 +102,8 @@ public class RemoteDataAccess implements DataAccess {
                 buddies.putStuddyBuddy(buddy.getName());
             }
         } catch (InterruptedException | IOException e) {
-            throw new IllegalArgumentException("Could not save user-object to server.", e);
+            e.printStackTrace();
+            throw new IllegalArgumentException("Could not save user-object to server.");
         }
     }
 

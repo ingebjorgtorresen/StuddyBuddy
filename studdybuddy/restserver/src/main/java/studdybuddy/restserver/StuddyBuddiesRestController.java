@@ -28,9 +28,9 @@ public class StuddyBuddiesRestController {
       buddiesService.autoSaveStuddyBuddies();
     }
 
-    private void checkStuddyBuddy(StuddyBuddy studdyBuddy, String name) {
+    private void checkStuddyBuddyNotNull(StuddyBuddy studdyBuddy, String name) {
         if (studdyBuddy == null) {
-          throw new IllegalArgumentException("There is no studdyBuddy user named \"" + name + "\"");
+          throw new IllegalArgumentException("The studdyBuddy user named \"" + name + "\" has not been registered.");
         }
     }
     
@@ -43,7 +43,7 @@ public class StuddyBuddiesRestController {
   @GetMapping(path = "/{name}")
   public StuddyBuddy getStuddyBuddy(@PathVariable("name") String name) {
     StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
-    checkStuddyBuddy(studdyBuddy, name);
+    checkStuddyBuddyNotNull(studdyBuddy, name);
     return studdyBuddy;
   }
 
@@ -57,7 +57,7 @@ public class StuddyBuddiesRestController {
   public String getPasswordByName(@PathVariable("name") String name) {
     StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
     String password = studdyBuddy.getPassword();
-    checkStuddyBuddy(studdyBuddy, name);
+    checkStuddyBuddyNotNull(studdyBuddy, name);
     return password;
   }
 
