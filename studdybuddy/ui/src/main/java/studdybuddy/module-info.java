@@ -1,7 +1,6 @@
 module studdybuddy.ui {
     requires com.fasterxml.jackson.databind;
     requires studdybuddy.core;
-    requires studdybuddy.restserver;
     requires javafx.controls;
     requires javafx.fxml;
 

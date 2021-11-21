@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import studdybuddy.json.*;
 import studdybuddy.core.*;
 import studdybuddy.dataaccess.*;
-import studdybuddy.restserver.*;
 
 public class AppController {
 

@@ -2,7 +2,6 @@ package studdybuddy.ui;
 
 import studdybuddy.core.*;
 import studdybuddy.dataaccess.*;
-import studdybuddy.restserver.StuddyBuddiesRestController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
