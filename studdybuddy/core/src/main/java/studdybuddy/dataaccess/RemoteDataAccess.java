@@ -81,8 +81,10 @@ public class RemoteDataAccess implements DataAccess {
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
                 .PUT(BodyPublishers.ofString(byddyAsString)).build();
+                System.out.println(request.toString());
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                 HttpResponse.BodyHandlers.ofString());
+                System.out.println(response);
             String responseBuddyString = response.body();
             StuddyBuddy addedBuddy = mapper.readValue(responseBuddyString, StuddyBuddy.class);
             if(addedBuddy != null) {

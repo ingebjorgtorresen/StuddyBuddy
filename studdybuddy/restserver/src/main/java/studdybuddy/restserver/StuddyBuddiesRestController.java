@@ -72,6 +72,7 @@ public class StuddyBuddiesRestController {
   public StuddyBuddy putStuddyBuddy(@PathVariable("name") String name,
       @RequestBody StuddyBuddy studdyBuddy) {
     //boolean added = getStuddyBuddies().putStuddyBuddy(name) == null;
+    buddiesService.getStuddyBuddies().putStuddyBuddy(name);
     autoSaveStuddyBuddies();
     return studdyBuddy;
   }

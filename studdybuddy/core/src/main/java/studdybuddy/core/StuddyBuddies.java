@@ -64,6 +64,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     * @return buddy if it was added or else null
     */
     public StuddyBuddy putStuddyBuddy(String name) {
+        // TODO: add must be called before get
         StuddyBuddy buddy = getStuddyBuddy(name);
         try {
             addStuddyBuddy(buddy);
