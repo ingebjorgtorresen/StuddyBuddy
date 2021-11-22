@@ -23,30 +23,33 @@ import studdybuddy.dataaccess.DirectDataAccess;
 import studdybuddy.dataaccess.RemoteDataAccess;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
+/**
+ * AppController class.
+ */
 public class AppController {
 
   private static final String studdyBuddiesWithTwoStuddyBuddy = """
-      {
-          "StuddyBuddies" : [ {
-            "Name" : "FirstBuddy",
-            "Registrations" : [ {
-              "Date" : "10/10/2022",
-              "Room" : "TestRoom1",
-              "Course" : "TestCourse1",
-              "Start time" : "08:00",
-              "End time" : "12:00"
-            } ]
-          }, {
-            "Name" : "SecondBuddy",
-            "Registrations" : [ {
-              "Date" : "12/12/2022",
-              "Room" : "TestRoom2",
-              "Course" : "TestCourse2",
-              "Start time" : "10:00",
-              "End time" : "14:00"
-            } ]
+    {
+        "StuddyBuddies" : [ {
+          "Name" : "FirstBuddy",
+          "Registrations" : [ {
+            "Date" : "10/10/2022",
+            "Room" : "TestRoom1",
+            "Course" : "TestCourse1",
+            "Start time" : "08:00",
+            "End time" : "12:00"
           } ]
-      } """;
+        }, {
+          "Name" : "SecondBuddy",
+          "Registrations" : [ {
+            "Date" : "12/12/2022",
+            "Room" : "TestRoom2",
+            "Course" : "TestCourse2",
+            "Start time" : "10:00",
+            "End time" : "14:00"
+          } ]
+        } ]
+    } """;
 
   @FXML
   String userStuddyBuddyPath;
@@ -69,8 +72,8 @@ public class AppController {
   /**
    * Method that first tries to read file from home folder. If StuddyBuddies
    * object is null then tries to sample studdybuddies from resource instead.
-   * 
-   * @return
+   *
+   * @return buddies 
    */
   private StuddyBuddies getInitialStuddyBuddies() {
     StuddyBuddies buddies = null;
@@ -114,7 +117,7 @@ public class AppController {
         }
       }
     }
-    if(buddies == null) {
+    if (buddies == null) {
       buddies = new StuddyBuddies();
       StuddyBuddy buddy = new StuddyBuddy();
       buddy.setName("Selma");
@@ -132,18 +135,21 @@ public class AppController {
     return buddies;
   }
 
+  /**
+   * method for initializing.
+   */
   @FXML
   public void initialize() {
     buddies = new StuddyBuddies();
-    if(endpointUri != null) {
+    if (endpointUri != null) {
       try {
         System.out.println("Using remote endpoint @ " + endpointUri);
         dataAccess = new RemoteDataAccess(new URI(endpointUri));
-      } catch(URISyntaxException e) {
+      } catch (URISyntaxException e) {
         System.err.println(e);
       }
     }
-    if(dataAccess == null) {
+    if (dataAccess == null) {
       this.persistence = new StuddyBuddiesPersistence();
       persistence.setSaveFilePath(userStuddyBuddyPath);
       DirectDataAccess directAccess = new DirectDataAccess(getInitialStuddyBuddies());
@@ -152,6 +158,9 @@ public class AppController {
     }
   }
 
+  /**
+   * method for handling GetStarted button.
+   */
   @FXML
   public void handleGetStarted() {
     try {
@@ -165,11 +174,10 @@ public class AppController {
       registrationStage.setScene(new Scene(parent));
       registrationStage.show();
       Stage thisStage = (Stage) getStartedButton.getScene().getWindow();
-			thisStage.close();
+      thisStage.close();
 
-  } catch (IOException e) {
+    } catch (IOException e) {
       e.printStackTrace();
+    }
   }
-  }
-
 }

@@ -7,6 +7,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * class that launch remote app.
+ */
 public class StuddyBuddyRemoteApp extends Application {
 
   @Override

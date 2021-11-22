@@ -5,9 +5,9 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import java.time.LocalDate;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -21,7 +21,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 
 
 /**
- * Controller class for the forum page
+ * Controller class for the forum page.
  */
 public class StuddyBuddyForumController {
 
@@ -56,6 +56,9 @@ public class StuddyBuddyForumController {
     display();
   }
 
+  /**
+   * Method for handling the add AddRegistration Button.
+   */
   @FXML
   public void handleAddRegistration() {
     try {
@@ -75,6 +78,9 @@ public class StuddyBuddyForumController {
     }
   }
 
+  /**
+   * Method for handling the LogOut button.
+   */
   @FXML
   public void handleLogOut() {
     try {
@@ -92,10 +98,16 @@ public class StuddyBuddyForumController {
     }
   }
 
+  /**
+   * getter for registered studdyBuddies.
+   *
+   * @return the studdyBuddies that have been registered.
+   */
   public StuddyBuddies getRegistratedStuddyBuddies() {
     StuddyBuddies registeredBuddies = null;
     try (Reader reader =
-        new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
+        new FileReader(System.getProperty("user.home") 
+        + registrationsFileName, StandardCharsets.UTF_8)) {
       registeredBuddies = persistence.readStuddyBuddies(reader);
     } catch (Exception e) {
       System.err.println("Couldn´t read from file");
@@ -113,7 +125,7 @@ public class StuddyBuddyForumController {
   private StuddyBuddies buddies = new StuddyBuddies();
 
   /**
-   * Method to set ut the studdyBuddies that will be displayed on the forum-page
+   * Method to set ut the studdyBuddies that will be displayed on the forum-page.
    */
   private void setUpBuddies() {
 
@@ -127,15 +139,10 @@ public class StuddyBuddyForumController {
     StuddyBuddyRegistration reg3 = new StuddyBuddyRegistration();
     StuddyBuddyRegistration reg4 = new StuddyBuddyRegistration();
 
-    LocalDate date1;
-    LocalDate date2;
-    LocalDate date3;
-    LocalDate date4;
-
-    date1 = LocalDate.of(2021, 11, 11);
-    date2 = LocalDate.of(2021, 11, 11);
-    date3 = LocalDate.of(2021, 11, 11);
-    date4 = LocalDate.of(2021, 11, 11);
+    LocalDate date1 = LocalDate.of(2021, 11, 11);
+    LocalDate date2 = LocalDate.of(2021, 11, 11);
+    LocalDate date3 = LocalDate.of(2021, 11, 11);
+    LocalDate date4 = LocalDate.of(2021, 11, 11);
 
     buddy1.setName("Selma");
     buddy1.setPassword("Passord123");

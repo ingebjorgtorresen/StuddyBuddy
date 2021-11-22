@@ -1,8 +1,8 @@
 package studdybuddy.ui;
 
+import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import java.io.IOException;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import studdybuddy.core.StuddyBuddies;
@@ -77,6 +77,12 @@ public class RegisterStuddyBuddyController {
     return StuddyBuddyValidation.checkPassword(getInputPassword());
   }
 
+  /**
+   * Method for checking if the name has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
   public boolean checkName() {
     if ((checkNotNull() == false) || (checkInputName() == false)) {
       return false;
@@ -84,6 +90,12 @@ public class RegisterStuddyBuddyController {
     return true;
   }
 
+  /**
+   * Method for checking if the password has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
   public boolean checkPassword() {
     if ((checkNotNull() == false) || (checkInputPassword() == false)) {
       return false;
@@ -92,6 +104,9 @@ public class RegisterStuddyBuddyController {
   }
 
 
+  /**
+   * Method for checking if the password- and checkpassword-textfields has the same input.
+   */
   public boolean checkPasswordsMatch() {
     if (!(getInputPassword().equals(getInputPasswordCheck()))) {
       return false;
@@ -116,6 +131,13 @@ public class RegisterStuddyBuddyController {
    * } catch (IOException e) { messageBox.setText("Could not load window."); } }
    */
 
+  
+  /**
+   * Method for handeling activating of the register button. 
+   *
+   * @param event the event
+   * @throws IOException if it is wrong
+   */
   @FXML
   public void handleRegisterUser(ActionEvent event) throws IOException {
     checkInputs();
@@ -126,11 +148,12 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for transering dataAccess and studdyBuddies between classes
+   * Method for transering dataAccess and studdyBuddies between classes.
+   * Is used in the class that opens an FXML that uses this controller.
    * 
-   * Is used in the class that opens an FXML that uses this controller
-   * 
+
    * @param dataAccess dataAccess for the run of the application
+   * 
    * @param buddies studdyBuddies for the run of the application
    */
   public void transferData(DataAccess dataAccess, StuddyBuddies buddies) {
@@ -138,49 +161,45 @@ public class RegisterStuddyBuddyController {
     this.buddies = buddies;
   }
 
+  /**
+   * Method that checks if the name and password is correct.
+   */
   public void checkInputs() {
     if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
 
-    else if ((!checkName()) && (!checkPassword())) {
+    } else if ((!checkName()) && (!checkPassword())) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
 
-    else if ((!checkName()) && (!checkPasswordsMatch())) {
+    } else if ((!checkName()) && (!checkPasswordsMatch())) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
 
-    else if (!(checkName())) {
+    } else if (!(checkName())) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordField.setText(getInputPassword());
       passwordCheckField.setText(getInputPasswordCheck());
-    }
 
-    else if (!(checkPassword())) {
+    } else if (!(checkPassword())) {
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       nameField.setText(getInputName());
-    }
 
-    else if (!(checkPasswordsMatch())) {
+    } else if (!(checkPasswordsMatch())) {
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       nameField.setText(getInputName());
-    }
 
-    else {
-
+    } else {
       passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");

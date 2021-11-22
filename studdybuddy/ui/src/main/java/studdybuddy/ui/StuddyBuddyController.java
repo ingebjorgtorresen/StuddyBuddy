@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 /**
  * Controller class for Log in to a StuddyBuddy account.
  */
-
 public class StuddyBuddyController {
 
     /*

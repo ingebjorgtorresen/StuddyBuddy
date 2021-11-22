@@ -17,7 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;*/
 
 /**
- * Controller for studdyBuddies objects
+ * Controller for studdyBuddies objects.
  */
 public class StuddyBuddiesController {
     
