@@ -1,10 +1,5 @@
 package studdybuddy.json;
 
-import studdybuddy.core.StuddyBuddyRegistration;
-import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -13,14 +8,28 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import studdybuddy.core.StuddyBuddyRegistration;
 
+/**
+ * Class for deserializing StuddyBuddyRegistration objects.
+ */
 public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<StuddyBuddyRegistration> {
 
-  /*
-   * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Registrations": [ ... ] }
+  /**
+   * Method for deserializing
+   * StuddyBuddyRegistration objects.
+   * Format: { "Registrations": [ ... ] }
+   *
+   * @param node to deserialize.
+   * @return deserialized StuddyBuddyRegistration.
+   * @throws IOException if problem with input or output.
+   * @throws JsonProcessingException if problem with processing JsonNode.
    */
-
-  public StuddyBuddyRegistration deserialize(JsonNode node) throws IOException, JsonProcessingException {
+  public StuddyBuddyRegistration deserialize(JsonNode node)
+      throws IOException, JsonProcessingException {
     if (node instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) node;
       StuddyBuddyRegistration studdyBuddyRegistration = new StuddyBuddyRegistration();

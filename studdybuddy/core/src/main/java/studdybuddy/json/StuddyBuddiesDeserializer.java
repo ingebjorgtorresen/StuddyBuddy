@@ -8,10 +8,13 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import java.io.IOException;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
-import java.io.IOException;
 
+/**
+ * Class for deserializing StuddyBuddies objects.
+ */
 public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
 
   private StuddyBuddyDeserializer studdyBuddyeserializer = new StuddyBuddyDeserializer();
@@ -23,6 +26,14 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
     return deserialize((JsonNode) treeNode);
   }
 
+  /**
+   * Method for deserializing StuddyBuddies object.
+   *
+   * @param node JsonNode to deserialze.
+   * @return deserialized StuddyBuddies object.
+   * @throws JsonProcessingException if problem with processing JsonNode.
+   * @throws IOException if problem with input or output.
+   */
   public StuddyBuddies deserialize(JsonNode node) throws JsonProcessingException, IOException {
     if (node instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) node;
@@ -41,5 +52,4 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
     }
     return null;
   }
-
 }

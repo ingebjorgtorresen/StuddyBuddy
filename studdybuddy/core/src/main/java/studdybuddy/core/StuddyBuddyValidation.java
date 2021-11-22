@@ -1,10 +1,10 @@
 package studdybuddy.core;
 
 import java.time.DateTimeException;
-import java.time.format.DateTimeFormatter;
-import java.time.format.ResolverStyle;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.ResolverStyle;
 import java.util.regex.Pattern;
 
 /**
@@ -13,9 +13,10 @@ import java.util.regex.Pattern;
 public abstract class StuddyBuddyValidation {
 
   /**
-   * Method for checking if password is on right format. Right format is 8 characters or more that is
+   * Method for checking if password is on right format.
+   * Right format is 8 characters or more that is
    * either letters or digits.
-   * 
+   *
    * @param password password to check
    * @return true if format is correct, else return false
    */
@@ -28,7 +29,7 @@ public abstract class StuddyBuddyValidation {
 
   /**
    * checks that the name has the correct format. The name can only consist of letters and space.
-   * 
+   *
    * @param name the name to check
    * @return true if the formate is correct and false if it is incorrect
    */
@@ -45,9 +46,9 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * checks that the argument is not null
-   * 
-   * @param string string to check
+   * Checks that the argument is not null.
+   *
+   * @param string string to check.
    */
 
   public static void checkNotNull(String string) {
@@ -57,9 +58,9 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * checks that the LocalDate-argument is not null
-   * 
-   * @param date to check
+   * Checks that the LocalDate argument is not null.
+   *
+   * @param date to check.
    */
   public static void checkDateNotNull(LocalDate date) {
     if (date == null) {
@@ -68,15 +69,18 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * check the format of the time parameter the time must be in format("HH:mm") and not null
-   * 
-   * @param time
-   * @throws IllegalArgumentException if the format is incorrect
+   * Check the format of the time parameter
+   * The time must be in format("HH:mm") and not null.
+   *
+   * @param time to check.
+   * @throws IllegalArgumentException if the format is incorrect.
    */
   public static void checkTimeFormat(String time) {
     checkNotNull(time);
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm").withResolverStyle(ResolverStyle.STRICT);
+    DateTimeFormatter formatter
+        = DateTimeFormatter.ofPattern("HH:mm")
+        .withResolverStyle(ResolverStyle.STRICT);
     try {
       LocalTime.parse(time, formatter).toString();
     } catch (DateTimeException e) {
@@ -86,9 +90,11 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * @param startTime
-   * @param endTime
-   * @return false if end time is before start time and true if it is after
+   * Checks that startTime is before endTime.
+   *
+   * @param startTime registration start time.
+   * @param endTime registration end time.
+   * @return false if end time is before start time and true if it is after.
    */
   public static boolean checkStartTimeBeforeEndTime(String startTime, String endTime) {
     if ((startTime == null) || (endTime == null)) {
@@ -107,10 +113,11 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * checks if the room is in the correct format the room must consist of letters, numbers, "-" or
-   * spaces
-   * 
-   * @return true if the format is coorect and false if it is incorrect
+   * Checks if the room is in the correct format
+   * the room must consist of letters, numbers, "-" or
+   * spaces.
+   *
+   * @return true if the format is coorect and false if it is incorrect.
    */
   public static boolean checkRoom(String room) {
     char[] chars = room.toCharArray();
@@ -125,10 +132,11 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * checks if the course is in the correct format the course must consist of letters, numbers, "-" or
-   * spaces
-   * 
-   * @return true if the format is coorect and false if it is incorrect
+   * Checks if the course is in the correct format
+   * the course must consist of letters, numbers, "-" or
+   * spaces.
+   *
+   * @return true if the format is coorect and false if it is incorrect.
    */
   public static boolean checkCourse(String course) {
     char[] chars = course.toCharArray();
