@@ -1,7 +1,5 @@
 package studdybuddy.ui;
 
-import studdybuddy.core.*;
-import studdybuddy.dataaccess.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,7 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyValidation;
+import studdybuddy.dataaccess.DataAccess;
 import java.io.IOException;
 import java.net.URL;
 

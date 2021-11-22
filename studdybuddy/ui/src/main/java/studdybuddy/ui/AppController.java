@@ -16,9 +16,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import studdybuddy.json.*;
-import studdybuddy.core.*;
-import studdybuddy.dataaccess.*;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
+import studdybuddy.dataaccess.DataAccess;
+import studdybuddy.dataaccess.DirectDataAccess;
+import studdybuddy.dataaccess.RemoteDataAccess;
+import studdybuddy.json.StuddyBuddiesPersistence;
 
 public class AppController {
 

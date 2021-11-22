@@ -1,11 +1,5 @@
 package studdybuddy.ui;
 
-<<<<<<< HEAD:studdyBuddy/ui/src/main/java/ui/StuddyBuddyRegistrationController.java
-import core.*;
-=======
-import studdybuddy.core.*;
-import studdybuddy.json.*;
->>>>>>> c90ec2bc42f117c191c6201f95bb5f09a8e1ca68:studdybuddy/ui/src/main/java/studdybuddy/ui/StuddyBuddyRegistrationController.java
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -25,7 +19,10 @@ import java.net.URL;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import json.*;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
+import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
  * Controller class for a registration
