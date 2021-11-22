@@ -57,8 +57,7 @@ public class StuddyBuddyRegistration {
 	 * sets the end time.
 	 * 
 	 * @param endTime
-	 * @throws IllegalArgumentException if the format is incorrect or if startTime
-	 *                                  is before endTime
+	 * @throws IllegalArgumentException if the format is incorrect or if startTime is before endTime
 	 */
 	public void setEndTime(String endTime) {
 		StuddyBuddyValidation.checkNotNull(endTime);
@@ -117,7 +116,7 @@ public class StuddyBuddyRegistration {
 
 	@Override
 	public String toString() {
-		return "Date: " + getDate() + "\n" + "Room: " + getRoom() + "\n" + "Course: " + getCourse() + "\n"
-				+ "Start time: " + getStartTime() + "\n" + "End time: " + getEndTime() + "\n ";
+		return "Date: " + getDate() + "\n" + "Room: " + getRoom() + "\n" + "Course: " + getCourse() + "\n" + "Start time: "
+				+ getStartTime() + "\n" + "End time: " + getEndTime() + "\n ";
 	}
 }

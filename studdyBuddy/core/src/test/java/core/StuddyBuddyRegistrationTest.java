@@ -16,7 +16,7 @@ public class StuddyBuddyRegistrationTest {
 	private StuddyBuddyRegistration registration;
 
 	/**
-	 * Setup for each test. 
+	 * Setup for each test.
 	 */
 	@BeforeEach
 	public void setup() {
@@ -29,7 +29,7 @@ public class StuddyBuddyRegistrationTest {
 	@Test
 	public void testDate() {
 		LocalDate date;
-		date = LocalDate.of(2022,12,12);
+		date = LocalDate.of(2022, 12, 12);
 		registration.setDate(date);
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 		String formattedString = date.format(formatter);
@@ -60,7 +60,7 @@ public class StuddyBuddyRegistrationTest {
 	}
 
 	/**
-	 * Method for testing setter for course. 
+	 * Method for testing setter for course.
 	 */
 	@Test
 	public void setCourse() {
@@ -69,7 +69,7 @@ public class StuddyBuddyRegistrationTest {
 	}
 
 	/**
-	 * Method for testing format of time. 
+	 * Method for testing format of time.
 	 */
 	@Test
 	public void testTimeFormat() {
@@ -94,7 +94,7 @@ public class StuddyBuddyRegistrationTest {
 	}
 
 	/**
-	 * Method for testing room format. 
+	 * Method for testing room format.
 	 */
 	@Test
 	public void testRoomFormat() {
@@ -111,7 +111,7 @@ public class StuddyBuddyRegistrationTest {
 	}
 
 	/**
-	 * Method for testing course format. 
+	 * Method for testing course format.
 	 */
 	@Test
 	public void testCourseFormat() {

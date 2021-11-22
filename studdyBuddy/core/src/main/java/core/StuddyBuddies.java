@@ -13,8 +13,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     List<StuddyBuddy> studdyBuddies = new ArrayList<>();
 
     /**
-     * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it
-     * exists. Else return null.
+     * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it exists. Else return null.
      *
      * @param name name of the user we want to get
      * @return StuddyBuddy if it exists or null
@@ -78,8 +77,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     }
 
     /**
-     * Method that return this object as an iterator, and it enables (studdyBuddy :
-     * studdyBuddies).
+     * Method that return this object as an iterator, and it enables (studdyBuddy : studdyBuddies).
      */
     @Override
     public Iterator<StuddyBuddy> iterator() {
@@ -110,9 +108,8 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     }
 
     /*
-     * @Override public String toString() { String buddies = ""; for (StuddyBuddy
-     * buddy : studdyBuddies) { buddies += buddy.getName() + "\n"; } return buddies;
-     * }
+     * @Override public String toString() { String buddies = ""; for (StuddyBuddy buddy : studdyBuddies)
+     * { buddies += buddy.getName() + "\n"; } return buddies; }
      */
 
 }

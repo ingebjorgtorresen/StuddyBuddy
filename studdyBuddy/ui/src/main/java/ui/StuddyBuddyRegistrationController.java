@@ -58,8 +58,8 @@ public class StuddyBuddyRegistrationController {
     }
 
     /**
-     * creates a new registration if the registration is not null, the pane is
-     * cleared meassage text is set to not be visable and in Paradise Pink color
+     * creates a new registration if the registration is not null, the pane is cleared meassage text is
+     * set to not be visable and in Paradise Pink color
      */
     private void createRegistration() {
         messageText.setVisible(false);
@@ -258,8 +258,7 @@ public class StuddyBuddyRegistrationController {
     }
 
     /**
-     * register a new StuddyBuddy sets the room, course, start time, end time and
-     * date
+     * register a new StuddyBuddy sets the room, course, start time, end time and date
      */
     private void registerStuddyBuddy() {
         StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
@@ -276,8 +275,8 @@ public class StuddyBuddyRegistrationController {
             buddies.addStuddyBuddy(buddy);
         }
 
-        try (Writer writer = new FileWriter(System.getProperty("user.home") + registrationsFileName,
-                StandardCharsets.UTF_8)) {
+        try (Writer writer =
+                new FileWriter(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
             writer.flush();
         } catch (IOException e) {
@@ -288,8 +287,8 @@ public class StuddyBuddyRegistrationController {
 
     public StuddyBuddy getRegisteredStuddyBuddy() {
         StuddyBuddy registeredBuddy = null;
-        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName,
-                StandardCharsets.UTF_8)) {
+        try (Reader reader =
+                new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             registeredBuddy = persistence.readStuddyBuddies(reader).getStuddyBuddy(buddy.getName());
         } catch (IOException e) {
             System.err.println("Couldn't read from file.");
@@ -318,12 +317,11 @@ public class StuddyBuddyRegistrationController {
     }
 
     /**
-     * sets the feedback text to not be visable and to have Paradise Pink color
-     * saves this registration to file registration was successful sets message to
-     * be visable sets feedback to be visable if registration was successful sets
-     * message text to be Amazon color if registration was successful sets feedback
-     * text to have Yellow Green Crayola color if registration was successful clears
-     * the texfields if registration was successful
+     * sets the feedback text to not be visable and to have Paradise Pink color saves this registration
+     * to file registration was successful sets message to be visable sets feedback to be visable if
+     * registration was successful sets message text to be Amazon color if registration was successful
+     * sets feedback text to have Yellow Green Crayola color if registration was successful clears the
+     * texfields if registration was successful
      */
     @FXML
     public void handleRegister() throws FileNotFoundException { // try, catch

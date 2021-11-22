@@ -3,8 +3,7 @@ package ui;
 import dataaccess.*;
 
 /**
- * Abstract class containg methods for setting and getting Remote and Direct
- * DataAccess.
+ * Abstract class containg methods for setting and getting Remote and Direct DataAccess.
  */
 
 abstract class DataAccessController {

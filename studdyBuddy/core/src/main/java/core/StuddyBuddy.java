@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 /**
- * Class for StuddyBuddy, which is the user class. Each user has a name and a
- * password.
+ * Class for StuddyBuddy, which is the user class. Each user has a name and a password.
  */
 
 public class StuddyBuddy {
@@ -49,9 +48,8 @@ public class StuddyBuddy {
 	}
 
 	/**
-	 * Method for setting password if it is valid. A valid password has at least 8
-	 * characters, and consists of only digits and letters. Also throws exeption if
-	 * password is invalid.
+	 * Method for setting password if it is valid. A valid password has at least 8 characters, and
+	 * consists of only digits and letters. Also throws exeption if password is invalid.
 	 * 
 	 * @param password the password the user wishes to set.
 	 */

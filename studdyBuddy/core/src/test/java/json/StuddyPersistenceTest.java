@@ -14,7 +14,7 @@ import org.junit.jupiter.api.Test;
 import core.*;
 
 public class StuddyPersistenceTest {
-    
+
     private static StuddyBuddiesPersistence persistence;
     private static String testFileName = "testPersistence.json";
     private static StuddyBuddies buddies;
@@ -24,7 +24,7 @@ public class StuddyPersistenceTest {
     private static StuddyBuddyRegistration registration2;
     private static Writer writer;
     private static Reader reader;
-    
+
     @BeforeEach
     public void setup() {
         buddies = new StuddyBuddies();
@@ -34,7 +34,7 @@ public class StuddyPersistenceTest {
         buddy1.setName("FirstBuddy");
         registration1 = new StuddyBuddyRegistration();
         LocalDate date1;
-        date1 = LocalDate.of(2022,10,10);
+        date1 = LocalDate.of(2022, 10, 10);
         registration1.setDate(date1);
         registration1.setRoom("TestRoom1");
         registration1.setCourse("TestCourse1");
@@ -45,7 +45,7 @@ public class StuddyPersistenceTest {
         buddy2.setName("SecondBuddy");
         registration2 = new StuddyBuddyRegistration();
         LocalDate date2;
-        date2 = LocalDate.of(2022,12,12);
+        date2 = LocalDate.of(2022, 12, 12);
         registration2.setDate(date2);
         registration2.setRoom("TestRoom2");
         registration2.setCourse("TestCourse2");
@@ -56,7 +56,7 @@ public class StuddyPersistenceTest {
         buddy2.addRegistration(registration2);
         buddies.addStuddyBuddy(buddy1);
         buddies.addStuddyBuddy(buddy2);
-        
+
         try {
             writer = new FileWriter(testFileName, StandardCharsets.UTF_8);
             reader = new FileReader(testFileName, StandardCharsets.UTF_8);
@@ -65,7 +65,8 @@ public class StuddyPersistenceTest {
         }
     }
 
-    // Writes an object to a test file, then checks that the object read from the file is equal to the one that was written
+    // Writes an object to a test file, then checks that the object read from the file is equal to the
+    // one that was written
     @Test
     public void testPersistence() {
         StuddyBuddies testBuddies = null;
@@ -78,7 +79,8 @@ public class StuddyPersistenceTest {
         }
 
         Assertions.assertEquals(buddy1.getName(), testBuddies.getStuddyBuddy(buddy1.getName()).getName());
-        StuddyBuddyRegistration testRegistration = testBuddies.getStuddyBuddy(buddy2.getName()).getRegistrations().get(0);
+        StuddyBuddyRegistration testRegistration =
+                testBuddies.getStuddyBuddy(buddy2.getName()).getRegistrations().get(0);
         Assertions.assertEquals(registration2.getDate(), testRegistration.getDate());
         Assertions.assertEquals(registration2.getCourse(), testRegistration.getCourse());
         Assertions.assertEquals(registration2.getRoom(), testRegistration.getRoom());

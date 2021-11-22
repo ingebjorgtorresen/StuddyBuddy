@@ -13,8 +13,8 @@ import java.util.regex.Pattern;
 public abstract class StuddyBuddyValidation {
 
 	/**
-	 * Method for checking if password is on right format. Right format is 8
-	 * characters or more that is either letters or digits.
+	 * Method for checking if password is on right format. Right format is 8 characters or more that is
+	 * either letters or digits.
 	 * 
 	 * @param password password to check
 	 * @return true if format is correct, else return false
@@ -27,8 +27,7 @@ public abstract class StuddyBuddyValidation {
 	}
 
 	/**
-	 * checks that the name has the correct format. The name can only consist of
-	 * letters and space.
+	 * checks that the name has the correct format. The name can only consist of letters and space.
 	 * 
 	 * @param name the name to check
 	 * @return true if the formate is correct and false if it is incorrect
@@ -69,8 +68,7 @@ public abstract class StuddyBuddyValidation {
 	}
 
 	/**
-	 * check the format of the time parameter the time must be in format("HH:mm")
-	 * and not null
+	 * check the format of the time parameter the time must be in format("HH:mm") and not null
 	 * 
 	 * @param time
 	 * @throws IllegalArgumentException if the format is incorrect
@@ -109,8 +107,8 @@ public abstract class StuddyBuddyValidation {
 	}
 
 	/**
-	 * checks if the room is in the correct format the room must consist of letters,
-	 * numbers, "-" or spaces
+	 * checks if the room is in the correct format the room must consist of letters, numbers, "-" or
+	 * spaces
 	 * 
 	 * @return true if the format is coorect and false if it is incorrect
 	 */
@@ -127,8 +125,8 @@ public abstract class StuddyBuddyValidation {
 	}
 
 	/**
-	 * checks if the course is in the correct format the course must consist of
-	 * letters, numbers, "-" or spaces
+	 * checks if the course is in the correct format the course must consist of letters, numbers, "-" or
+	 * spaces
 	 * 
 	 * @return true if the format is coorect and false if it is incorrect
 	 */

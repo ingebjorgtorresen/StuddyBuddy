@@ -12,8 +12,7 @@ import core.*;
 import json.StuddyBuddiesPersistence;
 
 /**
- * Class that works locally with data. Can use pre-defined StuddyBuddy object,
- * or read from file.
+ * Class that works locally with data. Can use pre-defined StuddyBuddy object, or read from file.
  */
 
 public class DirectDataAccess implements DataAccess {
@@ -31,8 +30,7 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Constructor that creates an instance that reads from the json.file specified
-     * as a parameter.
+     * Constructor that creates an instance that reads from the json.file specified as a parameter.
      * 
      * @param file the filename of the json file to write to
      */
@@ -42,8 +40,7 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Method for reading from json-file with reasource from field:
-     * studdybuddiesFilename
+     * Method for reading from json-file with reasource from field: studdybuddiesFilename
      * 
      * @return a StuddyBuddies object
      */
@@ -64,8 +61,7 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Method for writing a StuddyBuddy object serialized as a json-string to file
-     * in the resource file.
+     * Method for writing a StuddyBuddy object serialized as a json-string to file in the resource file.
      * 
      * @param buddies StuddyBuddies object to save
      */
@@ -126,8 +122,7 @@ public class DirectDataAccess implements DataAccess {
     public void postStuddyBuddy(StuddyBuddy buddy) {
         this.readStuddyBuddies();
         try {
-            this.buddies.getStuddyBuddy(buddy.getName()).updateStuddyBuddyObject(buddy);
-            ;
+            this.buddies.getStuddyBuddy(buddy.getName()).updateStuddyBuddyObject(buddy);;
         } catch (NullPointerException e) {
             throw new IllegalArgumentException(
                     "User does not exist in the server, and the user can therefore not be updated.");
@@ -167,8 +162,8 @@ public class DirectDataAccess implements DataAccess {
     }
 
     /**
-     * Method for writing a empty StuddyBuddy object to the json-file. This is used
-     * for testing when one wants to clear the document before testing.
+     * Method for writing a empty StuddyBuddy object to the json-file. This is used for testing when one
+     * wants to clear the document before testing.
      */
     public void writeEmptyStuddyBuddyToDocument() {
         writeStuddyBuddies(new StuddyBuddies());

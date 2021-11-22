@@ -36,8 +36,7 @@ public class StuddyBuddyController {
     }
 
     /**
-     * sets the name to be the input in nameField the name can only consist of
-     * letters and space.
+     * sets the name to be the input in nameField the name can only consist of letters and space.
      * 
      * @return the name from input
      */
