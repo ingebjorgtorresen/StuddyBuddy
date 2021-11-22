@@ -1,18 +1,20 @@
 package studdybuddy.ui;
 
-import studdybuddy.core.*;
-import studdybuddy.dataaccess.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
+import java.io.IOException;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyValidation;
+import studdybuddy.dataaccess.DataAccess;
+
+/*import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.io.IOException;
-import java.net.URL;
+import java.net.URL;*/
 
 /**
  * Controller class for registering new StuddyBuddy/user.
@@ -102,7 +104,7 @@ public class RegisterStuddyBuddyController {
         return buddy;
     }
 
-    private void changeScene(ActionEvent event) throws IOException {
+    /*private void changeScene(ActionEvent event) throws IOException {
         try {
             URL file = getClass().getResource("StuddyBuddy.fxml");
             FXMLLoader loader = new FXMLLoader(file);
@@ -117,7 +119,7 @@ public class RegisterStuddyBuddyController {
         } catch (IOException e) {
             messageBox.setText("Could not load window.");
         }
-    }
+    }*/
 
     @FXML
     public void handleRegisterUser(ActionEvent event) throws IOException {

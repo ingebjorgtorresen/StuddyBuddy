@@ -5,18 +5,20 @@ import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
-
-import studdybuddy.core.*;
-import studdybuddy.json.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import java.time.LocalDate;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
+import studdybuddy.json.StuddyBuddiesPersistence;
+
 
 /**
  * Controller class for the forum page
