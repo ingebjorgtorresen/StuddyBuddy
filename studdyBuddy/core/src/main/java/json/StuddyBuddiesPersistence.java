@@ -1,6 +1,6 @@
 package json;
 
-import core.*;
+import core.StuddyBuddies;
 import java.io.IOException;
 import java.io.Writer;
 import java.io.Reader;

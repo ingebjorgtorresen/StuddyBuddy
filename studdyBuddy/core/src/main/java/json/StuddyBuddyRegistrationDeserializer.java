@@ -1,6 +1,6 @@
 package json;
 
-import core.*;
+import core.StuddyBuddyRegistration;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

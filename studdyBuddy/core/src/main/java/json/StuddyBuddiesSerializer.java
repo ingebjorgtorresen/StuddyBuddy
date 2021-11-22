@@ -1,10 +1,11 @@
 package json;
 
-import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import core.*;
+import core.StuddyBuddies;
+import core.StuddyBuddy;
+import java.io.IOException;
 
 /**
  * Serializer for StuddyBudies object.

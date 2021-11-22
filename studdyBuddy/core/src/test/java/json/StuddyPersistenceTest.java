@@ -1,5 +1,8 @@
 package json;
 
+import core.StuddyBuddies;
+import core.StuddyBuddy;
+import core.StuddyBuddyRegistration;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -7,11 +10,9 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import core.*;
 
 public class StuddyPersistenceTest {
     

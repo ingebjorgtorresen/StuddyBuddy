@@ -1,13 +1,13 @@
 package dataaccess;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import core.StuddyBuddy;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
-import core.*;
 import json.StuddyModule;
 
 /**

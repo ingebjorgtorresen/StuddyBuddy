@@ -1,6 +1,8 @@
 package json;
 
-import core.*;
+import core.StuddyBuddy;
+import core.StuddyBuddyRegistration;
+import core.StuddyBuddies;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 

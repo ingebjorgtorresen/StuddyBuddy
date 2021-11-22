@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.Module;
 import org.springframework.boot.SpringApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import studdyBuddy.core.*;
+import studdyBuddy.core.StuddyBuddies;
 
 
 @SpringBootApplication

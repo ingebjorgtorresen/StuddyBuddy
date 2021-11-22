@@ -6,8 +6,8 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import org.springframework.stereotype.Service;
-import core.*;
-import json.*;
+import core.StuddyBuddies;
+import json.StuddyBuddiesPersistence;
 
 
 @Service

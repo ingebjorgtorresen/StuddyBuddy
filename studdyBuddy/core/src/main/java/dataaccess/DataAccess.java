@@ -1,6 +1,6 @@
 package dataaccess;
 
-import core.*;
+import core.StuddyBuddy;
 
 /**
  * Interface for methods GET, PUT and POST methods used in DataAccess classes.
