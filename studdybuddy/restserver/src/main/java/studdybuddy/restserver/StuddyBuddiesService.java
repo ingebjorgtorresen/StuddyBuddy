@@ -11,19 +11,25 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.springframework.stereotype.Service;
-import studdybuddy.core.*;
-import studdybuddy.json.*;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.json.StuddyBuddiesPersistence;
 
-
+/**
+ * Service class for Spring Boot server.
+ */
 @Service
 public class StuddyBuddiesService {
     
   private StuddyBuddies buddies;
-  private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();;
+  private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
   private String buddiesJsonFileName = "buddies.json";
   private String initialBuddiesFileName = "initial_buddies.json";
   private boolean initialBuddiesInBuddies = false;
 
+  /**
+   * Constructor that sets the StuddyBuddies.
+   */
   public StuddyBuddiesService() {
     putInitialStuddyBuddiesObject();
     getInitialStuddyBuddiesObject();
@@ -38,12 +44,12 @@ public class StuddyBuddiesService {
     this.buddies = buddies;
   }
 
+  /**
+   * Method that uses persistence to save studdyBuddies.
+   */
   public void autoSaveStuddyBuddies() {
     if (persistence != null) {
       try {
-        System.out.println();
-        System.out.println("Fra service skrives dette studdybuddies objektet");
-        System.out.println(buddies);
         persistence.saveStuddyBuddies(buddies);
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save StuddyBuddies: " + e);
@@ -88,7 +94,7 @@ public class StuddyBuddiesService {
   /**
    * Method for writing a StuddyBuddies object to a json-file.
    *
-   * @param users StuddyBuddies object to be saved
+   * @param buddies StuddyBuddies object to be saved
    */
   public void writeBuddies(StuddyBuddies buddies) {
     if (buddiesJsonFileName != null) {
@@ -111,16 +117,17 @@ public class StuddyBuddiesService {
   public StuddyBuddies readBuddies() {
     if (buddiesJsonFileName != null) {
       Path path = Paths.get(System.getProperty("user.home"), buddiesJsonFileName);
-      if (path != null && path.toFile().exists())
-      try (Reader reader = new FileReader(path.toFile(), StandardCharsets.UTF_8)){
-        putInitialStuddyBuddiesObject();
-        StuddyBuddies buddies = persistence.readStuddyBuddies(reader);
-        return buddies;
-      } catch (IOException e) {
-        e.printStackTrace();
-        throw new IllegalStateException(
-            "Unable to read from '" + Paths.get(System.getProperty("user.home"), 
-            buddiesJsonFileName) + "'.");
+      if (path != null && path.toFile().exists()) {
+        try (Reader reader = new FileReader(path.toFile(), StandardCharsets.UTF_8)) {
+          putInitialStuddyBuddiesObject();
+          StuddyBuddies buddies = persistence.readStuddyBuddies(reader);
+          return buddies;
+        } catch (IOException e) {
+          e.printStackTrace();
+          throw new IllegalStateException(
+              "Unable to read from '" + Paths.get(System.getProperty("user.home"), 
+              buddiesJsonFileName) + "'.");
+        } 
       }
     }
     return null;
