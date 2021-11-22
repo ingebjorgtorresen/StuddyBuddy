@@ -1,16 +1,16 @@
 package studdybuddy.dataaccess;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.nio.charset.StandardCharsets;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
-import studdybuddy.core.*;
+import java.nio.charset.StandardCharsets;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
@@ -19,23 +19,33 @@ import studdybuddy.json.StuddyBuddiesPersistence;
  */
 public class RemoteDataAccess implements DataAccess {
 
-  private final URI baseURI;
+  private final URI baseUri;
   private ObjectMapper mapper;
 
   /**
    * Constructor that sets base URI for gitpod and mapper.
    */
-  public RemoteDataAccess(URI baseURI) {
-    this.baseURI = baseURI;
+  public RemoteDataAccess(URI baseUri) {
+    this.baseUri = baseUri;
     mapper = StuddyBuddiesPersistence.createObjectMapper();
   }
 
+  /**
+   * Getter for StuddyBuddies.
+   *
+   * @param buddies buddies.
+   * @return buddies.
+   */
   public StuddyBuddies getStuddyBuddies(StuddyBuddies buddies) {
     if (buddies == null) {
-      HttpRequest request = HttpRequest.newBuilder(baseURI).header("Accept", "application/json").GET().build();
+      HttpRequest request = 
+          HttpRequest.newBuilder(baseUri)
+          .header("Accept", "application/json")
+          .GET().build();
       try {
         final HttpResponse<String> response =
-            HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+            HttpClient.newBuilder().build()
+            .send(request, HttpResponse.BodyHandlers.ofString());
         buddies = mapper.readValue(response.body(), StuddyBuddies.class);
       } catch (IOException | InterruptedException e) {
         throw new RuntimeException(e);
@@ -44,24 +54,27 @@ public class RemoteDataAccess implements DataAccess {
     return buddies;
   }
 
-  private String URIParam(String s) {
+  private String encodeUriParam(String s) {
     return URLEncoder.encode(s, StandardCharsets.UTF_8);
   }
 
-  private URI studdybuddyURI(String name) {
-    return baseURI.resolve("user").resolve(URIParam(name));
+  private URI studdybuddyUri(String name) {
+    return baseUri.resolve("user").resolve(encodeUriParam(name));
   }
 
   @Override
-  public StuddyBuddy getStuddyBuddyByName(String name, StuddyBuddies buddies) {
+  public StuddyBuddy getStuddyBuddyByName(
+        String name, StuddyBuddies buddies) {
     StuddyBuddy buddy;
     try {
       HttpRequest request =
-          HttpRequest.newBuilder(studdybuddyURI(name)).header("Accept", "application/json").GET().build();
+          HttpRequest.newBuilder(studdybuddyUri(name))
+          .header("Accept", "application/json")
+          .GET().build();
       final HttpResponse<String> response =
-          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          HttpClient.newBuilder().build()
+          .send(request, HttpResponse.BodyHandlers.ofString());
       String responseString = response.body();
-      System.out.println("getStuddyBuddy(" + name + ") response: " + responseString);
       buddy = mapper.readValue(responseString, StuddyBuddy.class);
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);
@@ -71,24 +84,26 @@ public class RemoteDataAccess implements DataAccess {
 
   /**
    * Method for sending a StudyBuddy object to server.
+   *
+   * @param buddy buddy to be saved.
+   * @param buddies that buddy will be saved in.
    */
   @Override
-  public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
+  public void putStuddyBuddy(
+        StuddyBuddy buddy, StuddyBuddies buddies) {
     try {
       String buddyAsString = mapper.writeValueAsString(buddy);
-      HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName())).header("Accept", "application/json")
-          .header("Content-Type", "application/json").PUT(BodyPublishers.ofString(buddyAsString)).build();
+      HttpRequest request 
+          = HttpRequest.newBuilder(studdybuddyUri(buddy.getName()))
+          .header("Accept", "application/json")
+          .header("Content-Type", "application/json")
+          .PUT(BodyPublishers.ofString(buddyAsString)).build();
       final HttpResponse<String> response =
-          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
-
+          HttpClient.newBuilder().build()
+          .send(request, HttpResponse.BodyHandlers.ofString());
       if (response.statusCode() != 200) {
         System.err.println("Request was unsuccessfull");
       }
-      // String responseBuddyString = response.body();
-      /*
-       * StuddyBuddy addedBuddy = mapper.readValue(responseBuddyString, StuddyBuddy.class); if(addedBuddy
-       * != null) { buddies.addStuddyBuddy(buddy); }
-       */
     } catch (InterruptedException | IOException e) {
       e.printStackTrace();
       throw new IllegalArgumentException("Could not save user-object to server.");
@@ -97,17 +112,22 @@ public class RemoteDataAccess implements DataAccess {
 
   /**
    * Method for updating a StuddyBuddy object on server.
+   *
+   * @param buddy buddy to be saved.
+   * @param buddies that buddy will be saved in.
    */
   @Override
   public void postStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
     try {
       String jsonString = mapper.writeValueAsString(buddy);
-      HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName())).header("Accept", "application/json")
+      HttpRequest request 
+          = HttpRequest.newBuilder(studdybuddyUri(buddy.getName()))
+          .header("Accept", "application/json")
           .header("Content-Type", "application/json")
-          // only thing different frokm putStuddyBuddy is that this uses POST method
           .POST(BodyPublishers.ofString(jsonString)).build();
       final HttpResponse<String> response =
-          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          HttpClient.newBuilder().build()
+          .send(request, HttpResponse.BodyHandlers.ofString());
       String responseString = response.body();
       Boolean added = mapper.readValue(responseString, Boolean.class);
       if (added != null) {
@@ -118,19 +138,33 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
-  private URI passwordURI(String name) {
-    return baseURI.resolve("user").resolve(URIParam(name)).resolve("pw");
+  /**
+   * Gets the password URI.
+   *
+   * @param name of StuddyBuddy.
+   * @return the password URI.
+   */
+  private URI passwordUri(String name) {
+    return baseUri.resolve("user").resolve(encodeUriParam(name)).resolve("pw");
   }
 
+  /**
+   * Getter for password.
+   *
+   * @param name name of StuddyBuddy.
+   * @param buddies to get from.
+   */
   @Override
   public String getStuddyBuddyPasswordByName(String name, StuddyBuddies buddies) {
     try {
       HttpRequest request =
-          HttpRequest.newBuilder(passwordURI(name)).header("Accept", "application/json").GET().build();
+          HttpRequest.newBuilder(passwordUri(name))
+          .header("Accept", "application/json")
+          .GET().build();
       final HttpResponse<String> response =
-          HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
+          HttpClient.newBuilder().build()
+          .send(request, HttpResponse.BodyHandlers.ofString());
       String responseString = response.body();
-      System.out.println("getStuddyBuddyPasswordByName(" + name + ") response: " + responseString);
       return responseString;
     } catch (IOException | InterruptedException e) {
       throw new RuntimeException(e);

@@ -1,28 +1,30 @@
 package studdybuddy.json;
 
-import studdybuddy.core.StuddyBuddyRegistration;
-import studdybuddy.core.*;
-import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import java.io.IOException;
+import studdybuddy.core.StuddyBuddyRegistration;
 
+/**
+ * Class for serializing StuddyBuddyRegistration objects.
+ */
 public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBuddyRegistration> {
 
   /*
-   * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Room" : "...",
+   * format: { "Room" : "...",
    * "Course" : "...", "Start time" : "...", "End time" : "..." }
    */
-
   @Override
-  public void serialize(StuddyBuddyRegistration registration, JsonGenerator jGen, SerializerProvider serializerProvider)
+  public void serialize(StuddyBuddyRegistration registration,
+      JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
       throws IOException {
-    jGen.writeStartObject();
-    jGen.writeStringField("Date", registration.getDate());
-    jGen.writeStringField("Room", registration.getRoom());
-    jGen.writeStringField("Course", registration.getCourse());
-    jGen.writeStringField("Start time", registration.getStartTime());
-    jGen.writeStringField("End time", registration.getEndTime());
-    jGen.writeEndObject();
+    jsonGenerator.writeStartObject();
+    jsonGenerator.writeStringField("Date", registration.getDate());
+    jsonGenerator.writeStringField("Room", registration.getRoom());
+    jsonGenerator.writeStringField("Course", registration.getCourse());
+    jsonGenerator.writeStringField("Start time", registration.getStartTime());
+    jsonGenerator.writeStringField("End time", registration.getEndTime());
+    jsonGenerator.writeEndObject();
   }
 }

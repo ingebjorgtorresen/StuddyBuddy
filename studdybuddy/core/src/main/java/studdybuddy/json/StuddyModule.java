@@ -1,18 +1,23 @@
 package studdybuddy.json;
 
-import studdybuddy.core.StuddyBuddy;
-import studdybuddy.core.StuddyBuddyRegistration;
-import studdybuddy.core.StuddyBuddies;
-import studdybuddy.core.*;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
 
+/**
+ * Module with serializers and deserializers 
+ * for all studdybuddy classes.
+ */
 @SuppressWarnings("serial")
 public class StuddyModule extends SimpleModule {
-  private static final String NAME = "StuddyModule";
 
+  /**
+   * Constructor for StuddyModule.
+   */
   public StuddyModule() {
-    super(NAME, Version.unknownVersion());
+    super("StuddyModule", Version.unknownVersion());
     addSerializer(StuddyBuddy.class, new StuddyBuddySerializer());
     addDeserializer(StuddyBuddy.class, new StuddyBuddyDeserializer());
 
@@ -21,7 +26,5 @@ public class StuddyModule extends SimpleModule {
     
     addSerializer(StuddyBuddies.class, new StuddyBuddiesSerializer());
     addDeserializer(StuddyBuddies.class, new StuddyBuddiesDeserializer());
-
   }
-
 }

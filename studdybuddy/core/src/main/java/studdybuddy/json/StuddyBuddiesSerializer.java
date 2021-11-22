@@ -3,37 +3,34 @@ package studdybuddy.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import java.io.IOException;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
-import java.io.IOException;
-import studdybuddy.core.*;
 
 /**
- * Serializer for StuddyBudies object.
+ * Class for serializing StuddyBuddies objects.
  */
 public class StuddyBuddiesSerializer extends JsonSerializer<StuddyBuddies> {
 
   /**
-   * format: { "Studdybuddies" : [ StuddyBuddy... ] }
-   */
-
-  /**
    * Method for writing an instance of StuddyBuddies as a json string to a json generator.
-   * 
+   * format: { "Studdybuddies" : [ StuddyBuddy... ] }
+   *
    * @param buddies StuddyBuddies object to be serialized
-   * @param JGen generator to use
+   * @param jsonGenerator generator to use
    * @param serializerProvider serializerProvider to use
    */
   @Override
-  public void serialize(StuddyBuddies buddies, JsonGenerator JGen, SerializerProvider serializerProvider)
+  public void serialize(StuddyBuddies buddies, 
+      JsonGenerator jsonGenerator, SerializerProvider serializerProvider)
       throws IOException {
-    JGen.writeStartObject();
-    JGen.writeArrayFieldStart("StuddyBuddies");
+    jsonGenerator.writeStartObject();
+    jsonGenerator.writeArrayFieldStart("StuddyBuddies");
     for (StuddyBuddy buddy : buddies) {
-      JGen.writeObject(buddy);
+      jsonGenerator.writeObject(buddy);
     }
-    JGen.writeEndArray();
-    JGen.writeEndObject();
+    jsonGenerator.writeEndArray();
+    jsonGenerator.writeEndObject();
   }
 
 }
