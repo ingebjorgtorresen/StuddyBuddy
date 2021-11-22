@@ -42,6 +42,7 @@ public class StuddyBuddiesRestController {
    */
   @GetMapping(path = "/{name}")
   public StuddyBuddy getStuddyBuddy(@PathVariable("name") String name) {
+    System.out.println("Nå kjøres denne");
     StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
     checkStuddyBuddyNotNull(studdyBuddy, name);
     return studdyBuddy;
@@ -71,6 +72,9 @@ public class StuddyBuddiesRestController {
   @PutMapping(path = "/{name}")
   public StuddyBuddy putStuddyBuddy(@PathVariable("name") String name,
       @RequestBody StuddyBuddy studdyBuddy) {
+    System.out.println("Studdybuddy objektet i restcontroller sin put");
+    System.out.println(studdyBuddy);
+    buddiesService.addStuddyBuddyToBuddies(studdyBuddy);
     buddiesService.autoSaveStuddyBuddies();
     return studdyBuddy;
   }

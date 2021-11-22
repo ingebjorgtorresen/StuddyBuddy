@@ -40,6 +40,9 @@ public class StuddyBuddiesService {
   public void autoSaveStuddyBuddies() {
     if (persistence != null) {
       try {
+        System.out.println();
+        System.out.println("Fra service skrives dette studdybuddies objektet");
+        System.out.println(buddies);
         persistence.saveStuddyBuddies(buddies);
       } catch (IllegalStateException | IOException e) {
         System.err.println("Couldn't auto-save StuddyBuddies: " + e);
@@ -116,6 +119,10 @@ public class StuddyBuddiesService {
       }
     }
     return null;
+  }
+
+  public void addStuddyBuddyToBuddies(StuddyBuddy buddy) {
+    buddies.addStuddyBuddy(buddy);
   }
 
 }

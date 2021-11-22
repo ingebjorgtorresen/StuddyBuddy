@@ -46,7 +46,8 @@ public class StuddyBuddiesPersistence {
     * @throws IOException
     */
     public void writeStuddyBuddies(StuddyBuddies buddies, Writer writer) throws IOException {
-        System.out.println("KOMMER HIT");
+        System.out.println("Skriver dette buddies objektet");
+        System.out.println(buddies);
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, buddies);
     }
 
