@@ -1,6 +1,6 @@
 {
     "java.configuration.updateBuildConfiguration": "automatic",
-    "java.format.settings.url": "studdyBuddy/config/checkstyle/eclipse-java-google-style.xml",
+    "java.format.settings.url": "studdybuddy/config/checkstyle/eclipse-java-google-style.xml",
     "[java]": {
       "editor.tabSize": 2
     },

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.control.Pane?>
-
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" prefHeight="640.0" prefWidth="350.0">
-    <Pane id="registrationsPane"> </Pane>
-    <Button text="Back" fx:id="backToRegistrationPage" onAction="#directToRegistrationPage" layoutX="300.0" layoutY="600.0"/>
-</AnchorPane>
