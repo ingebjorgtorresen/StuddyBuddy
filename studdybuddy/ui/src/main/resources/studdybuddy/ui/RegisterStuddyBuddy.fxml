@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Button?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studdybuddy.ui.RegisterStuddyBuddyController" prefHeight="640.0" prefWidth="350.0">
+
+    <Label text="Name:" layoutX="10.0" layoutY="200.0"/>
+
+    <TextField fx:id="nameField" promptText="Username" layoutX="150.0" layoutY="200.0"/>
+
+    <Label text="Password:" layoutX="10.0" layoutY="250.0"/>
+
+    <TextField fx:id="passwordField" promptText="Password" layoutX="150.0" layoutY="250.0"/>
+
+    <Label text="Check password:" layoutX="10.0" layoutY="300.0"/>
+
+    <TextField fx:id="passwordCheckField" promptText="Repeat password" layoutX="150.0" layoutY="300.0"/>
+
+    <Button text="Register user" fx:id="register" onAction="#handleRegisterUser" layoutX="235.0" layoutY="450.0"/>
+
+    <Label text="" fx:id="messageBox" layoutX="10.0" layoutY="500.0"/>
+
+</AnchorPane>
