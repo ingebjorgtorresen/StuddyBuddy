@@ -13,19 +13,26 @@ import java.io.IOException;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyRegistration;
 
+/**
+ * Class for deserializing StuddyBuddy objects.
+ */
 public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
 
-  StuddyBuddyRegistrationDeserializer registrationDeserializer = new StuddyBuddyRegistrationDeserializer();
+  StuddyBuddyRegistrationDeserializer registrationDeserializer 
+      = new StuddyBuddyRegistrationDeserializer();
 
-  /*
-   * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Name": "...", Registrations: [...] }
+  /**
+   * Deserialize help-method.
+   * (useful in StuddyBuddyRegistrationDeserializer)
+   * format: { "Name": "...", Registrations: [...] }
+   *
+   * @param jsonNode node to deserialze.
+   * @return deserialized StuddyBuddy objects.
+   * @throws JsonProcessingException if problem with processing JsonNode.
+   * @throws IOException if problem with input or output.
    */
-
-  // public class StuddyBuddyDeserializer<JsonParser> extends
-  // JsonDeserializer<TodoItem> {
-
-  // deserialize help-method (useful in StuddyBuddyRegistrationDeserializer)
-  public StuddyBuddy deserialize(JsonNode jsonNode) throws JsonProcessingException, IOException {
+  public StuddyBuddy deserialize(JsonNode jsonNode) 
+      throws JsonProcessingException, IOException {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;
       StuddyBuddy studdyBuddy = new StuddyBuddy();
@@ -38,7 +45,8 @@ public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
       JsonNode registrationsNode = objectNode.get("Registrations");
       if (registrationsNode instanceof ArrayNode) {
         for (JsonNode registrationNode : (ArrayNode) registrationsNode) {
-          StuddyBuddyRegistration registration = registrationDeserializer.deserialize(registrationNode);
+          StuddyBuddyRegistration registration
+              = registrationDeserializer.deserialize(registrationNode);
           if (registration != null) {
             studdyBuddy.addRegistration(registration);
           }
@@ -49,11 +57,15 @@ public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
     return null;
   }
 
+  /**
+   * Deserialize method.
+   *
+   * @return adeserialized StuddyBuddy object.
+   */
   @Override
   public StuddyBuddy deserialize(JsonParser p, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
     TreeNode treeNode = p.getCodec().readTree(p);
     return deserialize((JsonNode) treeNode);
   }
-
 }

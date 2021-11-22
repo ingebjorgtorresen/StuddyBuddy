@@ -26,7 +26,7 @@ public class StuddyBuddy {
 
   /**
    * Method for setting name of the user if it is a valid name.
-   * 
+   *
    * @param name the name to set.
    */
   public void setName(String name) {
@@ -40,7 +40,7 @@ public class StuddyBuddy {
 
   /**
    * Method for getting the name of the user.
-   * 
+   *
    * @return name of the user.
    */
   public String getName() {
@@ -48,9 +48,10 @@ public class StuddyBuddy {
   }
 
   /**
-   * Method for setting password if it is valid. A valid password has at least 8 characters, and
+   * Method for setting password if it is valid. 
+   * A valid password has at least 8 characters, and
    * consists of only digits and letters. Also throws exeption if password is invalid.
-   * 
+   *
    * @param password the password the user wishes to set.
    */
   public void setPassword(String password) {
@@ -63,7 +64,7 @@ public class StuddyBuddy {
 
   /**
    * Method for getting the password connected to the user.
-   * 
+   *
    * @return the password of the user.
    */
   public String getPassword() {
@@ -72,7 +73,7 @@ public class StuddyBuddy {
 
   /**
    * Method for making an iterator over StuddyBuddyRegistration objects.
-   * 
+   *
    * @return iterator over StudduBuddyregistration objects.
    */
   public Iterator<StuddyBuddyRegistration> iterator() {
@@ -81,7 +82,7 @@ public class StuddyBuddy {
 
   /**
    * Method for adding a registration to the users registration object.
-   * 
+   *
    * @param registration the registration we wnat to add.
    */
   public void addRegistration(StuddyBuddyRegistration registration) {
@@ -90,7 +91,7 @@ public class StuddyBuddy {
 
   /**
    * Method for removing an element in the list over registrations if it exists.
-   * 
+   *
    * @param registration the registration we want to remove.
    */
   public void removeRegistration(StuddyBuddyRegistration registration) {
@@ -99,13 +100,18 @@ public class StuddyBuddy {
 
   /**
    * Method for getting the list over this users registrations.
-   * 
+   *
    * @return the list over registrations.
    */
   public List<StuddyBuddyRegistration> getRegistrations() {
     return registrations;
   }
 
+  /**
+   * Updates a StuddyBuddy object.
+   *
+   * @param buddy the updates object.
+   */
   public void updateStuddyBuddyObject(StuddyBuddy buddy) {
     this.name = buddy.name;
     this.password = buddy.password;
@@ -113,7 +119,9 @@ public class StuddyBuddy {
 
   }
 
-  // Return a studdyBuddy object by its name
+  /**
+   * toString that returns the StuddyBuddys name.
+   */
   @Override
   public String toString() {
     return getName();

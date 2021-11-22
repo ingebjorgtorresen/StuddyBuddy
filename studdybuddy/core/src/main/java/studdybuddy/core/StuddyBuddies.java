@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * Class for all StuddyBuddies/users. Has a list of all StuddyBuddy objects.
+ * Class for all StuddyBuddies.
+ * Has a list of all StuddyBuddy objects.
  */
 
 public class StuddyBuddies implements Iterable<StuddyBuddy> {
@@ -13,10 +14,10 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   List<StuddyBuddy> studdyBuddies = new ArrayList<>();
 
   /**
-   * Method for searching for StuddyBuddy by name. Return StuddyBuddy if it exists. Else return null.
+   * Method for searching for StuddyBuddy by name.
    *
-   * @param name name of the user we want to get
-   * @return StuddyBuddy if it exists or null
+   * @param name name of the user we want to get.
+   * @return StuddyBuddy if it exists or null.
    */
   public StuddyBuddy getStuddyBuddy(String name) {
     for (StuddyBuddy buddy : this.studdyBuddies) {
@@ -29,7 +30,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
   /**
    * Method that checks if StuddyBuddy exitst by name.
-   * 
+   *
    * @param name name of the user
    * @return true if user exists, else null
    */
@@ -39,7 +40,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
   /**
    * Method for adding a new StuddyBuddy to StuddyBuddies.
-   * 
+   *
    * @param buddy StuddyBuddy we want to add.
    */
   public void addStuddyBuddy(StuddyBuddy buddy) {
@@ -54,7 +55,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
   /**
    * Method for adding many StuddyBuddy objects at once.
-   * 
+   *
    * @param buddies StuddyBuddy Objects we want to add.
    */
   public void addStuddyBuddies(StuddyBuddy... buddies) {
@@ -65,7 +66,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
   /**
    * Method that removes StudyBuddy if it exists.
-   * 
+   *
    * @param buddy StuddyBuddy to remove.
    */
   public void removeStuddyBuddy(StuddyBuddy buddy) {
@@ -82,7 +83,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
   /**
    * Method for getting list over all StuddyBuddy objects.
-   * 
+   *
    * @return the list that contains StuddyBuddy objects.
    */
   public List<StuddyBuddy> getStuddyBuddies() {
@@ -97,15 +98,10 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     StringBuilder builder = new StringBuilder("Buddies: ");
     for (StuddyBuddy buddy : studdyBuddies) {
       builder.append(
-          "\n" + buddy.getName() + "\n" + buddy.getRegistrations() + "\n-----------------------------------------");
-      // builder.append("\n" + buddy.getRegistrations());
+          "\n" + buddy.getName() 
+          + "\n" + buddy.getRegistrations()
+          + "\n-----------------------------------------");
     }
     return builder.toString();
   }
-
-  /*
-   * @Override public String toString() { String buddies = ""; for (StuddyBuddy buddy : studdyBuddies)
-   * { buddies += buddy.getName() + "\n"; } return buddies; }
-   */
-
 }
