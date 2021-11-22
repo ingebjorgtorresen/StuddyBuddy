@@ -22,6 +22,7 @@ public class StuddyBuddiesService {
   private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();;
   private String buddiesJsonFileName = "buddies.json";
   private String initialBuddiesFileName = "initial_buddies.json";
+  private boolean initialBuddiesInBuddies = false;
 
   public StuddyBuddiesService() {
     putInitialStuddyBuddiesObject();
@@ -55,8 +56,12 @@ public class StuddyBuddiesService {
    * in the resources folder.
    */
   protected void putInitialStuddyBuddiesObject() {
-    buddies = getInitialStuddyBuddiesObject();
-    writeBuddies(buddies);
+    if (!initialBuddiesInBuddies) {
+      buddies = getInitialStuddyBuddiesObject();
+      writeBuddies(buddies);
+      initialBuddiesInBuddies = true;
+    }
+
   }
 
   /**
