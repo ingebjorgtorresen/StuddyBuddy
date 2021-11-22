@@ -185,7 +185,5 @@ public class RegisterStuddyBuddyController {
             messageBox.setText("Could not save registration.");
             e.printStackTrace();
         }
-
     }
-
 }

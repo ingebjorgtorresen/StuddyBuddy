@@ -1,30 +1,31 @@
 package ui;
 
 import core.*;
-import json.*;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.Writer;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
+import javafx.scene.control.Label;
 import java.net.URL;
+import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+import json.*;
 
+/**
+ * Controller class for a registration
+ */
 public class StuddyBuddyRegistrationController {
-
     private StuddyBuddy buddy;
     private StuddyBuddies buddies = new StuddyBuddies();
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
@@ -350,5 +351,4 @@ public class StuddyBuddyRegistrationController {
             e.printStackTrace();
         }
     }
-
 }

@@ -20,6 +20,9 @@ import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import json.StuddyBuddiesPersistence;
 
+/**
+ * Controller class for the forum page
+ */
 public class StuddyBuddyForumController {
 
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
@@ -180,5 +183,4 @@ public class StuddyBuddyForumController {
         setUpBuddies();
         allRegistrationsText.setText(buddies.toString());
     }
-
 }
