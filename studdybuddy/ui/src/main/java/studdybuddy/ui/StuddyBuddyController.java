@@ -1,9 +1,6 @@
 package studdybuddy.ui;
 
 /*import java.io.IOException;
-
-import studdybuddy.core.*;
-import studdybuddy.dataaccess.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -11,12 +8,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import java.net.URL;*/
 
 /**
  * Controller class for Log in to a StuddyBuddy account.
  */
-
 public class StuddyBuddyController {
 
     /*
@@ -40,8 +35,7 @@ public class StuddyBuddyController {
     }
 
     /**
-     * sets the name to be the input in nameField the name can only consist of
-     * letters and space.
+     * sets the name to be the input in nameField the name can only consist of letters and space.
      * 
      * @return the name from input
      *

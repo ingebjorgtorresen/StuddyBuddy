@@ -5,22 +5,22 @@ package studdybuddy.restserver;
  */
 public class WelcomeService {
 
-    private String welcomeText;
+  private String welcomeText;
 
-    /**
-     * Constructor that sets the text.
-     */
-    public WelcomeService() {
-        this.welcomeText = "Welcome to rest API for StuddyBuddy.";
-    }
+  /**
+   * Constructor that sets the text.
+   */
+  public WelcomeService() {
+    this.welcomeText = "Welcome to rest API for StuddyBuddy.";
+  }
 
-    /**
-     * Method for getting the welcome text.
-     * 
-     * @return the welcome text
-     */
-    public String getWelcomeText() {
-        return this.welcomeText;
-    }
-    
+  /**
+   * Method for getting the welcome text.
+   *
+   * @return the welcome text
+   */
+  public String getWelcomeText() {
+    return this.welcomeText;
+  }
+
 }
