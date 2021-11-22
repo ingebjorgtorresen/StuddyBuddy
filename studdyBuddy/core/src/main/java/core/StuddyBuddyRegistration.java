@@ -5,118 +5,118 @@ import java.time.format.DateTimeFormatter;
 
 public class StuddyBuddyRegistration {
 
-	private StuddyBuddy studdyBuddy;
-	private String date;
-	private String startTime;
-	private String endTime;
-	private String room;
-	private String course;
+  private StuddyBuddy studdyBuddy;
+  private String date;
+  private String startTime;
+  private String endTime;
+  private String room;
+  private String course;
 
-	public void setStuddyBuddy(StuddyBuddy studdyBuddy) {
-		this.studdyBuddy = studdyBuddy;
-	}
+  public void setStuddyBuddy(StuddyBuddy studdyBuddy) {
+    this.studdyBuddy = studdyBuddy;
+  }
 
-	public StuddyBuddy getStuddyBuddy() {
-		return studdyBuddy;
-	}
+  public StuddyBuddy getStuddyBuddy() {
+    return studdyBuddy;
+  }
 
-	public String getDate() {
-		return date;
-	}
+  public String getDate() {
+    return date;
+  }
 
-	public String getUsername() {
-		return studdyBuddy.getName();
-	}
+  public String getUsername() {
+    return studdyBuddy.getName();
+  }
 
-	public void setDate(LocalDate date) {
-		StuddyBuddyValidation.checkDateNotNull(date);
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
-		String formattedString = date.format(formatter);
-		this.date = formattedString;
-	}
+  public void setDate(LocalDate date) {
+    StuddyBuddyValidation.checkDateNotNull(date);
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+    String formattedString = date.format(formatter);
+    this.date = formattedString;
+  }
 
-	/**
-	 * sets the start time.
-	 * 
-	 * @param startTime
-	 * @throws IllegalArgumentException if the format is incorrect
-	 */
-	public void setStartTime(String startTime) {
-		StuddyBuddyValidation.checkNotNull(startTime);
-		StuddyBuddyValidation.checkTimeFormat(startTime);
+  /**
+   * sets the start time.
+   * 
+   * @param startTime
+   * @throws IllegalArgumentException if the format is incorrect
+   */
+  public void setStartTime(String startTime) {
+    StuddyBuddyValidation.checkNotNull(startTime);
+    StuddyBuddyValidation.checkTimeFormat(startTime);
 
-		this.startTime = startTime;
+    this.startTime = startTime;
 
-	}
+  }
 
-	public String getStartTime() {
-		return startTime;
-	}
+  public String getStartTime() {
+    return startTime;
+  }
 
-	/**
-	 * sets the end time.
-	 * 
-	 * @param endTime
-	 * @throws IllegalArgumentException if the format is incorrect or if startTime is before endTime
-	 */
-	public void setEndTime(String endTime) {
-		StuddyBuddyValidation.checkNotNull(endTime);
-		StuddyBuddyValidation.checkTimeFormat(endTime);
+  /**
+   * sets the end time.
+   * 
+   * @param endTime
+   * @throws IllegalArgumentException if the format is incorrect or if startTime is before endTime
+   */
+  public void setEndTime(String endTime) {
+    StuddyBuddyValidation.checkNotNull(endTime);
+    StuddyBuddyValidation.checkTimeFormat(endTime);
 
-		if (StuddyBuddyValidation.checkStartTimeBeforeEndTime(this.startTime, endTime) == true) {
-			this.endTime = endTime;
-		}
+    if (StuddyBuddyValidation.checkStartTimeBeforeEndTime(this.startTime, endTime) == true) {
+      this.endTime = endTime;
+    }
 
-		else {
-			throw new IllegalArgumentException("Endtime can not be before starttime.");
-		}
-	}
+    else {
+      throw new IllegalArgumentException("Endtime can not be before starttime.");
+    }
+  }
 
-	public String getEndTime() {
-		return endTime;
-	}
+  public String getEndTime() {
+    return endTime;
+  }
 
-	/**
-	 * @param room
-	 * @throws IllegalArgumentException if the format is incorrect.
-	 */
-	public void setRoom(String room) {
-		StuddyBuddyValidation.checkNotNull(room);
+  /**
+   * @param room
+   * @throws IllegalArgumentException if the format is incorrect.
+   */
+  public void setRoom(String room) {
+    StuddyBuddyValidation.checkNotNull(room);
 
-		if (StuddyBuddyValidation.checkRoom(room) == false) {
-			throw new IllegalArgumentException(
-					"Can not use other characters than letters, digits, '-' and ' '. You wrote: " + room);
-		}
-		this.room = room;
-	}
+    if (StuddyBuddyValidation.checkRoom(room) == false) {
+      throw new IllegalArgumentException(
+          "Can not use other characters than letters, digits, '-' and ' '. You wrote: " + room);
+    }
+    this.room = room;
+  }
 
-	public String getRoom() {
-		return room;
-	}
+  public String getRoom() {
+    return room;
+  }
 
-	/**
-	 * sets course
-	 * 
-	 * @param course
-	 * @throws IllegalArgumentException if the format of the course param is wrong.
-	 */
-	public void setCourse(String course) {
-		StuddyBuddyValidation.checkNotNull(course);
+  /**
+   * sets course
+   * 
+   * @param course
+   * @throws IllegalArgumentException if the format of the course param is wrong.
+   */
+  public void setCourse(String course) {
+    StuddyBuddyValidation.checkNotNull(course);
 
-		if (StuddyBuddyValidation.checkCourse(course) == false) {
-			throw new IllegalArgumentException(
-					"Can not use other characters than letters, digits, '-' and ' '. You wrote: " + course);
-		}
-		this.course = course;
-	}
+    if (StuddyBuddyValidation.checkCourse(course) == false) {
+      throw new IllegalArgumentException(
+          "Can not use other characters than letters, digits, '-' and ' '. You wrote: " + course);
+    }
+    this.course = course;
+  }
 
-	public String getCourse() {
-		return course;
-	}
+  public String getCourse() {
+    return course;
+  }
 
-	@Override
-	public String toString() {
-		return "Date: " + getDate() + "\n" + "Room: " + getRoom() + "\n" + "Course: " + getCourse() + "\n" + "Start time: "
-				+ getStartTime() + "\n" + "End time: " + getEndTime() + "\n ";
-	}
+  @Override
+  public String toString() {
+    return "Date: " + getDate() + "\n" + "Room: " + getRoom() + "\n" + "Course: " + getCourse() + "\n" + "Start time: "
+        + getStartTime() + "\n" + "End time: " + getEndTime() + "\n ";
+  }
 }
