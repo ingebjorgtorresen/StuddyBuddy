@@ -1,7 +1,9 @@
 package studdybuddy.dataaccess;
 
-import studdybuddy.core.*;
+
+import studdybuddy.core.StuddyBuddies;
 import studdybuddy.json.StuddyBuddiesPersistence;
+import studdybuddy.core.StuddyBuddy;
 
 /**
  * Class that works locally with data. Can use pre-defined StuddyBuddy object, or read from file.

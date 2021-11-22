@@ -1,8 +1,8 @@
 package studdybuddy.core;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  * Class for StuddyBuddy, which is the user class. Each user has a name and a password.

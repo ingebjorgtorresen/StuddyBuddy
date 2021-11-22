@@ -1,6 +1,7 @@
 package studdybuddy.dataaccess;
 
-import studdybuddy.core.*;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
 
 /**
  * Interface for methods GET, PUT and POST methods used in DataAccess classes.

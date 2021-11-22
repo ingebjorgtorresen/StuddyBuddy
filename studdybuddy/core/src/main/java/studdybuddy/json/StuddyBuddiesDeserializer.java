@@ -11,7 +11,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import java.io.IOException;
-import studdybuddy.core.*;
 
 public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
 

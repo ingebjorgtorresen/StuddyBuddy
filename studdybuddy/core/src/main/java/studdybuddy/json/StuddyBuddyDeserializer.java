@@ -1,7 +1,5 @@
 package studdybuddy.json;
 
-import studdybuddy.core.*;
-
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.TreeNode;
@@ -12,6 +10,8 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import java.io.IOException;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
 
 public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
 

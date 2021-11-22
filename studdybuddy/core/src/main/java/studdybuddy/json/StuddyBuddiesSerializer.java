@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import java.io.IOException;
-import studdybuddy.core.*;
 
 /**
  * Serializer for StuddyBudies object.

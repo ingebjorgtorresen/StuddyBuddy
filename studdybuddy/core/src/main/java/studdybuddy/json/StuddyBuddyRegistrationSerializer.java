@@ -1,7 +1,6 @@
 package studdybuddy.json;
 
 import studdybuddy.core.StuddyBuddyRegistration;
-import studdybuddy.core.*;
 import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;

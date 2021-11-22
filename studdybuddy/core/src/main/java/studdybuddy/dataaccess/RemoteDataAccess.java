@@ -1,17 +1,17 @@
 package studdybuddy.dataaccess;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpRequest.BodyPublishers;
-import java.nio.charset.StandardCharsets;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.net.http.HttpResponse;
-import studdybuddy.core.*;
+import java.nio.charset.StandardCharsets;
+import studdybuddy.core.StuddyBuddies;
 import studdybuddy.json.StuddyBuddiesPersistence;
+import studdybuddy.core.StuddyBuddy;
 
 /**
  * Class for communcating with and accessing server. Has methods for GET, PUT, POST that uses

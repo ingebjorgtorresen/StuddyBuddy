@@ -1,7 +1,6 @@
 package studdybuddy.json;
 
 import studdybuddy.core.StuddyBuddyRegistration;
-import studdybuddy.core.*;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;

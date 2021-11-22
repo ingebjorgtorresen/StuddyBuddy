@@ -3,7 +3,6 @@ package studdybuddy.json;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyRegistration;
 import studdybuddy.core.StuddyBuddies;
-import studdybuddy.core.*;
 import com.fasterxml.jackson.core.Version;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 

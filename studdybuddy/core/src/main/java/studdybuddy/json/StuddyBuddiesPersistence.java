@@ -1,7 +1,5 @@
 package studdybuddy.json;
 
-import studdybuddy.core.*;
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -11,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.io.Reader;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import studdybuddy.core.StuddyBuddies;
 
 /**
  * Wrapper class for JSON serialization, to avoid direct compile dependecies on Jackson for other
