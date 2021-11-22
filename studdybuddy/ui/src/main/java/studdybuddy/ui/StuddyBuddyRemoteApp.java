@@ -8,17 +8,17 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class StuddyBuddyRemoteApp extends Application {
-    
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("RemoteApp.fxml"));
-        Parent parent = fxmlLoader.load();
-        stage.setScene(new Scene(parent));
-        stage.setTitle("StuddyBuddy");
-        stage.show();
-    }
 
-    public static void main(String[] args) {
-        launch(StuddyBuddyRemoteApp.class);
-    }
+  @Override
+  public void start(Stage stage) throws IOException {
+    FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource("RemoteApp.fxml"));
+    Parent parent = fxmlLoader.load();
+    stage.setScene(new Scene(parent));
+    stage.setTitle("StuddyBuddy");
+    stage.show();
+  }
+
+  public static void main(String[] args) {
+    launch(StuddyBuddyRemoteApp.class);
+  }
 }
