@@ -46,6 +46,7 @@ public class StuddyBuddiesPersistence {
     * @throws IOException
     */
     public void writeStuddyBuddies(StuddyBuddies buddies, Writer writer) throws IOException {
+        System.out.println("KOMMER HIT");
         mapper.writerWithDefaultPrettyPrinter().writeValue(writer, buddies);
     }
 
@@ -97,6 +98,7 @@ public class StuddyBuddiesPersistence {
      * @throws IllegalStateException
      */
     public void saveStuddyBuddies(StuddyBuddies studdyBuddies) throws IOException, IllegalStateException {
+        System.out.println("Savepath: " + savePath);
         if (savePath == null) {
             throw new IllegalStateException("file path is not set");
         }

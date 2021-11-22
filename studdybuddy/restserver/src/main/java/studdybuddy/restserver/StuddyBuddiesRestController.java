@@ -71,9 +71,7 @@ public class StuddyBuddiesRestController {
   @PutMapping(path = "/{name}")
   public StuddyBuddy putStuddyBuddy(@PathVariable("name") String name,
       @RequestBody StuddyBuddy studdyBuddy) {
-    //boolean added = getStuddyBuddies().putStuddyBuddy(name) == null;
-    buddiesService.getStuddyBuddies().putStuddyBuddy(name);
-    autoSaveStuddyBuddies();
+    buddiesService.autoSaveStuddyBuddies();
     return studdyBuddy;
   }
 

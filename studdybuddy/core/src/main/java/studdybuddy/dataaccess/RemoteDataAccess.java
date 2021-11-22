@@ -76,20 +76,22 @@ public class RemoteDataAccess implements DataAccess {
     @Override
     public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
         try {
-            String byddyAsString = mapper.writeValueAsString(buddy);
+            String buddyAsString = mapper.writeValueAsString(buddy);
             HttpRequest request = HttpRequest.newBuilder(studdybuddyURI(buddy.getName()))
                 .header("Accept", "application/json")
                 .header("Content-Type", "application/json")
-                .PUT(BodyPublishers.ofString(byddyAsString)).build();
-                System.out.println(request.toString());
+                .PUT(BodyPublishers.ofString(buddyAsString)).build();
             final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
                 HttpResponse.BodyHandlers.ofString());
-                System.out.println(response);
-            String responseBuddyString = response.body();
-            StuddyBuddy addedBuddy = mapper.readValue(responseBuddyString, StuddyBuddy.class);
-            if(addedBuddy != null) {
-                buddies.putStuddyBuddy(buddy.getName());
+
+            if (response.statusCode() != 200) {
+                System.err.println("Request was unsuccessfull");
             }
+            // String responseBuddyString = response.body();
+            /*StuddyBuddy addedBuddy = mapper.readValue(responseBuddyString, StuddyBuddy.class);
+            if(addedBuddy != null) {
+                buddies.addStuddyBuddy(buddy);
+            }*/
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
             throw new IllegalArgumentException("Could not save user-object to server.");
@@ -112,7 +114,7 @@ public class RemoteDataAccess implements DataAccess {
             String responseString = response.body();
             Boolean added = mapper.readValue(responseString, Boolean.class);
             if(added != null) {
-                buddies.putStuddyBuddy(buddy.getName());
+                buddies.addStuddyBuddy(buddy);
             }
         } catch (InterruptedException | IOException e) {
             throw new IllegalArgumentException("Could not save user-object to server.");

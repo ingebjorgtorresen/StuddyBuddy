@@ -125,8 +125,6 @@ public class RegisterStuddyBuddyController {
         StuddyBuddy buddy = createNewStuddyBuddy();
         buddies.addStuddyBuddy(buddy);
         dataAccess.putStuddyBuddy(buddy, buddies);
-        System.out.println("put kjøres med buddy: " + buddy);
-        System.out.println("og buddies: " + buddies);
         //messageBox.setText("Registering new user was sucessfull.");
     }
 

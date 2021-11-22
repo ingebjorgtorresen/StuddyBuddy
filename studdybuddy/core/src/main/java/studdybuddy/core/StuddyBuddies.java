@@ -35,10 +35,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @return true if user exists, else null
      */
     private boolean checkIfStuddyBuddyExists(String name) {
-        if (getStuddyBuddy(name) != null) {
-            return true;
-        }
-        return false;
+        return  getStuddyBuddy(name) != null;
     }
 
     /**
@@ -47,14 +44,13 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
      * @param buddy StuddyBuddy we want to add.
      */
     public void addStuddyBuddy(StuddyBuddy buddy) {
-        if (checkIfStuddyBuddyExists(buddy.getName()) == false) {
+        if (!checkIfStuddyBuddyExists(buddy.getName())) {
             StuddyBuddy newStuddyBuddy = (StuddyBuddy) buddy;
             this.studdyBuddies.add(newStuddyBuddy);
             buddy.setStuddyBuddies(this);
         } else {
             throw new IllegalArgumentException("Already user existing with name: " + buddy.getName());
         }
-
     }
 
     /**
@@ -62,17 +58,18 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
     *
     * @param name the name of the StuddyBuddy we want to add.
     * @return buddy if it was added or else null
-    */
-    public StuddyBuddy putStuddyBuddy(String name) {
+    
+    public StuddyBuddy putStuddyBuddy(StuddyBuddy buddy) {
         // TODO: add must be called before get
-        StuddyBuddy buddy = getStuddyBuddy(name);
+        addStuddyBuddy(buddy);
+        //StuddyBuddy buddy = getStuddyBuddy(name);
         try {
             addStuddyBuddy(buddy);
         } catch (IllegalArgumentException e) {
             return null;
         }
         return buddy; 
-    }
+    }*/
 
     /**
      * Method for adding many StuddyBuddy objects at once.
