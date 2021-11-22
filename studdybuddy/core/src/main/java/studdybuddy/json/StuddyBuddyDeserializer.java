@@ -15,46 +15,45 @@ import java.io.IOException;
 
 public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
 
-    StuddyBuddyRegistrationDeserializer registrationDeserializer = new StuddyBuddyRegistrationDeserializer();
+  StuddyBuddyRegistrationDeserializer registrationDeserializer = new StuddyBuddyRegistrationDeserializer();
 
-    /*
-     * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Name": "...",
-     * Registrations: [...] }
-     */
+  /*
+   * formatet vi ønsker at StuddyBuddy-objektene skal se ut: { "Name": "...", Registrations: [...] }
+   */
 
-    // public class StuddyBuddyDeserializer<JsonParser> extends
-    // JsonDeserializer<TodoItem> {
+  // public class StuddyBuddyDeserializer<JsonParser> extends
+  // JsonDeserializer<TodoItem> {
 
-    // deserialize help-method (useful in StuddyBuddyRegistrationDeserializer)
-    public StuddyBuddy deserialize(JsonNode jsonNode) throws JsonProcessingException, IOException {
-        if (jsonNode instanceof ObjectNode) {
-            ObjectNode objectNode = (ObjectNode) jsonNode;
-            StuddyBuddy studdyBuddy = new StuddyBuddy();
-            JsonNode nameNode = objectNode.get("Name");
+  // deserialize help-method (useful in StuddyBuddyRegistrationDeserializer)
+  public StuddyBuddy deserialize(JsonNode jsonNode) throws JsonProcessingException, IOException {
+    if (jsonNode instanceof ObjectNode) {
+      ObjectNode objectNode = (ObjectNode) jsonNode;
+      StuddyBuddy studdyBuddy = new StuddyBuddy();
+      JsonNode nameNode = objectNode.get("Name");
 
-            if (nameNode instanceof TextNode) {
-                studdyBuddy.setName((nameNode).asText());
-            }
+      if (nameNode instanceof TextNode) {
+        studdyBuddy.setName((nameNode).asText());
+      }
 
-            JsonNode registrationsNode = objectNode.get("Registrations");
-            if (registrationsNode instanceof ArrayNode) {
-                for (JsonNode registrationNode : (ArrayNode) registrationsNode) {
-                    StuddyBuddyRegistration registration = registrationDeserializer.deserialize(registrationNode);
-                    if (registration != null) {
-                        studdyBuddy.addRegistration(registration);
-                    }
-                }
-            }
-            return studdyBuddy;
+      JsonNode registrationsNode = objectNode.get("Registrations");
+      if (registrationsNode instanceof ArrayNode) {
+        for (JsonNode registrationNode : (ArrayNode) registrationsNode) {
+          StuddyBuddyRegistration registration = registrationDeserializer.deserialize(registrationNode);
+          if (registration != null) {
+            studdyBuddy.addRegistration(registration);
+          }
         }
-        return null;
+      }
+      return studdyBuddy;
     }
+    return null;
+  }
 
-    @Override
-    public StuddyBuddy deserialize(JsonParser p, DeserializationContext ctxt)
-            throws IOException, JsonProcessingException {
-        TreeNode treeNode = p.getCodec().readTree(p);
-        return deserialize((JsonNode) treeNode);
-    }
+  @Override
+  public StuddyBuddy deserialize(JsonParser p, DeserializationContext ctxt)
+      throws IOException, JsonProcessingException {
+    TreeNode treeNode = p.getCodec().readTree(p);
+    return deserialize((JsonNode) treeNode);
+  }
 
 }

@@ -1,10 +1,7 @@
 package studdybuddy.json;
 
-<<<<<<< HEAD:studdyBuddy/core/src/main/java/json/StuddyBuddyRegistrationSerializer.java
-import core.StuddyBuddyRegistration;
-=======
+import studdybuddy.core.StuddyBuddyRegistration;
 import studdybuddy.core.*;
->>>>>>> c90ec2bc42f117c191c6201f95bb5f09a8e1ca68:studdybuddy/core/src/main/java/studdybuddy/json/StuddyBuddyRegistrationSerializer.java
 import java.io.IOException;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
