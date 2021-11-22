@@ -113,11 +113,10 @@ public class RegisterStuddyBuddyController {
     }
 
     /*
-     * private void saveStuddyBuddyToFile() throws IOException { try (Writer writer
-     * = new FileWriter(System.getProperty("user.home") + userRegistrationFileName,
-     * StandardCharsets.UTF_8)) { persistence.writeStuddyBuddies(buddies, writer);
-     * writer.flush(); } catch (IOException e) { throw new
-     * IOException("Could not save registration."); } }
+     * private void saveStuddyBuddyToFile() throws IOException { try (Writer writer = new
+     * FileWriter(System.getProperty("user.home") + userRegistrationFileName, StandardCharsets.UTF_8)) {
+     * persistence.writeStuddyBuddies(buddies, writer); writer.flush(); } catch (IOException e) { throw
+     * new IOException("Could not save registration."); } }
      */
 
     @FXML

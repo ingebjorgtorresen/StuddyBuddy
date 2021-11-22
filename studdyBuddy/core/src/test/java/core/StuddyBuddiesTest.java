@@ -15,7 +15,7 @@ public class StuddyBuddiesTest {
     private StuddyBuddies buddies;
 
     /**
-     * Setup for each test. 
+     * Setup for each test.
      */
     @BeforeEach
     public void setup() {
@@ -23,7 +23,7 @@ public class StuddyBuddiesTest {
     }
 
     /**
-     * Method for testing getStuddyBuddy method. 
+     * Method for testing getStuddyBuddy method.
      */
     @Test
     public void testGetStuddyBuddy() {
@@ -35,8 +35,8 @@ public class StuddyBuddiesTest {
     }
 
     /**
-     * Method for testing addStuddyBuddy method.
-     * It indirectly tests if checkIfStuddyBuddyExists works, because it is used in addStuddyBuddy.
+     * Method for testing addStuddyBuddy method. It indirectly tests if checkIfStuddyBuddyExists works,
+     * because it is used in addStuddyBuddy.
      */
     @Test
     public void testAddStuddyBuddy() {
@@ -48,7 +48,7 @@ public class StuddyBuddiesTest {
     }
 
     /**
-     * Method for testing addStuddyBuddies method. 
+     * Method for testing addStuddyBuddies method.
      */
     @Test
     public void testAddStuddyBuddies() {
@@ -64,7 +64,7 @@ public class StuddyBuddiesTest {
     }
 
     /**
-     * Method for testing removeStuddyBuddy method. 
+     * Method for testing removeStuddyBuddy method.
      */
     @Test
     public void testRemoveStuddyBuddy() {

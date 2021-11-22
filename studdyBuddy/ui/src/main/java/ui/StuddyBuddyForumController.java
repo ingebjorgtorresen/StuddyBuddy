@@ -94,8 +94,8 @@ public class StuddyBuddyForumController {
 
     public StuddyBuddies getRegistratedStuddyBuddies() {
         StuddyBuddies registeredBuddies = null;
-        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName,
-                StandardCharsets.UTF_8)) {
+        try (Reader reader =
+                new FileReader(System.getProperty("user.home") + registrationsFileName, StandardCharsets.UTF_8)) {
             registeredBuddies = persistence.readStuddyBuddies(reader);
         } catch (Exception e) {
             System.err.println("Couldn´t read from file");
@@ -107,8 +107,7 @@ public class StuddyBuddyForumController {
     /**
      * public void displayRegistrations() { StuddyBuddies registeredBuddies =
      * getRegistratedStuddyBuddies(); if (registeredBuddies != null){
-     * allRegistrationsText.setText(registeredBuddies.getStuddyBuddies().toString());
-     * } }
+     * allRegistrationsText.setText(registeredBuddies.getStuddyBuddies().toString()); } }
      */
 
     private StuddyBuddies buddies = new StuddyBuddies();

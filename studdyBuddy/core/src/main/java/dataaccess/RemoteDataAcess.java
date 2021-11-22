@@ -11,8 +11,8 @@ import java.net.http.HttpResponse;
 import json.StuddyModule;
 
 /**
- * Class for communcating with and accessing server. Has methods for GET, PUT,
- * POST that uses HttpRequest.
+ * Class for communcating with and accessing server. Has methods for GET, PUT, POST that uses
+ * HttpRequest.
  */
 public class RemoteDataAcess implements DataAccess {
 
@@ -46,8 +46,8 @@ public class RemoteDataAcess implements DataAccess {
         try {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "user/" + name))
                     .header("Accept", "application/json").GET().build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             final String responseString = response.body();
             ObjectMapper mapper = new ObjectMapper();
             mapper.registerModule(new StuddyModule());
@@ -71,8 +71,8 @@ public class RemoteDataAcess implements DataAccess {
         try {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + name + "/password"))
                     .header("Accept", "application/json").header("Content-Type", "application/json").GET().build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) { // HTTP 200 OK is code that indicates that the request has suceeded.
                 throw new IllegalArgumentException("User does not exist.");
             }
@@ -95,8 +95,8 @@ public class RemoteDataAcess implements DataAccess {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + buddy.getName() + "/password"))
                     .header("Accept", "application/json").header("Content-Type", "application/json")
                     .PUT(BodyPublishers.ofString(jsonString)).build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
                 throw new IllegalArgumentException("Could not save user-object to server.");
             }
@@ -118,8 +118,8 @@ public class RemoteDataAcess implements DataAccess {
             HttpRequest request = HttpRequest.newBuilder(URI.create(baseURI + "/user" + buddy.getName() + "/password"))
                     .header("Accept", "application/json").header("Content-Type", "application/json")
                     .POST(BodyPublishers.ofString(jsonString)).build();
-            final HttpResponse<String> response = HttpClient.newBuilder().build().send(request,
-                    HttpResponse.BodyHandlers.ofString());
+            final HttpResponse<String> response =
+                    HttpClient.newBuilder().build().send(request, HttpResponse.BodyHandlers.ofString());
             if (response.statusCode() != 200) {
                 throw new IllegalArgumentException("Could not save user-object to server.");
             }
