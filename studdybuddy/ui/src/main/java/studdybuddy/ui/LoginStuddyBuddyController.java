@@ -61,12 +61,23 @@ public class LoginStuddyBuddyController {
         this.buddies = buddies;
     }
 
+    /**
+     * Method that sets the password to be the input from passwordField, and can only consist of letters
+     * from the english alphabet(so can not use æ,ø,å) and digits
+     * 
+     * @return the password from input
+     */
     @FXML
     public String getInputPassword() {
         String passwordString = passwordField.getText();
         return passwordString;
     }
 
+    /**
+     * Method that checks if user exist in server, and return true if it exists, else false
+     * 
+     * @return true if user exists
+     */
     public boolean checkIfUserExist() {
         try {
             dataAccess.getStuddyBuddyByName(getInputName(), buddies);
@@ -76,6 +87,11 @@ public class LoginStuddyBuddyController {
         return true;
     }
 
+    /**
+     * Method that checks if input password mathces the acutal password of the user by its username
+     * 
+     * @return true if passwords match, else false
+     */
     public boolean checkPasswordsMacthes() {
         return getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName(), buddies));
     }
@@ -96,10 +112,10 @@ public class LoginStuddyBuddyController {
 
         try {
 
-            URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
+            URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            //StuddyBuddyForumController forumController = loader.getController();
+            StuddyBuddiesController buddiesController = loader.getController();
 
             checkIfUserExist();
             checkPasswordsMacthes();
@@ -121,12 +137,12 @@ public class LoginStuddyBuddyController {
                 setStuddyBuddyFromServer();
                 nameField.clear();
                 passwordField.clear();
-                //forumController.setStuddyBuddyFromLogin(studdyBuddy);
+                buddiesController.transferData(dataAccess, buddies, buddy);
 
-                Stage forumStage = new Stage();
-                forumStage.setTitle("Forum");
-                forumStage.setScene(new Scene(parent));
-                forumStage.show();
+                Stage buddiesStage = new Stage();
+                buddiesStage.setTitle("StuddyBuddies");
+                buddiesStage.setScene(new Scene(parent));
+                buddiesStage.show();
                 Stage thisStage = (Stage) nameField.getScene().getWindow();
                 thisStage.close();
             }
