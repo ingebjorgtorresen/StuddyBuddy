@@ -1,9 +1,11 @@
 package studdybuddy.dataaccess;
 
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.json.StuddyBuddiesPersistence;
@@ -14,8 +16,13 @@ import studdybuddy.json.StuddyBuddiesPersistence;
  */
 public class DirectDataAccess implements DataAccess {
 
-  private StuddyBuddiesPersistence buddiesPersistence = null;
-  private String filename;
+  private StuddyBuddiesPersistence buddiesPersistence;
+  private String filename = "directBuddies.json";
+
+  public DirectDataAccess() {
+    buddiesPersistence = new StuddyBuddiesPersistence();
+    buddiesPersistence.setSaveFilePath(filename);
+  }
 
   @Override
   public StuddyBuddy getStuddyBuddyByName(String name, StuddyBuddies buddies) {
@@ -58,12 +65,13 @@ public class DirectDataAccess implements DataAccess {
 
   @Override
   public StuddyBuddies getStuddyBuddies() {
-    StuddyBuddies buddies = null;
-    try (Reader reader = new FileReader(filename)) {
-      buddies = buddiesPersistence.readStuddyBuddies(reader);
+    try {
+      URL url = getClass().getResource(filename);
+      Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
+      return buddiesPersistence.readStuddyBuddies(reader);
     } catch (IOException e) {
       e.printStackTrace();
     }
-    return buddies;
+    return null;
   }
 }

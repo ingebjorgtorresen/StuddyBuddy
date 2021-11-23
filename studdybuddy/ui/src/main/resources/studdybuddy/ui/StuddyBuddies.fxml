@@ -29,6 +29,6 @@
         <content>
             <Label fx:id="allRegistrationsText" layoutX="10.0" layoutY="200.0"/>
         </content>
-    </ScrollPane> 
+    </ScrollPane>
 
 </AnchorPane>

@@ -144,7 +144,6 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
-    
     checkInputs();
     StuddyBuddy buddy = createNewStuddyBuddy();
     buddies.addStuddyBuddy(buddy);
@@ -153,6 +152,8 @@ public class RegisterStuddyBuddyController {
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
       Parent parent = (Parent) loader.load();
+      StuddyBuddiesController buddiesController = loader.getController();
+      buddiesController.transferData(dataAccess, buddies);
       Stage buddiesStage = new Stage();
       buddiesStage.setScene(new Scene(parent));
       buddiesStage.show();
