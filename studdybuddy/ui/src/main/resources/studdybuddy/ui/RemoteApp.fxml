@@ -19,6 +19,8 @@
             <Image url="@StuddyBuddy1.png"/>
     </ImageView>
 
-    <Button text="Get started" fx:id="getStartedButton" onAction="#handleGetStarted" layoutX="120.0" layoutY="350.0"/>
+    <Button text="Login" fx:id="loginButton" onAction="#handleLogin" layoutX="100.0" layoutY="350.0" prefWidth="150.0"/>
+
+    <Button text="Register new buddy" fx:id="registerButton" onAction="#handleRegister" layoutX="100.0" layoutY="380.0" prefWidth="150.0"/>
 
 </AnchorPane>

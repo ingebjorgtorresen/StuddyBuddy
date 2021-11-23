@@ -62,12 +62,12 @@ public class AppController {
   }
 
   /**
-   * method for handling GetStarted button.
+   * Method for click on register button.
+   * Redirects to register page.
    */
   @FXML
-  public void handleGetStarted() {
+  public void handleRegister() {
     try {
-      // Bytter til registreringssiden, hvertfall foreløpig
       FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterStuddyBuddy.fxml"));
       Parent parent = (Parent) loader.load();
       RegisterStuddyBuddyController registerController = loader.getController();
@@ -83,4 +83,14 @@ public class AppController {
       e.printStackTrace();
     }
   }
+
+  /**
+   * Method for click on login button.
+   * Redirects to login page.
+   */
+  @FXML
+  public void handleLogin() {
+    //TODO: Redirect to login page
+  }
+
 }
