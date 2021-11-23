@@ -33,23 +33,21 @@ public class RemoteDataAccess implements DataAccess {
   /**
    * Getter for StuddyBuddies.
    *
-   * @param buddies buddies.
    * @return buddies.
    */
-  public StuddyBuddies getStuddyBuddies(StuddyBuddies buddies) {
-    if (buddies == null) {
-      HttpRequest request = 
-          HttpRequest.newBuilder(baseUri)
-          .header("Accept", "application/json")
-          .GET().build();
-      try {
-        final HttpResponse<String> response =
-            HttpClient.newBuilder().build()
-            .send(request, HttpResponse.BodyHandlers.ofString());
-        buddies = mapper.readValue(response.body(), StuddyBuddies.class);
-      } catch (IOException | InterruptedException e) {
-        throw new RuntimeException(e);
-      }
+  public StuddyBuddies getStuddyBuddies() {
+    StuddyBuddies buddies = null;
+    HttpRequest request = 
+        HttpRequest.newBuilder(baseUri)
+        .header("Accept", "application/json")
+        .GET().build();
+    try {
+      final HttpResponse<String> response =
+          HttpClient.newBuilder().build()
+          .send(request, HttpResponse.BodyHandlers.ofString());
+      buddies = mapper.readValue(response.body(), StuddyBuddies.class);
+    } catch (IOException | InterruptedException e) {
+      throw new RuntimeException(e);
     }
     return buddies;
   }

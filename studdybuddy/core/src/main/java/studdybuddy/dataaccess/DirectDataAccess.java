@@ -1,5 +1,9 @@
 package studdybuddy.dataaccess;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.json.StuddyBuddiesPersistence;
@@ -11,6 +15,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class DirectDataAccess implements DataAccess {
 
   private StuddyBuddiesPersistence buddiesPersistence = null;
+  private String filename;
 
   @Override
   public StuddyBuddy getStuddyBuddyByName(String name, StuddyBuddies buddies) {
@@ -49,5 +54,16 @@ public class DirectDataAccess implements DataAccess {
     } catch (Exception e) {
       System.err.println("Could not save StuddyBuddies: " + e.getMessage());
     }
+  }
+
+  @Override
+  public StuddyBuddies getStuddyBuddies() {
+    StuddyBuddies buddies = null;
+    try (Reader reader = new FileReader(filename)) {
+      buddies = buddiesPersistence.readStuddyBuddies(reader);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    return buddies;
   }
 }
