@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
-import studdybuddy.core.StuddyBuddy;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
@@ -19,7 +18,6 @@ import studdybuddy.dataaccess.DataAccess;
 public class LoginStuddyBuddyController {
 
     private DataAccess dataAccess;
-    private StuddyBuddy buddy;
     private StuddyBuddies buddies;
 
     @FXML
@@ -78,7 +76,7 @@ public class LoginStuddyBuddyController {
      * 
      * @return true if user exists
      */
-    public boolean checkIfUserExist() {
+    public boolean userExists() {
         try {
             dataAccess.getStuddyBuddyByName(getInputName(), buddies);
         } catch( RuntimeException e) {
@@ -92,63 +90,42 @@ public class LoginStuddyBuddyController {
      * 
      * @return true if passwords match, else false
      */
-    public boolean checkPasswordsMacthes() {
+    public boolean passwordIsCorrect() {
         return getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName(), buddies));
     }
 
-    public void setStuddyBuddyFromServer() {
-        buddy = dataAccess.getStuddyBuddyByName(getInputName(), buddies);
-    }
-
-    public StuddyBuddy getStuddyBuddy() {
-        return buddy;
-    }
-
     /**
-     * Sends the username and password to the next controller and loads a new window
+     * Opens the studdyBuddies page if the username and password is correct.
      */
     @FXML
     public void handleLogin() {
 
-        try {
+        if (!userExists()) {
+            nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+            passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+            errorMessage.setText("User does not exist.\nGo back and register.");
+        }
 
+        if (!passwordIsCorrect()) {
+            nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+            passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+            errorMessage.setText("Wrong password.");
+        }
+
+        try {
             URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             StuddyBuddiesController buddiesController = loader.getController();
-
-            checkIfUserExist();
-            checkPasswordsMacthes();
-
-            if (!checkIfUserExist()) {
-                nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-                errorMessage.setText("User does not exist.");
-
-            }
-
-            else if (!checkPasswordsMacthes()) {
-                nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-                passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-                nameField.setText(getInputName());
-            }
-
-            else {
-                setStuddyBuddyFromServer();
-                nameField.clear();
-                passwordField.clear();
-                buddiesController.transferData(dataAccess, buddies, buddy);
-
-                Stage buddiesStage = new Stage();
-                buddiesStage.setTitle("StuddyBuddies");
-                buddiesStage.setScene(new Scene(parent));
-                buddiesStage.show();
-                Stage thisStage = (Stage) nameField.getScene().getWindow();
-                thisStage.close();
-            }
-
+            buddiesController.transferData(dataAccess, buddies, dataAccess.getStuddyBuddyByName(getInputName(), buddies));
+            Stage buddiesStage = new Stage();
+            buddiesStage.setTitle("StuddyBuddies");
+            buddiesStage.setScene(new Scene(parent));
+            buddiesStage.show();
+            Stage thisStage = (Stage) nameField.getScene().getWindow();
+            thisStage.close();
         } catch (IOException e) {
-            errorMessage.setText("Could not Log in. Try again.");
+            errorMessage.setText("Could not open StuddyBuddies page.");
             e.printStackTrace();
         }
     }

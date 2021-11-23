@@ -60,6 +60,16 @@ public class RemoteDataAccess implements DataAccess {
     return baseUri.resolve("user").resolve(encodeUriParam(name));
   }
 
+    /**
+   * Gets the password URI.
+   *
+   * @param name of StuddyBuddy.
+   * @return the password URI.
+   */
+  private URI passwordUri(String name) {
+    return baseUri.resolve("user").resolve(encodeUriParam(name) + "/pw");
+  }
+
   @Override
   public StuddyBuddy getStuddyBuddyByName(
         String name, StuddyBuddies buddies) {
@@ -133,16 +143,6 @@ public class RemoteDataAccess implements DataAccess {
      catch (InterruptedException | IOException e) {
       throw new IllegalArgumentException("Could not save user-object to server.");
     }
-  }
-
-  /**
-   * Gets the password URI.
-   *
-   * @param name of StuddyBuddy.
-   * @return the password URI.
-   */
-  private URI passwordUri(String name) {
-    return baseUri.resolve("user").resolve(encodeUriParam(name)).resolve("pw");
   }
 
   /**
