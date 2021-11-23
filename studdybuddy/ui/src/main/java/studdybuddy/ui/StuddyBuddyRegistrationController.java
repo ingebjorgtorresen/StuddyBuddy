@@ -356,6 +356,236 @@ public class StuddyBuddyRegistrationController {
      */
     registerStuddyBuddy();
     saveStuddyBuddyToFile();
+    
+    if(getDate() == null && getRoom() == null && getCourse() == null && getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+
+    else if(getDate() == null && getRoom() == null && getCourse() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getRoom() == null && getCourse() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getDate() == null && getRoom() == null && getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getDate() == null && getCourse() == null && getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getRoom() == null && getCourse() == null && getStartTime() == null && getEndTime() == null ){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+
+    else if(getDate() == null && getRoom() == null && getCourse() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getRoom() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getRoom() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getDate() == null && getCourse() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getCourse() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getDate() == null && getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getRoom() == null && getCourse() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getRoom() == null && getCourse() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getRoom() == null && getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getCourse() == null && getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+
+    else if(getDate() == null && getRoom() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getCourse() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getDate() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getRoom() == null && getCourse() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getRoom() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getRoom() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getCourse() == null && getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getCourse() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else if(getStartTime() == null && getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+
+    else if(getDate() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getRoom() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getCourse() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getStartTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+    else if(getEndTime() == null){
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    }
+    else{
+      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    }
+
     // displayRegistration();
 
     try {
