@@ -291,21 +291,6 @@ public class StuddyBuddyRegistrationController {
       this.buddy = buddy;
   }
 
-  /**
-   * Method for checking if the date has the correct format.
-   *
-   * @return true if it is correct, else false
-   * 
-   */
-  private boolean validDate() {
-    try {
-      StuddyBuddyValidation.checkNotNull(getInputDate().toString());
-    } catch (IllegalArgumentException e) {
-      return false;
-    }
-    return true;
-  }
-
   private boolean checkNotNull(String input) {
     try {
       StuddyBuddyValidation.checkNotNull(input);
@@ -387,7 +372,8 @@ public class StuddyBuddyRegistrationController {
    * 
    */
   public boolean validEndTime(){
-    if ((checkNotNull(getInputEndTime()) == false) || (checkInputRoom() == false)) {
+    if ((checkNotNull(getInputEndTime()) == false) || (checkInputRoom() == false)
+      || (StuddyBuddyValidation.checkStartTimeBeforeEndTime(getInputStartTime(), getInputEndTime())) ) {
       return false;
     }
     return true;
@@ -404,20 +390,21 @@ public class StuddyBuddyRegistrationController {
   @FXML
   public void handleRegister() {
     registerStuddyBuddy();
-    dataAccess.postStuddyBuddy(buddy, buddies);
     
-    if(validDate() == false && validRoom() == false && validCourse() == false
+    if(validRoom() == false && validCourse() == false
         && validStartTime() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
       roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
       courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
       startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
       endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
 
-    else if(validDate() == false && validRoom() == false && validCourse() == false
+    else if(validRoom() == false && validCourse() == false
         && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: red;");
@@ -427,9 +414,8 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setStyle("-fx-border-color: gray;");
       endTimeField.setText(getInputEndTime());
     }
-    else if(validDate() == false && validRoom() == false && validCourse() == false
+    else if(validRoom() == false && validCourse() == false
         && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: red;");
@@ -439,9 +425,8 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setStyle("-fx-border-color: red;");
       endTimeField.clear();
     }
-    else if(validDate() == false && validRoom() == false && validStartTime() == false
+    else if(validRoom() == false && validStartTime() == false
         && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: gray;");
@@ -451,132 +436,8 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setStyle("-fx-border-color: red;");
       endTimeField.clear();
     }
-    else if(validDate() == false && validCourse() == false && validStartTime() == false
+    else if(validCourse() == false && validStartTime() == false
         && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validRoom() == false && validCourse() == false && validStartTime() == false
-        && validEndTime() == false ){
-      datepicker.setStyle("-fx-border-color: gray;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-
-    else if(validDate() == false && validRoom() == false && validCourse() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validDate() == false && validRoom() == false && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validDate() == false && validRoom() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("--fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validDate() == false && validCourse() == false && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validDate() == false && validCourse() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validDate() == false && validStartTime() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validRoom() == false && validCourse() == false && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validRoom() == false && validCourse() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validRoom() == false && validStartTime() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validCourse() == false && validStartTime() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: red;");
@@ -587,52 +448,7 @@ public class StuddyBuddyRegistrationController {
       endTimeField.clear();
     }
 
-    else if(validDate() == false && validRoom() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validDate() == false && validCourse() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validDate() == false && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validDate() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
     else if(validRoom() == false && validCourse() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: red;");
@@ -643,7 +459,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setText(getInputEndTime());
     }
     else if(validRoom() == false && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: gray;");
@@ -654,7 +469,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setText(getInputEndTime());
     }
     else if(validRoom() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: gray;");
@@ -665,7 +479,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.clear();
     }
     else if(validCourse() == false && validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: red;");
@@ -676,7 +489,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setText(getInputEndTime());
     }
     else if(validCourse() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: red;");
@@ -687,7 +499,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.clear();
     }
     else if(validStartTime() == false && validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: gray;");
@@ -698,19 +509,7 @@ public class StuddyBuddyRegistrationController {
       endTimeField.clear();
     }
 
-    else if(validDate() == false){
-      datepicker.setStyle("-fx-border-color: red;");
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
     else if(validRoom() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: red;");
       roomField.clear();
       courseField.setStyle("-fx-border-color: gray;");
@@ -721,7 +520,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setText(getInputEndTime());
     }
     else if(validCourse() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: red;");
@@ -732,7 +530,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setText(getInputEndTime());
     }
     else if(validStartTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: gray;");
@@ -743,7 +540,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.setText(getInputEndTime());
     }
     else if(validEndTime() == false){
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: gray;");
@@ -754,7 +550,6 @@ public class StuddyBuddyRegistrationController {
       endTimeField.clear();
     }
     else{
-      datepicker.setStyle("-fx-border-color: gray;");
       roomField.setStyle("-fx-border-color: gray;");
       roomField.setText(getInputRoom());
       courseField.setStyle("-fx-border-color: gray;");
@@ -763,10 +558,12 @@ public class StuddyBuddyRegistrationController {
       startTimeField.setText(getInputStartTime());
       endTimeField.setStyle("-fx-border-color: gray;");
       endTimeField.setText(getInputEndTime());
+
+      dataAccess.postStuddyBuddy(buddy, buddies);
+      
     }
 
     // displayRegistration();
-    dataAccess.postStuddyBuddy(buddy, buddies);
 
     try {
       URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
