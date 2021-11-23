@@ -42,9 +42,6 @@ public class StuddyBuddiesController {
     private Label studdyBuddyUser;
 
     @FXML
-    private Label registrationsTitle;
-
-    @FXML
     private Label allRegistrationsText;
 
 
@@ -107,6 +104,7 @@ public class StuddyBuddiesController {
      */
     @FXML
     public void display() {
+        username.setText(buddy.getName());
         allRegistrationsText.setText(dataAccess.getStuddyBuddies().toString());
     }
 
