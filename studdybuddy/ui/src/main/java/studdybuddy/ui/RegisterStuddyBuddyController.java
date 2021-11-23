@@ -139,7 +139,7 @@ public class RegisterStuddyBuddyController {
    * @throws IOException if it is wrong
    */
   @FXML
-  public void handleRegisterUser(ActionEvent event) throws IOException {
+  public void handleRegister(ActionEvent event) throws IOException {
     checkInputs();
     StuddyBuddy buddy = createNewStuddyBuddy();
     buddies.addStuddyBuddy(buddy);
@@ -204,5 +204,13 @@ public class RegisterStuddyBuddyController {
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
     }
+  }
+
+  /**
+   * Method for redirecting back to the welcome page.
+   */
+  @FXML
+  public void handleBack() {
+    // TODO: redirect
   }
 }

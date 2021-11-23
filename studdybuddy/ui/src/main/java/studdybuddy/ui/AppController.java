@@ -21,16 +21,16 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class AppController {
 
   @FXML
-  String userStuddyBuddyPath;
+  private String userStuddyBuddyPath;
 
   @FXML
-  String endpointUri;
+  private String endpointUri;
 
   @FXML
-  String sampleStuddyBuddyResource;
+  private Button loginButton;
 
   @FXML
-  private Button getStartedButton;
+  private Button registerButton;
 
   private StuddyBuddiesPersistence persistence;
 
@@ -73,10 +73,10 @@ public class AppController {
       RegisterStuddyBuddyController registerController = loader.getController();
       registerController.transferData(dataAccess, buddies);
       Stage registrationStage = new Stage();
-      registrationStage.setTitle("Register buddy");
+      registrationStage.setTitle("Register");
       registrationStage.setScene(new Scene(parent));
       registrationStage.show();
-      Stage thisStage = (Stage) getStartedButton.getScene().getWindow();
+      Stage thisStage = (Stage) registerButton.getScene().getWindow();
       thisStage.close();
 
     } catch (IOException e) {
@@ -90,7 +90,19 @@ public class AppController {
    */
   @FXML
   public void handleLogin() {
-    //TODO: Redirect to login page
+    try {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginStuddyBuddy.fxml"));
+    Parent parent = (Parent) loader.load();
+    LoginStuddyBuddyController loginController = loader.getController();
+    loginController.transferData(dataAccess, buddies);
+    Stage loginStage = new Stage();
+    loginStage.setTitle("Login");
+    loginStage.setScene(new Scene(parent));
+    loginStage.show();
+    Stage thisStage = (Stage) loginButton.getScene().getWindow();
+    thisStage.close(); 
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
   }
-
 }
