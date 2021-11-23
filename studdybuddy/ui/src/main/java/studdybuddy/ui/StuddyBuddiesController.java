@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
@@ -20,6 +21,7 @@ public class StuddyBuddiesController {
     
     private DataAccess dataAccess;
     private StuddyBuddies buddies;
+    private StuddyBuddy buddy;
 
     @FXML
     private ImageView studdyBuddyLogo;
@@ -55,9 +57,10 @@ public class StuddyBuddiesController {
    * 
    * @param buddies studdyBuddies for the run of the application
    */
-  public void transferData(DataAccess dataAccess, StuddyBuddies buddies) {
+  public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
     this.dataAccess = dataAccess;
     this.buddies = buddies;
+    this.buddy = buddy;
     display();
   }
 
@@ -68,7 +71,7 @@ public class StuddyBuddiesController {
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             StuddyBuddyRegistrationController registrationController = loader.getController();
-            registrationController.transferData(dataAccess, buddies);
+            registrationController.transferData(dataAccess, buddies, buddy);
             Stage registrationStage = new Stage();
             registrationStage.setTitle("Registration");
             registrationStage.setScene(new Scene(parent));

@@ -11,7 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+// import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
@@ -22,6 +22,7 @@ import studdybuddy.dataaccess.DataAccess;
  * Controller class for a registration.
  */
 public class StuddyBuddyRegistrationController {
+  
   private StuddyBuddy buddy;
   private StuddyBuddies buddies;
   private DataAccess dataAccess;
@@ -49,17 +50,17 @@ public class StuddyBuddyRegistrationController {
 
   public void initialize() {
     datepicker.getEditor().setDisable(true);
-    createRegistration();
+    // createRegistration();
   }
 
   /**
    * Method that creates a new registration if the registration is not null.
    * The pane is cleared meassage text is set to not be visable and in Paradise Pink color.
-   */
+   *
   private void createRegistration() {
     messageText.setVisible(false);
     messageText.setTextFill(Color.web("#ED4D6E"));
-  }
+  }*/
 
   public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
     this.buddy = studdyBuddy;
@@ -283,9 +284,10 @@ public class StuddyBuddyRegistrationController {
   * Method for transering dataAccess between classes.
   * Is used in the class that opens an FXML that uses this controller.
   */
-    public void transferData(DataAccess dataAccess, StuddyBuddies buddies) {
+    public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
       this.dataAccess = dataAccess;
       this.buddies = buddies;
+      this.buddy = buddy;
   }
 
   /**
@@ -299,7 +301,7 @@ public class StuddyBuddyRegistrationController {
   @FXML
   public void handleRegister() {
     registerStuddyBuddy();
-    dataAccess.putStuddyBuddy(buddy, buddies);
+    dataAccess.postStuddyBuddy(buddy, buddies);
 
     try {
       URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
@@ -307,7 +309,7 @@ public class StuddyBuddyRegistrationController {
       Parent parent = (Parent) loader.load();
       StuddyBuddiesController buddiesController = loader.getController();
       System.out.println("Den kjører handle register i registration controller");
-      buddiesController.transferData(dataAccess, buddies);
+      buddiesController.transferData(dataAccess, buddies, buddy);
       Stage registrationStage = new Stage();
       registrationStage.setTitle("Forum");
       registrationStage.setScene(new Scene(parent));

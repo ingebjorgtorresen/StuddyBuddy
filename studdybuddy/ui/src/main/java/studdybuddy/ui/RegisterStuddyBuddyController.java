@@ -153,7 +153,7 @@ public class RegisterStuddyBuddyController {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
       Parent parent = (Parent) loader.load();
       StuddyBuddiesController buddiesController = loader.getController();
-      buddiesController.transferData(dataAccess, buddies);
+      buddiesController.transferData(dataAccess, buddies, buddy);
       Stage buddiesStage = new Stage();
       buddiesStage.setScene(new Scene(parent));
       buddiesStage.show();
