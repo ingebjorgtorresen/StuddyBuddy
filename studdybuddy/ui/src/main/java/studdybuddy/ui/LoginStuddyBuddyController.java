@@ -99,7 +99,6 @@ public class LoginStuddyBuddyController {
             URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            //StuddyBuddyForumController forumController = loader.getController();
 
             checkIfUserExist();
             checkPasswordsMacthes();
@@ -121,12 +120,11 @@ public class LoginStuddyBuddyController {
                 setStuddyBuddyFromServer();
                 nameField.clear();
                 passwordField.clear();
-                //forumController.setStuddyBuddyFromLogin(studdyBuddy);
 
-                Stage forumStage = new Stage();
-                forumStage.setTitle("Forum");
-                forumStage.setScene(new Scene(parent));
-                forumStage.show();
+                Stage buddiesStage = new Stage();
+                buddiesStage.setTitle("StuddyBuddies");
+                buddiesStage.setScene(new Scene(parent));
+                buddiesStage.show();
                 Stage thisStage = (Stage) nameField.getScene().getWindow();
                 thisStage.close();
             }
@@ -147,6 +145,7 @@ public class LoginStuddyBuddyController {
         Parent parent = (Parent) loader.load();
         Stage welcomeStage = new Stage();
         welcomeStage.setScene(new Scene(parent));
+        welcomeStage.setTitle("StuddyBuddy");
         welcomeStage.show();
         Stage thisStage = (Stage) nameField.getScene().getWindow();
         thisStage.close(); 
