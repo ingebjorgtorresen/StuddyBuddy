@@ -319,4 +319,24 @@ public class StuddyBuddyRegistrationController {
       e.printStackTrace();
     }
   }
+
+    /**
+   * Method for redirecting back to the welcome page.
+   */
+  @FXML
+  public void handleBack() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+        Parent parent = (Parent) loader.load();
+        StuddyBuddiesController buddiesController = loader.getController();
+        buddiesController.transferData(dataAccess, buddies, buddy);
+        Stage buddiesStage = new Stage();
+        buddiesStage.setScene(new Scene(parent));
+        buddiesStage.show();
+        Stage thisStage = (Stage) datepicker.getScene().getWindow();
+        thisStage.close(); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
