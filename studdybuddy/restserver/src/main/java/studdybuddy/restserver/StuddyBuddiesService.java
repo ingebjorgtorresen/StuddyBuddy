@@ -13,6 +13,7 @@ import java.nio.file.Paths;
 import org.springframework.stereotype.Service;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
@@ -137,4 +138,8 @@ public class StuddyBuddiesService {
     buddies.addStuddyBuddy(buddy);
   }
 
+  public void updateStuddyBuddies(StuddyBuddy buddy) {
+    buddies.removeStuddyBuddy(buddies.getStuddyBuddy(buddy.getName()));
+    buddies.addStuddyBuddy(buddy);;
+  }
 }

@@ -36,4 +36,9 @@ public interface DataAccess {
    * @param buddy the StuddyBuddy to save
    */
   public void postStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies);
+
+  /**
+   * Getter for StuddyBuddies objects
+   */
+  public StuddyBuddies getStuddyBuddies();
 }

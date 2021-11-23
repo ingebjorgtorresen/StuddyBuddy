@@ -1,13 +1,7 @@
 package studdybuddy.ui;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXML;
@@ -17,21 +11,21 @@ import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.paint.Color;
+// import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyRegistration;
-import studdybuddy.json.StuddyBuddiesPersistence;
+import studdybuddy.dataaccess.DataAccess;
 
 /**
  * Controller class for a registration.
  */
 public class StuddyBuddyRegistrationController {
+  
   private StuddyBuddy buddy;
-  private StuddyBuddies buddies = new StuddyBuddies();
-  private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
-  private String registrationsFileName = "/registrations.json";
+  private StuddyBuddies buddies;
+  private DataAccess dataAccess;
 
   @FXML
   private DatePicker datepicker;
@@ -56,17 +50,17 @@ public class StuddyBuddyRegistrationController {
 
   public void initialize() {
     datepicker.getEditor().setDisable(true);
-    createRegistration();
+    // createRegistration();
   }
 
   /**
    * Method that creates a new registration if the registration is not null.
    * The pane is cleared meassage text is set to not be visable and in Paradise Pink color.
-   */
+   *
   private void createRegistration() {
     messageText.setVisible(false);
     messageText.setTextFill(Color.web("#ED4D6E"));
-  }
+  }*/
 
   public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
     this.buddy = studdyBuddy;
@@ -285,59 +279,15 @@ public class StuddyBuddyRegistrationController {
     setDateFromInput(registration);
     buddy.addRegistration(registration);
   }
-
-  private void saveStuddyBuddyToFile() {
-    if (buddies.getStuddyBuddy(buddy.getName()) == null) {
-      buddies.addStuddyBuddy(buddy);
-    }
-
-    try (Writer writer =
-        new FileWriter(System.getProperty("user.home") 
-        + registrationsFileName, StandardCharsets.UTF_8)) {
-      persistence.writeStuddyBuddies(buddy.getStuddyBuddies(), writer);
-      writer.flush();
-    } catch (IOException e) {
-      messageText.setText("Couldn't save your registration.");
-      messageText.setVisible(true);
-    }
-  }
-
+  
   /**
-   * Getter for the registered StuddyBuddy.
-   */
-  public StuddyBuddy getRegisteredStuddyBuddy() {
-    StuddyBuddy registeredBuddy = null;
-    try (Reader reader =
-        new FileReader(System.getProperty("user.home") 
-        + registrationsFileName, StandardCharsets.UTF_8)) {
-      registeredBuddy = persistence.readStuddyBuddies(reader).getStuddyBuddy(buddy.getName());
-    } catch (IOException e) {
-      System.err.println("Couldn't read from file.");
-      e.printStackTrace();
-    }
-    return registeredBuddy;
-  }
-
-  /**
-   * Method for displaying the registration-info on screen.
-   */
-  public void displayRegistration() {
-    StuddyBuddy registeredBuddy = getRegisteredStuddyBuddy();
-    if (registeredBuddy == null) {
-      messageText.setText("Couldn't register. Registered buddy was null.");
-    } else {
-      messageText.setText("Registration was successfull!");
-      messageText.setTextFill(Color.web("#7DDF64"));
-      feedbackText.setText(buddy.getRegistrations().get(0).toString());
-      feedbackText.setStyle("-fx-background-color: #C0DF85");
-      feedbackText.setVisible(true);
-    }
-
-    messageText.setVisible(true);
-    roomField.clear();
-    courseField.clear();
-    startTimeField.clear();
-    endTimeField.clear();
+  * Method for transering dataAccess between classes.
+  * Is used in the class that opens an FXML that uses this controller.
+  */
+    public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
+      this.dataAccess = dataAccess;
+      this.buddies = buddies;
+      this.buddy = buddy;
   }
 
   /**
@@ -349,27 +299,44 @@ public class StuddyBuddyRegistrationController {
    * texfields if registration was successful
    */
   @FXML
-  public void handleRegister() throws FileNotFoundException { // try, catch
-    /**
-     * if (feedbackText.isVisible()) { feedbackText.setVisible(false);
-     * messageText.setTextFill(Color.web("#ED4D6E")); }
-     */
+  public void handleRegister() {
     registerStuddyBuddy();
-    saveStuddyBuddyToFile();
-    // displayRegistration();
+    dataAccess.postStuddyBuddy(buddy, buddies);
 
     try {
-
-      URL fxmlFile = getClass().getResource("StuddyBuddyForum.fxml");
+      URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
       FXMLLoader loader = new FXMLLoader(fxmlFile);
       Parent parent = (Parent) loader.load();
+      StuddyBuddiesController buddiesController = loader.getController();
+      buddiesController.transferData(dataAccess, buddies, buddy);
       Stage registrationStage = new Stage();
       registrationStage.setTitle("Forum");
       registrationStage.setScene(new Scene(parent));
       registrationStage.show();
-
+      Stage thisStage = (Stage) datepicker.getScene().getWindow();
+      thisStage.close(); 
     } catch (IOException e) {
       e.printStackTrace();
     }
   }
+
+    /**
+   * Method for redirecting back to the welcome page.
+   */
+  @FXML
+  public void handleBack() {
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+        Parent parent = (Parent) loader.load();
+        StuddyBuddiesController buddiesController = loader.getController();
+        buddiesController.transferData(dataAccess, buddies, buddy);
+        Stage buddiesStage = new Stage();
+        buddiesStage.setScene(new Scene(parent));
+        buddiesStage.show();
+        Stage thisStage = (Stage) datepicker.getScene().getWindow();
+        thisStage.close(); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
