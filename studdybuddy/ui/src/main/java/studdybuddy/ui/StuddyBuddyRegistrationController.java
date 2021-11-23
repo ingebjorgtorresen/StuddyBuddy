@@ -2,21 +2,17 @@ package studdybuddy.ui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-// import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyRegistration;
-import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
@@ -43,38 +39,12 @@ public class StuddyBuddyRegistrationController {
   @FXML
   private TextField endTimeField;
 
-  @FXML
-  private Label messageText;
-
-  @FXML
-  private Label feedbackText;
-
   public void initialize() {
     datepicker.getEditor().setDisable(true);
-    // createRegistration();
   }
-
-  /**
-   * Method that creates a new registration if the registration is not null.
-   * The pane is cleared meassage text is set to not be visable and in Paradise Pink color.
-   *
-  private void createRegistration() {
-    messageText.setVisible(false);
-    messageText.setTextFill(Color.web("#ED4D6E"));
-  }*/
 
   public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
     this.buddy = studdyBuddy;
-  }
-
-  /**
-   * Getter for the inputDate.
-   *
-   * @return the date from input
-   */
-  @FXML
-  public LocalDate getInputDate() {
-    return datepicker.getValue();
   }
 
   /**
@@ -82,10 +52,10 @@ public class StuddyBuddyRegistrationController {
    */
   public void setDateFromInput(StuddyBuddyRegistration registration) {
     try {
-      registration.setDate(getInputDate());
+      registration.setDate(datepicker.getValue());
     } catch (IllegalArgumentException e) {
-      messageText.setText("Use the calender to choose date!");
-      messageText.setVisible(true);
+      e.printStackTrace();
+      throw new IllegalStateException("Invalid date.");
     }
   }
 
@@ -95,21 +65,9 @@ public class StuddyBuddyRegistrationController {
    * @return the input date as String
    */
   public String getInputDateString(StuddyBuddyRegistration registration) {
-    // String dateString = getInputDate().toString();
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-    String formattedString = getInputDate().format(formatter);
+    String formattedString = datepicker.getValue().format(formatter);
     return formattedString;
-  }
-
-  /**
-   * Getter for the inputRoom.
-   * the room can only consist of letters, "-" and space.
-   *
-   * @return the room from input
-   */
-  @FXML
-  public String getInputRoom() {
-    return roomField.getText();
   }
 
   /**
@@ -117,23 +75,13 @@ public class StuddyBuddyRegistrationController {
    */
   public void setRoomFromInput(StuddyBuddyRegistration registration) {
     try {
-      registration.setRoom(getInputRoom());
+      registration.setRoom(roomField.getText());
+      roomField.setStyle("-fx-border-color: grey;");
     } catch (IllegalArgumentException e) {
-      messageText
-          .setText("Can not use other characters \nthan letters," 
-          + "digits, '-' and \n' '. You wrote: " + getInputRoom());
-      messageText.setVisible(true);
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      throw new IllegalStateException("Invalid room.");
     }
-  }
-
-  /**
-   * the room can only consist of letters, "-" and space.
-   *
-   * @return the course from input
-   */
-  @FXML
-  public String getInputCourse() {
-    return courseField.getText();
   }
 
   /**
@@ -141,23 +89,13 @@ public class StuddyBuddyRegistrationController {
    */
   public void setCourseFromInput(StuddyBuddyRegistration registration) {
     try {
-      registration.setCourse(getInputCourse());
+      registration.setCourse(courseField.getText());
+      courseField.setStyle("-fx-border-color: grey;");
     } catch (IllegalArgumentException e) {
-      messageText.setText(
-          "Can not use other characters \nthan letters, digits, '-' and \n' '. You wrote: " 
-          + getInputCourse());
-      messageText.setVisible(true);
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      throw new IllegalStateException("Invalid course.");
     }
-  }
-
-  /**
-   * the start time must be on format 'HH:mm'.
-   *
-   * @return the start time from input
-   */
-  @FXML
-  public String getInputStartTime() {
-    return startTimeField.getText();
   }
 
   /**
@@ -166,21 +104,13 @@ public class StuddyBuddyRegistrationController {
   @FXML
   public void setStartTimeFromInput(StuddyBuddyRegistration registration) {
     try {
-      registration.setStartTime(getInputStartTime());
+      registration.setStartTime(startTimeField.getText());
+      startTimeField.setStyle("-fx-border-color: grey;");
     } catch (IllegalArgumentException e) {
-      messageText.setText("Starttime must be on format \n'HH:mm' ");
-      messageText.setVisible(true);
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      throw new IllegalStateException("Invalid start time.");
     }
-  }
-
-  /**
-   * the end time must be on format 'HH:mm' and after StartTime.
-   *
-   * @return the end time from input
-   */
-  @FXML
-  public String getInputEndTime() {
-    return endTimeField.getText();
   }
 
   /**
@@ -189,96 +119,32 @@ public class StuddyBuddyRegistrationController {
   @FXML
   public void setEndTimeFromInput(StuddyBuddyRegistration registration) {
     try {
-      registration.setEndTime(getInputEndTime());
+      registration.setEndTime(endTimeField.getText());
+      endTimeField.setStyle("-fx-border-color: grey;");
     } catch (IllegalArgumentException e) {
-      messageText.setText("EndTime must be on format \n'HH:mm' and after StartTime");
-      messageText.setVisible(true);
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();;
+      throw new IllegalStateException("Invalid end time.");
     }
-  }
-
-  /**
-   * Getter for the date.
-   *
-   * @return datepicker
-   */
-  public DatePicker getDate() {
-    return datepicker;
-  }
-
-  /**
-   * Getter for the room.
-   *
-   * @return roomField
-   */
-  public TextField getRoom() {
-    return roomField;
-  }
-
-  /**
-   * Getter for the course.
-   *
-   * @return courseField
-   */
-  public TextField getCourse() {
-    return courseField;
-  }
-
-  /**
-   * Getter for the startTime.
-   *
-   * @return startTimeField
-   */
-  public TextField getStartTime() {
-    return startTimeField;
-  }
-
-  /**
-   * Getter for the endTime.
-   *
-   * @return endTimeField
-   */
-  public TextField getEndTime() {
-    return endTimeField;
-  }
-
-  /**
-   * Get the text printed from the label messageText.
-   *
-   * @return messageText from label
-   */
-  public String getMessageText() {
-    return messageText.getText();
-  }
-
-  /**
-   * Get the label messageText.
-   *
-   * @return the label messageText
-   */
-  public Label getMessageTextLabel() {
-    return messageText;
-  }
-
-  /**
-   * Get the label feedbackText.
-   *
-   * @return the label feedbackText
-   */
-  public Label getFeedbackLabel() {
-    return feedbackText;
   }
 
   /**
    * register a new StuddyBuddy sets the room, course, start time, end time and date.
    */
-  private void registerStuddyBuddy() {
+  private boolean registerStuddyBuddy() {
     StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
-    setRoomFromInput(registration);
-    setCourseFromInput(registration);
-    setStartTimeFromInput(registration);
-    setEndTimeFromInput(registration);
-    setDateFromInput(registration);
-    buddy.addRegistration(registration);
+    try {
+      setRoomFromInput(registration);
+      setCourseFromInput(registration);
+      setStartTimeFromInput(registration);
+      setEndTimeFromInput(registration);
+      setDateFromInput(registration);
+      buddy.addRegistration(registration);
+      return true;
+    } catch (IllegalStateException e) {
+      return false;
+    }
+
   }
   
   /**
@@ -289,95 +155,7 @@ public class StuddyBuddyRegistrationController {
       this.dataAccess = dataAccess;
       this.buddies = buddies;
       this.buddy = buddy;
-  }
-
-  private boolean checkNotNull(String input) {
-    try {
-      StuddyBuddyValidation.checkNotNull(input);
-    } catch (IllegalArgumentException e) {
-      return false;
     }
-    return true;
-  }
-
-  private boolean checkInputRoom() {
-    return StuddyBuddyValidation.checkCourse(getInputCourse());
-  }
-  
-  /**
-   * Method for checking if the room has the correct format.
-   *
-   * @return true if it is correct, else false
-   * 
-   */
-  public boolean validRoom() {
-    if ((checkNotNull(getInputRoom()) == false) || (checkInputRoom() == false)) {
-      return false;
-    }
-    return true;
-  }
-
-  private boolean checkInputCourse() {
-    return StuddyBuddyValidation.checkCourse(getInputCourse());
-  }
-
-  /**
-   * Method for checking if the course has the correct format.
-   *
-   * @return true if it is correct, else false
-   * 
-   */
-  public boolean validCourse() {
-    if ((checkNotNull(getInputCourse()) == false) || (checkInputRoom() == false)) {
-      return false;
-    }
-    return true;
-  }
-
-  private boolean checkInputStartTime() {
-    try {
-      StuddyBuddyValidation.checkTimeFormat(getInputStartTime());
-    } catch (IllegalArgumentException e) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Method for checking if the room has the correct format.
-   *
-   * @return true if it is correct, else false
-   * 
-   */
-  public boolean validStartTime(){
-    if ((checkNotNull(getInputStartTime()) == false) || (checkInputRoom() == false)) {
-      return false;
-    }
-    return true;
-  }
-
-  private boolean checkInputEndTime() {
-    try {
-      StuddyBuddyValidation.checkTimeFormat(getInputEndTime());
-    } catch (IllegalArgumentException e) {
-      return false;
-    }
-    return true;
-  }
-
-   /**
-   * Method for checking if the room has the correct format.
-   *
-   * @return true if it is correct, else false
-   * 
-   */
-  public boolean validEndTime(){
-    if ((checkNotNull(getInputEndTime()) == false) || (checkInputRoom() == false)
-      || (StuddyBuddyValidation.checkStartTimeBeforeEndTime(getInputStartTime(), getInputEndTime())) ) {
-      return false;
-    }
-    return true;
-  }
 
   /**
    * Sets the feedback text to not be visable and to have Paradise Pink color saves this .
@@ -389,196 +167,23 @@ public class StuddyBuddyRegistrationController {
    */
   @FXML
   public void handleRegister() {
-    registerStuddyBuddy();
-    
-    if(validRoom() == false && validCourse() == false
-        && validStartTime() == false && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-
-    else if(validRoom() == false && validCourse() == false
-        && validStartTime() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validRoom() == false && validCourse() == false
-        && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputEndTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validRoom() == false && validStartTime() == false
-        && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validCourse() == false && validStartTime() == false
-        && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-
-    else if(validRoom() == false && validCourse() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validRoom() == false && validStartTime() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validRoom() == false && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validCourse() == false && validStartTime() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validCourse() == false && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.clear();
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else if(validStartTime() == false && validEndTime() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-
-    else if(validRoom() == false){
-      roomField.setStyle("-fx-border-color: red;");
-      roomField.clear();
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validCourse() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: red;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validStartTime() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: red;");
-      startTimeField.clear();
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-    }
-    else if(validEndTime() == false){
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: red;");
-      endTimeField.clear();
-    }
-    else{
-      roomField.setStyle("-fx-border-color: gray;");
-      roomField.setText(getInputRoom());
-      courseField.setStyle("-fx-border-color: gray;");
-      courseField.setText(getInputCourse());
-      startTimeField.setStyle("-fx-border-color: gray;");
-      startTimeField.setText(getInputStartTime());
-      endTimeField.setStyle("-fx-border-color: gray;");
-      endTimeField.setText(getInputEndTime());
-
+    if (registerStuddyBuddy()) {
       dataAccess.postStuddyBuddy(buddy, buddies);
-      
-    }
-
-    // displayRegistration();
-
-    try {
-      URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
-      FXMLLoader loader = new FXMLLoader(fxmlFile);
-      Parent parent = (Parent) loader.load();
-      StuddyBuddiesController buddiesController = loader.getController();
-      buddiesController.transferData(dataAccess, buddies, buddy);
-      Stage registrationStage = new Stage();
-      registrationStage.setTitle("Forum");
-      registrationStage.setScene(new Scene(parent));
-      registrationStage.show();
-      Stage thisStage = (Stage) datepicker.getScene().getWindow();
-      thisStage.close(); 
-    } catch (IOException e) {
-      e.printStackTrace();
+      try {
+        URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
+        FXMLLoader loader = new FXMLLoader(fxmlFile);
+        Parent parent = (Parent) loader.load();
+        StuddyBuddiesController buddiesController = loader.getController();
+        buddiesController.transferData(dataAccess, buddies, buddy);
+        Stage registrationStage = new Stage();
+        registrationStage.setTitle("Forum");
+        registrationStage.setScene(new Scene(parent));
+        registrationStage.show();
+        Stage thisStage = (Stage) datepicker.getScene().getWindow();
+        thisStage.close(); 
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
     }
   }
 
