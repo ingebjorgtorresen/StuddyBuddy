@@ -23,6 +23,7 @@ public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
       throws IOException {
     jsonGenerator.writeStartObject();
     jsonGenerator.writeStringField("Name", studdyBuddy.getName());
+    jsonGenerator.writeStringField("Password", studdyBuddy.getPassword());
     jsonGenerator.writeArrayFieldStart("Registrations");
     for (StuddyBuddyRegistration registration : studdyBuddy.getRegistrations()) {
       jsonGenerator.writeObject(registration);
