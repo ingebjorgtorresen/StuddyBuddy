@@ -3,8 +3,12 @@ package studdybuddy.ui;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyValidation;
@@ -139,12 +143,25 @@ public class RegisterStuddyBuddyController {
    * @throws IOException if it is wrong
    */
   @FXML
-  public void handleRegisterUser(ActionEvent event) throws IOException {
+  public void handleRegister(ActionEvent event) throws IOException {
     checkInputs();
     StuddyBuddy buddy = createNewStuddyBuddy();
     buddies.addStuddyBuddy(buddy);
     dataAccess.putStuddyBuddy(buddy, buddies);
-    // messageBox.setText("Registering new user was sucessfull.");
+    
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+      Parent parent = (Parent) loader.load();
+      StuddyBuddiesController buddiesController = loader.getController();
+      buddiesController.transferData(dataAccess, buddies, buddy);
+      Stage buddiesStage = new Stage();
+      buddiesStage.setScene(new Scene(parent));
+      buddiesStage.show();
+      Stage thisStage = (Stage) nameField.getScene().getWindow();
+      thisStage.close(); 
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
   }
 
   /**
@@ -204,5 +221,23 @@ public class RegisterStuddyBuddyController {
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
     }
+  }
+
+  /**
+   * Method for redirecting back to the welcome page.
+   */
+  @FXML
+  public void handleBack() {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoteApp.fxml"));
+      Parent parent = (Parent) loader.load();
+      Stage welcomeStage = new Stage();
+      welcomeStage.setScene(new Scene(parent));
+      welcomeStage.show();
+      Stage thisStage = (Stage) nameField.getScene().getWindow();
+      thisStage.close(); 
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
   }
 }

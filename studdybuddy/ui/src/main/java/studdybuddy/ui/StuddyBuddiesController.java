@@ -1,29 +1,27 @@
 package studdybuddy.ui;
 
-/*import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;*/
+import javafx.stage.Stage;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.dataaccess.DataAccess;
 
 /**
  * Controller for studdyBuddies objects.
  */
 public class StuddyBuddiesController {
     
-    // Commented out while working on other classes
-    /*private DataAccess dataAccess;
-    private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
+    private DataAccess dataAccess;
+    private StuddyBuddies buddies;
+    private StuddyBuddy buddy;
 
     @FXML
     private ImageView studdyBuddyLogo;
@@ -50,31 +48,30 @@ public class StuddyBuddiesController {
     private Label allRegistrationsText;
 
 
-    /**
-    * Sets the DataAccess for this controller,
-    * so data can come from different sources.
-    *
-    * @param dataAccess the new dataAccess
-    
-    public void setDataAccess(DataAccess dataAccess) {
-        this.dataAccess = dataAccess;
-    }
+  /**
+   * Method for transering dataAccess and studdyBuddies between classes.
+   * Is used in the class that opens an FXML that uses this controller.
+   * 
 
-    @FXML
-    public void initialize() {
-        System.out.println();
-        System.out.println("Den kjører initialize i StuddyBuddiesController.java");
-        System.out.println();
-        display();
-    }
+   * @param dataAccess dataAccess for the run of the application
+   * 
+   * @param buddies studdyBuddies for the run of the application
+   */
+  public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
+    this.dataAccess = dataAccess;
+    this.buddies = buddies;
+    this.buddy = buddy;
+    display();
+  }
 
     @FXML
     public void handleAddRegistration() {
         try {
-
             URL fxmlFile = getClass().getResource("StuddyBuddyRegistration.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
+            StuddyBuddyRegistrationController registrationController = loader.getController();
+            registrationController.transferData(dataAccess, buddies, buddy);
             Stage registrationStage = new Stage();
             registrationStage.setTitle("Registration");
             registrationStage.setScene(new Scene(parent));
@@ -90,39 +87,27 @@ public class StuddyBuddiesController {
     @FXML
     public void handleLogOut() {
         try {
-
-            URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");
+            URL fxmlFile = getClass().getResource("RemoteApp.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            Stage registrationStage = new Stage();
-            registrationStage.setTitle("StuddyBuddy");
-            registrationStage.setScene(new Scene(parent));
-            registrationStage.show();
+            Stage welcomeStage = new Stage();
+            welcomeStage.setTitle("StuddyBuddy");
+            welcomeStage.setScene(new Scene(parent));
+            welcomeStage.show();
+            Stage thisStage = (Stage) studdyBuddyLogo.getScene().getWindow();
+            thisStage.close(); 
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public StuddyBuddies getRegistratedStuddyBuddies() {
-        // Must be updated with server logic
-        /*StuddyBuddies registeredBuddies = null;
-        try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName,
-                StandardCharsets.UTF_8)) {
-            registeredBuddies = persistence.readStuddyBuddies(reader);
-        } catch (Exception e) {
-            System.err.println("Couldn´t read from file");
-            e.printStackTrace();
-        }
-        return registeredBuddies;
-        return null;
-    }
-
+    /**
+     * Method for displaying buddies and registrations.
+     */
     @FXML
     public void display() {
-        // setUpBuddies();
-        //allRegistrationsText.setText(buddies.toString());
-        allRegistrationsText.setText("HEIHEI:))");
-    } */
+        allRegistrationsText.setText(dataAccess.getStuddyBuddies().toString());
+    }
 
 }

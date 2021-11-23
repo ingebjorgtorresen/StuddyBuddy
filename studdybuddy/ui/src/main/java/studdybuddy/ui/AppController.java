@@ -21,16 +21,16 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class AppController {
 
   @FXML
-  String userStuddyBuddyPath;
+  private String userStuddyBuddyPath;
 
   @FXML
-  String endpointUri;
+  private String endpointUri;
 
   @FXML
-  String sampleStuddyBuddyResource;
+  private Button loginButton;
 
   @FXML
-  private Button getStartedButton;
+  private Button registerButton;
 
   private StuddyBuddiesPersistence persistence;
 
@@ -62,25 +62,47 @@ public class AppController {
   }
 
   /**
-   * method for handling GetStarted button.
+   * Method for click on register button.
+   * Redirects to register page.
    */
   @FXML
-  public void handleGetStarted() {
+  public void handleRegister() {
     try {
-      // Bytter til registreringssiden, hvertfall foreløpig
       FXMLLoader loader = new FXMLLoader(getClass().getResource("RegisterStuddyBuddy.fxml"));
       Parent parent = (Parent) loader.load();
       RegisterStuddyBuddyController registerController = loader.getController();
       registerController.transferData(dataAccess, buddies);
       Stage registrationStage = new Stage();
-      registrationStage.setTitle("Register buddy");
+      registrationStage.setTitle("Register");
       registrationStage.setScene(new Scene(parent));
       registrationStage.show();
-      Stage thisStage = (Stage) getStartedButton.getScene().getWindow();
+      Stage thisStage = (Stage) registerButton.getScene().getWindow();
       thisStage.close();
 
     } catch (IOException e) {
       e.printStackTrace();
+    }
+  }
+
+  /**
+   * Method for click on login button.
+   * Redirects to login page.
+   */
+  @FXML
+  public void handleLogin() {
+    try {
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginStuddyBuddy.fxml"));
+    Parent parent = (Parent) loader.load();
+    LoginStuddyBuddyController loginController = loader.getController();
+    loginController.transferData(dataAccess, buddies);
+    Stage loginStage = new Stage();
+    loginStage.setTitle("Login");
+    loginStage.setScene(new Scene(parent));
+    loginStage.show();
+    Stage thisStage = (Stage) loginButton.getScene().getWindow();
+    thisStage.close(); 
+    } catch (IOException e) {
+        e.printStackTrace();
     }
   }
 }

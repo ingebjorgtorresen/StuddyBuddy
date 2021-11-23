@@ -17,12 +17,8 @@ public class StuddyBuddyValidationTest {
   public void testCheckPassword() {
     String validPassword = "validPassword1";
     String tooShortPassword = "short1";
-    String passwordMissingNumbers = "passwordMissingNumbers";
-    String passwordMissingLetters = "12345678";
     assertTrue(StuddyBuddyValidation.checkPassword(validPassword));
     assertFalse(StuddyBuddyValidation.checkPassword(tooShortPassword));
-    assertFalse(StuddyBuddyValidation.checkPassword(passwordMissingNumbers));
-    assertFalse(StuddyBuddyValidation.checkPassword(passwordMissingLetters));
   }
 
   /**
