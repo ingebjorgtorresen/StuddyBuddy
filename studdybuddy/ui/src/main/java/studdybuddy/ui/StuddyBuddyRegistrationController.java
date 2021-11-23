@@ -308,7 +308,6 @@ public class StuddyBuddyRegistrationController {
       FXMLLoader loader = new FXMLLoader(fxmlFile);
       Parent parent = (Parent) loader.load();
       StuddyBuddiesController buddiesController = loader.getController();
-      System.out.println("Den kjører handle register i registration controller");
       buddiesController.transferData(dataAccess, buddies, buddy);
       Stage registrationStage = new Stage();
       registrationStage.setTitle("Forum");

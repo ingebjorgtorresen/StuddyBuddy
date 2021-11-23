@@ -26,10 +26,6 @@ public class StuddyBuddiesRestController {
     return buddiesService.getStuddyBuddies();
   }
 
-  private void autoSaveStuddyBuddies() {
-    buddiesService.autoSaveStuddyBuddies();
-  }
-
   private void checkStuddyBuddyNotNull(StuddyBuddy studdyBuddy, String name) {
     if (studdyBuddy == null) {
       throw new IllegalArgumentException("The studdyBuddy user named \""
@@ -45,7 +41,6 @@ public class StuddyBuddiesRestController {
    */
   @GetMapping(path = "/{name}")
   public StuddyBuddy getStuddyBuddy(@PathVariable("name") String name) {
-    System.out.println("Nå kjøres denne");
     StuddyBuddy studdyBuddy = getStuddyBuddies().getStuddyBuddy(name);
     checkStuddyBuddyNotNull(studdyBuddy, name);
     return studdyBuddy;
@@ -74,10 +69,10 @@ public class StuddyBuddiesRestController {
    */
   @PutMapping(path = "/{name}")
   public StuddyBuddy putStuddyBuddy(@PathVariable("name") 
-      String name, @RequestBody StuddyBuddy studdyBuddy) {
-    buddiesService.addStuddyBuddyToBuddies(studdyBuddy);
+      String name, @RequestBody StuddyBuddy buddy) {
+    buddiesService.addStuddyBuddyToBuddies(buddy);
     buddiesService.autoSaveStuddyBuddies();
-    return studdyBuddy;
+    return buddy;
   }
 
   /**
@@ -88,11 +83,11 @@ public class StuddyBuddiesRestController {
    * @return tru if posted, false if not posted
    */
   @PostMapping(path = "/{name}")
-  public boolean postStuddyBuddy(@PathVariable("name") String name,
-        @RequestBody StuddyBuddy studdyBuddy) {
-    boolean updated = getStuddyBuddies().getStuddyBuddy(name) == null;
-    autoSaveStuddyBuddies();
-    return updated;
+  public void postStuddyBuddy(@PathVariable("name") String name,
+        @RequestBody StuddyBuddy buddy) {
+      
+      buddiesService.updateStuddyBuddies(buddy);
+      buddiesService.autoSaveStuddyBuddies();
   }
 
 }

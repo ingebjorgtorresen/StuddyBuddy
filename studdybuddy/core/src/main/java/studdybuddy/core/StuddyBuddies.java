@@ -70,7 +70,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
    * @param buddy StuddyBuddy to remove.
    */
   public void removeStuddyBuddy(StuddyBuddy buddy) {
-    this.studdyBuddies.remove(buddy);
+    studdyBuddies.remove(buddy);
   }
 
   /**
