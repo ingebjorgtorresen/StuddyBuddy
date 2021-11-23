@@ -1,6 +1,6 @@
 package studdybuddy.ui;
 
-/*import java.io.FileReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.URL;
@@ -14,7 +14,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;*/
+import javafx.stage.Stage;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.dataaccess.DataAccess;
+import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
  * Controller for studdyBuddies objects.
@@ -22,7 +25,7 @@ import javafx.stage.Stage;*/
 public class StuddyBuddiesController {
     
     // Commented out while working on other classes
-    /*private DataAccess dataAccess;
+    private DataAccess dataAccess;
     private StuddyBuddiesPersistence persistence = new StuddyBuddiesPersistence();
 
     @FXML
@@ -55,6 +58,7 @@ public class StuddyBuddiesController {
     * so data can come from different sources.
     *
     * @param dataAccess the new dataAccess
+    */
     
     public void setDataAccess(DataAccess dataAccess) {
         this.dataAccess = dataAccess;
@@ -62,9 +66,6 @@ public class StuddyBuddiesController {
 
     @FXML
     public void initialize() {
-        System.out.println();
-        System.out.println("Den kjører initialize i StuddyBuddiesController.java");
-        System.out.println();
         display();
     }
 
@@ -90,14 +91,15 @@ public class StuddyBuddiesController {
     @FXML
     public void handleLogOut() {
         try {
-
-            URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");
+            URL fxmlFile = getClass().getResource("RemoteApp.fxml");
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
-            Stage registrationStage = new Stage();
-            registrationStage.setTitle("StuddyBuddy");
-            registrationStage.setScene(new Scene(parent));
-            registrationStage.show();
+            Stage welcomeStage = new Stage();
+            welcomeStage.setTitle("StuddyBuddy");
+            welcomeStage.setScene(new Scene(parent));
+            welcomeStage.show();
+            Stage thisStage = (Stage) studdyBuddyLogo.getScene().getWindow();
+            thisStage.close(); 
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -105,8 +107,8 @@ public class StuddyBuddiesController {
     }
 
     public StuddyBuddies getRegistratedStuddyBuddies() {
-        // Must be updated with server logic
-        /*StuddyBuddies registeredBuddies = null;
+        /* Must be updated with server logic
+        StuddyBuddies registeredBuddies = null;
         try (Reader reader = new FileReader(System.getProperty("user.home") + registrationsFileName,
                 StandardCharsets.UTF_8)) {
             registeredBuddies = persistence.readStuddyBuddies(reader);
@@ -114,7 +116,7 @@ public class StuddyBuddiesController {
             System.err.println("Couldn´t read from file");
             e.printStackTrace();
         }
-        return registeredBuddies;
+        return registeredBuddies;*/
         return null;
     }
 
@@ -123,6 +125,6 @@ public class StuddyBuddiesController {
         // setUpBuddies();
         //allRegistrationsText.setText(buddies.toString());
         allRegistrationsText.setText("HEIHEI:))");
-    } */
+    }
 
 }

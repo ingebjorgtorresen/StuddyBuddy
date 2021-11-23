@@ -102,7 +102,7 @@ public class RemoteDataAccess implements DataAccess {
           HttpClient.newBuilder().build()
           .send(request, HttpResponse.BodyHandlers.ofString());
       if (response.statusCode() != 200) {
-        System.err.println("Request was unsuccessfull");
+        throw new IllegalStateException("Request was unsuccessfull");
       }
     } catch (InterruptedException | IOException e) {
       e.printStackTrace();
@@ -125,15 +125,14 @@ public class RemoteDataAccess implements DataAccess {
           .header("Accept", "application/json")
           .header("Content-Type", "application/json")
           .POST(BodyPublishers.ofString(jsonString)).build();
-      final HttpResponse<String> response =
+        final HttpResponse<String> response =
           HttpClient.newBuilder().build()
           .send(request, HttpResponse.BodyHandlers.ofString());
-      String responseString = response.body();
-      Boolean added = mapper.readValue(responseString, Boolean.class);
-      if (added != null) {
-        buddies.addStuddyBuddy(buddy);
+      if (response.statusCode() != 200) {
+        throw new IllegalStateException("Request was unsuccessfull");
       }
-    } catch (InterruptedException | IOException e) {
+      }
+     catch (InterruptedException | IOException e) {
       throw new IllegalArgumentException("Could not save user-object to server.");
     }
   }

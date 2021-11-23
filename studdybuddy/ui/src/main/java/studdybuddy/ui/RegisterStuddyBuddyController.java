@@ -144,11 +144,23 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
+    
     checkInputs();
     StuddyBuddy buddy = createNewStuddyBuddy();
     buddies.addStuddyBuddy(buddy);
     dataAccess.putStuddyBuddy(buddy, buddies);
-    // messageBox.setText("Registering new user was sucessfull.");
+    
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+      Parent parent = (Parent) loader.load();
+      Stage buddiesStage = new Stage();
+      buddiesStage.setScene(new Scene(parent));
+      buddiesStage.show();
+      Stage thisStage = (Stage) nameField.getScene().getWindow();
+      thisStage.close(); 
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
   }
 
   /**

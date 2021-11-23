@@ -75,8 +75,6 @@ public class StuddyBuddiesRestController {
   @PutMapping(path = "/{name}")
   public StuddyBuddy putStuddyBuddy(@PathVariable("name") 
       String name, @RequestBody StuddyBuddy studdyBuddy) {
-    System.out.println("Studdybuddy objektet i restcontroller sin put");
-    System.out.println(studdyBuddy);
     buddiesService.addStuddyBuddyToBuddies(studdyBuddy);
     buddiesService.autoSaveStuddyBuddies();
     return studdyBuddy;
