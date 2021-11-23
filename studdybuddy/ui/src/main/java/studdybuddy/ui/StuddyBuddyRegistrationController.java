@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyRegistration;
+import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
@@ -341,6 +342,108 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
+   * Method for checking if the date has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
+  private boolean validDate() {
+    try {
+      StuddyBuddyValidation.checkNotNull(getInputDate().toString());
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkNotNull(String input) {
+    try {
+      StuddyBuddyValidation.checkNotNull(input);
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkInputRoom() {
+    return StuddyBuddyValidation.checkCourse(getInputCourse());
+  }
+  
+  /**
+   * Method for checking if the room has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
+  public boolean validRoom() {
+    if ((checkNotNull(getInputRoom()) == false) || (checkInputRoom() == false)) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkInputCourse() {
+    return StuddyBuddyValidation.checkCourse(getInputCourse());
+  }
+
+  /**
+   * Method for checking if the course has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
+  public boolean validCourse() {
+    if ((checkNotNull(getInputCourse()) == false) || (checkInputRoom() == false)) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkInputStartTime() {
+    try {
+      StuddyBuddyValidation.checkTimeFormat(getInputStartTime());
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
+   * Method for checking if the room has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
+  public boolean validStartTime(){
+    if ((checkNotNull(getInputStartTime()) == false) || (checkInputRoom() == false)) {
+      return false;
+    }
+    return true;
+  }
+
+  private boolean checkInputEndTime() {
+    try {
+      StuddyBuddyValidation.checkTimeFormat(getInputEndTime());
+    } catch (IllegalArgumentException e) {
+      return false;
+    }
+    return true;
+  }
+
+   /**
+   * Method for checking if the room has the correct format.
+   *
+   * @return true if it is correct, else false
+   * 
+   */
+  public boolean validEndTime(){
+    if ((checkNotNull(getInputEndTime()) == false) || (checkInputRoom() == false)) {
+      return false;
+    }
+    return true;
+  }
+
+  /**
    * Sets the feedback text to not be visable and to have Paradise Pink color saves this .
    * registration to file registration was successful sets message to be visable 
    * sets feedback to be visable if registration was successful sets message
@@ -357,233 +460,363 @@ public class StuddyBuddyRegistrationController {
     registerStuddyBuddy();
     saveStuddyBuddyToFile();
     
-    if(getDate() == null && getRoom() == null && getCourse() == null && getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    if(validDate() == false && validRoom() == false && validCourse() == false
+        && validStartTime() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      courseField.setStyle("-fx-border-color: red;");
+      startTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.setStyle("-fx-border-color: red;");
     }
 
-    else if(getDate() == null && getRoom() == null && getCourse() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validRoom() == false && validCourse() == false
+        && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getDate() == null && getRoom() == null && getCourse() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validDate() == false && validRoom() == false && validCourse() == false
+        && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputEndTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getDate() == null && getRoom() == null && getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validDate() == false && validRoom() == false && validStartTime() == false
+        && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getDate() == null && getCourse() == null && getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validDate() == false && validCourse() == false && validStartTime() == false
+        && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getRoom() == null && getCourse() == null && getStartTime() == null && getEndTime() == null ){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
-
-    else if(getDate() == null && getRoom() == null && getCourse() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-    }
-    else if(getDate() == null && getRoom() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-    }
-    else if(getDate() == null && getRoom() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
-    else if(getDate() == null && getCourse() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-    }
-    else if(getDate() == null && getCourse() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
-    else if(getDate() == null && getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
-    else if(getRoom() == null && getCourse() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-    }
-    else if(getRoom() == null && getCourse() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
-    else if(getRoom() == null && getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-    }
-    else if(getCourse() == null && getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validRoom() == false && validCourse() == false && validStartTime() == false
+        && validEndTime() == false ){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
 
-    else if(getDate() == null && getRoom() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validRoom() == false && validCourse() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getDate() == null && getCourse() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validRoom() == false && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getDate() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validRoom() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("--fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getDate() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validDate() == false && validCourse() == false && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getRoom() == null && getCourse() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validCourse() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getRoom() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validStartTime() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getRoom() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validRoom() == false && validCourse() == false && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getCourse() == null && getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validRoom() == false && validCourse() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getCourse() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validRoom() == false && validStartTime() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getStartTime() == null && getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validCourse() == false && validStartTime() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
 
-    else if(getDate() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validRoom() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getRoom() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validCourse() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getCourse() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
-    else if(getStartTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+    else if(validDate() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
-    else if(getEndTime() == null){
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+    else if(validRoom() == false && validCourse() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validRoom() == false && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validRoom() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
+    }
+    else if(validCourse() == false && validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validCourse() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.clear();
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
+    }
+    else if(validStartTime() == false && validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
+    }
+
+    else if(validDate() == false){
+      datepicker.setStyle("-fx-border-color: red;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validRoom() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: red;");
+      roomField.clear();
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validCourse() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: red;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validStartTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: red;");
+      startTimeField.clear();
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
+    }
+    else if(validEndTime() == false){
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: red;");
+      endTimeField.clear();
     }
     else{
-      datepicker.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      roomField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      courseField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      startTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
-      endTimeField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      datepicker.setStyle("-fx-border-color: gray;");
+      roomField.setStyle("-fx-border-color: gray;");
+      roomField.setText(getInputRoom());
+      courseField.setStyle("-fx-border-color: gray;");
+      courseField.setText(getInputCourse());
+      startTimeField.setStyle("-fx-border-color: gray;");
+      startTimeField.setText(getInputStartTime());
+      endTimeField.setStyle("-fx-border-color: gray;");
+      endTimeField.setText(getInputEndTime());
     }
 
     // displayRegistration();
