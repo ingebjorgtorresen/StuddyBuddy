@@ -36,10 +36,15 @@ public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
     if (jsonNode instanceof ObjectNode) {
       ObjectNode objectNode = (ObjectNode) jsonNode;
       StuddyBuddy studdyBuddy = new StuddyBuddy();
+      
       JsonNode nameNode = objectNode.get("Name");
-
       if (nameNode instanceof TextNode) {
         studdyBuddy.setName((nameNode).asText());
+      }
+
+      JsonNode passwordNode = objectNode.get("Password");
+      if (passwordNode instanceof TextNode) {
+        studdyBuddy.setPassword((passwordNode).asText());
       }
 
       JsonNode registrationsNode = objectNode.get("Registrations");
