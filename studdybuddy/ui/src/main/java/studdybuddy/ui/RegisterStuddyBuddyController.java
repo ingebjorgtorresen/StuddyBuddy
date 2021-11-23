@@ -3,8 +3,12 @@ package studdybuddy.ui;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyValidation;
@@ -211,6 +215,16 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleBack() {
-    // TODO: redirect
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoteApp.fxml"));
+      Parent parent = (Parent) loader.load();
+      Stage welcomeStage = new Stage();
+      welcomeStage.setScene(new Scene(parent));
+      welcomeStage.show();
+      Stage thisStage = (Stage) nameField.getScene().getWindow();
+      thisStage.close(); 
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
   }
 }

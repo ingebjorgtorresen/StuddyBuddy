@@ -142,6 +142,16 @@ public class LoginStuddyBuddyController {
    */
   @FXML
   public void handleBack() {
-    // TODO: redirect
+    try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoteApp.fxml"));
+        Parent parent = (Parent) loader.load();
+        Stage welcomeStage = new Stage();
+        welcomeStage.setScene(new Scene(parent));
+        welcomeStage.show();
+        Stage thisStage = (Stage) nameField.getScene().getWindow();
+        thisStage.close(); 
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
