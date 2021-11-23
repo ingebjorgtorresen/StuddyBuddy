@@ -66,7 +66,7 @@ public class RegisterStuddyBuddyController {
 
   private boolean checkNotNull() {
     try {
-      StuddyBuddyValidation.checkNotNull(getInputName());
+      StuddyBuddyValidation.checkNotNullorEmpty(getInputName());
     } catch (IllegalArgumentException e) {
       return false;
     }
@@ -156,6 +156,7 @@ public class RegisterStuddyBuddyController {
       buddiesController.transferData(dataAccess, buddies, buddy);
       Stage buddiesStage = new Stage();
       buddiesStage.setScene(new Scene(parent));
+      buddiesStage.setTitle("StuddyBuddies");
       buddiesStage.show();
       Stage thisStage = (Stage) nameField.getScene().getWindow();
       thisStage.close(); 
@@ -233,6 +234,7 @@ public class RegisterStuddyBuddyController {
       Parent parent = (Parent) loader.load();
       Stage welcomeStage = new Stage();
       welcomeStage.setScene(new Scene(parent));
+      welcomeStage.setTitle("StuddyBuddy");
       welcomeStage.show();
       Stage thisStage = (Stage) nameField.getScene().getWindow();
       thisStage.close(); 

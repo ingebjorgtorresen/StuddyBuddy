@@ -60,10 +60,13 @@ public class StuddyBuddyRegistration {
    * @param date the new date.
    */
   public void setDate(LocalDate date) {
-    StuddyBuddyValidation.checkDateNotNull(date);
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
-    String formattedString = date.format(formatter);
-    this.date = formattedString;
+    if (StuddyBuddyValidation.checkDatNotNull(date)) {
+      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/YYYY");
+      String formattedString = date.format(formatter);
+      this.date = formattedString;
+    } else {
+      throw new IllegalArgumentException("Ivalid date.");
+    }
   }
 
   /**
@@ -73,11 +76,12 @@ public class StuddyBuddyRegistration {
    * @throws IllegalArgumentException if the format is incorrect.
    */
   public void setStartTime(String startTime) {
-    StuddyBuddyValidation.checkNotNull(startTime);
-    StuddyBuddyValidation.checkTimeFormat(startTime);
-
-    this.startTime = startTime;
-
+    if (StuddyBuddyValidation.checkNotNullorEmpty(startTime) 
+        && StuddyBuddyValidation.checkTimeFormat(startTime)) {
+      this.startTime = startTime;
+    } else {
+      throw new IllegalArgumentException("Invalid start time.");
+    }
   }
 
   /**
@@ -96,13 +100,11 @@ public class StuddyBuddyRegistration {
    * @throws IllegalArgumentException if the format is incorrect or if startTime is before endTime.
    */
   public void setEndTime(String endTime) {
-    StuddyBuddyValidation.checkNotNull(endTime);
-    StuddyBuddyValidation.checkTimeFormat(endTime);
-
-    if (StuddyBuddyValidation.checkStartTimeBeforeEndTime(this.startTime, endTime) == true) {
+    if (StuddyBuddyValidation.checkStartTimeBeforeEndTime(this.startTime, endTime) 
+        && StuddyBuddyValidation.checkNotNullorEmpty(endTime) && StuddyBuddyValidation.checkTimeFormat(endTime)) {
       this.endTime = endTime;
     } else {
-      throw new IllegalArgumentException("Endtime can not be before starttime.");
+      throw new IllegalArgumentException("Invalid end time.");
     }
   }
 
@@ -122,13 +124,13 @@ public class StuddyBuddyRegistration {
    * @throws IllegalArgumentException if the format is incorrect.
    */
   public void setRoom(String room) {
-    StuddyBuddyValidation.checkNotNull(room);
 
-    if (StuddyBuddyValidation.checkRoom(room) == false) {
+    if (StuddyBuddyValidation.checkRoom(room) && StuddyBuddyValidation.checkNotNullorEmpty(room)) {
+      this.room = room;
+    } else {
       throw new IllegalArgumentException(
           "Can not use other characters than letters, digits, '-' and ' '. You wrote: " + room);
     }
-    this.room = room;
   }
 
   /**
@@ -147,13 +149,12 @@ public class StuddyBuddyRegistration {
    * @throws IllegalArgumentException if the format of the course param is wrong.
    */
   public void setCourse(String course) {
-    StuddyBuddyValidation.checkNotNull(course);
-
-    if (StuddyBuddyValidation.checkCourse(course) == false) {
+    if (StuddyBuddyValidation.checkCourse(course) && (StuddyBuddyValidation.checkNotNullorEmpty(course))) {
+      this.course = course;
+    } else {
       throw new IllegalArgumentException(
-          "Can not use other characters than letters, digits, '-' and ' '. You wrote: " + course);
+        "Can not use other characters than letters, digits, '-' and ' '. You wrote: " + course);
     }
-    this.course = course;
   }
 
   /**

@@ -140,6 +140,7 @@ public class LoginStuddyBuddyController {
         Parent parent = (Parent) loader.load();
         Stage welcomeStage = new Stage();
         welcomeStage.setScene(new Scene(parent));
+        welcomeStage.setTitle("StuddyBuddy");
         welcomeStage.show();
         Stage thisStage = (Stage) nameField.getScene().getWindow();
         thisStage.close(); 

@@ -21,10 +21,7 @@ public abstract class StuddyBuddyValidation {
    * @return true if format is correct, else return false
    */
   public static boolean checkPassword(String password) {
-    if (Pattern.matches("\\w{8,}", password)) {
-      return true;
-    }
-    return false;
+    return Pattern.matches("\\w{8,}", password);
   }
 
   /**
@@ -34,14 +31,15 @@ public abstract class StuddyBuddyValidation {
    * @return true if the formate is correct and false if it is incorrect
    */
   public static boolean checkName(String name) {
+    if (!checkNotNullorEmpty(name)) {
+      return false;
+    }
     char[] chars = name.toCharArray();
-
     for (char c : chars) {
       if (!(Character.isLetter(c) || (c == ' '))) {
         return false;
       }
     }
-
     return true;
   }
 
@@ -51,21 +49,12 @@ public abstract class StuddyBuddyValidation {
    * @param string string to check.
    */
 
-  public static void checkNotNull(String string) {
-    if (string == null) {
-      throw new IllegalArgumentException("Input can not be null/nothing.");
-    }
+  public static boolean checkNotNullorEmpty(String string) {
+    return (string != null && !string.equals(""));
   }
 
-  /**
-   * Checks that the LocalDate argument is not null.
-   *
-   * @param date to check.
-   */
-  public static void checkDateNotNull(LocalDate date) {
-    if (date == null) {
-      throw new IllegalArgumentException("Input can not be null/nothing.");
-    }
+  public static boolean checkDatNotNull(LocalDate date) {
+    return date != null;
   }
 
   /**
@@ -75,18 +64,19 @@ public abstract class StuddyBuddyValidation {
    * @param time to check.
    * @throws IllegalArgumentException if the format is incorrect.
    */
-  public static void checkTimeFormat(String time) {
-    checkNotNull(time);
-
+  public static boolean checkTimeFormat(String time) {
+    if (!checkNotNullorEmpty(time)) {
+      return false;
+    }
     DateTimeFormatter formatter
         = DateTimeFormatter.ofPattern("HH:mm")
         .withResolverStyle(ResolverStyle.STRICT);
     try {
       LocalTime.parse(time, formatter).toString();
     } catch (DateTimeException e) {
-      e.printStackTrace();
-      throw new IllegalArgumentException("Wrong format, or could not parse.");
+        return false;
     }
+    return true;
   }
 
   /**
@@ -97,19 +87,14 @@ public abstract class StuddyBuddyValidation {
    * @return false if end time is before start time and true if it is after.
    */
   public static boolean checkStartTimeBeforeEndTime(String startTime, String endTime) {
-    if ((startTime == null) || (endTime == null)) {
-      throw new IllegalArgumentException(
-          "Time can not be null/nothing. Starttime was " + startTime + " endtime was: " + endTime);
+    if (checkNotNullorEmpty(startTime) && checkNotNullorEmpty(endTime)) {
+      LocalTime start = LocalTime.parse(startTime);
+      LocalTime end = LocalTime.parse(endTime);
+      if ((end.isAfter(start)) && (start != end)) {
+        return true;
+      }
     }
-
-    LocalTime start = LocalTime.parse(startTime);
-    LocalTime end = LocalTime.parse(endTime);
-
-    if ((start.isAfter(end)) || (start == end)) {
-      return false;
-    }
-
-    return true;
+    return false;
   }
 
   /**
@@ -120,14 +105,15 @@ public abstract class StuddyBuddyValidation {
    * @return true if the format is coorect and false if it is incorrect.
    */
   public static boolean checkRoom(String room) {
+    if (!checkNotNullorEmpty(room)) {
+      return false;
+    }
     char[] chars = room.toCharArray();
-
     for (char c : chars) {
       if (!((Character.isLetter(c)) || (Character.isDigit(c)) || (c == '-') || (c == ' '))) {
         return false;
       }
     }
-
     return true;
   }
 
@@ -139,15 +125,15 @@ public abstract class StuddyBuddyValidation {
    * @return true if the format is coorect and false if it is incorrect.
    */
   public static boolean checkCourse(String course) {
+    if (!checkNotNullorEmpty(course)) {
+      return false;
+    }
     char[] chars = course.toCharArray();
-
     for (char c : chars) {
       if (!((Character.isLetter(c)) || (Character.isDigit(c)) || (c == '-') || (c == ' '))) {
         return false;
       }
     }
-
     return true;
   }
-
 }

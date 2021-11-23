@@ -30,12 +30,12 @@ public class StuddyBuddy {
    * @param name the name to set.
    */
   public void setName(String name) {
-    StuddyBuddyValidation.checkNotNull(name);
-    if (!StuddyBuddyValidation.checkName(name)) {
+    if (StuddyBuddyValidation.checkName(name) && StuddyBuddyValidation.checkNotNullorEmpty(name)) {
+      this.name = name;
+    } else {
       throw new IllegalArgumentException(
           "Name can not include any characthers but letters and ' ', you wrote: " + name);
     }
-    this.name = name;
   }
 
   /**
@@ -55,8 +55,7 @@ public class StuddyBuddy {
    * @param password the password the user wishes to set.
    */
   public void setPassword(String password) {
-    StuddyBuddyValidation.checkNotNull(password);
-    if (!StuddyBuddyValidation.checkPassword(password)) {
+    if (!StuddyBuddyValidation.checkPassword(password) || !StuddyBuddyValidation.checkNotNullorEmpty(password)) {
       throw new IllegalArgumentException("Please write a valid password.");
     }
     this.password = password;
