@@ -1,5 +1,7 @@
 package studdybuddy.ui;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
@@ -16,13 +19,25 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import studdybuddy.core.StuddyBuddy;
-import studdybuddy.dataaccess.DirectDataAccess;
+import com.github.tomakehurst.wiremock.WireMockServer;
+import com.github.tomakehurst.wiremock.client.WireMock;
+import static com.github.tomakehurst.wiremock.client.WireMock.aResponse;
+import static com.github.tomakehurst.wiremock.client.WireMock.equalTo;
+import static com.github.tomakehurst.wiremock.client.WireMock.get;
+import static com.github.tomakehurst.wiremock.client.WireMock.stubFor;
+import static com.github.tomakehurst.wiremock.client.WireMock.urlEqualTo;
+import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
+//import studdybuddy.dataaccess.DirectDataAccess;
+import studdybuddy.dataaccess.RemoteDataAccess;
 
 public class StuddyBuddiesControllerTest extends ApplicationTest {
 
-  private DirectDataAccess dataAccess;
+  //private DirectDataAccess dataAccess;
+  private RemoteDataAccess remoteDataAccess;
   private StuddyBuddiesController controller;
   private StuddyBuddy buddy;
+  private WireMockConfiguration configuration;
+  private WireMockServer wireMockServer;
   
   @FXML
   private Label username;
@@ -40,8 +55,30 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
   }
 
   @BeforeEach
+  public void startWireMockServerandSetUpStuddyBuddies() throws URISyntaxException {
+    configuration = WireMockConfiguration.wireMockConfig().port(8080);
+    wireMockServer = new WireMockServer(configuration.portNumber());
+    wireMockServer.start();
+    WireMock.configureFor("localhost", configuration.portNumber());
+    remoteDataAccess = new RemoteDataAccess(new URI("http://localhost:" + wireMockServer.port() + "/studdybuddy"));
+  }
+
+  public String getStuddyBuddiesDisplayed() {
+    stubFor(get(urlEqualTo("/studdybuddy"))
+        .withHeader("Accept", equalTo("application/json"))
+        .willReturn(aResponse()
+            .withStatus(200)
+            .withHeader("Content-Type", "application/json")
+            .withBody("{\"studdyBuddies\": [ {\"name\": \"registration\"}, {\"name\": \"registration\"} ]}")
+        )
+    );
+    String studdyBuddiesDisplayed = remoteDataAccess.getStuddyBuddies().toString();
+    return studdyBuddiesDisplayed;
+  }
+
+//  @BeforeEach
   public void setUpStuddyBuddies() {
-    dataAccess = new DirectDataAccess();
+    //dataAccess = new DirectDataAccess();
     controller = new StuddyBuddiesController();
     buddy = new StuddyBuddy();
     buddy.setName("User test");
@@ -51,7 +88,7 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
 
   @Test
   public void testController_studdyBuddies() {
-    assertNotNull(this.dataAccess);
+    //assertNotNull(this.dataAccess);
     assertNotNull(this.controller);
     assertNotNull(this.buddy);
     assertNotNull(this.username);
@@ -105,9 +142,14 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
   public void testDisplay() {
     username.setText(buddy.getName());
     assertEquals("User test", username.getText()); // må trolig bruke server her egt
-    /**String studdyBuddies = dataAccess.getStuddyBuddies().toString();
+    String studdyBuddies = remoteDataAccess.getStuddyBuddies().toString();
     allRegistrationsText.setText(studdyBuddies);
-    assertEquals(studdyBuddies, allRegistrationsText.getText());*/
+    assertEquals(studdyBuddies, allRegistrationsText.getText());
+  }
+
+  @AfterEach
+  public void stopWireMockServer() {
+    wireMockServer.stop();
   }
 
 }
