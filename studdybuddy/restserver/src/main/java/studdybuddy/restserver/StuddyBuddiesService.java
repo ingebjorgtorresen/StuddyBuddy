@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 import org.springframework.stereotype.Service;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
-import studdybuddy.core.StuddyBuddyRegistration;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
