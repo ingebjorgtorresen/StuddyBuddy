@@ -67,7 +67,7 @@ public class StuddyBuddyRegistrationTest {
 	}
 
 	/**
-	 * Method for testing format of time.
+	 * Method for testing time format.
 	 */
 	@Test
 	public void testTimeFormat() {
@@ -118,6 +118,9 @@ public class StuddyBuddyRegistrationTest {
 		});
 	}
 
+	/**
+	 * Method for testsing date format.
+	 */
 	@Test
 	public void testDateFormat() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {

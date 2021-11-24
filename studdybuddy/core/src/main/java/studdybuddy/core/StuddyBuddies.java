@@ -11,7 +11,7 @@ import java.util.List;
 
 public class StuddyBuddies implements Iterable<StuddyBuddy> {
 
-  List<StuddyBuddy> studdyBuddies = new ArrayList<>();
+  private List<StuddyBuddy> studdyBuddies = new ArrayList<>();
 
   /**
    * Method for searching for StuddyBuddy by name.
