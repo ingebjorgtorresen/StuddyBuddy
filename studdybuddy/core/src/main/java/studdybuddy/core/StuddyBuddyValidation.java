@@ -74,7 +74,7 @@ public abstract class StuddyBuddyValidation {
     try {
       LocalTime.parse(time, formatter).toString();
     } catch (DateTimeException e) {
-        return false;
+      return false;
     }
     return true;
   }

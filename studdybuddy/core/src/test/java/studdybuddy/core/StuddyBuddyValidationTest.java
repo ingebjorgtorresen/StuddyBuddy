@@ -1,17 +1,17 @@
 package studdybuddy.core;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Test class for StuddyBuddyValidtation.
+ */
 public class StuddyBuddyValidationTest {
 
   /**
-   * Tests the checkPassword method
-   * 
-   * Right format is 8 or more characters, either letters or digits.
+   * Tests the checkPassword method.
+   * Correct format is 8 or more characters, either letters or digits.
    */
   @Test
   public void testCheckPassword() {
@@ -22,9 +22,8 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests that the checkName method
-   * 
-   * Name can only consist of letters and space
+   * Tests that the checkName method.
+   * Name can only consist of letters and space.
    */
   @Test
   public void testCheckName() {
@@ -37,9 +36,8 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkTimeFormat method
-   * 
-   * Test that exceptions are thrown when the format is wrong
+   * Tests the checkTimeFormat method.
+   * Test that exceptions are thrown when the format is wrong.
    */
   @Test
   public void testcheckTimeFormat() {
@@ -47,16 +45,15 @@ public class StuddyBuddyValidationTest {
     String invalidFormatTwo = "12";
     String invalidFormatThree = "1200";
     String validFormat = "12:00";
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatOne));
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatTwo));
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatThree));
-    assertDoesNotThrow(() -> StuddyBuddyValidation.checkTimeFormat(validFormat));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatOne));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatTwo));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatThree));
+    assertTrue(StuddyBuddyValidation.checkTimeFormat(validFormat));
   }
 
   /**
-   * Tests the checkStartTimeBeforeEndTime method
-   * 
-   * Should return false if end time is before start time and true if it is after
+   * Tests the checkStartTimeBeforeEndTime method.
+   * Should return false if end time is before start time and true if it is after.
    */
   @Test
   public void testCheckStartTimeBeforeEndTime() {
@@ -68,11 +65,9 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkRoom method
-   * 
-   * True if the room must consist of letters, numbers, "-" and/or spaces
-   * 
-   * False otherwise
+   * Tests the checkRoom method.
+   * True if the room must consist of letters, numbers, "-" and/or spaces.
+   * False otherwise.
    */
   @Test
   public void testCheckRoom() {
@@ -85,11 +80,9 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkCourse method
-   * 
-   * True if the course consist of letters, numbers, "-" or spaces
-   * 
-   * False otherwise
+   * Tests the checkCourse method.
+   * True if the course consist of letters, numbers, "-" or spaces.
+   * False otherwise.
    */
   @Test
   public void checkCourse() {

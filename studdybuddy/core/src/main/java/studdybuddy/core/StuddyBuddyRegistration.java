@@ -101,7 +101,8 @@ public class StuddyBuddyRegistration {
    */
   public void setEndTime(String endTime) {
     if (StuddyBuddyValidation.checkStartTimeBeforeEndTime(this.startTime, endTime) 
-        && StuddyBuddyValidation.checkNotNullorEmpty(endTime) && StuddyBuddyValidation.checkTimeFormat(endTime)) {
+        && StuddyBuddyValidation.checkNotNullorEmpty(endTime) 
+        && StuddyBuddyValidation.checkTimeFormat(endTime)) {
       this.endTime = endTime;
     } else {
       throw new IllegalArgumentException("Invalid end time.");
@@ -149,7 +150,8 @@ public class StuddyBuddyRegistration {
    * @throws IllegalArgumentException if the format of the course param is wrong.
    */
   public void setCourse(String course) {
-    if (StuddyBuddyValidation.checkCourse(course) && (StuddyBuddyValidation.checkNotNullorEmpty(course))) {
+    if (StuddyBuddyValidation.checkCourse(course) 
+        && (StuddyBuddyValidation.checkNotNullorEmpty(course))) {
       this.course = course;
     } else {
       throw new IllegalArgumentException(
