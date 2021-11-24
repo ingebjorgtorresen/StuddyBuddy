@@ -15,7 +15,7 @@ import studdybuddy.json.StuddyModule;
  */
 @RestController
 @SpringBootApplication
-public class StuddyBuddiesApplication {
+public class StuddyBuddyApplication {
 
   private WelcomeService welcomeService = new WelcomeService();
   
@@ -30,6 +30,6 @@ public class StuddyBuddiesApplication {
   }
 
   public static void main(String[] args) {
-    SpringApplication.run(StuddyBuddiesApplication.class, args);
+    SpringApplication.run(StuddyBuddyApplication.class, args);
   }
 }
