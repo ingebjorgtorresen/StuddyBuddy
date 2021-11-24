@@ -10,6 +10,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
