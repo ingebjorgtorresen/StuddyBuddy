@@ -1,8 +1,6 @@
 package studdybuddy.core;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
@@ -47,10 +45,10 @@ public class StuddyBuddyValidationTest {
     String invalidFormatTwo = "12";
     String invalidFormatThree = "1200";
     String validFormat = "12:00";
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatOne));
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatTwo));
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatThree));
-    assertDoesNotThrow(() -> StuddyBuddyValidation.checkTimeFormat(validFormat));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatOne));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatTwo));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatThree));
+    assertTrue(StuddyBuddyValidation.checkTimeFormat(validFormat));
   }
 
   /**
