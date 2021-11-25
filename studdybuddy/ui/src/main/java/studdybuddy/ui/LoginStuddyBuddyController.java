@@ -10,6 +10,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
@@ -77,12 +79,11 @@ public class LoginStuddyBuddyController {
      * @return true if user exists
      */
     public boolean userExists() {
-        try {
-            dataAccess.getStuddyBuddyByName(getInputName());
-        } catch( RuntimeException e) {
-            return false;
+        StuddyBuddy buddy = dataAccess.getStuddyBuddyByName(getInputName());
+        if(StuddyBuddyValidation.checkNotNullorEmpty(buddy.toString())) {
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -106,27 +107,30 @@ public class LoginStuddyBuddyController {
             errorMessage.setText("User does not exist.\nGo back and register.");
         }
 
-        if (!passwordIsCorrect()) {
+        else if (!passwordIsCorrect()) {
             nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
             passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+            nameField.setText(getInputName());
             errorMessage.setText("Wrong password.");
         }
 
-        try {
-            URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
-            FXMLLoader loader = new FXMLLoader(fxmlFile);
-            Parent parent = (Parent) loader.load();
-            StuddyBuddiesController buddiesController = loader.getController();
-            buddiesController.transferData(dataAccess, buddies, dataAccess.getStuddyBuddyByName(getInputName()));
-            Stage buddiesStage = new Stage();
-            buddiesStage.setTitle("StuddyBuddies");
-            buddiesStage.setScene(new Scene(parent));
-            buddiesStage.show();
-            Stage thisStage = (Stage) nameField.getScene().getWindow();
-            thisStage.close();
-        } catch (IOException e) {
-            errorMessage.setText("Could not open StuddyBuddies page.");
-            e.printStackTrace();
+        else {
+            try {
+                URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
+                FXMLLoader loader = new FXMLLoader(fxmlFile);
+                Parent parent = (Parent) loader.load();
+                StuddyBuddiesController buddiesController = loader.getController();
+                buddiesController.transferData(dataAccess, buddies, dataAccess.getStuddyBuddyByName(getInputName()));
+                Stage buddiesStage = new Stage();
+                buddiesStage.setTitle("StuddyBuddies");
+                buddiesStage.setScene(new Scene(parent));
+                buddiesStage.show();
+                Stage thisStage = (Stage) nameField.getScene().getWindow();
+                thisStage.close();
+            } catch (IOException e) {
+                errorMessage.setText("Could not open StuddyBuddies page.");
+                e.printStackTrace();
+            }
         }
     }
 
