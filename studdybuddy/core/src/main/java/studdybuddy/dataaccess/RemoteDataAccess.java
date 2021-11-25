@@ -60,7 +60,7 @@ public class RemoteDataAccess implements DataAccess {
     return baseUri.resolve("user").resolve(encodeUriParam(name));
   }
 
-    /**
+  /**
    * Gets the password URI.
    *
    * @param name of StuddyBuddy.
@@ -133,14 +133,13 @@ public class RemoteDataAccess implements DataAccess {
           .header("Accept", "application/json")
           .header("Content-Type", "application/json")
           .POST(BodyPublishers.ofString(jsonString)).build();
-        final HttpResponse<String> response =
+      final HttpResponse<String> response =
           HttpClient.newBuilder().build()
           .send(request, HttpResponse.BodyHandlers.ofString());
       if (response.statusCode() != 200) {
         throw new IllegalStateException("Request was unsuccessfull");
       }
-      }
-     catch (InterruptedException | IOException e) {
+    } catch (InterruptedException | IOException e) {
       throw new IllegalArgumentException("Could not save user-object to server.");
     }
   }
