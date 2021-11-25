@@ -42,7 +42,7 @@ public class StuddyBuddyTest {
   }
 
   /**
-   * Method for testing setter for password.
+   * Method for testing setter for password
    */
   public void testPassword() {
     studdyBuddy.setPassword("12345678");

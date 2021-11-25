@@ -55,8 +55,7 @@ public class StuddyBuddy {
    * @param password the password the user wishes to set.
    */
   public void setPassword(String password) {
-    if (!StuddyBuddyValidation.checkPassword(password) 
-        || !StuddyBuddyValidation.checkNotNullorEmpty(password)) {
+    if (!StuddyBuddyValidation.checkPassword(password) || !StuddyBuddyValidation.checkNotNullorEmpty(password)) {
       throw new IllegalArgumentException("Please write a valid password.");
     }
     this.password = password;
