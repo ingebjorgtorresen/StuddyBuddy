@@ -168,7 +168,7 @@ public class StuddyBuddyRegistrationController {
   @FXML
   public void handleRegister() {
     if (registerStuddyBuddy()) {
-      dataAccess.postStuddyBuddy(buddy, buddies);
+      dataAccess.postStuddyBuddy(buddy);
       try {
         URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
         FXMLLoader loader = new FXMLLoader(fxmlFile);

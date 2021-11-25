@@ -17,14 +17,16 @@ public class DirectDataAccess implements DataAccess {
 
   private StuddyBuddiesPersistence buddiesPersistence;
   private String filename = "directBuddies.json";
+  private StuddyBuddies buddies;
 
   public DirectDataAccess() {
     buddiesPersistence = new StuddyBuddiesPersistence();
     buddiesPersistence.setSaveFilePath(filename);
+    buddies = getStuddyBuddies();
   }
 
   @Override
-  public StuddyBuddy getStuddyBuddyByName(String name, StuddyBuddies buddies) {
+  public StuddyBuddy getStuddyBuddyByName(String name) {
     StuddyBuddy buddy = buddies.getStuddyBuddy(name);
     if (buddy == null) {
       throw new IllegalArgumentException("The user does not exist.");
@@ -33,17 +35,17 @@ public class DirectDataAccess implements DataAccess {
   }
 
   @Override
-  public String getStuddyBuddyPasswordByName(String name, StuddyBuddies buddies) {
-    return getStuddyBuddyByName(name, buddies).getPassword();
+  public String getStuddyBuddyPasswordByName(String name) {
+    return getStuddyBuddyByName(name).getPassword();
   }
 
   @Override
-  public void putStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
+  public void putStuddyBuddy(StuddyBuddy buddy) {
     buddies.addStuddyBuddy(buddy);
   }
 
   @Override
-  public void postStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
+  public void postStuddyBuddy(StuddyBuddy buddy) {
     buddies.addStuddyBuddy(buddy);
   }
 
