@@ -1,7 +1,6 @@
 {
     "StuddyBuddies" : [ {
       "Name" : "Anette",
-      "Password" : "password1",
       "Registrations" : [ {
         "Date" : "10/10/2022",
         "Room" : "R2",
@@ -11,7 +10,6 @@
       } ]
     }, {
       "Name" : "Tuva",
-      "Password" : "passw0rd",
       "Registrations" : [ {
         "Date" : "12/12/2022",
         "Room" : "F1",
@@ -21,7 +19,6 @@
       } ]
     }, {
       "Name" : "Ingebjørg",
-      "Password" : "pæssword",
       "Registrations": [ {
         "Date": "12/12/2022",
         "Room" : "S7",
@@ -31,7 +28,6 @@
       } ]
     }, {
       "Name" : "Selma",
-      "Password" : "passwooord",
       "Registrations": [ {
         "Date": "12/12/2022",
         "Room" : "S7",

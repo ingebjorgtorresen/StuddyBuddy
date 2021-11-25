@@ -18,7 +18,7 @@ import studdybuddy.core.StuddyBuddyRegistration;
  */
 public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
 
-  private StuddyBuddyRegistrationDeserializer registrationDeserializer 
+  StuddyBuddyRegistrationDeserializer registrationDeserializer 
       = new StuddyBuddyRegistrationDeserializer();
 
   /**
@@ -65,7 +65,7 @@ public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
   /**
    * Deserialize method.
    *
-   * @return a deserialized StuddyBuddy object.
+   * @return adeserialized StuddyBuddy object.
    */
   @Override
   public StuddyBuddy deserialize(JsonParser p, DeserializationContext ctxt)

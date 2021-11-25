@@ -13,7 +13,7 @@ import studdybuddy.core.StuddyBuddyRegistration;
 public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
 
   /*
-   * Format:
+   * Formatet vi ønsker at StuddyBuddy-objektene skal se ut:
    * { "Name": "...",
    * "Registrations" : [...] }
    */
