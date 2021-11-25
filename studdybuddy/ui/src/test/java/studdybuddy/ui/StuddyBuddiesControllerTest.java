@@ -23,10 +23,6 @@ import studdybuddy.core.StuddyBuddy;
 public class StuddyBuddiesControllerTest extends ApplicationTest {
 
   private StuddyBuddiesController controller;
-  private StuddyBuddy buddy;
-  
-  @FXML
-  private Label username;
 
   @Override
   public void start(final Stage stage) throws Exception {
@@ -40,16 +36,11 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
   @BeforeEach
   public void setUpStuddyBuddies() {
     controller = new StuddyBuddiesController();
-    buddy = new StuddyBuddy();
-    buddy.setName("User test");
-    username = new Label();
   }
 
   @Test
   public void testController_studdyBuddies() {
     assertNotNull(this.controller);
-    assertNotNull(this.buddy);
-    assertNotNull(this.username);
   }
 
   @Test
@@ -59,9 +50,9 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
     for(Window window : beforeClick){
       beforeClickRoot = window.getScene().getRoot();
     }
-    Thread.sleep(1000);
+    Thread.sleep(5000);
     clickOn("#addRegistrationButton");
-    Thread.sleep(1000);
+    Thread.sleep(5000);
     List<Window> afterClick = Window.getWindows();
     Parent afterClickRoot = null;
     for(Window window : afterClick){
@@ -77,20 +68,14 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
     for(Window window : beforeClick){
       beforeClickRoot = window.getScene().getRoot();
     }
-    Thread.sleep(1000);
+    Thread.sleep(5000);
     clickOn("#logOut");
-    Thread.sleep(1000);
+    Thread.sleep(5000);
     List<Window> afterClick = Window.getWindows();
     Parent afterClickRoot = null;
     for(Window window : afterClick){
       afterClickRoot = window.getScene().getRoot();
     }
     assertNotEquals(afterClickRoot, beforeClickRoot);
-  }
-
-  @Test
-  public void testDisplay() {
-    username.setText(buddy.getName());
-    assertEquals("User test", username.getText());
   }
 }
