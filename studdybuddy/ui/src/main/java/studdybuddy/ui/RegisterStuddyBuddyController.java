@@ -144,45 +144,6 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
-    checkInputs();
-    StuddyBuddy buddy = createNewStuddyBuddy();
-    buddies.addStuddyBuddy(buddy);
-    dataAccess.putStuddyBuddy(buddy);
-    
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
-      Parent parent = (Parent) loader.load();
-      StuddyBuddiesController buddiesController = loader.getController();
-      buddiesController.transferData(dataAccess, buddies, buddy);
-      Stage buddiesStage = new Stage();
-      buddiesStage.setScene(new Scene(parent));
-      buddiesStage.setTitle("StuddyBuddies");
-      buddiesStage.show();
-      Stage thisStage = (Stage) nameField.getScene().getWindow();
-      thisStage.close(); 
-      } catch (IOException e) {
-          e.printStackTrace();
-      }
-  }
-
-  /**
-   * Method for transering dataAccess and studdyBuddies between classes.
-   * Is used in the class that opens an FXML that uses this controller.
-   * 
-
-   * @param dataAccess dataAccess for the run of the application
-   * 
-   * @param buddies studdyBuddies for the run of the application
-   */
-  public void transferData(DataAccess dataAccess, StuddyBuddies buddies) {
-    this.dataAccess = dataAccess;
-    this.buddies = buddies;
-  }
-
-  /**
-   * Method that checks if the name and password is correct.
-   */
-  public void checkInputs() {
     if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
@@ -221,7 +182,39 @@ public class RegisterStuddyBuddyController {
       passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       nameField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      StuddyBuddy buddy = createNewStuddyBuddy();
+      buddies.addStuddyBuddy(buddy);
+      dataAccess.putStuddyBuddy(buddy);
     }
+    
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+      Parent parent = (Parent) loader.load();
+      StuddyBuddiesController buddiesController = loader.getController();
+      buddiesController.transferData(dataAccess, buddies, buddy);
+      Stage buddiesStage = new Stage();
+      buddiesStage.setScene(new Scene(parent));
+      buddiesStage.setTitle("StuddyBuddies");
+      buddiesStage.show();
+      Stage thisStage = (Stage) nameField.getScene().getWindow();
+      thisStage.close(); 
+      } catch (IOException e) {
+          e.printStackTrace();
+      }
+  }
+
+  /**
+   * Method for transering dataAccess and studdyBuddies between classes.
+   * Is used in the class that opens an FXML that uses this controller.
+   * 
+
+   * @param dataAccess dataAccess for the run of the application
+   * 
+   * @param buddies studdyBuddies for the run of the application
+   */
+  public void transferData(DataAccess dataAccess, StuddyBuddies buddies) {
+    this.dataAccess = dataAccess;
+    this.buddies = buddies;
   }
 
   /**
