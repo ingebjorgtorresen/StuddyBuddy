@@ -37,9 +37,8 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkTimeFormat method
-   * 
-   * Test that exceptions are thrown when the format is wrong
+   * Tests the checkTimeFormat method.
+   * Test that exceptions are thrown when the format is wrong.
    */
   @Test
   public void testcheckTimeFormat() {
@@ -47,10 +46,10 @@ public class StuddyBuddyValidationTest {
     String invalidFormatTwo = "12";
     String invalidFormatThree = "1200";
     String validFormat = "12:00";
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatOne));
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatTwo));
-    assertThrows(IllegalArgumentException.class, () -> StuddyBuddyValidation.checkTimeFormat(invalidFormatThree));
-    assertDoesNotThrow(() -> StuddyBuddyValidation.checkTimeFormat(validFormat));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatOne));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatTwo));
+    assertFalse(StuddyBuddyValidation.checkTimeFormat(invalidFormatThree));
+    assertTrue(StuddyBuddyValidation.checkTimeFormat(validFormat));
   }
 
   /**
