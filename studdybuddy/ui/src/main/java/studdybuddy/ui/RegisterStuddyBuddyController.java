@@ -147,7 +147,7 @@ public class RegisterStuddyBuddyController {
     checkInputs();
     StuddyBuddy buddy = createNewStuddyBuddy();
     buddies.addStuddyBuddy(buddy);
-    dataAccess.putStuddyBuddy(buddy, buddies);
+    dataAccess.putStuddyBuddy(buddy);
     
     try {
       FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));

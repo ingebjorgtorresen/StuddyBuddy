@@ -71,8 +71,7 @@ public class RemoteDataAccess implements DataAccess {
   }
 
   @Override
-  public StuddyBuddy getStuddyBuddyByName(
-        String name, StuddyBuddies buddies) {
+  public StuddyBuddy getStuddyBuddyByName(String name) {
     StuddyBuddy buddy;
     try {
       HttpRequest request =
@@ -97,8 +96,7 @@ public class RemoteDataAccess implements DataAccess {
    * @param buddies that buddy will be saved in.
    */
   @Override
-  public void putStuddyBuddy(
-        StuddyBuddy buddy, StuddyBuddies buddies) {
+  public void putStuddyBuddy(StuddyBuddy buddy) {
     try {
       String buddyAsString = mapper.writeValueAsString(buddy);
       HttpRequest request 
@@ -125,7 +123,7 @@ public class RemoteDataAccess implements DataAccess {
    * @param buddies that buddy will be saved in.
    */
   @Override
-  public void postStuddyBuddy(StuddyBuddy buddy, StuddyBuddies buddies) {
+  public void postStuddyBuddy(StuddyBuddy buddy) {
     try {
       String jsonString = mapper.writeValueAsString(buddy);
       HttpRequest request 
@@ -152,7 +150,7 @@ public class RemoteDataAccess implements DataAccess {
    * @param buddies to get from.
    */
   @Override
-  public String getStuddyBuddyPasswordByName(String name, StuddyBuddies buddies) {
+  public String getStuddyBuddyPasswordByName(String name) {
     try {
       HttpRequest request =
           HttpRequest.newBuilder(passwordUri(name))

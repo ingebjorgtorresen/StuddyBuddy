@@ -78,7 +78,7 @@ public class LoginStuddyBuddyController {
      */
     public boolean userExists() {
         try {
-            dataAccess.getStuddyBuddyByName(getInputName(), buddies);
+            dataAccess.getStuddyBuddyByName(getInputName());
         } catch( RuntimeException e) {
             return false;
         }
@@ -91,7 +91,7 @@ public class LoginStuddyBuddyController {
      * @return true if passwords match, else false
      */
     public boolean passwordIsCorrect() {
-        return getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName(), buddies));
+        return getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName()));
     }
 
     /**
@@ -117,7 +117,7 @@ public class LoginStuddyBuddyController {
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             StuddyBuddiesController buddiesController = loader.getController();
-            buddiesController.transferData(dataAccess, buddies, dataAccess.getStuddyBuddyByName(getInputName(), buddies));
+            buddiesController.transferData(dataAccess, buddies, dataAccess.getStuddyBuddyByName(getInputName()));
             Stage buddiesStage = new Stage();
             buddiesStage.setTitle("StuddyBuddies");
             buddiesStage.setScene(new Scene(parent));
