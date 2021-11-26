@@ -14,14 +14,6 @@ import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
 
-/*
- * import javafx.fxml.FXMLLoader;
- * import javafx.scene.Parent;
- * import javafx.scene.Scene;
- * import javafx.stage.Stage; 
- * import java.net.URL;
- */
-
 /**
  * Controller class for registering new StuddyBuddy/user.
  */
@@ -46,24 +38,44 @@ public class RegisterStuddyBuddyController {
 
   private DataAccess dataAccess;
 
+  /**
+   * Method for getting name in nameField
+   * 
+   * @return name 
+   */
   @FXML
   public String getInputName() {
     String nameString = nameField.getText();
     return nameString;
   }
 
+  /**
+   * Method for getting password in passwordCheckField
+   * 
+   * @return password 
+   */
   @FXML
   public String getInputPasswordCheck() {
     String passwordString = passwordCheckField.getText();
     return passwordString;
   }
 
+  /**
+   * Method for getting password in passwordField
+   * 
+   * @return password
+   */
   @FXML
   public String getInputPassword() {
     String passwordString = passwordField.getText();
     return passwordString;
   }
 
+  /**
+   * Method for checking input name not null
+   * 
+   * @return true if name is not null, else false
+   */
   private boolean checkNotNull() {
     try {
       StuddyBuddyValidation.checkNotNullorEmpty(getInputName());
@@ -73,12 +85,31 @@ public class RegisterStuddyBuddyController {
     return true;
   }
 
+  /**
+   * Method for checking format of input name
+   * 
+   * @return true if format is correct, else false
+   */
   private boolean checkInputName() {
     return StuddyBuddyValidation.checkName(getInputName());
   }
 
+  /**
+   * Method for checking format of input password
+   * 
+   * @return true if format is correct, else false
+   */
   private boolean checkInputPassword() {
     return StuddyBuddyValidation.checkPassword(getInputPassword());
+  }
+
+  /**
+   * Method for checking if buddy exists
+   * 
+   * @return true if buddy exists, else false
+   */
+  private boolean checkBuddyExists() {
+    return StuddyBuddyValidation.buddyExists(dataAccess.getStuddyBuddies(), getInputName());
   }
 
   /**
@@ -110,6 +141,8 @@ public class RegisterStuddyBuddyController {
 
   /**
    * Method for checking if the password- and checkpassword-textfields has the same input.
+   * 
+   * @return true if passwords match, else false
    */
   public boolean checkPasswordsMatch() {
     if (!(getInputPassword().equals(getInputPasswordCheck()))) {
@@ -118,23 +151,17 @@ public class RegisterStuddyBuddyController {
     return true;
   }
 
+  /**
+   * Method for creating new StuddyBuddy
+   * 
+   * @return studdybuddy
+   */
   private StuddyBuddy createNewStuddyBuddy() {
     buddy = new StuddyBuddy();
     buddy.setName(getInputName());
     buddy.setPassword(getInputPassword());
     return buddy;
   }
-
-  /*
-   * private void changeScene(ActionEvent event) throws IOException { try { URL file =
-   * getClass().getResource("StuddyBuddy.fxml"); FXMLLoader loader = new FXMLLoader(file); Parent
-   * parent = (Parent) loader.load(); Stage stage = new Stage(); stage.setTitle("Log in");
-   * stage.setScene(new Scene(parent)); stage.show(); Stage thisStage = (Stage)
-   * nameField.getScene().getWindow(); thisStage.close();
-   * 
-   * } catch (IOException e) { messageBox.setText("Could not load window."); } }
-   */
-
   
   /**
    * Method for handeling activating of the register button. 
@@ -144,7 +171,17 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
-    if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
+
+    if(checkBuddyExists()) {
+      nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      passwordField.setText(getInputPassword());
+      passwordCheckField.setText(getInputPasswordCheck());
+      messageBox.setText("User already exists. \nChoose another username.");
+    }
+
+    else if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
@@ -204,7 +241,7 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for transering dataAccess and studdyBuddies between classes.
+   * Method for transfering dataAccess and studdyBuddies between classes.
    * Is used in the class that opens an FXML that uses this controller.
    * 
 
