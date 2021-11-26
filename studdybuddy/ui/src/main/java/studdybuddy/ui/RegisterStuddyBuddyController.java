@@ -14,14 +14,6 @@ import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
 
-/*
- * import javafx.fxml.FXMLLoader;
- * import javafx.scene.Parent;
- * import javafx.scene.Scene;
- * import javafx.stage.Stage; 
- * import java.net.URL;
- */
-
 /**
  * Controller class for registering new StuddyBuddy/user.
  */
@@ -81,6 +73,10 @@ public class RegisterStuddyBuddyController {
     return StuddyBuddyValidation.checkPassword(getInputPassword());
   }
 
+  private boolean checkBuddyExists() {
+    return StuddyBuddyValidation.buddyExists(buddies, getInputName());
+  }
+
   /**
    * Method for checking if the name has the correct format.
    *
@@ -124,17 +120,6 @@ public class RegisterStuddyBuddyController {
     buddy.setPassword(getInputPassword());
     return buddy;
   }
-
-  /*
-   * private void changeScene(ActionEvent event) throws IOException { try { URL file =
-   * getClass().getResource("StuddyBuddy.fxml"); FXMLLoader loader = new FXMLLoader(file); Parent
-   * parent = (Parent) loader.load(); Stage stage = new Stage(); stage.setTitle("Log in");
-   * stage.setScene(new Scene(parent)); stage.show(); Stage thisStage = (Stage)
-   * nameField.getScene().getWindow(); thisStage.close();
-   * 
-   * } catch (IOException e) { messageBox.setText("Could not load window."); } }
-   */
-
   
   /**
    * Method for handeling activating of the register button. 
@@ -144,7 +129,17 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
-    if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
+
+    if(checkBuddyExists()) {
+      nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
+      passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
+      passwordField.setText(getInputPassword());
+      passwordCheckField.setText(getInputPasswordCheck());
+      messageBox.setText("User already exists. \nChoose another username.");
+    }
+
+    else if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
