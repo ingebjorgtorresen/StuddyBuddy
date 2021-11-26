@@ -133,7 +133,7 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
     for(Window window : afterClick){
       afterClickRoot = window.getScene().getRoot();
     }
-    assertEquals(afterClickRoot, beforeClickRoot);
+    assertNotEquals(afterClickRoot, beforeClickRoot);
   }
   
 }
