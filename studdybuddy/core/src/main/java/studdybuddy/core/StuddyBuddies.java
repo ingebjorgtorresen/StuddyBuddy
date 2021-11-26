@@ -29,22 +29,12 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   }
 
   /**
-   * Method that checks if StuddyBuddy exitst by name.
-   *
-   * @param name name of the user
-   * @return true if user exists, else null
-   */
-  private boolean checkIfStuddyBuddyExists(String name) {
-    return getStuddyBuddy(name) != null;
-  }
-
-  /**
    * Method for adding a new StuddyBuddy to StuddyBuddies.
    *
    * @param buddy StuddyBuddy we want to add.
    */
   public void addStuddyBuddy(StuddyBuddy buddy) {
-    if (!checkIfStuddyBuddyExists(buddy.getName())) {
+    if (!StuddyBuddyValidation.buddyExists(this, buddy.getName())) {
       StuddyBuddy newStuddyBuddy = (StuddyBuddy) buddy;
       this.studdyBuddies.add(newStuddyBuddy);
       buddy.setStuddyBuddies(this);

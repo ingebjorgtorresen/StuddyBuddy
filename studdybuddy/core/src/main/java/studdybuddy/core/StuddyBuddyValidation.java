@@ -58,6 +58,16 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
+   * Method that checks if StuddyBuddy exitst by name.
+   *
+   * @param name name of the user
+   * @return true if user exists, else null
+   */
+  public static boolean buddyExists(StuddyBuddies buddies, String name) {
+    return buddies.getStuddyBuddy(name) != null;
+  }
+
+  /**
    * Check the format of the time parameter
    * The time must be in format("HH:mm") and not null.
    *

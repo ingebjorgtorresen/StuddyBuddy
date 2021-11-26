@@ -1,9 +1,11 @@
 package studdybuddy.dataaccess;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.Reader;
-import java.net.URL;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
@@ -16,7 +18,8 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class DirectDataAccess implements DataAccess {
 
   private StuddyBuddiesPersistence buddiesPersistence;
-  private String filename = "directBuddies.json";
+  private String filename = "/workspace/gr2144/studdybuddy/core/src/main/resources/studdybuddy/dataaccess/directBuddies.json";
+  private File file = new File(filename);
   private StuddyBuddies buddies;
 
   public DirectDataAccess() {
@@ -27,7 +30,7 @@ public class DirectDataAccess implements DataAccess {
 
   @Override
   public StuddyBuddy getStuddyBuddyByName(String name) {
-    StuddyBuddy buddy = buddies.getStuddyBuddy(name);
+    StuddyBuddy buddy = getStuddyBuddies().getStuddyBuddy(name);
     if (buddy == null) {
       throw new IllegalArgumentException("The user does not exist.");
     }
@@ -42,11 +45,22 @@ public class DirectDataAccess implements DataAccess {
   @Override
   public void putStuddyBuddy(StuddyBuddy buddy) {
     buddies.addStuddyBuddy(buddy);
+    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+      buddiesPersistence.writeStuddyBuddies(buddies, writer);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   @Override
   public void postStuddyBuddy(StuddyBuddy buddy) {
+    buddies.removeStuddyBuddy(buddies.getStuddyBuddy(buddy.getName()));
     buddies.addStuddyBuddy(buddy);
+    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+      buddiesPersistence.writeStuddyBuddies(buddies, writer);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   public void setPersistence(StuddyBuddiesPersistence persistence) {
@@ -66,13 +80,11 @@ public class DirectDataAccess implements DataAccess {
 
   @Override
   public StuddyBuddies getStuddyBuddies() {
-    try {
-      URL url = getClass().getResource(filename);
-      Reader reader = new InputStreamReader(url.openStream(), StandardCharsets.UTF_8);
+    try (Reader reader = new FileReader(filename, StandardCharsets.UTF_8)) {
       return buddiesPersistence.readStuddyBuddies(reader);
     } catch (IOException e) {
       e.printStackTrace();
+      return null;
     }
-    return null;
   }
 }

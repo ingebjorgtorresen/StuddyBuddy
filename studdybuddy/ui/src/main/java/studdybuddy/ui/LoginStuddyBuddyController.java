@@ -10,7 +10,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
-import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
 
@@ -79,11 +78,8 @@ public class LoginStuddyBuddyController {
      * @return true if user exists
      */
     public boolean userExists() {
-        StuddyBuddy buddy = dataAccess.getStuddyBuddyByName(getInputName());
-        if(StuddyBuddyValidation.checkNotNullorEmpty(buddy.toString())) {
-            return true;
-        }
-        return false;
+        StuddyBuddies buddies = dataAccess.getStuddyBuddies();
+        return StuddyBuddyValidation.buddyExists(buddies, getInputName());
     }
 
     /**
@@ -100,7 +96,6 @@ public class LoginStuddyBuddyController {
      */
     @FXML
     public void handleLogin() {
-
         if (!userExists()) {
             nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
             passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
@@ -116,7 +111,7 @@ public class LoginStuddyBuddyController {
 
         else {
             try {
-                URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
+                URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");;
                 FXMLLoader loader = new FXMLLoader(fxmlFile);
                 Parent parent = (Parent) loader.load();
                 StuddyBuddiesController buddiesController = loader.getController();
@@ -140,7 +135,7 @@ public class LoginStuddyBuddyController {
   @FXML
   public void handleBack() {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoteApp.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddy.fxml"));
         Parent parent = (Parent) loader.load();
         Stage welcomeStage = new Stage();
         welcomeStage.setScene(new Scene(parent));
