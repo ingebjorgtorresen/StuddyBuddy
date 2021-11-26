@@ -45,7 +45,7 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
   }
 
   /**
-  * Method for checking that the login button switches window.
+  * Method for checking that the login button works when login is valid.
   * 
   * @throws InterruptedException if the thread is interrupted.
   */
@@ -76,6 +76,64 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
       afterClickRoot = window.getScene().getRoot();
     }
     assertNotEquals(afterClickRoot, beforeClickRoot);
+  }
+
+  /**
+  * Method for checking that the login button works when username is invalid.
+  * 
+  * @throws InterruptedException if the thread is interrupted.
+  */
+  @Test
+  public void testUnsuccessfullLogin() throws InterruptedException {
+    String buddyName = "Frank";
+    Thread.sleep(1000);
+    clickOn("#nameField").write(buddyName);
+    assertEquals(buddyName, controller.getInputName());
+
+    String buddyPassword = "Passord1";
+    Thread.sleep(1000);
+    clickOn("#passwordField").write(buddyPassword);
+    assertEquals(buddyPassword, controller.getInputPassword());
+
+    List<Window> beforeClick = Window.getWindows();
+    Parent beforeClickRoot = null;
+    for (Window window : beforeClick) {
+    beforeClickRoot = window.getScene().getRoot();
+    }
+
+    Thread.sleep(1000);
+    clickOn("#loginButton");
+    Thread.sleep(1000);
+    List<Window> afterClick = Window.getWindows();
+    Parent afterClickRoot = null;
+    for(Window window : afterClick){
+      afterClickRoot = window.getScene().getRoot();
+    }
+    assertEquals(afterClickRoot, beforeClickRoot);
+  }
+
+  /**
+  * Method for checking that the login button works when username is invalid.
+  * 
+  * @throws InterruptedException if the thread is interrupted.
+  */
+  @Test
+  public void testBackButton() throws InterruptedException {
+    List<Window> beforeClick = Window.getWindows();
+    Parent beforeClickRoot = null;
+    for (Window window : beforeClick) {
+    beforeClickRoot = window.getScene().getRoot();
+    }
+
+    Thread.sleep(1000);
+    clickOn("#backButton");
+    Thread.sleep(1000);
+    List<Window> afterClick = Window.getWindows();
+    Parent afterClickRoot = null;
+    for(Window window : afterClick){
+      afterClickRoot = window.getScene().getRoot();
+    }
+    assertEquals(afterClickRoot, beforeClickRoot);
   }
   
 }
