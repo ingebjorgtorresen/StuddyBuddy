@@ -33,10 +33,6 @@ public class LoginStuddyBuddyController {
     @FXML
     private RegisterStuddyBuddyController registerViewController;
 
-    public void setDataAccess(DataAccess access) {
-        this.dataAccess = access;
-    }
-
     /**
      * Sets the name to be the input in nameField the name can only consist of letters and space.
      *
