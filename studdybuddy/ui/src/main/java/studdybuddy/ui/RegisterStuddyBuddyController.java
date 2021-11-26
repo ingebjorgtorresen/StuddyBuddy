@@ -223,7 +223,7 @@ public class RegisterStuddyBuddyController {
   @FXML
   public void handleBack() {
     try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("RemoteApp.fxml"));
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddy.fxml"));
       Parent parent = (Parent) loader.load();
       Stage welcomeStage = new Stage();
       welcomeStage.setScene(new Scene(parent));

@@ -34,26 +34,16 @@
     "Password" : "Passord1",
     "Registrations" : [ {
       "Date" : "12/12/2022",
-      "Room" : "S7",
-      "Course" : "Statistikk",
-      "Start time" : "08:15",
-      "End time" : "10:00"
-    }, {
-      "Date" : "12/12/2022",
       "Room" : "A3-138",
       "Course" : "Informatikk prosjektarbeid",
       "Start time" : "10:15",
       "End time" : "12:00"
     }, {
-      "Date" : "11/24/2021",
-      "Room" : "sdfghjkl",
-      "Course" : "ølkjhgf",
-      "Start time" : "12:00",
-      "End time" : "19:00"
+      "Date" : "12/12/2022",
+      "Room" : "S7",
+      "Course" : "Statistikk",
+      "Start time" : "08:15",
+      "End time" : "10:00"
     } ]
-  }, {
-    "Name" : "qwertyuio",
-    "Password" : "87654321",
-    "Registrations" : [ ]
   } ]
 }

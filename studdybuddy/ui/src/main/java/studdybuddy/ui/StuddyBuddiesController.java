@@ -85,12 +85,7 @@ public class StuddyBuddiesController {
     @FXML
     public void handleLogOut() {
         try {
-            URL fxmlFile;
-            if (dataAccess instanceof RemoteDataAccess) {
-                fxmlFile = getClass().getResource("RemoteApp.fxml");
-            } else {
-                fxmlFile = getClass().getResource("DirectApp.fxml");
-            }
+            URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");;
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             Stage welcomeStage = new Stage();
