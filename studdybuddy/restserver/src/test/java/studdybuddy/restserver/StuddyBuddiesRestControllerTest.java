@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 /**
  * Test class for StuddyBuddiesRestController.
+ * Only tests get methods seeing as they would not work without put and post.
  */
 @SpringBootTest(classes = {StuddyBuddiesRestController.class, StuddyBuddiesService.class, StuddyBuddyApplication.class})
 @AutoConfigureMockMvc

@@ -23,6 +23,7 @@ public class StuddyBuddyApplicationTest {
   
   /**
    * Tests that the home method returns the welcome massage.
+   * Only tests get methods seeing as they would not work without put and post.
    */
   @Test
   public void testHome() {
