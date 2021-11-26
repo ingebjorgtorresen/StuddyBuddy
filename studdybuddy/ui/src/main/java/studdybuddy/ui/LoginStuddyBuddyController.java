@@ -13,6 +13,7 @@ import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
+import studdybuddy.dataaccess.RemoteDataAccess;
 
 /**
  * Controller class for Login to a StuddyBuddy account.
@@ -116,7 +117,7 @@ public class LoginStuddyBuddyController {
 
         else {
             try {
-                URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");
+                URL fxmlFile = getClass().getResource("StuddyBuddies.fxml");;
                 FXMLLoader loader = new FXMLLoader(fxmlFile);
                 Parent parent = (Parent) loader.load();
                 StuddyBuddiesController buddiesController = loader.getController();

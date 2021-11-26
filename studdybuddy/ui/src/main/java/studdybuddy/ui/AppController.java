@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
+import studdybuddy.core.StuddyBuddy;
 import studdybuddy.dataaccess.DataAccess;
 import studdybuddy.dataaccess.DirectDataAccess;
 import studdybuddy.dataaccess.RemoteDataAccess;
@@ -44,15 +45,12 @@ public class AppController {
   @FXML
   public void initialize() {
     buddies = new StuddyBuddies();
-    if (endpointUri != null) {
-      try {
-        System.out.println("Using remote endpoint @ " + endpointUri);
-        dataAccess = new RemoteDataAccess(new URI(endpointUri));
-      } catch (URISyntaxException e) {
-        System.err.println(e);
-      }
-    }
-    if (dataAccess == null) {
+    try{
+      dataAccess = new RemoteDataAccess(new URI(endpointUri));
+      dataAccess.getStuddyBuddies();
+      System.out.println("Using remote endpoint @ " + endpointUri);
+    } catch (RuntimeException | URISyntaxException e) {
+      System.out.println("Server is not up. Using local saving.");
       this.persistence = new StuddyBuddiesPersistence();
       persistence.setSaveFilePath(userStuddyBuddyPath);
       DirectDataAccess directAccess = new DirectDataAccess();
