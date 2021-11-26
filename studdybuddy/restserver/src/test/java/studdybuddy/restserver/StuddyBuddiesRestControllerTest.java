@@ -7,12 +7,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
  * Test class for StuddyBuddiesRestController.
@@ -23,9 +20,6 @@ public class StuddyBuddiesRestControllerTest {
   
   @Autowired
   private MockMvc mockMvc;
-
-  @Autowired
-  private StuddyBuddiesRestController restController;
 
   private String selmaBuddyString = "{\"Name\":"
       +"\"Selma\",\"Password\":\"Passord1\""
@@ -39,7 +33,7 @@ public class StuddyBuddiesRestControllerTest {
   private String selmaPasswordString = "Passord1";
 
   /**
-   * Tests getStuddyBuddies
+   * Tests getStuddyBuddies.
    * @throws Exception if mockMvc fails
    */
   @Test
@@ -52,7 +46,7 @@ public class StuddyBuddiesRestControllerTest {
   }
 
   /**
-   * Tests getStuddyBuddy
+   * Tests getStuddyBuddy.
    * @throws Exception if mockMvc fails
    */
   @Test
@@ -69,7 +63,7 @@ public class StuddyBuddiesRestControllerTest {
   }
 
   /**
-   * Tests getStuddyBuddy
+   * Tests getStuddyBuddy.
    * @throws Exception if mockMvc fails
    */
   @Test
