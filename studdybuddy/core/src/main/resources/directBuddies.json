@@ -1,45 +1,49 @@
 {
-    "StuddyBuddies" : [ {
-      "Name" : "Anette",
-      "Registrations" : [ {
-        "Date" : "10/10/2022",
-        "Room" : "R2",
-        "Course" : "Algoritmer og datastrukturer",
-        "Start time" : "08:00",
-        "End time" : "12:00"
-      } ]
-    }, {
-      "Name" : "Tuva",
-      "Registrations" : [ {
-        "Date" : "12/12/2022",
-        "Room" : "F1",
-        "Course" : "Datamaskiner og digitalteknikk",
-        "Start time" : "12:15",
-        "End time" : "14:00"
-      } ]
-    }, {
-      "Name" : "Ingebjørg",
-      "Registrations": [ {
-        "Date": "12/12/2022",
-        "Room" : "S7",
-        "Course" : "Statistikk",
-        "Start time" : "08:15",
-        "End time" : "10:00"
-      } ]
-    }, {
-      "Name" : "Selma",
-      "Registrations": [ {
-        "Date": "12/12/2022",
-        "Room" : "S7",
-        "Course" : "Statistikk",
-        "Start time" : "08:15",
-        "End time" : "10:00"
-      }, {
-        "Date": "12/12/2022",
-        "Room" : "A3-138",
-        "Course" : "Informatikk prosjektarbeid",
-        "Start time" : "10:15",
-        "End time" : "12:00"
-      } ]
+  "StuddyBuddies" : [ {
+    "Name" : "Anette",
+    "Password" : "Ludde123",
+    "Registrations" : [ {
+      "Date" : "10/10/2022",
+      "Room" : "R2",
+      "Course" : "Algoritmer og datastrukturer",
+      "Start time" : "08:00",
+      "End time" : "12:00"
     } ]
-  }
+  }, {
+    "Name" : "Tuva",
+    "Password" : "Tussi321",
+    "Registrations" : [ {
+      "Date" : "12/12/2022",
+      "Room" : "F1",
+      "Course" : "Datamaskiner og digitalteknikk",
+      "Start time" : "12:15",
+      "End time" : "14:00"
+    } ]
+  }, {
+    "Name" : "Ingebjørg",
+    "Password" : "Julenisse21",
+    "Registrations": [ {
+      "Date": "12/12/2022",
+      "Room" : "S7",
+      "Course" : "Statistikk",
+      "Start time" : "08:15",
+      "End time" : "10:00"
+    } ]
+  }, {
+    "Name" : "Selma",
+    "Password" : "Passord1",
+    "Registrations": [ {
+      "Date": "12/12/2022",
+      "Room" : "S7",
+      "Course" : "Statistikk",
+      "Start time" : "08:15",
+      "End time" : "10:00"
+    }, {
+      "Date": "12/12/2022",
+      "Room" : "A3-138",
+      "Course" : "Informatikk prosjektarbeid",
+      "Start time" : "10:15",
+      "End time" : "12:00"
+    } ]
+  } ]
+}
