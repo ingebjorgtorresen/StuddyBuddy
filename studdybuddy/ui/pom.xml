@@ -105,7 +105,7 @@
                     <noManPages>true</noManPages>
                     <launcher>studdybuddyfx</launcher>
                     <!-- syntax: module-name/full-app-class-name -->
-                    <mainClass>studdybuddy.ui/studdybuddy.ui.StuddyBuddyRemoteApp</mainClass>
+                    <mainClass>studdybuddy.ui/studdybuddy.ui.StuddyBuddyApp</mainClass>
                     <jlinkImageName>studdybuddyfx</jlinkImageName>
                     <jlinkZipName>studdybuddyfx</jlinkZipName>
                 </configuration>

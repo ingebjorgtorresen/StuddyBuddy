@@ -83,10 +83,10 @@ public class RemoteDataAccess implements DataAccess {
           .send(request, HttpResponse.BodyHandlers.ofString());
       String responseString = response.body();
       buddy = mapper.readValue(responseString, StuddyBuddy.class);
+      return buddy;
     } catch (IOException | InterruptedException e) {
-      throw new RuntimeException(e);
+      return null;
     }
-    return buddy;
   }
 
   /**
