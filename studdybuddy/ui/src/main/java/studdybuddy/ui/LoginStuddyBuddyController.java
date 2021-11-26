@@ -45,8 +45,8 @@ public class LoginStuddyBuddyController {
     }
 
     /**
-     * Method for transering dataAccess and studdyBuddies between classes.
-     * Is used in the class that opens an FXML that uses this controller.
+     * Method for transering dataAccess and studdyBuddies between classes. Is used in the class that
+     * opens an FXML that uses this controller.
      *
      * @param dataAccess dataAccess for the run of the application
      * @param buddies studdyBuddies for the run of the application
@@ -57,9 +57,10 @@ public class LoginStuddyBuddyController {
     }
 
     /**
-     * Method that sets the password to be the input from passwordField, and can only consist of letters
-     * from the english alphabet(so can not use æ,ø,å) and digits
-     * 
+     * Method that sets the password to be the input from passwordField, 
+     * and can only consist of letters from the english 
+     * alphabet(so can not use æ,ø,å) and digits.
+     *
      * @return the password from input
      */
     @FXML
@@ -70,7 +71,7 @@ public class LoginStuddyBuddyController {
 
     /**
      * Method that checks if user exist in server, and return true if it exists, else false
-     * 
+     *
      * @return true if user exists
      */
     public boolean userExists() {
@@ -79,8 +80,8 @@ public class LoginStuddyBuddyController {
     }
 
     /**
-     * Method that checks if input password mathces the acutal password of the user by its username
-     * 
+     * Method that checks if input password mathces the acutal password of the user by its username.
+     *
      * @return true if passwords match, else false
      */
     public boolean passwordIsCorrect() {
@@ -111,7 +112,8 @@ public class LoginStuddyBuddyController {
                 FXMLLoader loader = new FXMLLoader(fxmlFile);
                 Parent parent = (Parent) loader.load();
                 StuddyBuddiesController buddiesController = loader.getController();
-                buddiesController.transferData(dataAccess, buddies, dataAccess.getStuddyBuddyByName(getInputName()));
+                buddiesController.transferData(dataAccess, 
+                        buddies, dataAccess.getStuddyBuddyByName(getInputName()));
                 Stage buddiesStage = new Stage();
                 buddiesStage.setTitle("StuddyBuddies");
                 buddiesStage.setScene(new Scene(parent));
@@ -125,20 +127,20 @@ public class LoginStuddyBuddyController {
         }
     }
 
-  /**
-   * Method for redirecting back to the welcome page.
-   */
-  @FXML
-  public void handleBack() {
-    try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddy.fxml"));
-        Parent parent = (Parent) loader.load();
-        Stage welcomeStage = new Stage();
-        welcomeStage.setScene(new Scene(parent));
-        welcomeStage.setTitle("StuddyBuddy");
-        welcomeStage.show();
-        Stage thisStage = (Stage) nameField.getScene().getWindow();
-        thisStage.close(); 
+    /**
+     * Method for redirecting back to the welcome page.
+     */
+    @FXML
+    public void handleBack() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddy.fxml"));
+            Parent parent = (Parent) loader.load();
+            Stage welcomeStage = new Stage();
+            welcomeStage.setScene(new Scene(parent));
+            welcomeStage.setTitle("StuddyBuddy");
+            welcomeStage.show();
+            Stage thisStage = (Stage) nameField.getScene().getWindow();
+            thisStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

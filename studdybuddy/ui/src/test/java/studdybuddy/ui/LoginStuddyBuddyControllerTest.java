@@ -25,6 +25,9 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
   private DataAccess dataAccess = new DirectDataAccess();
   private StuddyBuddies buddies;
 
+  /**
+   * Sets StuddyBuddies and DataAccess.
+   */
   @BeforeEach
   public void setUpController() {
     buddies = dataAccess.getStuddyBuddies();
@@ -79,7 +82,7 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
   }
 
   /**
-  * Method for checking that the login button works when username is invalid.
+  * Method for checking that the login button does not works when username is invalid.
   * 
   * @throws InterruptedException if the thread is interrupted.
   */
@@ -113,7 +116,7 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
   }
 
   /**
-  * Method for checking that the login button works when username is invalid.
+  * Method for checking that the back button works.
   * 
   * @throws InterruptedException if the thread is interrupted.
   */
