@@ -22,8 +22,8 @@
   }, {
     "Name" : "Ingebjørg",
     "Password" : "Julenisse21",
-    "Registrations": [ {
-      "Date": "12/12/2022",
+    "Registrations" : [ {
+      "Date" : "12/12/2022",
       "Room" : "S7",
       "Course" : "Statistikk",
       "Start time" : "08:15",
@@ -32,18 +32,48 @@
   }, {
     "Name" : "Selma",
     "Password" : "Passord1",
-    "Registrations": [ {
-      "Date": "12/12/2022",
+    "Registrations" : [ {
+      "Date" : "12/12/2022",
       "Room" : "S7",
       "Course" : "Statistikk",
       "Start time" : "08:15",
       "End time" : "10:00"
     }, {
-      "Date": "12/12/2022",
+      "Date" : "12/12/2022",
       "Room" : "A3-138",
       "Course" : "Informatikk prosjektarbeid",
       "Start time" : "10:15",
       "End time" : "12:00"
+    }, {
+      "Date" : "12/02/2021",
+      "Room" : "asdfghjklø",
+      "Course" : "ølkjhgf",
+      "Start time" : "12:00",
+      "End time" : "18:00"
     } ]
+  }, {
+    "Name" : "dfghjklø",
+    "Password" : "12345678",
+    "Registrations" : [ {
+      "Date" : "12/08/2021",
+      "Room" : "wertyuio",
+      "Course" : "sdfghjk",
+      "Start time" : "12:00",
+      "End time" : "13:00"
+    } ]
+  }, {
+    "Name" : "sdfghjkl",
+    "Password" : "12345678",
+    "Registrations" : [ {
+      "Date" : "11/24/2021",
+      "Room" : "sdfghjkl",
+      "Course" : "vgbhjkl",
+      "Start time" : "12:34",
+      "End time" : "19:10"
+    } ]
+  }, {
+    "Name" : "aseredsdfrtygvhuijnjkopl",
+    "Password" : "asdfghjklasdfghjkl",
+    "Registrations" : [ ]
   } ]
 }
