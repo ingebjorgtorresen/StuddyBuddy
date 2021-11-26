@@ -16,7 +16,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class DirectDataAccess implements DataAccess {
 
   private StuddyBuddiesPersistence buddiesPersistence;
-  private String filename = "directBuddies.json";
+  private String filename = "/directBuddies.json";
   private StuddyBuddies buddies;
 
   public DirectDataAccess() {
