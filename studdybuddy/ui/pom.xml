@@ -24,12 +24,12 @@
             <artifactId>javafx-controls</artifactId>
             <version>16</version>
         </dependency>
+         
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>16</version>
         </dependency>
-
         <!-- junit testing with jupiter -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -63,7 +63,6 @@
             <version>2.2</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>
@@ -99,10 +98,46 @@
                 <!-- Default configuration for running -->
                 <!-- Usage: mvn javafx:run -->
                 <configuration>
+                    <!-- rest of options are for jlink -->
+                    <compress>2</compress>
+                    <noHeaderFiles>true</noHeaderFiles>
+                    <stripDebug>true</stripDebug>
+                    <noManPages>true</noManPages>
+                    <launcher>studdybuddyfx</launcher>
                     <!-- syntax: module-name/full-app-class-name -->
                     <mainClass>studdybuddy.ui/studdybuddy.ui.StuddyBuddyRemoteApp</mainClass>
+                    <jlinkImageName>studdybuddyfx</jlinkImageName>
+                    <jlinkZipName>studdybuddyfx</jlinkZipName>
                 </configuration>
             </plugin>
+
+            <!-- config above and below taken from https://dev.to/cherrychain/javafx-jlink-and-jpackage-h9 -->
+            <plugin>
+                <groupId>org.panteleyev</groupId>
+                <artifactId>jpackage-maven-plugin</artifactId>
+                <version>1.4.0</version>
+                <configuration>
+                    <name>StuddyBuddyFX</name>
+                    <appVersion>1.0.0</appVersion>
+                    <vendor>it1901</vendor>
+                    <destination>target/dist</destination>
+                    <module>studdybuddy.ui/studdybuddy.ui.StuddyBuddyApp</module>
+                    <runtimeImage>target/studdybuddyfx</runtimeImage>
+                    <javaOptions>
+                        <option>-Dfile.encoding=UTF-8</option>
+                    </javaOptions>
+                    <!-- linux options --> 
+                    <linuxShortcut>true</linuxShortcut>
+                    <linuxMenuGroup>StuddyBuddyFX</linuxMenuGroup>
+
+                    <!-- windows options --> 
+                    <winDirChooser>true</winDirChooser>
+                    <winShortcut>true</winShortcut>
+                    <winMenu>true</winMenu>
+                    <winMenuGroup>StuddyBuddyFX</winMenuGroup>
+                </configuration>
+            </plugin>
+
              <!-- Configure jacoco code coverage -->
             <plugin>
                 <groupId>org.jacoco</groupId>
