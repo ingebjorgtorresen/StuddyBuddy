@@ -50,20 +50,17 @@ public class DirectDataAccess implements DataAccess {
     } catch (IOException e) {
       e.printStackTrace();
     }
-    System.out.println("Wrote buddies " + buddies.toString());
   }
 
   @Override
   public void postStuddyBuddy(StuddyBuddy buddy) {
-    /*buddies.addStuddyBuddy(buddy);
-    System.out.println("HUSK Å ENDRE POST");
-    try {
-      FileOutputStream fileStream = new FileOutputStream(filename);
-      Writer writer = new OutputStreamWriter(fileStream, "UTF-8");
-      buddiesPersistence.writeStuddyBuddies(getStuddyBuddies(), writer);
+    buddies.removeStuddyBuddy(buddies.getStuddyBuddy(buddy.getName()));
+    buddies.addStuddyBuddy(buddy);
+    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+      buddiesPersistence.writeStuddyBuddies(buddies, writer);
     } catch (IOException e) {
       e.printStackTrace();
-    }*/
+    }
   }
 
   public void setPersistence(StuddyBuddiesPersistence persistence) {
