@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.dataaccess.DataAccess;
+import studdybuddy.dataaccess.RemoteDataAccess;
 
 /**
  * Controller for studdyBuddies objects.
@@ -84,7 +85,12 @@ public class StuddyBuddiesController {
     @FXML
     public void handleLogOut() {
         try {
-            URL fxmlFile = getClass().getResource("RemoteApp.fxml");
+            URL fxmlFile;
+            if (dataAccess instanceof RemoteDataAccess) {
+                fxmlFile = getClass().getResource("RemoteApp.fxml");
+            } else {
+                fxmlFile = getClass().getResource("DirectApp.fxml");
+            }
             FXMLLoader loader = new FXMLLoader(fxmlFile);
             Parent parent = (Parent) loader.load();
             Stage welcomeStage = new Stage();
