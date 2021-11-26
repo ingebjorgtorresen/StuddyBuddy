@@ -38,7 +38,7 @@ public interface DataAccess {
   public void postStuddyBuddy(StuddyBuddy buddy);
 
   /**
-   * Getter for StuddyBuddies objects
+   * Getter for StuddyBuddies objects.
    */
   public StuddyBuddies getStuddyBuddies();
 }
