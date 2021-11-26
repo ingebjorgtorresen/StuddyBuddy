@@ -3,6 +3,7 @@ package studdybuddy.ui;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Objects;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -48,9 +49,9 @@ public class AppController {
     try{
       dataAccess = new RemoteDataAccess(new URI(endpointUri));
       dataAccess.getStuddyBuddies();
-      System.out.println("Using remote endpoint @ " + endpointUri);
-    } catch (RuntimeException | URISyntaxException e) {
-      System.out.println("Server is not up. Using local saving.");
+      System.out.println("Using remote saving with endpointURI: " + endpointUri);
+    } catch (RuntimeException | URISyntaxException  e) {
+      System.out.println("Could not connect to server. Using local saving.");
       this.persistence = new StuddyBuddiesPersistence();
       persistence.setSaveFilePath(userStuddyBuddyPath);
       DirectDataAccess directAccess = new DirectDataAccess();
