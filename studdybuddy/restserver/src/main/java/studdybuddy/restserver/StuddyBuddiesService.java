@@ -41,10 +41,6 @@ public class StuddyBuddiesService {
     return readBuddies();
   }
 
-  public void setStuddyBuddies(StuddyBuddies buddies) {
-    this.buddies = buddies;
-  }
-
   /**
    * Method that uses persistence to save studdyBuddies.
    */
