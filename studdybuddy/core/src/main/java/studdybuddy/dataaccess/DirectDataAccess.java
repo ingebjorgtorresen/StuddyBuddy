@@ -18,7 +18,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class DirectDataAccess implements DataAccess {
 
   private StuddyBuddiesPersistence buddiesPersistence;
-  private String filename = "directBuddies.json";
+  private String filename = "/workspace/gr2144/studdybuddy/core/src/main/resources/studdybuddy/dataaccess/directBuddies.json";
   private File file = new File(filename);
   private StuddyBuddies buddies;
 
