@@ -1,87 +1,209 @@
 package studdybuddy.ui;
 
-/*
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.testfx.framework.junit5.ApplicationTest;
-import javafx.scene.control.DatePicker;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import org.junit.jupiter.api.Assertions;
-
 import java.time.LocalDate;
-
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import javafx.scene.control.DatePicker;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
+import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
-import core.StuddyBuddy;
-import core.StuddyBuddyRegistration;
+import studdybuddy.core.StuddyBuddy;
+import studdybuddy.core.StuddyBuddyRegistration;
+import studdybuddy.core.StuddyBuddies;
+import studdybuddy.dataaccess.DataAccess;
+import studdybuddy.dataaccess.DirectDataAccess;
 
 public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
 
-    private StuddyBuddyRegistrationController controller;
-
-    private StuddyBuddy studdyBuddy;
-
+    private StuddyBuddyRegistrationController controller = new StuddyBuddyRegistrationController();
+    private DataAccess dataAccess = new DirectDataAccess();
+    private StuddyBuddies buddies;
+    private StuddyBuddy buddy;
     private StuddyBuddyRegistration registration;
-        
-    private String successfullRegistration = "Registration was successfull!";
-
-    @Override
-    public void start(final Stage stage) throws Exception {
-      final FXMLLoader loader = new FXMLLoader(getClass().getResource("/StuddyBuddyRegistration_test.fxml"));
-      final Parent root = loader.load();
-      this.controller = loader.getController();
-      this.controller.setStuddyBuddyFromLogin(generateTestStuddyBuddy());
-      stage.setScene(new Scene(root));
-      stage.show();
-    }
-
-    /** 
-     * Set up for testing StuddyBuddyRegistrationController.java
-     * 
-     * @return StuddyBuddy-instance for use in testing
-     *
-    private StuddyBuddy generateTestStuddyBuddy(){
-        StuddyBuddy studdyBuddy = new StuddyBuddy();
-        studdyBuddy.setName("Test");
-        StuddyBuddyRegistration reg1 = new StuddyBuddyRegistration();
-        reg1 = new StuddyBuddyRegistration();
-        LocalDate date1;
-        date1 = LocalDate.of(2022,10,10);
-        reg1.setDate(date1);
-        reg1.setRoom("A3-138");
-        reg1.setCourse("ITP");
-        reg1.setStartTime("11:00");
-        reg1.setEndTime("12:00");
-        studdyBuddy.addRegistration(reg1);
-        reg1.setStuddyBuddy(studdyBuddy);
-        this.registration = reg1;
-        return this.studdyBuddy = studdyBuddy;
-    }
 
     /**
      * Set up for the tests. 
      * Clicking on the textFields and filling them with information.
      * 
      * @throws InterruptedException if Thread.sleep() fails
-     *
+     */
     @BeforeEach
     public void setUpRegistrations() throws InterruptedException{
-      Thread.sleep(1500);
-      clickOn("#roomField").write("A3-138");
-      clickOn("#courseField").write("ITP");
-      Thread.sleep(500);
+      buddies = dataAccess.getStuddyBuddies();
+      controller.transferData(dataAccess, buddies, buddy);
+      controller.setStuddyBuddyFromLogin(generateTestStuddyBuddy());
+    }
+  
+
+    @Override
+    public void start(final Stage stage) throws Exception {
+      final FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddyRegistration_test.fxml"));
+      final Parent root = loader.load();
+      //this.controller.setStuddyBuddyFromLogin(generateTestStuddyBuddy());
+      controller = loader.getController();
+      stage.setScene(new Scene(root));
+      stage.show();
     }
 
-    private void setTimes() throws InterruptedException{
+    private void enableDatePicker() {
+      controller.getDatePicker().setDisable(false);
+    }
+
+    private void setDate(LocalDate date) {
+      enableDatePicker();
+      ((DatePicker) lookup("#datepicker").query()).setValue(date);
+    }
+
+    private void setCourse(String course) {
+      registration.setCourse(course);
+    }
+
+    /** 
+     * Set up for testing StuddyBuddyRegistrationController.java
+     * 
+     * @return StuddyBuddy-instance for use in testing
+     */
+    private StuddyBuddy generateTestStuddyBuddy(){
+        StuddyBuddy buddy = new StuddyBuddy();
+        buddy.setName("Test");
+        StuddyBuddyRegistration reg1 = new StuddyBuddyRegistration();
+        reg1 = new StuddyBuddyRegistration();
+        LocalDate date1;
+        date1 = LocalDate.of(2022,10,10);
+        setDate(date1);
+        reg1.setDate(date1);
+        reg1.setRoom("A3-138");
+        //reg1.setCourse("ITP");
+        reg1.setStartTime("11:00");
+        reg1.setEndTime("12:00");
+        buddy.addRegistration(reg1);
+        reg1.setStuddyBuddy(buddy);
+        this.registration = reg1;
+        return this.buddy = buddy;
+    }
+
+
+    @Test
+    public void testSuccessfullRegistration() throws InterruptedException {
+      LocalDate date;
+      date = LocalDate.of(2022, 12, 12);
+      registration.setDate(date);
+      setCourse("ITP");
+      String room = "A3-138";
+      String course = "ITP";
+      String startTime = "11:00";
+      String endTime = "12:00";
+
+      Thread.sleep(3000);
+      clickOn("#roomField").write(room);
+      assertEquals(room, registration.getRoom());
+      
+      Thread.sleep(3000);
+      clickOn("#courseField").write(course);
+      assertEquals(course, registration.getCourse());
+
+      Thread.sleep(3000);
+      clickOn("#startTimeField").write(startTime);
+      assertEquals(startTime, registration.getStartTime());
+
+      Thread.sleep(3000);
+      clickOn("#endTimeField").write(endTime);
+      assertEquals(endTime, registration.getEndTime());
+
+      List<Window> beforeClick = Window.getWindows();
+      Parent beforeClickRoot = null;
+      for (Window window : beforeClick) {
+      beforeClickRoot = window.getScene().getRoot();
+      }
+
+      Thread.sleep(3000);
+      clickOn("#register");
+      Thread.sleep(3000);
+      List<Window> afterClick = Window.getWindows();
+      Parent afterClickRoot = null;
+      for(Window window : afterClick){
+        afterClickRoot = window.getScene().getRoot();
+      }
+      assertNotEquals(afterClickRoot, beforeClickRoot);
+    }
+
+    @Test
+    public void testUnsuccessfullRegistration() throws InterruptedException {
+      LocalDate date;
+      date = LocalDate.of(2022, 12, 12);
+      registration.setDate(date);
+      setCourse("#ITP");
+      String room = "A3-138";
+      String course = "#ITP";
+      String startTime = "11:00";
+      String endTime = "12:00";
+      
+      Thread.sleep(3000);
+      clickOn("#roomField").write(room);
+      assertEquals(room, registration.getRoom());
+      
+      Thread.sleep(3000);
+      clickOn("#courseField").write(course);
+      assertEquals(course, registration.getCourse());
+
+      Thread.sleep(3000);
+      clickOn("#startTimeField").write(startTime);
+      assertEquals(startTime, registration.getStartTime());
+
+      Thread.sleep(3000);
+      clickOn("#endTimeField").write(endTime);
+      assertEquals(endTime, registration.getEndTime());
+
+      List<Window> beforeClick = Window.getWindows();
+      Parent beforeClickRoot = null;
+      for (Window window : beforeClick) {
+      beforeClickRoot = window.getScene().getRoot();
+      }
+
+      Thread.sleep(3000);
+      clickOn("#register");
+      try {
+        Thread.sleep(3000);
+      } catch (Exception e) {
+        fail();
+      }
+      Thread.sleep(3000);
+      
+      List<Window> afterClick = Window.getWindows();
+      Parent afterClickRoot = null;
+      for(Window window : afterClick){
+        afterClickRoot = window.getScene().getRoot();
+      }
+      assertEquals(afterClickRoot, beforeClickRoot);
+    }
+
+    @Test
+    public void testBackButton() throws InterruptedException {
+      List<Window> beforeClick = Window.getWindows();
+      Parent beforeClickRoot = null;
+      for (Window window : beforeClick) {
+      beforeClickRoot = window.getScene().getRoot();
+      }
+
+      Thread.sleep(5000);
+      clickOn("#backButton");
+      Thread.sleep(5000);
+      List<Window> afterClick = Window.getWindows();
+      Parent afterClickRoot = null;
+      for(Window window : afterClick){
+        afterClickRoot = window.getScene().getRoot();
+      }
+      assertNotEquals(afterClickRoot, beforeClickRoot);
+    }
+
+    /**private void setTimes() throws InterruptedException{
       Thread.sleep(1500);
       clickOn("#startTimeField").write("11:00");
       clickOn("#endTimeField").write("12:00");
@@ -96,24 +218,25 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     public void testController_studdyBuddy() {
       assertNotNull(this.controller);
       assertNotNull(this.studdyBuddy);
+      assertNotNull(this.registration);
     }
 
     /**
      * Ckeck that the label messageText prints the correct message
      * when the registration is successfull.
-     *
-    @Test
+     */
+    /**@Test
     public void checkSuccessfullRegistration() throws InterruptedException{
         checkRegister();
-        assertEquals(successfullRegistration, controller.getMessageText());
+        //assertEquals(successfullRegistration, controller.getMessageText());
     }
 
     /**
      * Checks that the registration is not successfull when the input
      * in roomField is invalid.
      * @throws InterruptedException
-     *
-    @Test
+     */
+    /**@Test
     public void testRoom() throws InterruptedException {
       setTimes();
       setDate();
@@ -128,8 +251,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
      /**
      * Checks that the registration is not successfull when the input
      * in courseField is invalid.
-     *
-    @Test
+     */
+    /**@Test
     public void testCourse() throws InterruptedException {
       setTimes();
       setDate();
@@ -141,8 +264,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
      /**
      * Checks that the registration is not successfull when the input
      * in startTimeField is invalid.
-     *
-    @Test
+     */
+    /**@Test
     public void testStartTime() throws InterruptedException {
       setTimes();
       setDate();
@@ -154,8 +277,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
      /**
      * Checks that the registration is not successfull when the input
      * in endTimeField is invalid.
-     *
-    @Test
+     */
+    /**@Test
     public void testEndTime() throws InterruptedException {
       setTimes();
       setDate();
@@ -168,8 +291,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
      * Method for checking that exception gets thrown if start time is after end time.
      * 
      * @throws InterruptedException
-     *
-    @Test
+     */
+    /**@Test
     public void checkStartTimeBeforeEndTime() throws InterruptedException {
       setDate();
       Thread.sleep(1500);
@@ -182,25 +305,25 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     /**
      * Ckeck that the label feedbackText is not visable
      * when the registration is unsuccessfull.
-     *
-    @Test
+     */
+    /**@Test
     public void checkUnsuccessfullRegistration() throws InterruptedException {
       checkRegister();
       assertNotEquals(successfullRegistration, controller.getMessageText());
-      assertFalse(controller.getFeedbackLabel().isVisible());
+      //assertFalse(controller.getFeedbackLabel().isVisible());
     }
 
     /**
      * Click register-button
-     *
-    private void checkRegister(){
+     */
+    /**private void checkRegister(){
         clickOn("#register");
     }
 
     /**
      * Click that the registration is displayed correctly
-     *
-    @Test
+     */
+    /**@Test
     public void testDisplayRegistration() throws InterruptedException {
       setTimes();
       setDate();
@@ -213,8 +336,8 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
       else{
         checkSuccessfullRegistration();
         assertEquals(Color.web("#7DDF64"), controller.getMessageTextLabel().getTextFill());
-        assertEquals("-fx-background-color: #C0DF85", controller.getFeedbackLabel().getStyle());
-        assertTrue(controller.getFeedbackLabel().isVisible());
+        //assertEquals("-fx-background-color: #C0DF85", controller.getFeedbackLabel().getStyle());
+        //assertTrue(controller.getFeedbackLabel().isVisible());
       }
 
       assertTrue(controller.getMessageTextLabel().isVisible());
@@ -228,9 +351,9 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     public void testHandleRegistration() throws InterruptedException{
       setTimes();
       setDate();
-      if (controller.getFeedbackLabel().isVisible()){
-        assertEquals(Color.web("#ED4D6E"), controller.getMessageTextLabel().getTextFill());
-      }
+      //if (controller.getFeedbackLabel().isVisible()){
+        //assertEquals(Color.web("#ED4D6E"), controller.getMessageTextLabel().getTextFill());
+      //}
 
       //Check that the registration is correct
       assertEquals("A3-138", controller.getRoom().getText());
@@ -242,6 +365,5 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
       assertEquals(studdyBuddy, registration.getStuddyBuddy());
       assertTrue(studdyBuddy.getRegistrations().contains(registration));
 
-    }
+    }*/
 }
-*/
