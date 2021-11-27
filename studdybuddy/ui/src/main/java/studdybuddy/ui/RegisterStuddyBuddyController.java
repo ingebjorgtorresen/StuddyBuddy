@@ -198,7 +198,7 @@ public class RegisterStuddyBuddyController {
       buddiesStage.show();
       Stage thisStage = (Stage) nameField.getScene().getWindow();
       thisStage.close(); 
-      } catch (IOException e) {
+      } catch (IOException | NullPointerException e) {
           e.printStackTrace();
       }
   }

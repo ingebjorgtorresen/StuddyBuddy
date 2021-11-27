@@ -5,7 +5,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.Button?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ui.RegisterStuddyBuddyController" prefHeight="640.0" prefWidth="350.0">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studdybuddy.ui.RegisterStuddyBuddyController" prefHeight="640.0" prefWidth="350.0">
+    <Button text="Back" fx:id="backButton" onAction="#handleBack" layoutX="10.0" layoutY="10.0"/>
 
     <Label text="Name:" layoutX="10.0" layoutY="200.0"/>
 
@@ -19,8 +20,7 @@
 
     <TextField fx:id="passwordCheckField" promptText="Repeat password" layoutX="150.0" layoutY="300.0"/>
 
-    <Button text="Register user" fx:id="register" onAction="#handleRegisterUser" layoutX="235.0" layoutY="450.0"/>
+    <Button text="Register user" fx:id="registerButton" onAction="#handleRegister" layoutX="235.0" layoutY="450.0"/>
 
     <Label text="" fx:id="messageBox" layoutX="10.0" layoutY="500.0"/>
-
 </AnchorPane>
