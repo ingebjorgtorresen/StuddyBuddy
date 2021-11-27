@@ -23,7 +23,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class AppController {
 
   @FXML
-  private String userStuddyBuddyPath;
+  private String directStuddyBuddiesResource;
 
   @FXML
   private String endpointUri;
@@ -53,7 +53,7 @@ public class AppController {
     } catch (RuntimeException | URISyntaxException  e) {
       System.out.println("Could not connect to server. Using local saving.");
       this.persistence = new StuddyBuddiesPersistence();
-      persistence.setSaveFilePath(userStuddyBuddyPath);
+      persistence.setSaveFilePath(directStuddyBuddiesResource);
       DirectDataAccess directAccess = new DirectDataAccess();
       directAccess.setPersistence(persistence);
       dataAccess = directAccess;
