@@ -18,8 +18,7 @@ import studdybuddy.json.StuddyBuddiesPersistence;
 public class DirectDataAccess implements DataAccess {
 
   private StuddyBuddiesPersistence buddiesPersistence;
-  private String filename = "/workspace/gr2144/studdybuddy/core/src/main/resources/studdybuddy/dataaccess/directBuddies.json";
-  private File file = new File(filename);
+  private String filename = "src/main/resources/studdybuddy/ui/directBuddies.json";
   private StuddyBuddies buddies;
 
   public DirectDataAccess() {
@@ -45,7 +44,7 @@ public class DirectDataAccess implements DataAccess {
   @Override
   public void putStuddyBuddy(StuddyBuddy buddy) {
     buddies.addStuddyBuddy(buddy);
-    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+    try (Writer writer = new FileWriter(filename, StandardCharsets.UTF_8)) {
       buddiesPersistence.writeStuddyBuddies(buddies, writer);
     } catch (IOException e) {
       e.printStackTrace();
@@ -56,7 +55,7 @@ public class DirectDataAccess implements DataAccess {
   public void postStuddyBuddy(StuddyBuddy buddy) {
     buddies.removeStuddyBuddy(buddies.getStuddyBuddy(buddy.getName()));
     buddies.addStuddyBuddy(buddy);
-    try (Writer writer = new FileWriter(file, StandardCharsets.UTF_8)) {
+    try (Writer writer = new FileWriter(filename, StandardCharsets.UTF_8)) {
       buddiesPersistence.writeStuddyBuddies(buddies, writer);
     } catch (IOException e) {
       e.printStackTrace();
@@ -65,6 +64,7 @@ public class DirectDataAccess implements DataAccess {
 
   public void setPersistence(StuddyBuddiesPersistence persistence) {
     this.buddiesPersistence = persistence;
+    persistence.setSaveFilePath("directBuddies.json");
   }
 
   /**
