@@ -34,7 +34,8 @@ public class LoginStuddyBuddyController {
   private RegisterStuddyBuddyController registerViewController;
 
   /**
-   * Sets the name to be the input in nameField the name can only consist of letters and space.
+   * Sets the name to be the input in nameField.
+   * The name can only consist of letters and space.
    *
    * @return the name from input
    */
@@ -45,8 +46,8 @@ public class LoginStuddyBuddyController {
   }
 
   /**
-   * Method for transering dataAccess and studdyBuddies between classes. Is used in the class that
-   * opens an FXML that uses this controller.
+   * Method for transering dataAccess and studdyBuddies between classes.
+   * Is used in the class that opens an FXML that uses this controller.
    *
    * @param dataAccess dataAccess for the run of the application
    * @param buddies studdyBuddies for the run of the application
@@ -58,8 +59,8 @@ public class LoginStuddyBuddyController {
 
   /**
    * Method that sets the password to be the input from passwordField,
-   * and can only consist of letters
-   * from the english alphabet(so can not use æ,ø,å) and digits.
+   * Can only consist of letters from the english alphabet
+   * (so can not use æ,ø,å) and digits.
    *
    * @return the password from input
    */
@@ -70,8 +71,8 @@ public class LoginStuddyBuddyController {
   }
 
   /**
-   * Method that checks if user exist in server, and return true if it exists, 
-   * else false.
+   * Method that checks if user exist in server.
+   * Returns true if it exists, else false.
    *
    * @return true if user exists
    */
@@ -91,7 +92,8 @@ public class LoginStuddyBuddyController {
   }
 
   /**
-   * Opens the studdyBuddies page if the username and password is correct.
+   * Method for click on Login button.
+   * Redirects to StuddyBuddies page if the username and password is correct.
    */
   @FXML
   public void handleLogin() {

@@ -61,7 +61,8 @@ public class StuddyBuddiesController {
   }
 
   /**
-   * Method for click on Add registration button. Redirects to register page.
+   * Method for click on Add registration button.
+   * Redirects to register page.
    */
   @FXML
   public void handleAddRegistration() {
@@ -84,7 +85,8 @@ public class StuddyBuddiesController {
   }
 
   /**
-   * Method for click on logout button. Redirects to register page.
+   * Method for click on logout button.
+   * Redirects to register page.
    */
   @FXML
   public void handleLogOut() {
