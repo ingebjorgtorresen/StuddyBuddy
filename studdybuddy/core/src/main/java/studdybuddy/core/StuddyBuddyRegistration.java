@@ -95,7 +95,6 @@ public class StuddyBuddyRegistration {
    * @throws IllegalArgumentException if the format is incorrect.
    */
   public void setRoom(String room) {
-
     if (StuddyBuddyValidation.checkRoom(room) && StuddyBuddyValidation.checkNotNullorEmpty(room)) {
       this.room = room;
     } else {

@@ -82,6 +82,12 @@ public class RemoteDataAccess implements DataAccess {
     return baseUri.resolve("user").resolve(encodeUriParam(name) + "/pw");
   }
 
+  /**
+   * Method for sending a request to get a StuddyBuddy from server.
+   *
+   * @param name of buddy to get
+   * @return buddy
+   */
   @Override
   public StuddyBuddy getStuddyBuddyByName(String name) {
     StuddyBuddy buddy;
@@ -101,6 +107,9 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
+  /**
+   * Method for sending a request to save a StuddyBuddy to server.
+   */
   @Override
   public void putStuddyBuddy(StuddyBuddy buddy) {
     try {
@@ -122,6 +131,9 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
+  /**
+   * Method for sending a request to update a StuddyBuddy on server.
+   */
   @Override
   public void postStuddyBuddy(StuddyBuddy buddy) {
     try {
@@ -142,6 +154,12 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
+  /**
+   * Method for sending a request to get password from server.
+   *
+   * @param name of StuddyBuddy
+   * @return password
+   */
   @Override
   public String getStuddyBuddyPasswordByName(String name) {
     try {
