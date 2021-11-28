@@ -4,22 +4,17 @@ import java.util.List;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import studdybuddy.dataaccess.DirectDataAccess;
 
 public class StuddyBuddiesControllerTest extends ApplicationTest {
 
   private StuddyBuddiesController controller;
-  private DirectDataAccess directDataAccess;
-  private Label allRegistrationsText;
 
   /**
    * Method that loads and sets the scene.
@@ -39,8 +34,6 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
   @BeforeEach
   public void setUpStuddyBuddies() {
     controller = new StuddyBuddiesController();
-    directDataAccess = new DirectDataAccess();
-    allRegistrationsText = new Label();
   }
 
   /**
@@ -49,16 +42,6 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
   @Test
   public void testController_studdyBuddies() {
     assertNotNull(this.controller);
-    assertNotNull(this.directDataAccess);
-  }
-
-  /**
-  * Method for checking if the correct dataAccess and studdyBuddies is transfered
-  * between classes.
-  */
-  @Test
-  public void testTransferData() {
-    // TODO
   }
 
   /**
@@ -105,15 +88,5 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
       afterClickRoot = window.getScene().getRoot();
     }
     assertNotEquals(afterClickRoot, beforeClickRoot);
-  }
-
-  /**
-  * Method for checking if the correct information is diplayed.
-  */
-  @Test
-  public void testDisplay() {
-    allRegistrationsText.setText(directDataAccess.getStuddyBuddies().toString());
-    String displayedStuddyBuddies = directDataAccess.getStuddyBuddies().toString();
-    assertEquals(displayedStuddyBuddies, allRegistrationsText.getText());
   }
 }
