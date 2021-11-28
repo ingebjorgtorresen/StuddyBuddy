@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.dataaccess.DataAccess;
-import studdybuddy.dataaccess.RemoteDataAccess;
 
 /**
  * Controller for studdyBuddies objects.

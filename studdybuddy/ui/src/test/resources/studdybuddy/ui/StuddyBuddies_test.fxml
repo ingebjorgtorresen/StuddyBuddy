@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studdybuddy.ui.StuddyBuddiesController" prefHeight="640.0" prefWidth="350.0">
+    <ImageView fx:id="studdyBuddyLogo" fitHeight="50.0" fitWidth="250.0" layoutX="5.0" layoutY="5.0">
+            <Image url="@StuddyBuddy1.png"/>
+    </ImageView>
+    
+    <ImageView fx:id="userIcon" fitHeight="30.0" fitWidth="30.0" layoutX="10.0" layoutY="55.0" pickOnBounds="true" preserveRatio="true" >
+            <Image url="@userIcon.png" />
+    </ImageView>
+
+    <Label fx:id="username" layoutX="50.0" layoutY="63.0"/>
+
+    <Button fx:id="logOut" onAction="#handleLogOut" layoutX="265.0" layoutY="60.0" text="Log out"/>
+
+    <Line layoutX="10.0" layoutY="90.0" endX="330" />
+
+    <Button text="Add registration" fx:id="addRegistrationButton" onAction="#handleAddRegistration" layoutX="210.0" layoutY="100.0"/>
+    
+     <ScrollPane fx:id="regScrollPane" layoutX="15.0" layoutY="130.0" prefWidth="330" prefHeight="500">
+        <content>
+            <Label fx:id="allRegistrationsText" layoutX="10.0" layoutY="200.0"/>
+        </content>
+    </ScrollPane>
+
+</AnchorPane>
