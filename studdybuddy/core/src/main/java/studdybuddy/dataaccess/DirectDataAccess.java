@@ -1,6 +1,5 @@
 package studdybuddy.dataaccess;
 
-import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -21,6 +20,9 @@ public class DirectDataAccess implements DataAccess {
   private String filename = "src/main/resources/studdybuddy/ui/directBuddies.json";
   private StuddyBuddies buddies;
 
+  /**
+   * Constructor that sets persistence, filename and buddies.
+   */
   public DirectDataAccess() {
     buddiesPersistence = new StuddyBuddiesPersistence();
     buddiesPersistence.setSaveFilePath(filename);
@@ -61,14 +63,19 @@ public class DirectDataAccess implements DataAccess {
       e.printStackTrace();
     }
   }
-
+  
+  /**
+   * Method for setting persistence, which also sets filepath.
+   *
+   * @param persistence to set
+   */
   public void setPersistence(StuddyBuddiesPersistence persistence) {
     this.buddiesPersistence = persistence;
     persistence.setSaveFilePath("directBuddies.json");
   }
 
   /**
-   * Uses persistence to save the StuddyBuddies objects.
+   * Method that uses persistence to save the StuddyBuddies objects.
    */
   public void autoSaveStuddyBuddies(StuddyBuddies buddies) {
     try {

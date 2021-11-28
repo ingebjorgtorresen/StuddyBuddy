@@ -19,14 +19,12 @@ import studdybuddy.core.StuddyBuddyRegistration;
 public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<StuddyBuddyRegistration> {
 
   /**
-   * Method for deserializing
-   * StuddyBuddyRegistration objects.
-   * Format: { "Registrations": [ ... ] }
+   * Help-method for deserializing StuddyBuddyRegistration objects.
    *
-   * @param node to deserialize.
-   * @return deserialized StuddyBuddyRegistration.
-   * @throws IOException if problem with input or output.
-   * @throws JsonProcessingException if problem with processing JsonNode.
+   * @param node to deserialize
+   * @return deserialized StuddyBuddyRegistration
+   * @throws IOException if problem with input or output
+   * @throws JsonProcessingException if problem with processing JsonNode
    */
   public StuddyBuddyRegistration deserialize(JsonNode node)
       throws IOException, JsonProcessingException {
@@ -66,6 +64,15 @@ public class StuddyBuddyRegistrationDeserializer extends JsonDeserializer<Studdy
     return null;
   }
 
+  /**
+   * Method for deserializing StuddyBuddyRegistration object.
+   *
+   * @param p Jasonparser to parse
+   * @param ctxt the DeserializationCOntext  
+   * @return a deserialized StuddyBuddyRegistration object
+   * @throws JsonProcessingException if problem with processing JsonNode
+   * @throws IOException if problem with input or output
+   */
   @Override
   public StuddyBuddyRegistration deserialize(JsonParser p, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {

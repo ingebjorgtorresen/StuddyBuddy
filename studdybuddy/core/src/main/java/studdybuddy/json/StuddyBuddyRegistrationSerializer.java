@@ -11,9 +11,14 @@ import studdybuddy.core.StuddyBuddyRegistration;
  */
 public class StuddyBuddyRegistrationSerializer extends JsonSerializer<StuddyBuddyRegistration> {
 
-  /*
-   * format: { "Room" : "...",
-   * "Course" : "...", "Start time" : "...", "End time" : "..." }
+  /* Method for writing an instance of StuddyBuddyRegistration
+   * as an json string to a json generator.
+   * Format: { "Room" : "...", "Course" : "...", "Start time" : "...", "End time" : "..." }
+   * 
+   * @param registration StuddyBuddyRegistration object to be serialized
+   * @param jsonGenerator generator to use
+   * @param serializerProvider serializerProvider to use
+   * @throws IOException if problem with input or output
    */
   @Override
   public void serialize(StuddyBuddyRegistration registration,

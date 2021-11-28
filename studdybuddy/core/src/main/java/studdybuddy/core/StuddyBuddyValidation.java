@@ -15,7 +15,9 @@ public abstract class StuddyBuddyValidation {
   /**
    * Method for checking if password is on right format.
    * Right format is 8 characters or more that is
-   * either letters or digits.
+   * either letters or digits. The letters follows the 
+   * english alphabet so characters like æ,ø,å will 
+   * not be accepted. 
    *
    * @param password password to check
    * @return true if format is correct, else return false
@@ -25,7 +27,8 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * checks that the name has the correct format. The name can only consist of letters and space.
+   * Method for checking if the name has the correct format.
+   * The name can only consist of letters and space.
    *
    * @param name the name to check
    * @return true if the formate is correct and false if it is incorrect
@@ -44,7 +47,7 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * Checks that the argument is not null.
+   * Method for checking if the argument is not null.
    *
    * @param string string to check.
    */
@@ -53,12 +56,18 @@ public abstract class StuddyBuddyValidation {
     return (string != null && !string.equals(""));
   }
 
+  /**
+   * Method for checking that date is not null. 
+   *
+   * @param date to check
+   * @return true if date is not null, else false
+   */
   public static boolean checkDatNotNull(LocalDate date) {
     return date != null;
   }
 
   /**
-   * Method that checks if StuddyBuddy exitst by name.
+   * Method that checks if StuddyBuddy exists by name.
    *
    * @param name name of the user
    * @return true if user exists, else null
@@ -68,11 +77,11 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * Check the format of the time parameter
-   * The time must be in format("HH:mm") and not null.
+   * Method for checking if the input time is on correct format.
+   * The time must be on format("HH:mm") and not null.
    *
-   * @param time to check.
-   * @throws IllegalArgumentException if the format is incorrect.
+   * @param time to check
+   * @throws IllegalArgumentException if the format is incorrect
    */
   public static boolean checkTimeFormat(String time) {
     if (!checkNotNullorEmpty(time)) {
@@ -84,17 +93,17 @@ public abstract class StuddyBuddyValidation {
     try {
       LocalTime.parse(time, formatter).toString();
     } catch (DateTimeException e) {
-        return false;
+      return false;
     }
     return true;
   }
 
   /**
-   * Checks that startTime is before endTime.
+   * Method for checking if startTime is before endTime.
    *
-   * @param startTime registration start time.
-   * @param endTime registration end time.
-   * @return false if end time is before start time and true if it is after.
+   * @param startTime registration start time
+   * @param endTime registration end time
+   * @return false if end time is before start time and true if it is after
    */
   public static boolean checkStartTimeBeforeEndTime(String startTime, String endTime) {
     if (checkNotNullorEmpty(startTime) && checkNotNullorEmpty(endTime)) {
@@ -108,11 +117,11 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * Checks if the room is in the correct format
-   * the room must consist of letters, numbers, "-" or
+   * Method for checking if the room is on the correct format
+   * The room must consist of letters, numbers, "-" or
    * spaces.
    *
-   * @return true if the format is coorect and false if it is incorrect.
+   * @return true if the format is coorect and false if it is incorrect
    */
   public static boolean checkRoom(String room) {
     if (!checkNotNullorEmpty(room)) {
@@ -128,11 +137,11 @@ public abstract class StuddyBuddyValidation {
   }
 
   /**
-   * Checks if the course is in the correct format
-   * the course must consist of letters, numbers, "-" or
+   * Method for checking if the course is on the correct format.
+   * The course must consist of letters, numbers, "-" or
    * spaces.
    *
-   * @return true if the format is coorect and false if it is incorrect.
+   * @return true if the format is correct and false if it is incorrect.
    */
   public static boolean checkCourse(String course) {
     if (!checkNotNullorEmpty(course)) {

@@ -14,8 +14,8 @@ import studdybuddy.core.StuddyBuddy;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
- * Class for communcating with and accessing server. Has methods for GET, PUT, POST that uses
- * HttpRequest.
+ * Class for communcating with and accessing server. 
+ * Has methods for GET, PUT, POST that uses HttpRequest.
  */
 public class RemoteDataAccess implements DataAccess {
 
@@ -31,9 +31,9 @@ public class RemoteDataAccess implements DataAccess {
   }
 
   /**
-   * Getter for StuddyBuddies.
+   * Method for getting StuddyBuddies.
    *
-   * @return buddies.
+   * @return buddies
    */
   public StuddyBuddies getStuddyBuddies() {
     StuddyBuddies buddies = null;
@@ -52,19 +52,31 @@ public class RemoteDataAccess implements DataAccess {
     return buddies;
   }
 
+  /**
+   * Method for making base URI.
+   *
+   * @param s to use
+   * @return uri as String
+   */
   private String encodeUriParam(String s) {
     return URLEncoder.encode(s, StandardCharsets.UTF_8);
   }
 
+  /**
+   * Method for making URI for studdybuddy by name.
+   *
+   * @param name to use
+   * @return URI for studdybuddy
+   */
   private URI studdybuddyUri(String name) {
     return baseUri.resolve("user").resolve(encodeUriParam(name));
   }
 
   /**
-   * Gets the password URI.
+   * Method for getting the password URI.
    *
-   * @param name of StuddyBuddy.
-   * @return the password URI.
+   * @param name of StuddyBuddy
+   * @return the password URI
    */
   private URI passwordUri(String name) {
     return baseUri.resolve("user").resolve(encodeUriParam(name) + "/pw");
@@ -89,12 +101,6 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
-  /**
-   * Method for sending a StudyBuddy object to server.
-   *
-   * @param buddy buddy to be saved.
-   * @param buddies that buddy will be saved in.
-   */
   @Override
   public void putStuddyBuddy(StuddyBuddy buddy) {
     try {
@@ -116,12 +122,6 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
-  /**
-   * Method for updating a StuddyBuddy object on server.
-   *
-   * @param buddy buddy to be saved.
-   * @param buddies that buddy will be saved in.
-   */
   @Override
   public void postStuddyBuddy(StuddyBuddy buddy) {
     try {
@@ -142,12 +142,6 @@ public class RemoteDataAccess implements DataAccess {
     }
   }
 
-  /**
-   * Getter for password.
-   *
-   * @param name name of StuddyBuddy.
-   * @param buddies to get from.
-   */
   @Override
   public String getStuddyBuddyPasswordByName(String name) {
     try {
