@@ -59,6 +59,10 @@ public class StuddyBuddyRegistrationController {
     }
   }
 
+  public DatePicker getDatePicker() {
+    return datepicker;
+  }
+
   /**
    * Getter for InputDateString.
    *
