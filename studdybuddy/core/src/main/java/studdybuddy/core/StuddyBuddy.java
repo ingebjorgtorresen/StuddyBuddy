@@ -96,10 +96,6 @@ public class StuddyBuddy {
    * @return the list over registrations
    */
   public List<StuddyBuddyRegistration> getRegistrations() {
-    List<StuddyBuddyRegistration> copy = new ArrayList<>();
-    for (StuddyBuddyRegistration registration : registrations) {
-      copy.add(registration);
-    }
-    return copy;
+    return new ArrayList<StuddyBuddyRegistration>(registrations);
   }
 }
