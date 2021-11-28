@@ -64,7 +64,7 @@ public class StuddyBuddiesRestController {
    * Adds a StuddyBuddy if it does not already exist.
    *
    * @param name the name of the StuddyBuddy
-   * @param studdyBuddy the studdyBuddy to add
+   * @param buddy the studdyBuddy to add
    * @return true if it was added, false if it was replaced
    */
   @PutMapping(path = "/{name}")
@@ -79,15 +79,15 @@ public class StuddyBuddiesRestController {
    * Post a StuddyBuddy if the studdyBuddy is not null.
    *
    * @param name the name of the StuddyBuddy 
-   * @param studdyBuddy the studdyBuddy to post
-   * @return tru if posted, false if not posted
+   * @param buddy the studdyBuddy to post
+   * 
    */
   @PostMapping(path = "/{name}")
   public void postStuddyBuddy(@PathVariable("name") String name,
         @RequestBody StuddyBuddy buddy) {
       
-      buddiesService.updateStuddyBuddies(buddy);
-      buddiesService.autoSaveStuddyBuddies();
+    buddiesService.updateStuddyBuddies(buddy);
+    buddiesService.autoSaveStuddyBuddies();
   }
 
 }
