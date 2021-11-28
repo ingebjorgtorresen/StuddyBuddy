@@ -19,6 +19,15 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
 
   private StuddyBuddyDeserializer studdyBuddyeserializer = new StuddyBuddyDeserializer();
 
+  /**
+   * Method for deserializing StuddyBuddies object.
+   *
+   * @param parser to parse
+   * @param ctxt the DeserializationContext
+   * @return deserialized StuddyBuddies object
+   * @throws JsonProcessingException if problem with processing JsonNode
+   * @throws IOException if problem with input or output
+   */
   @Override
   public StuddyBuddies deserialize(JsonParser parser, DeserializationContext ctxt)
       throws IOException, JsonProcessingException {
@@ -27,12 +36,12 @@ public class StuddyBuddiesDeserializer extends JsonDeserializer<StuddyBuddies> {
   }
 
   /**
-   * Method for deserializing StuddyBuddies object.
+   * Help-method for deserializing StuddyBuddies object.
    *
-   * @param node JsonNode to deserialze.
-   * @return deserialized StuddyBuddies object.
-   * @throws JsonProcessingException if problem with processing JsonNode.
-   * @throws IOException if problem with input or output.
+   * @param node JsonNode to deserialze
+   * @return deserialized StuddyBuddies object
+   * @throws JsonProcessingException if problem with processing JsonNode
+   * @throws IOException if problem with input or output
    */
   public StuddyBuddies deserialize(JsonNode node) throws JsonProcessingException, IOException {
     if (node instanceof ObjectNode) {

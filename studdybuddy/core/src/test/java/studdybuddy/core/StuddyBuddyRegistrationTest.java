@@ -58,15 +58,6 @@ public class StuddyBuddyRegistrationTest {
 	}
 
 	/**
-	 * Method for testing setter for course.
-	 */
-	@Test
-	public void setCourse() {
-		registration.setCourse("Statistikk");
-		Assertions.assertEquals("Statistikk", registration.getCourse());
-	}
-
-	/**
 	 * Method for testing format of time.
 	 */
 	@Test
@@ -118,6 +109,9 @@ public class StuddyBuddyRegistrationTest {
 		});
 	}
 
+	/**
+	 * Method for testing date format
+	 */
 	@Test
 	public void testDateFormat() {
 		Assertions.assertThrows(IllegalArgumentException.class, () -> {

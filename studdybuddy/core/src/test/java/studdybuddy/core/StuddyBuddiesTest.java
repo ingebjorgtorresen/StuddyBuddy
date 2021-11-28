@@ -1,7 +1,5 @@
 package studdybuddy.core;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
@@ -20,18 +18,6 @@ public class StuddyBuddiesTest {
   @BeforeEach
   public void setup() {
     buddies = new StuddyBuddies();
-  }
-
-  /**
-   * Method for testing getStuddyBuddy method.
-   */
-  @Test
-  public void testGetStuddyBuddy() {
-    assertNull(buddies.getStuddyBuddy("Tuva"));
-    StuddyBuddy buddy = new StuddyBuddy();
-    buddy.setName("Petra");
-    buddies.addStuddyBuddy(buddy);
-    assertEquals(buddy, buddies.getStuddyBuddy("Petra"));
   }
 
   /**

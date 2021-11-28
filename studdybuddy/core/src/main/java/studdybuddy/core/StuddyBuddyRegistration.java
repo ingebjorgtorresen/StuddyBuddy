@@ -4,14 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class for registrations.
- * A registration has a StuddyBuddy,
- * date, start time, end time, room
- * and course.
+ * Class for registrations. A registration has
+ * date, start time, end time, room and course.
  */
 public class StuddyBuddyRegistration {
 
-  private StuddyBuddy studdyBuddy;
   private String date;
   private String startTime;
   private String endTime;
@@ -19,45 +16,18 @@ public class StuddyBuddyRegistration {
   private String course;
 
   /**
-   * Setter for studdyBuddy.
+   * Method for getting date.
    *
-   * @param studdyBuddy the new studdyBuddy object.
-   */
-  public void setStuddyBuddy(StuddyBuddy studdyBuddy) {
-    this.studdyBuddy = studdyBuddy;
-  }
-
-  /**
-   * Getter for studdyBuddy.
-   *
-   * @return this studdyBuddy.
-   */
-  public StuddyBuddy getStuddyBuddy() {
-    return studdyBuddy;
-  }
-
-  /**
-   * Getter for date.
-   *
-   * @return this date.
+   * @return this date
    */
   public String getDate() {
     return date;
   }
 
   /**
-   * Getter for username.
+   * Method for setting date.
    *
-   * @return this username.
-   */
-  public String getUsername() {
-    return studdyBuddy.getName();
-  }
-
-  /**
-   * Setter for date.
-   *
-   * @param date the new date.
+   * @param date the new date
    */
   public void setDate(LocalDate date) {
     if (StuddyBuddyValidation.checkDatNotNull(date)) {
@@ -70,7 +40,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Setter for startTime.
+   * Method for setting startTime.
    *
    * @param startTime the new start time.
    * @throws IllegalArgumentException if the format is incorrect.
@@ -85,7 +55,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Getter for startTime.
+   * Mehtod for setting startTime.
    *
    * @return registration startTime.
    */
@@ -94,14 +64,15 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Setter for endTime.
+   * Method for setting endTime.
    *
    * @param endTime the new end time.
    * @throws IllegalArgumentException if the format is incorrect or if startTime is before endTime.
    */
   public void setEndTime(String endTime) {
     if (StuddyBuddyValidation.checkStartTimeBeforeEndTime(this.startTime, endTime) 
-        && StuddyBuddyValidation.checkNotNullorEmpty(endTime) && StuddyBuddyValidation.checkTimeFormat(endTime)) {
+        && StuddyBuddyValidation.checkNotNullorEmpty(endTime) 
+        && StuddyBuddyValidation.checkTimeFormat(endTime)) {
       this.endTime = endTime;
     } else {
       throw new IllegalArgumentException("Invalid end time.");
@@ -109,7 +80,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Getter for endTime.
+   * Method for getting endTime.
    *
    * @return this registration endTime.
    */
@@ -118,7 +89,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Setter for room.
+   * Method for setting room.
    *
    * @param room the new room.
    * @throws IllegalArgumentException if the format is incorrect.
@@ -134,7 +105,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Getter for room.
+   * Method for setting room.
    *
    * @return this room.
    */
@@ -143,13 +114,14 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Setter for course.
+   * Method for setting course.
    *
    * @param course the new course.
    * @throws IllegalArgumentException if the format of the course param is wrong.
    */
   public void setCourse(String course) {
-    if (StuddyBuddyValidation.checkCourse(course) && (StuddyBuddyValidation.checkNotNullorEmpty(course))) {
+    if (StuddyBuddyValidation.checkCourse(course) 
+        && (StuddyBuddyValidation.checkNotNullorEmpty(course))) {
       this.course = course;
     } else {
       throw new IllegalArgumentException(
@@ -158,7 +130,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * Getter for course.
+   * Method for getting course.
    *
    * @return this course.
    */
@@ -167,7 +139,7 @@ public class StuddyBuddyRegistration {
   }
 
   /**
-   * ToString for StuddyBuddyRegistration objects.
+   * Method for making toString for StuddyBuddyRegistration objects.
    *
    * @return Registration object as String.
    */

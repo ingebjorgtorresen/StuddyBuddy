@@ -14,10 +14,15 @@ import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 import studdybuddy.core.StuddyBuddyRegistration;
 
-public class StuddyPersistenceTest {
+/**
+ * Class for testing StuddyBuddiesPersistence. 
+ * This tests all serializers, deserializers and StuddyModule indirectly,
+ * because StuddyBuddiesPersistence uses all those classes.
+ */
+public class StuddyBuddiesPersistenceTest {
 
   private static StuddyBuddiesPersistence persistence;
-  private static String testFileName = "testPersistence.json";
+  private static String testFileName = "src/test/resources/studdybuddy/core/testPersistence.json";
   private static StuddyBuddies buddies;
   private static StuddyBuddy buddy1;
   private static StuddyBuddy buddy2;
@@ -26,6 +31,9 @@ public class StuddyPersistenceTest {
   private static Writer writer;
   private static Reader reader;
 
+  /**
+   * Set up for each test
+   */
   @BeforeEach
   public void setup() {
     buddies = new StuddyBuddies();
@@ -33,6 +41,7 @@ public class StuddyPersistenceTest {
 
     buddy1 = new StuddyBuddy();
     buddy1.setName("FirstBuddy");
+    buddy1.setPassword("eple1234");
     registration1 = new StuddyBuddyRegistration();
     LocalDate date1;
     date1 = LocalDate.of(2022, 10, 10);
@@ -44,6 +53,7 @@ public class StuddyPersistenceTest {
 
     buddy2 = new StuddyBuddy();
     buddy2.setName("SecondBuddy");
+    buddy2.setPassword("12345678");
     registration2 = new StuddyBuddyRegistration();
     LocalDate date2;
     date2 = LocalDate.of(2022, 12, 12);
@@ -66,8 +76,11 @@ public class StuddyPersistenceTest {
     }
   }
 
-  // Writes an object to a test file, then checks that the object read from the file is equal to the
-  // one that was written
+  /**
+   * Method that writes a StuddyBuddies object to a test file, 
+   * then tests if the object read from the file is equal to
+   * the one that was written.
+   */
   @Test
   public void testPersistence() {
     StuddyBuddies testBuddies = null;
@@ -80,6 +93,7 @@ public class StuddyPersistenceTest {
     }
 
     Assertions.assertEquals(buddy1.getName(), testBuddies.getStuddyBuddy(buddy1.getName()).getName());
+    Assertions.assertEquals(buddy1.getPassword(), testBuddies.getStuddyBuddy(buddy1.getName()).getPassword());
     StuddyBuddyRegistration testRegistration = testBuddies.getStuddyBuddy(buddy2.getName()).getRegistrations().get(0);
     Assertions.assertEquals(registration2.getDate(), testRegistration.getDate());
     Assertions.assertEquals(registration2.getCourse(), testRegistration.getCourse());

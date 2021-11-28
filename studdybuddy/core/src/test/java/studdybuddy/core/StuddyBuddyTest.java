@@ -20,15 +20,6 @@ public class StuddyBuddyTest {
   }
 
   /**
-   * Method for testing setter for name.
-   */
-  @Test
-  public void testName() {
-    studdyBuddy.setName("Turi");
-    Assertions.assertEquals("Turi", studdyBuddy.getName());
-  }
-
-  /**
    * Method for testing name format.
    */
   @Test
@@ -39,14 +30,6 @@ public class StuddyBuddyTest {
     Assertions.assertThrows(IllegalArgumentException.class, () -> {
       studdyBuddy.setName(null);
     });
-  }
-
-  /**
-   * Method for testing setter for password
-   */
-  public void testPassword() {
-    studdyBuddy.setPassword("12345678");
-    Assertions.assertEquals("12345678", studdyBuddy.getPassword());
   }
 
   /**

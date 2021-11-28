@@ -16,8 +16,8 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   /**
    * Method for searching for StuddyBuddy by name.
    *
-   * @param name name of the user we want to get.
-   * @return StuddyBuddy if it exists or null.
+   * @param name name of the user we want to get
+   * @return StuddyBuddy if it exists or null
    */
   public StuddyBuddy getStuddyBuddy(String name) {
     for (StuddyBuddy buddy : this.studdyBuddies) {
@@ -31,7 +31,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   /**
    * Method for adding a new StuddyBuddy to StuddyBuddies.
    *
-   * @param buddy StuddyBuddy we want to add.
+   * @param buddy StuddyBuddy we want to add
    */
   public void addStuddyBuddy(StuddyBuddy buddy) {
     if (!StuddyBuddyValidation.buddyExists(this, buddy.getName())) {
@@ -46,7 +46,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   /**
    * Method for adding many StuddyBuddy objects at once.
    *
-   * @param buddies StuddyBuddy Objects we want to add.
+   * @param buddies StuddyBuddy Objects we want to add
    */
   public void addStuddyBuddies(StuddyBuddy... buddies) {
     for (StuddyBuddy buddy : buddies) {
@@ -57,7 +57,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   /**
    * Method that removes StudyBuddy if it exists.
    *
-   * @param buddy StuddyBuddy to remove.
+   * @param buddy StuddyBuddy to remove
    */
   public void removeStuddyBuddy(StuddyBuddy buddy) {
     studdyBuddies.remove(buddy);
@@ -74,10 +74,14 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
   /**
    * Method for getting list over all StuddyBuddy objects.
    *
-   * @return the list that contains StuddyBuddy objects.
+   * @return the list that contains StuddyBuddy objects
    */
   public List<StuddyBuddy> getStuddyBuddies() {
-    return this.studdyBuddies;
+    List<StuddyBuddy> copy = new ArrayList<>();
+    for (StuddyBuddy buddy : studdyBuddies) {
+      copy.add(buddy);
+    }
+    return copy;
   }
 
   /**
