@@ -10,7 +10,6 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
@@ -37,19 +36,15 @@ public class StuddyBuddiesService {
     persistence.setSaveFilePath(buddiesJsonFileName);
   }
 
-  public StuddyBuddies getStuddyBuddies() {
-    return readBuddies();
-  }
-
   /**
    * Method that uses persistence to save studdyBuddies.
    */
-  public void autoSaveStuddyBuddies() {
+  public void saveStuddyBuddies() {
     if (persistence != null) {
       try {
         persistence.saveStuddyBuddies(buddies);
       } catch (IllegalStateException | IOException e) {
-        System.err.println("Couldn't auto-save StuddyBuddies: " + e);
+        System.err.println("Couldn't save StuddyBuddies: " + e);
       }
     }
   }
