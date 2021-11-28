@@ -48,7 +48,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the date to a registration.
+   * Method that sets the date to a registration.
    */
   public void setDateFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -75,7 +75,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the room to be the input in roomField.
+   * Method that sets the room to be the input in roomField.
    */
   public void setRoomFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -89,7 +89,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the course to be the input in courseField.
+   * Method that sets the course to be the input in courseField.
    */
   public void setCourseFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -103,7 +103,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the start time to be the input in startTimeField.
+   * Method that sets the start time to be the input in startTimeField.
    */
   @FXML
   public void setStartTimeFromInput(StuddyBuddyRegistration registration) {
@@ -118,7 +118,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the end time to be the input in endTimeField.
+   * Method that sets the end time to be the input in endTimeField.
    */
   @FXML
   public void setEndTimeFromInput(StuddyBuddyRegistration registration) {
@@ -133,7 +133,8 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * register a new StuddyBuddy sets the room, course, start time, end time and date.
+   * Method that register a new StuddyBuddy sets the room, course,
+   * start time, end time and date.
    */
   private boolean registerStuddyBuddy() {
     StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
@@ -162,12 +163,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * Sets the feedback text to not be visable and to have Paradise Pink color saves this .
-   * registration to file registration was successful sets message to be visable 
-   * sets feedback to be visable if registration was successful sets message
-   * text to be Amazon color if registration was successful sets feedback
-   * text to have Yellow Green Crayola color if registration was successful clears the
-   * texfields if registration was successful
+   * Method for click on register button. 
    */
   @FXML
   public void handleRegister() {

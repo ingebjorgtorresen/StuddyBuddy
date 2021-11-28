@@ -17,7 +17,6 @@ import studdybuddy.dataaccess.DataAccess;
 /**
  * Controller class for registering new StuddyBuddy/user.
  */
-
 public class RegisterStuddyBuddyController {
 
   @FXML
@@ -164,7 +163,7 @@ public class RegisterStuddyBuddyController {
   }
   
   /**
-   * Method for handeling activating of the register button. 
+   * Method for click on register button.
    *
    * @param event the event
    * @throws IOException if it is wrong
