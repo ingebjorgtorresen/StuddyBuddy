@@ -15,7 +15,7 @@ import studdybuddy.core.StuddyBuddy;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
- * Controller for studdyBuddies objects.
+ * Controller for studdyBuddies page.
  */
 public class StuddyBuddiesController {
 

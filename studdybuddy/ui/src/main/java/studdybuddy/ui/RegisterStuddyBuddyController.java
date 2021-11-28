@@ -15,7 +15,7 @@ import studdybuddy.core.StuddyBuddyValidation;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
- * Controller class for registering new StuddyBuddy/user.
+ * Controller class for registering new StuddyBuddy/account.
  */
 public class RegisterStuddyBuddyController {
 
@@ -44,8 +44,7 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public String getInputName() {
-    String nameString = nameField.getText();
-    return nameString;
+    return nameField.getText();
   }
 
   /**
@@ -55,8 +54,7 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public String getInputPasswordCheck() {
-    String passwordString = passwordCheckField.getText();
-    return passwordString;
+    return passwordCheckField.getText();
   }
 
   /**
@@ -66,49 +64,7 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public String getInputPassword() {
-    String passwordString = passwordField.getText();
-    return passwordString;
-  }
-
-  /**
-   * Method for checking input name not null.
-   *
-   * @return true if name is not null, else false
-   */
-  private boolean checkNotNull() {
-    try {
-      StuddyBuddyValidation.checkNotNullorEmpty(getInputName());
-    } catch (IllegalArgumentException e) {
-      return false;
-    }
-    return true;
-  }
-
-  /**
-   * Method for checking format of input name.
-   *
-   * @return true if format is correct, else false
-   */
-  private boolean checkInputName() {
-    return StuddyBuddyValidation.checkName(getInputName());
-  }
-
-  /**
-   * Method for checking format of input password.
-   *
-   * @return true if format is correct, else false
-   */
-  private boolean checkInputPassword() {
-    return StuddyBuddyValidation.checkPassword(getInputPassword());
-  }
-
-  /**
-   * Method for checking if buddy exists.
-   *
-   * @return true if buddy exists, else false
-   */
-  private boolean checkBuddyExists() {
-    return StuddyBuddyValidation.buddyExists(dataAccess.getStuddyBuddies(), getInputName());
+    return passwordField.getText();
   }
 
   /**
@@ -118,10 +74,8 @@ public class RegisterStuddyBuddyController {
    * 
    */
   public boolean checkName() {
-    if ((checkNotNull() == false) || (checkInputName() == false)) {
-      return false;
-    }
-    return true;
+    return (StuddyBuddyValidation.checkNotNullorEmpty(getInputName()) 
+        && StuddyBuddyValidation.checkName(getInputName()));
   }
 
   /**
@@ -131,10 +85,8 @@ public class RegisterStuddyBuddyController {
    * 
    */
   public boolean checkPassword() {
-    if ((checkNotNull() == false) || (checkInputPassword() == false)) {
-      return false;
-    }
-    return true;
+    return (StuddyBuddyValidation.checkNotNullorEmpty(getInputName())
+        && StuddyBuddyValidation.checkPassword(getInputPassword()));
   }
 
 
@@ -144,10 +96,7 @@ public class RegisterStuddyBuddyController {
    * @return true if passwords match, else false
    */
   public boolean checkPasswordsMatch() {
-    if (!(getInputPassword().equals(getInputPasswordCheck()))) {
-      return false;
-    }
-    return true;
+    return getInputPassword().equals(getInputPasswordCheck());
   }
 
   /**
@@ -163,16 +112,16 @@ public class RegisterStuddyBuddyController {
   }
   
   /**
-   * Method for click on register button.
+   * Method for handle click on register button.
    *
    * @param event the event
-   * @throws IOException if it is wrong
+   * @throws IOException if failed or interrupted I/O operation
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
     messageBox.setText("");
 
-    if (checkBuddyExists()) {
+    if (StuddyBuddyValidation.buddyExists(dataAccess.getStuddyBuddies(), getInputName())) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
@@ -241,7 +190,7 @@ public class RegisterStuddyBuddyController {
 
   /**
    * Method for transfering dataAccess and studdyBuddies between classes.
-   * Is used in the class that opens an FXML that uses this controller.
+   * Is is used in the class that opens an FXML that uses this controller.
    *
    * @param dataAccess dataAccess for the run of the application
    *

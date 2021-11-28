@@ -17,7 +17,7 @@ import studdybuddy.core.StuddyBuddyRegistration;
 import studdybuddy.dataaccess.DataAccess;
 
 /**
- * Controller class for a registration.
+ * Controller class for the registration page.
  */
 public class StuddyBuddyRegistrationController {
   
@@ -40,16 +40,24 @@ public class StuddyBuddyRegistrationController {
   @FXML
   private TextField endTimeField;
 
+  /**
+   * Method for initializing.
+   */
   public void initialize() {
     datepicker.getEditor().setDisable(true);
   }
 
+  /**
+   * Method for setting a buddy from login.
+   *
+   * @param studdyBuddy to be set
+   */
   public void setStuddyBuddyFromLogin(StuddyBuddy studdyBuddy) {
     this.buddy = studdyBuddy;
   }
 
   /**
-   * Method that sets the date to a registration.
+   * Method that sets the date.
    */
   public void setDateFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -65,7 +73,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * Getter for InputDateString.
+   * Method for getting the InputDateString.
    *
    * @return the input date as String
    */
@@ -164,7 +172,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * Method for click on register button. 
+   * Method for handle click on register button. 
    */
   @FXML
   public void handleRegister() {

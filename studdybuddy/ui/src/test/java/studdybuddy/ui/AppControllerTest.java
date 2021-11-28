@@ -19,7 +19,7 @@ public class AppControllerTest extends ApplicationTest{
   private StuddyBuddies buddies;
 
   /**
-   * Mathod that loads the and sets the scene.
+   * Method that loads the and sets the scene.
    */
   @Override
   public void start(final Stage stage) throws Exception {
@@ -29,27 +29,29 @@ public class AppControllerTest extends ApplicationTest{
     stage.setScene(new Scene(root));
     stage.show(); 
   }
-/**
- * Method that does setup before each test.
- */
+  
+  /**
+   * Method that does setup before each test.
+   */
   @BeforeEach
   public void setUpRegistration() {
     buddies = new StuddyBuddies();
   }
 
-/**
- * Method for checking that the controller and the studdyBuddies object are initialized
- */
+  /**
+   * Method for checking that the controller and the studdyBuddies object are initialized
+   */
   @Test
   public void testController() {
       assertNotNull(this.controller);
       assertNotNull(this.buddies);
   }
-/**
- * Method for checking if the LoginButton Switches Window.
- * 
- * @throws InterruptedException if the thread is interrupted
- */
+
+  /**
+   * Method for checking if the LoginButton Switches Window.
+   * 
+   * @throws InterruptedException if the thread is interrupted
+   */
   @Test
   public void testLoginButtonSwitchesWindow() throws InterruptedException {
     List<Window> beforeClick = Window.getWindows();

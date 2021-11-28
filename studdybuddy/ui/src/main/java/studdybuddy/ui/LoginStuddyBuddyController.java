@@ -34,19 +34,18 @@ public class LoginStuddyBuddyController {
   private RegisterStuddyBuddyController registerViewController;
 
   /**
-   * Sets the name to be the input in nameField.
+   * Method that gets the name to be the input in nameField.
    * The name can only consist of letters and space.
    *
    * @return the name from input
    */
   @FXML
   public String getInputName() {
-    String nameString = nameField.getText();
-    return nameString;
+    return nameField.getText();
   }
 
   /**
-   * Method for transering dataAccess and studdyBuddies between classes.
+   * Method for transfering dataAccess and studdyBuddies between classes.
    * Is used in the class that opens an FXML that uses this controller.
    *
    * @param dataAccess dataAccess for the run of the application
@@ -60,7 +59,7 @@ public class LoginStuddyBuddyController {
   /**
    * Method that sets the password to be the input from passwordField,
    * Can only consist of letters from the english alphabet
-   * (so can not use æ,ø,å) and digits.
+   * (cannot use æ,ø,å) and digits.
    *
    * @return the password from input
    */
@@ -71,8 +70,8 @@ public class LoginStuddyBuddyController {
   }
 
   /**
-   * Method that checks if user exist in server.
-   * Returns true if it exists, else false.
+   * Method that checks if user exist in server/file.
+   * Returns true if it exists, false if not.
    *
    * @return true if user exists
    */
@@ -82,17 +81,16 @@ public class LoginStuddyBuddyController {
   }
 
   /**
-   * Method that checks if input password mathces the acutal password of the
-   * user by its username.
+   * Method that checks if input password mathces the acutal password.
    *
-   * @return true if passwords match, else false
+   * @return true if passwords match, false if not
    */
   public boolean passwordIsCorrect() {
     return getInputPassword().equals(dataAccess.getStuddyBuddyPasswordByName(getInputName()));
   }
 
   /**
-   * Method for click on Login button.
+   * Method for handle click on Login button.
    * Redirects to StuddyBuddies page if the username and password is correct.
    */
   @FXML

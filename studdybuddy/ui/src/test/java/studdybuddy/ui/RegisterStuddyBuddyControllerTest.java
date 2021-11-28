@@ -19,6 +19,9 @@ import studdybuddy.dataaccess.DirectDataAccess;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
+/**
+ * Test class for RegisterStuddyBuddyController.
+ */
 public class RegisterStuddyBuddyControllerTest extends ApplicationTest {
 
   private RegisterStuddyBuddyController controller = new RegisterStuddyBuddyController();

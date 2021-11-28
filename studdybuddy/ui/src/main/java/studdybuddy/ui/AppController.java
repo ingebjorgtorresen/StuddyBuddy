@@ -55,7 +55,7 @@ public class AppController {
   }
 
   /**
-   * Method for click on register button.
+   * Method for handle click on register button.
    * Redirects to register page.
    */
   @FXML
@@ -78,7 +78,7 @@ public class AppController {
   }
 
   /**
-   * Method for click on login button.
+   * Method for handle click on login button.
    * Redirects to login page.
    */
   @FXML
