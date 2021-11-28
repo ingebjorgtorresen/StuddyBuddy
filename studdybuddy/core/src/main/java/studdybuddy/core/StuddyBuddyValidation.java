@@ -60,7 +60,7 @@ public abstract class StuddyBuddyValidation {
    * Method for checking that date is not null. 
    *
    * @param date to check
-   * @return true if date is nor null, else false
+   * @return true if date is not null, else false
    */
   public static boolean checkDatNotNull(LocalDate date) {
     return date != null;
