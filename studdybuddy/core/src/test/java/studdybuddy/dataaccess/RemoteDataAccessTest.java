@@ -20,6 +20,10 @@ import org.junit.jupiter.api.Test;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 
+/**
+ * Class that tests RemoteDataAccess class.
+ * The two getter-tests tests put and post methods indirectly. 
+ */
 public class RemoteDataAccessTest {
 
   private WireMockConfiguration config;
@@ -30,6 +34,11 @@ public class RemoteDataAccessTest {
       "\"Name\" : \"SecondBuddy\", \"Password\" : \"123456789\", \"Registrations\" : [ {\"Date\" : \"06/03/2022\", \"Room\" : \"F1\", \"Course\" : \"Datamaskiner og digitalteknikk\"," +
       "\"Start time\" : \"14:15\", \"End time\" : \"16:00\"} ]} ]}";
   
+  /**
+   * Set up for each class.
+   * 
+   * @throws URISyntaxException if something is wrong with syntax
+   */
   @BeforeEach
   public void startWireMockServerAndSetup() throws URISyntaxException {
     config = WireMockConfiguration.wireMockConfig().port(8080);
@@ -39,6 +48,10 @@ public class RemoteDataAccessTest {
     dataAccess = new RemoteDataAccess(new URI("http://localhost:" + wireMockServer.port() + "/studdybuddy"));
   }
 
+  /**
+   * Method for testing if names we get match with
+   * what was written to server. 
+   */
   @Test
   public void testGetStuddyBuddyNames() {
     stubFor(get(urlEqualTo("/studdybuddy"))
@@ -57,6 +70,10 @@ public class RemoteDataAccessTest {
     assertTrue(names.containsAll(List.of("FirstBuddy", "SecondBuddy")));
   }
 
+   /**
+   * Method for testing if passwords we get match with
+   * what was written to server. 
+   */
   @Test
   public void testGetStuddyBuddyPassword() {
     stubFor(get(urlEqualTo("/studdybuddy"))
@@ -75,6 +92,9 @@ public class RemoteDataAccessTest {
     assertTrue(passwords.containsAll(List.of("eple1234", "123456789")));
   }
 
+  /**
+   * Method for stopping WireMockServer after each test.
+   */
   @AfterEach
   public void stopWireMockServer() {
     wireMockServer.stop();

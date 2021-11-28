@@ -12,7 +12,7 @@ import java.nio.file.Paths;
 import studdybuddy.core.StuddyBuddies;
 
 /**
- * Wrapper class for JSON serialization
+ * Wrapper class for JSON serialization 
  * to avoid direct compile dependecies 
  * on Jackson for other modules.
  */
@@ -40,9 +40,9 @@ public class StuddyBuddiesPersistence {
   /**
    * Method that uses mapper to write studdyBuddies objects.
    *
-   * @param buddies StuddyBuddies object to write.
-   * @param writer to write with.
-   * @throws IOException if problem with input or output.
+   * @param buddies StuddyBuddies object to write
+   * @param writer to write with
+   * @throws IOException if problem with input or output
    */
   public void writeStuddyBuddies(StuddyBuddies buddies, Writer writer) throws IOException {
     mapper.writerWithDefaultPrettyPrinter().writeValue(writer, buddies);
@@ -63,14 +63,14 @@ public class StuddyBuddiesPersistence {
   /**
    * Method for setting SavePath.
    *
-   * @param saveFile file to save to.
+   * @param saveFile file to save to
    */
   public void setSaveFilePath(String saveFile) {
     this.savePath = Paths.get(System.getProperty("user.home"), saveFile);
   }
 
   /**
-   * Getter for savePath.
+   * Method for getting savePath.
    *
    * @return this savePath.
    */
@@ -82,8 +82,8 @@ public class StuddyBuddiesPersistence {
    * Method that loads a StuddyBuddies object from saved file in user.home folder.
    *
    * @return the loaded StuddyBuddies
-   * @throws IOException if problem with input or output.
-   * @throws IllegalStateException if savePath is null.
+   * @throws IOException if problem with input or output
+   * @throws IllegalStateException if savePath is null
    */
   public StuddyBuddies loadStuddyBuddies() throws IOException, IllegalStateException {
     if (savePath == null) {
@@ -97,9 +97,9 @@ public class StuddyBuddiesPersistence {
   /**
    * Method that saves a StuddyBuddies object to the savePath in the user.home folder.
    *
-   * @param studdyBuddies the StuddyBuddies to save.
-   * @throws IOException if problem with input or output.
-   * @throws IllegalStateException if savePath is null.
+   * @param studdyBuddies the StuddyBuddies to save
+   * @throws IOException if problem with input or output
+   * @throws IllegalStateException if savePath is null
    */
   public void saveStuddyBuddies(StuddyBuddies studdyBuddies)
       throws IOException, IllegalStateException {

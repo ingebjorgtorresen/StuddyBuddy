@@ -22,14 +22,13 @@ public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
       = new StuddyBuddyRegistrationDeserializer();
 
   /**
-   * Deserialize help-method.
+   * Help-Method for deserializing StuddyBuddy object.
    * (useful in StuddyBuddyRegistrationDeserializer)
-   * format: { "Name": "...", Registrations: [...] }
    *
-   * @param jsonNode node to deserialze.
-   * @return deserialized StuddyBuddy objects.
-   * @throws JsonProcessingException if problem with processing JsonNode.
-   * @throws IOException if problem with input or output.
+   * @param jsonNode node to deserialze
+   * @return deserialized StuddyBuddy objects
+   * @throws JsonProcessingException if problem with processing JsonNode
+   * @throws IOException if problem with input or output
    */
   public StuddyBuddy deserialize(JsonNode jsonNode) 
       throws JsonProcessingException, IOException {
@@ -63,9 +62,13 @@ public class StuddyBuddyDeserializer extends JsonDeserializer<StuddyBuddy> {
   }
 
   /**
-   * Deserialize method.
+   * Method for deserializing StuddyBuddy object.
    *
-   * @return adeserialized StuddyBuddy object.
+   * @param p Jasonparser to parse
+   * @param ctxt the DeserializationCOntext  
+   * @return a deserialized StuddyBuddy object
+   * @throws JsonProcessingException if problem with processing JsonNode
+   * @throws IOException if problem with input or output
    */
   @Override
   public StuddyBuddy deserialize(JsonParser p, DeserializationContext ctxt)

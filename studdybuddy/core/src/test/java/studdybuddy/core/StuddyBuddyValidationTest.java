@@ -1,16 +1,16 @@
 package studdybuddy.core;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Class for testing StuddyBuddyValidation
+ */
 public class StuddyBuddyValidationTest {
 
   /**
-   * Tests the checkPassword method
-   * 
+   * Tests the checkPassword method.
    * Right format is 8 or more characters, either letters or digits.
    */
   @Test
@@ -22,9 +22,8 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests that the checkName method
-   * 
-   * Name can only consist of letters and space
+   * Tests that the checkName method.
+   * Name can only consist of letters and space.
    */
   @Test
   public void testCheckName() {
@@ -53,9 +52,8 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkStartTimeBeforeEndTime method
-   * 
-   * Should return false if end time is before start time and true if it is after
+   * Tests the checkStartTimeBeforeEndTime method.
+   * Should return false if end time is before start time and true if it is after.
    */
   @Test
   public void testCheckStartTimeBeforeEndTime() {
@@ -67,11 +65,9 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkRoom method
-   * 
-   * True if the room must consist of letters, numbers, "-" and/or spaces
-   * 
-   * False otherwise
+   * Tests the checkRoom method.
+   * True if the room must consist of letters, numbers, "-" and/or spaces.
+   * False otherwise.
    */
   @Test
   public void testCheckRoom() {
@@ -84,10 +80,8 @@ public class StuddyBuddyValidationTest {
   }
 
   /**
-   * Tests the checkCourse method
-   * 
+   * Tests the checkCourse method.
    * True if the course consist of letters, numbers, "-" or spaces
-   * 
    * False otherwise
    */
   @Test

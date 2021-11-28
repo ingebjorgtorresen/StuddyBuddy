@@ -14,11 +14,12 @@ public class StuddyBuddiesSerializer extends JsonSerializer<StuddyBuddies> {
 
   /**
    * Method for writing an instance of StuddyBuddies as a json string to a json generator.
-   * format: { "Studdybuddies" : [ StuddyBuddy... ] }
+   * Format: { "Studdybuddies" : [ StuddyBuddy... ] }
    *
    * @param buddies StuddyBuddies object to be serialized
    * @param jsonGenerator generator to use
    * @param serializerProvider serializerProvider to use
+   * @throws IOException if problem with input or output
    */
   @Override
   public void serialize(StuddyBuddies buddies, 

@@ -12,10 +12,13 @@ import studdybuddy.core.StuddyBuddyRegistration;
  */
 public class StuddyBuddySerializer extends JsonSerializer<StuddyBuddy> {
 
-  /*
-   * Formatet vi ønsker at StuddyBuddy-objektene skal se ut:
-   * { "Name": "...",
-   * "Registrations" : [...] }
+  /* Method for writing an instance of StuddyBuddy as a json string to an json generator. 
+   * Format: { "Name": "...","Registrations" : [...] }
+   * 
+   * @param studdyBuddy to write
+   * @param jsonGenerator generator to use
+   * @param serializerProvider SerializerProvider to use
+   * @throws IOException if problem with input or output
    */
   @Override
   public void serialize(StuddyBuddy studdyBuddy,

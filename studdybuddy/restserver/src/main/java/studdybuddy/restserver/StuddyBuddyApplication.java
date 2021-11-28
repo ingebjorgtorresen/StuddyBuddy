@@ -16,12 +16,10 @@ import studdybuddy.json.StuddyModule;
 @RestController
 @SpringBootApplication
 public class StuddyBuddyApplication {
-
-  private WelcomeService welcomeService = new WelcomeService();
   
   @GetMapping("/")
   public String home() {
-    return this.welcomeService.getWelcomeText();
+    return "Welcome to rest API for StuddyBuddy.";
   }
 
   @Bean
