@@ -155,11 +155,11 @@ public class StuddyBuddyRegistrationController {
   * Method for transering dataAccess between classes.
   * Is used in the class that opens an FXML that uses this controller.
   */
-    public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
-      this.dataAccess = dataAccess;
-      this.buddies = buddies;
-      this.buddy = buddy;
-    }
+  public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
+    this.dataAccess = dataAccess;
+    this.buddies = buddies;
+    this.buddy = buddy;
+  }
 
   /**
    * Sets the feedback text to not be visable and to have Paradise Pink color saves this .
@@ -191,23 +191,23 @@ public class StuddyBuddyRegistrationController {
     }
   }
 
-    /**
+  /**
    * Method for redirecting back to the welcome page.
    */
   @FXML
   public void handleBack() {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
-        Parent parent = (Parent) loader.load();
-        StuddyBuddiesController buddiesController = loader.getController();
-        buddiesController.transferData(dataAccess, buddies, buddy);
-        Stage buddiesStage = new Stage();
-        buddiesStage.setScene(new Scene(parent));
-        buddiesStage.show();
-        Stage thisStage = (Stage) datepicker.getScene().getWindow();
-        thisStage.close(); 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+      Parent parent = (Parent) loader.load();
+      StuddyBuddiesController buddiesController = loader.getController();
+      buddiesController.transferData(dataAccess, buddies, buddy);
+      Stage buddiesStage = new Stage();
+      buddiesStage.setScene(new Scene(parent));
+      buddiesStage.show();
+      Stage thisStage = (Stage) datepicker.getScene().getWindow();
+      thisStage.close(); 
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 }

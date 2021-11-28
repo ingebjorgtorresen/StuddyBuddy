@@ -18,40 +18,39 @@ import studdybuddy.dataaccess.DataAccess;
  * Controller for studdyBuddies objects.
  */
 public class StuddyBuddiesController {
-    
-    private DataAccess dataAccess;
-    private StuddyBuddies buddies;
-    private StuddyBuddy buddy;
 
-    @FXML
-    private ImageView studdyBuddyLogo;
+  private DataAccess dataAccess;
+  private StuddyBuddies buddies;
+  private StuddyBuddy buddy;
 
-    @FXML
-    private ImageView userIcon;
+  @FXML
+  private ImageView studdyBuddyLogo;
 
-    @FXML
-    private Label username;
+  @FXML
+  private ImageView userIcon;
 
-    @FXML
-    private Button logOut;
+  @FXML
+  private Label username;
 
-    @FXML
-    private Button addRegistrationButton;
+  @FXML
+  private Button logOut;
 
-    @FXML
-    private Label studdyBuddyUser;
+  @FXML
+  private Button addRegistrationButton;
 
-    @FXML
-    private Label allRegistrationsText;
+  @FXML
+  private Label studdyBuddyUser;
+
+  @FXML
+  private Label allRegistrationsText;
 
 
   /**
-   * Method for transering dataAccess and studdyBuddies between classes.
-   * Is used in the class that opens an FXML that uses this controller.
-   * 
-
+   * Method for transering dataAccess and studdyBuddies between classes. Is used in the class that
+   * opens an FXML that uses this controller.
+   *
    * @param dataAccess dataAccess for the run of the application
-   * 
+   *
    * @param buddies studdyBuddies for the run of the application
    */
   public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
@@ -61,51 +60,57 @@ public class StuddyBuddiesController {
     display();
   }
 
-    @FXML
-    public void handleAddRegistration() {
-        try {
-            URL fxmlFile = getClass().getResource("StuddyBuddyRegistration.fxml");
-            FXMLLoader loader = new FXMLLoader(fxmlFile);
-            Parent parent = (Parent) loader.load();
-            StuddyBuddyRegistrationController registrationController = loader.getController();
-            registrationController.transferData(dataAccess, buddies, buddy);
-            Stage registrationStage = new Stage();
-            registrationStage.setTitle("Registration");
-            registrationStage.setScene(new Scene(parent));
-            registrationStage.show();
-            Stage thisStage = (Stage) username.getScene().getWindow();
-            thisStage.close();
+  /**
+   * Method for click on Add registration button. Redirects to register page.
+   */
+  @FXML
+  public void handleAddRegistration() {
+    try {
+      URL fxmlFile = getClass().getResource("StuddyBuddyRegistration.fxml");
+      FXMLLoader loader = new FXMLLoader(fxmlFile);
+      Parent parent = (Parent) loader.load();
+      StuddyBuddyRegistrationController registrationController = loader.getController();
+      registrationController.transferData(dataAccess, buddies, buddy);
+      Stage registrationStage = new Stage();
+      registrationStage.setTitle("Registration");
+      registrationStage.setScene(new Scene(parent));
+      registrationStage.show();
+      Stage thisStage = (Stage) username.getScene().getWindow();
+      thisStage.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    @FXML
-    public void handleLogOut() {
-        try {
-            URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");;
-            FXMLLoader loader = new FXMLLoader(fxmlFile);
-            Parent parent = (Parent) loader.load();
-            Stage welcomeStage = new Stage();
-            welcomeStage.setTitle("StuddyBuddy");
-            welcomeStage.setScene(new Scene(parent));
-            welcomeStage.show();
-            Stage thisStage = (Stage) studdyBuddyLogo.getScene().getWindow();
-            thisStage.close(); 
+  /**
+   * Method for click on logout button. Redirects to register page.
+   */
+  @FXML
+  public void handleLogOut() {
+    try {
+      URL fxmlFile = getClass().getResource("StuddyBuddy.fxml");;
+      FXMLLoader loader = new FXMLLoader(fxmlFile);
+      Parent parent = (Parent) loader.load();
+      Stage welcomeStage = new Stage();
+      welcomeStage.setTitle("StuddyBuddy");
+      welcomeStage.setScene(new Scene(parent));
+      welcomeStage.show();
+      Stage thisStage = (Stage) studdyBuddyLogo.getScene().getWindow();
+      thisStage.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 
-    /**
-     * Method for displaying buddies and registrations.
-     */
-    @FXML
-    public void display() {
-        username.setText(buddy.getName());
-        allRegistrationsText.setText(dataAccess.getStuddyBuddies().toString());
-    }
+  /**
+   * Method for displaying buddies and registrations.
+   */
+  @FXML
+  public void display() {
+    username.setText(buddy.getName());
+    allRegistrationsText.setText(dataAccess.getStuddyBuddies().toString());
+  }
 
 }

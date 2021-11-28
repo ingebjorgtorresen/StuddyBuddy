@@ -39,9 +39,9 @@ public class RegisterStuddyBuddyController {
   private DataAccess dataAccess;
 
   /**
-   * Method for getting name in nameField
-   * 
-   * @return name 
+   * Method for getting name in nameField.
+   *
+   * @return name
    */
   @FXML
   public String getInputName() {
@@ -50,9 +50,9 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for getting password in passwordCheckField
-   * 
-   * @return password 
+   * Method for getting password in passwordCheckField.
+   *
+   * @return password
    */
   @FXML
   public String getInputPasswordCheck() {
@@ -61,8 +61,8 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for getting password in passwordField
-   * 
+   * Method for getting password in passwordField.
+   *
    * @return password
    */
   @FXML
@@ -72,8 +72,8 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for checking input name not null
-   * 
+   * Method for checking input name not null.
+   *
    * @return true if name is not null, else false
    */
   private boolean checkNotNull() {
@@ -86,8 +86,8 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for checking format of input name
-   * 
+   * Method for checking format of input name.
+   *
    * @return true if format is correct, else false
    */
   private boolean checkInputName() {
@@ -95,8 +95,8 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for checking format of input password
-   * 
+   * Method for checking format of input password.
+   *
    * @return true if format is correct, else false
    */
   private boolean checkInputPassword() {
@@ -104,8 +104,8 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for checking if buddy exists
-   * 
+   * Method for checking if buddy exists.
+   *
    * @return true if buddy exists, else false
    */
   private boolean checkBuddyExists() {
@@ -141,7 +141,7 @@ public class RegisterStuddyBuddyController {
 
   /**
    * Method for checking if the password- and checkpassword-textfields has the same input.
-   * 
+   *
    * @return true if passwords match, else false
    */
   public boolean checkPasswordsMatch() {
@@ -152,8 +152,8 @@ public class RegisterStuddyBuddyController {
   }
 
   /**
-   * Method for creating new StuddyBuddy
-   * 
+   * Method for creating new StuddyBuddy.
+   *
    * @return studdybuddy
    */
   private StuddyBuddy createNewStuddyBuddy() {
@@ -172,16 +172,15 @@ public class RegisterStuddyBuddyController {
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
 
-    if(checkBuddyExists()) {
+    if (checkBuddyExists()) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: gray; -fx-border-color: gray;");
       passwordField.setText(getInputPassword());
       passwordCheckField.setText(getInputPasswordCheck());
       messageBox.setText("User already exists. \nChoose another username.");
-    }
-
-    else if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
+    
+    } else if (((!checkName()) && (!checkPassword()) && (!checkPasswordsMatch()))) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
       passwordCheckField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
@@ -243,10 +242,9 @@ public class RegisterStuddyBuddyController {
   /**
    * Method for transfering dataAccess and studdyBuddies between classes.
    * Is used in the class that opens an FXML that uses this controller.
-   * 
-
+   *
    * @param dataAccess dataAccess for the run of the application
-   * 
+   *
    * @param buddies studdyBuddies for the run of the application
    */
   public void transferData(DataAccess dataAccess, StuddyBuddies buddies) {

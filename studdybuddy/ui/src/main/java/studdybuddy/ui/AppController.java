@@ -43,7 +43,7 @@ public class AppController {
   @FXML
   public void initialize() {
     buddies = new StuddyBuddies();
-    try{
+    try {
       dataAccess = new RemoteDataAccess(new URI(endpointUri));
       dataAccess.getStuddyBuddies();
       System.out.println("Using remote saving with endpointURI: " + endpointUri);
@@ -86,18 +86,18 @@ public class AppController {
   @FXML
   public void handleLogin() {
     try {
-    FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginStuddyBuddy.fxml"));
-    Parent parent = (Parent) loader.load();
-    LoginStuddyBuddyController loginController = loader.getController();
-    loginController.transferData(dataAccess, buddies);
-    Stage loginStage = new Stage();
-    loginStage.setTitle("Login");
-    loginStage.setScene(new Scene(parent));
-    loginStage.show();
-    Stage thisStage = (Stage) loginButton.getScene().getWindow();
-    thisStage.close(); 
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("LoginStuddyBuddy.fxml"));
+      Parent parent = (Parent) loader.load();
+      LoginStuddyBuddyController loginController = loader.getController();
+      loginController.transferData(dataAccess, buddies);
+      Stage loginStage = new Stage();
+      loginStage.setTitle("Login");
+      loginStage.setScene(new Scene(parent));
+      loginStage.show();
+      Stage thisStage = (Stage) loginButton.getScene().getWindow();
+      thisStage.close(); 
     } catch (IOException e) {
-        e.printStackTrace();
+      e.printStackTrace();
     }
   }
 }
