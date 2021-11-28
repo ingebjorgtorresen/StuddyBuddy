@@ -10,7 +10,7 @@ module studdybuddy.restserver {
 
     requires org.slf4j;
 
-    requires transitive studdybuddy.core;
+    requires studdybuddy.core;
 
     exports studdybuddy.restserver;
 
