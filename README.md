@@ -116,6 +116,8 @@ Within src/main/java/studdybuddy you can find the folder [ui](studdybuddy/ui/src
 - StuddyBuddyRegistrationController.java
 - StuddyBuddyRemoteApp.java
 
+The folder also contains the sequence diagram as a puml and png.
+
 Within [src/main/resources/studdybuddy/ui](studdybuddy/ui/src/main/resources/studdybuddy/ui) you can find the files
 - directBuddies.json
 - LoginStuddyBuddy.fxml
