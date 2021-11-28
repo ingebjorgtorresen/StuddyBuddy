@@ -23,7 +23,7 @@ public class StuddyBuddiesRestController {
 
   @GetMapping("")
   public StuddyBuddies getStuddyBuddies() {
-    return buddiesService.getStuddyBuddies();
+    return buddiesService.readBuddies();
   }
 
   private void checkStuddyBuddyNotNull(StuddyBuddy studdyBuddy, String name) {
@@ -71,7 +71,7 @@ public class StuddyBuddiesRestController {
   public StuddyBuddy putStuddyBuddy(@PathVariable("name") 
       String name, @RequestBody StuddyBuddy buddy) {
     buddiesService.addStuddyBuddyToBuddies(buddy);
-    buddiesService.autoSaveStuddyBuddies();
+    buddiesService.saveStuddyBuddies();
     return buddy;
   }
 
@@ -80,16 +80,11 @@ public class StuddyBuddiesRestController {
    *
    * @param name the name of the StuddyBuddy 
    * @param buddy the studdyBuddy to post
-   * 
    */
   @PostMapping(path = "/{name}")
   public void postStuddyBuddy(@PathVariable("name") String name,
         @RequestBody StuddyBuddy buddy) {
-      
     buddiesService.updateStuddyBuddies(buddy);
-    buddiesService.autoSaveStuddyBuddies();
+    buddiesService.saveStuddyBuddies();
   }
-
 }
-
-

@@ -64,7 +64,7 @@ public class StuddyBuddiesRestControllerTest {
   }
 
   /**
-   * Tests getStuddyBuddy.
+   * Tests getPassword.
    * @throws Exception if mockMvc fails
    */
   @Test
@@ -79,5 +79,4 @@ public class StuddyBuddiesRestControllerTest {
     String resultPasswordString = result.getResponse().getContentAsString();
     assertEquals(selmaPasswordString, resultPasswordString);
   }
-
 }
