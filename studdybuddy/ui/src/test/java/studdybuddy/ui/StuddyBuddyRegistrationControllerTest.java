@@ -35,7 +35,7 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     public void setUpController() throws InterruptedException {
       buddies = dataAccess.getStuddyBuddies();
       controller.transferData(dataAccess, buddies, buddy);
-      buddy.setName("Name");
+      buddy.setName("Frank");
       buddy.setPassword("Password");
       registration = new StuddyBuddyRegistration();
     }
