@@ -16,9 +16,11 @@ To build the project, run mvn install from root project ([studdybuddy-folder](st
 
 The project must run from the ui_module, either with 'mvn -pl ui javafx:run' or first run 'cd ui' and then 'mvn javafx:run'. Know that mvn install must have been ran beforhand on the modules that the ui module is depending on.
 
+Running 'mvn spring-boot:run -pl restserver' or 'cd restserver && mvn spring-boot:run' will start up the server. From here you can run the application as described above.
+
 It is possible to run the application using jlink and jpackage, but only locally on an IDE, for example VScode. This is because we were not able to install fakeroot in GitPod, which is needed for making the zip file that contains the application. In order to run the application using jlink locally, you have to follow the steps below:
 
-- run server with spring boot in restserver, using the command 'mvn spring-boot:run -pl restserver'
+- run server with spring boot in restserver (as described above)
 - split the terminal and run the command 'mvn javafx:jlink jpackage:jpackage'
 - go into the ui folder in your IDE and then into the target folder
 - you should now have a zip file called "studdybuddyfx.zip" within the target folder
