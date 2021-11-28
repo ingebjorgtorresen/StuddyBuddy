@@ -27,11 +27,13 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
 
   /**
    * Sets StuddyBuddies and DataAccess.
+   * @throws InterruptedException
    */
   @BeforeEach
-  public void setUpController() {
+  public void setUpController() throws InterruptedException {
     buddies = dataAccess.getStuddyBuddies();
     controller.transferData(dataAccess, buddies);
+    Thread.sleep(1000);
   }
 
   /**
@@ -89,14 +91,13 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
   @Test
   public void testUnsuccessfullLogin() throws InterruptedException {
     String buddyName = "Frank";
-    Thread.sleep(1000);
     clickOn("#nameField").write(buddyName);
-    assertEquals(buddyName, controller.getInputName());
-
     String buddyPassword = "Passord1";
-    Thread.sleep(1000);
     clickOn("#passwordField").write(buddyPassword);
+    Thread.sleep(1000);
+    assertEquals(buddyName, controller.getInputName());
     assertEquals(buddyPassword, controller.getInputPassword());
+    Thread.sleep(1000);
 
     List<Window> beforeClick = Window.getWindows();
     Parent beforeClickRoot = null;

@@ -35,9 +35,10 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
     public void setUpController() throws InterruptedException {
       buddies = dataAccess.getStuddyBuddies();
       controller.transferData(dataAccess, buddies, buddy);
-      buddy.setName("Name");
+      buddy.setName("Frank");
       buddy.setPassword("Password");
       registration = new StuddyBuddyRegistration();
+      Thread.sleep(1000);
     }
   
 
@@ -63,19 +64,14 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
       ((DatePicker) lookup("#datepicker").query()).setValue(LocalDate.of(2022, 12, 12));
       registration.setRoom("A3-138");
       clickOn("#roomField").write("A3-138");
-      Thread.sleep(3000);
       registration.setCourse("ITP");
       clickOn("#courseField").write("ITP");
-      Thread.sleep(3000);
       registration.setStartTime("11:00");
       clickOn("#startTimeField").write("11:00");
-      Thread.sleep(3000);
       registration.setEndTime("12:00");
       clickOn("#endTimeField").write("12:00");
-      Thread.sleep(3000);
-      
       clickOn("#register");
-      Thread.sleep(3000);
+      Thread.sleep(2000);
 
       StuddyBuddyRegistration registeredRegistration = buddy.getRegistrations().get(0);
 
@@ -92,17 +88,12 @@ public class StuddyBuddyRegistrationControllerTest extends ApplicationTest {
      */
     @Test
     public void testUnsuccessfullRegistration() throws InterruptedException {
-      Thread.sleep(3000);
       clickOn("#roomField").write("Room");
-      Thread.sleep(3000);
       clickOn("#courseField").write("Course");
-      Thread.sleep(3000);
       clickOn("#startTimeField").write("12:00");
-      Thread.sleep(3000);
       clickOn("#endTimeField").write("14:00");
-      Thread.sleep(3000);
       clickOn("#register");
-
+      Thread.sleep(1000);
       assertThrows(IndexOutOfBoundsException.class, () -> {buddy.getRegistrations().get(0);});
     }
 

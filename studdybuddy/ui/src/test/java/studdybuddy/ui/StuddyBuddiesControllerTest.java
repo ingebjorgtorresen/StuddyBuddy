@@ -56,9 +56,9 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
     for(Window window : beforeClick){
       beforeClickRoot = window.getScene().getRoot();
     }
-    Thread.sleep(5000);
+    Thread.sleep(1000);
     clickOn("#addRegistrationButton");
-    Thread.sleep(5000);
+    Thread.sleep(1000);
     List<Window> afterClick = Window.getWindows();
     Parent afterClickRoot = null;
     for(Window window : afterClick){
@@ -79,9 +79,9 @@ public class StuddyBuddiesControllerTest extends ApplicationTest {
     for(Window window : beforeClick){
       beforeClickRoot = window.getScene().getRoot();
     }
-    Thread.sleep(5000);
+    Thread.sleep(1000);
     clickOn("#logOut");
-    Thread.sleep(5000);
+    Thread.sleep(1000);
     List<Window> afterClick = Window.getWindows();
     Parent afterClickRoot = null;
     for(Window window : afterClick){

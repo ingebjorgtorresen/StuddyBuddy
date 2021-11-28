@@ -3,6 +3,7 @@ package studdybuddy.ui;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -48,7 +49,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the date to a registration.
+   * Method that sets the date to a registration.
    */
   public void setDateFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -75,7 +76,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the room to be the input in roomField.
+   * Method that sets the room to be the input in roomField.
    */
   public void setRoomFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -89,7 +90,7 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the course to be the input in courseField.
+   * Method that sets the course to be the input in courseField.
    */
   public void setCourseFromInput(StuddyBuddyRegistration registration) {
     try {
@@ -103,14 +104,14 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the start time to be the input in startTimeField.
+   * Method that sets the start time to be the input in startTimeField.
    */
   @FXML
   public void setStartTimeFromInput(StuddyBuddyRegistration registration) {
     try {
       registration.setStartTime(startTimeField.getText());
       startTimeField.setStyle("-fx-border-color: grey;");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException | DateTimeParseException e) {
       startTimeField.setStyle("-fx-border-color: red;");
       startTimeField.clear();
       throw new IllegalStateException("Invalid start time.");
@@ -118,14 +119,14 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * sets the end time to be the input in endTimeField.
+   * Method that sets the end time to be the input in endTimeField.
    */
   @FXML
   public void setEndTimeFromInput(StuddyBuddyRegistration registration) {
     try {
       registration.setEndTime(endTimeField.getText());
       endTimeField.setStyle("-fx-border-color: grey;");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException | DateTimeParseException e) {
       endTimeField.setStyle("-fx-border-color: red;");
       endTimeField.clear();;
       throw new IllegalStateException("Invalid end time.");
@@ -133,7 +134,8 @@ public class StuddyBuddyRegistrationController {
   }
 
   /**
-   * register a new StuddyBuddy sets the room, course, start time, end time and date.
+   * Method that register a new StuddyBuddy sets the room, course,
+   * start time, end time and date.
    */
   private boolean registerStuddyBuddy() {
     StuddyBuddyRegistration registration = new StuddyBuddyRegistration();
@@ -145,7 +147,7 @@ public class StuddyBuddyRegistrationController {
       setDateFromInput(registration);
       buddy.addRegistration(registration);
       return true;
-    } catch (IllegalStateException e) {
+    } catch (IllegalStateException | NullPointerException e) {
       return false;
     }
 
@@ -155,19 +157,14 @@ public class StuddyBuddyRegistrationController {
   * Method for transering dataAccess between classes.
   * Is used in the class that opens an FXML that uses this controller.
   */
-    public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
-      this.dataAccess = dataAccess;
-      this.buddies = buddies;
-      this.buddy = buddy;
-    }
+  public void transferData(DataAccess dataAccess, StuddyBuddies buddies, StuddyBuddy buddy) {
+    this.dataAccess = dataAccess;
+    this.buddies = buddies;
+    this.buddy = buddy;
+  }
 
   /**
-   * Sets the feedback text to not be visable and to have Paradise Pink color saves this .
-   * registration to file registration was successful sets message to be visable 
-   * sets feedback to be visable if registration was successful sets message
-   * text to be Amazon color if registration was successful sets feedback
-   * text to have Yellow Green Crayola color if registration was successful clears the
-   * texfields if registration was successful
+   * Method for click on register button. 
    */
   @FXML
   public void handleRegister() {
@@ -191,23 +188,23 @@ public class StuddyBuddyRegistrationController {
     }
   }
 
-    /**
+  /**
    * Method for redirecting back to the welcome page.
    */
   @FXML
   public void handleBack() {
     try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
-        Parent parent = (Parent) loader.load();
-        StuddyBuddiesController buddiesController = loader.getController();
-        buddiesController.transferData(dataAccess, buddies, buddy);
-        Stage buddiesStage = new Stage();
-        buddiesStage.setScene(new Scene(parent));
-        buddiesStage.show();
-        Stage thisStage = (Stage) datepicker.getScene().getWindow();
-        thisStage.close(); 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+      Parent parent = (Parent) loader.load();
+      StuddyBuddiesController buddiesController = loader.getController();
+      buddiesController.transferData(dataAccess, buddies, buddy);
+      Stage buddiesStage = new Stage();
+      buddiesStage.setScene(new Scene(parent));
+      buddiesStage.show();
+      Stage thisStage = (Stage) datepicker.getScene().getWindow();
+      thisStage.close(); 
+    } catch (IOException e) {
+      e.printStackTrace();
     }
+  }
 }
