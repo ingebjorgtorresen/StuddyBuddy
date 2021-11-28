@@ -14,5 +14,5 @@ module studdybuddy.restserver {
 
     exports studdybuddy.restserver;
 
-    opens studdybuddy.restserver to spring.beans, spring.context, spring.web;
+    opens studdybuddy.restserver to spring.beans, spring.context, spring.web, spring.core;
 }
