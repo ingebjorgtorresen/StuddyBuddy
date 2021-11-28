@@ -12,6 +12,9 @@ import org.testfx.framework.junit5.ApplicationTest;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+/**
+ * Test class for StuddyBuddiesController.
+ */
 public class StuddyBuddiesControllerTest extends ApplicationTest {
 
   private StuddyBuddiesController controller;

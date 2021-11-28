@@ -139,5 +139,4 @@ public class LoginStuddyBuddyControllerTest extends ApplicationTest {
     }
     assertNotEquals(afterClickRoot, beforeClickRoot);
   }
-  
 }

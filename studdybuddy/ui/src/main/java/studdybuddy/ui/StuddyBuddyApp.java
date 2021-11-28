@@ -8,7 +8,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * StuddyBuddyApp class that launches direct app.
+ * StuddyBuddyApp class that launches the application.
  */
 public class StuddyBuddyApp extends Application {
 

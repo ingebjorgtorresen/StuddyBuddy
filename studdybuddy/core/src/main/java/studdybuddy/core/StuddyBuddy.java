@@ -31,7 +31,7 @@ public class StuddyBuddy {
    * @return buddies to get
    */
   public StuddyBuddies getStuddyBuddies() {
-    return this.buddies;
+    return buddies;
   }
 
   /**

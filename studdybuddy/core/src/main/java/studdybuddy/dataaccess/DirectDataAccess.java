@@ -11,8 +11,7 @@ import studdybuddy.core.StuddyBuddy;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
- * Class that works locally with data. 
- * Can use pre-defined StuddyBuddy object, or read from file.
+ * Class that works locally with data.
  */
 public class DirectDataAccess implements DataAccess {
 
@@ -29,6 +28,11 @@ public class DirectDataAccess implements DataAccess {
     buddies = getStuddyBuddies();
   }
 
+  /**
+   * Method that gets StuddyBuddy by name.
+   *
+   * @param name of StuddyBuddy to get
+   */
   @Override
   public StuddyBuddy getStuddyBuddyByName(String name) {
     StuddyBuddy buddy = getStuddyBuddies().getStuddyBuddy(name);
@@ -38,11 +42,22 @@ public class DirectDataAccess implements DataAccess {
     return buddy;
   }
 
+  /**
+   * Method that gets StuddyBuddy by password.
+   *
+   * @param name of StuddyBuddy to get password
+   * @return password
+   */
   @Override
   public String getStuddyBuddyPasswordByName(String name) {
     return getStuddyBuddyByName(name).getPassword();
   }
 
+  /**
+   * Method for saving StuddyBuddy to file.
+   *
+   * @param buddy to save
+   */
   @Override
   public void putStuddyBuddy(StuddyBuddy buddy) {
     buddies.addStuddyBuddy(buddy);
@@ -53,6 +68,11 @@ public class DirectDataAccess implements DataAccess {
     }
   }
 
+  /**
+   * Method for updating a StuddyBuddy.
+   *
+   * @param buddy to update
+   */
   @Override
   public void postStuddyBuddy(StuddyBuddy buddy) {
     buddies.removeStuddyBuddy(buddies.getStuddyBuddy(buddy.getName()));
@@ -85,6 +105,11 @@ public class DirectDataAccess implements DataAccess {
     }
   }
 
+  /**
+   * Method for getting StuddyBuddies from file.
+   *
+   * @return StuddyBuddies from file
+   */
   @Override
   public StuddyBuddies getStuddyBuddies() {
     try (Reader reader = new FileReader(filename, StandardCharsets.UTF_8)) {
