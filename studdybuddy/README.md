@@ -3,20 +3,29 @@
 </p>
 
 ## Description of the application
-The StuddyBuddy application tries to connect students by having a registration platform that gathers information about when and where students/users are working. 
+The StuddyBuddy application tries to connect students by having a registration platform that gathers information about when and where students/users/buddies are working. 
 
-When opening the application the user is taken to a welcome page. Here the user can choose to either log in or register a new user. The first time the user opens the application he or she have to register a user, `StuddyBuddy`, with a name and password on a separte registration page; `"RegisterUser"`. This page is accessable by clicking on `"Register new buddy"` on the welcome page. The password must be written twice when registration. This is to ensure that the password is correct. If the user already is a buddy, he or she can enter the application by clicking on `"Login"` on the welcome page. When the user has either logged in or registerd a new user, he or she will be taken to a forum page; `"StuddyBuddies"`. Here the user is able to register a work/study session, by clicking on `"Add registration"`. The user is then taken to a registration page; `"Registration"`, where he or she can create a new `StuddyBuddyRegistration`. The user have to select a date by cliking on a calander. The user have to fill in which room they will be working in, which course they are working on, and a start and end time for the session. After having filled out all the different fields, the user will have a successfull registration that will be saved to a server, and the user is taken back to the forum page.Here the user will see his or her own registration, in addition to registrations from other users, also know as `StuddyBuddies`. The buddies are sorted out by when they registered a new StuddyBuddyRegistration. The newest registration is located at the bottonm of the forum.
+When opening the application the user is taken to a welcome page. Here the user can choose to either log in or register a new account/buddy. The first time the user opens the application he or she have to register a buddy, `StuddyBuddy`, with a name and password on a separte registration page; `"RegisterUser"`. This page is accessable by clicking on `"Register new buddy"` on the welcome page. The password must be written twice when registrating. This is to ensure that the password is correct. If the user already is a buddy, he or she can enter the application by clicking on `"Login"` on the welcome page. When the user has either logged in or registerd a new user, he or she will be taken to a forum page; `"StuddyBuddies"`. Here the user is able to register a work/study session, by clicking on `"Add registration"`. The user is then taken to a registration page; `"Registration"`, where he or she can create a new `StuddyBuddyRegistration`. The user has to select a date by cliking on a calander. The user has to fill in which room they will be working in, which course they are working on, and a start and end time for the session. After having filled out all the different fields, the user will have a successfull registration that will be saved to a server/file, and the user is taken back to the forum page. Here the user will see his or her own registration, in addition to registrations from other users, also know as `StuddyBuddies`. The buddies are sorted out by when they registered a new StuddyBuddyRegistration. The newest registration is located at the bottonm of the forum.
 
-The user is able to log out. This is done through the forum-page, where the user is able to click on a button marked "Log out". The user is then taken back to the login-page.
+The user is able to log out. This is done through the forumpage, where the user is able to click on a button marked "Log out". The user is then taken back to the login page.
 
 <br/>
 
-## The user interface
+## The graphic user interface
 
 <br/>
 
 <p align="center">
-<img src="https://imgur.com/Vs9s0fB.png" width="300"/>
+<img src="https://imgur.com/EpzSl1S.png" width="300"/>
+</p>
+<p style="text-align: center;">
+The welcome page
+</p>
+
+<br/>
+
+<p align="center">
+<img src="https://imgur.com/BhH7ane.png" width="300"/>
 </p>
 
 <p style="text-align: center;">
@@ -26,74 +35,105 @@ The login page
 <br/>
 
 <p align="center">
-<img align="center" src="https://imgur.com/rDTCfgB.png" width="300"/>
+<img src="https://imgur.com/FGce2pC.png" width="300"/>
 </p>
 
 <p style="text-align: center;">
-The registration page before clicking on register
+The login page with invalid input
 </p>
 
 <br/>
 
 <p align="center">
-<img src="https://imgur.com/ks90Ubz.png" width="300"/>
+<img align="center" src="https://imgur.com/FOXTkME.png" width="300"/>
 </p>
 
 <p style="text-align: center;">
-The registration page after clicking on register, when the registration was successful. The information is saved to a file. The registered information is read from the file and given as a feedback to the user
+The user registration page
+</p>
+
+<br/>
+
+<p align="center">
+<img src="https://imgur.com/oeq1kJP.png" width="300"/>
+</p>
+
+<p style="text-align: center;">
+The user registration page with invalid input
 </p>
 
 <br/>
 <p align="center">
-<img src="https://imgur.com/sabwPWX.png" width="300"/>
+<img src="https://imgur.com/dhayg3Y.png" width="300"/>
 </p>
 
 <p style="text-align: center;">
-The registration page after clicking on register, when the input was invalid
+The StuddyBuddies page with registrations
 </p>
-
 
 <br/>
 
+<p align="center">
+<img src="https://imgur.com/P4rVOIe.png" width="300"/>
+</p>
+<p style="text-align: center;">
+The registration page
+</p>
+
+<br/>
+
+<p align="center">
+<img src="https://imgur.com/sVr0ybg.png" width="300"/>
+</p>
+<p style="text-align: center;">
+The datepicker
+</p>
+
+<br/>
+
+<p align="center">
+<img src="https://imgur.com/1GHNoew.png" width="300"/>
+</p>
+<p style="text-align: center;">
+The registration page with invalid input example
+</p>
+
+<br/>
 
 ## User stories
 The following user stories covers the functionality of the application. 
 
 <br/>
 
-### <u> User story 1 - Registrating schoolwork </u>
-As a student I would like to be updated and informed when fellow students are on campus and also what they are working on.
+### <u> User story 1 - Registrating a study session </u>
+As a student I would like to track my study sessions and update fellow students on campus with imformation about my session so they can come and work with me.
 
-The user is in need of knowing when fellow students, specifically their friends, are on campus, at the library or other school-related places. It is practical to be able to register name, course, time period and room, in order to enhance collaboration amongst students. The registration should just consist of a simple text, but it is desirable that every field is used, in order to make the registration as informative and organized as possible. 
+The user is in need of registering name, course, time period and room, in order to enhance collaboration with other students. The registration should just consist of a simple text, but it is desirable that every field is used, in order to make the registration as informative and organized as possible. 
 
-#### **Important to be able to see:**
+#### **Important to be able to understand:**
+- log in/register new buddy
 - fields for registration
 - what you need to register in each field
-- “notification” if an input is invalid in a certain field
+- feedback if an input is invalid
 - that the registration was successful
 
 #### **Important to be able to do:**
-- write text in registration-field
+- write text in input fields
 - have several chances to write a valid input in all fields
+- display registrations
 
 <br/>
 
 ### <u> User story 2 - Forum with overview of registrations </u>
-As both a private person and student I wish to have an overview of my own attendance at school as well as what I am working on. This to make it easier to know how much time I spend on schoolwork and with which course. 
+As a student I wish to have an overview of other students working on campus. This is to make it easier to collaborate with students working with the same course, or in the same area.
 
-The user is in need of having a personal page/profile where he/she can register their attendance at school, with information about date, time, room and course. 
+The user is in need of having an overview of other students on campus, what, where and when the students are studying.
 
 #### **Important to be able to see:**
-- The personal page
-- Log in
-- Username/name
-- Fields for registration
-- What is registered and that it is complete
+- overview of registrations on campus
 
 #### **Important to be able to do:**
-- Be able to log in
-- Be transferred from log in/profile to page for registration
-- Write registration
+- scroll through registrations
 
 <br/>
 
