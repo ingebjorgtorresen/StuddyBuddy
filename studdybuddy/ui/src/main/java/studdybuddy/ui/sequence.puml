@@ -1,10 +1,54 @@
 actor User
-User -> "~#LogIn: Button" as LogIn: click
-LogIn -> StuddyBuddyController: handleLogin()
-StuddyBuddyController -> StuddyBuddyRegistrationController: handleLogin()
-StuddyBuddyRegistrationController -> "~#RoomText: TextField" as RoomText: getInputRoom()
-StuddyBuddyRegistrationController -> "~#CourseText: TextField" as CourseText: getInputCourse()
-StuddyBuddyRegistrationController -> "~#StartTimeText: TextField" as StartTimeText: getInputStartTime()
-StuddyBuddyRegistrationController -> "~#EndTimeText: TextField" as EndTimeText: getInputEndTime()
-StuddyBuddyRegistrationController -> "~#Register: Button" as Register: click
-Register -> StuddyBuddyRegistrationController: handleRegister()
+User -> AppController: (user opens app)
+User -> "~#newRegisterButton: Button" as Register_new_user: click
+Register_new_user -> RegisterStuddyBuddyController: handleRegister()
+AppController --> RegisterStuddyBuddyController: transferData(dataAccess, buddies)
+User -> "~#backButton: Button" as Back: click
+Back -> AppController: handleBack()
+User -> "~#newRegisterButton: Button" as Register_new_user: click
+Register_new_user -> RegisterStuddyBuddyController: handleRegister()
+AppController --> RegisterStuddyBuddyController: transferData(dataAccess, buddies)
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: checkBuddyExists()
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: checkPassword()
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: checkPasswordsMatch()
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: createNewStuddyBuddy()
+User -> "~#newUserButton: Button" as New_User: click
+New_User -> StuddyBuddiesController: handleRegister() 
+RegisterStuddyBuddyController --> StuddyBuddiesController: transferData(dataAccess, buddies, buddy) 
+actor User
+User -> AppController: (user opens app)
+User -> "~#newRegisterButton: Button" as Register_new_user: click
+Register_new_user -> RegisterStuddyBuddyController: handleRegister()
+AppController --> RegisterStuddyBuddyController: transferData(dataAccess, buddies)
+User -> "~#backButton: Button" as Back: click
+Back -> AppController: handleBack()
+User -> "~#newRegisterButton: Button" as Register_new_user: click
+Register_new_user -> RegisterStuddyBuddyController: handleRegister()
+AppController --> RegisterStuddyBuddyController: transferData(dataAccess, buddies)
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: checkBuddyExists()
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: checkPassword()
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: checkPasswordsMatch()
+RegisterStuddyBuddyController -> RegisterStuddyBuddyController: createNewStuddyBuddy()
+User -> "~#newUserButton: Button" as New_User: click
+New_User -> StuddyBuddiesController: handleRegister() 
+RegisterStuddyBuddyController --> StuddyBuddiesController: transferData(dataAccess, buddies, buddy) 
+User -> "~#newRegistrationButton: Button" as New_Registration: click
+New_Registration -> StuddyBuddyRegistrationController: handleAddRegistration()
+StuddyBuddiesController --> StuddyBuddyRegistrationController: transferData(dataAccess, buddies, buddy)
+User -> "~#RegistrationButton: Button" as Registration: click
+Registration -> StuddyBuddiesController: handleRegister()
+StuddyBuddyRegistrationController -> StuddyBuddyRegistrationController: registerStuddyBuddy()
+User -> "~#newRegistrationButton: Button" as New_Registration: click
+New_Registration -> StuddyBuddyRegistrationController: handleAddRegistration()
+StuddyBuddiesController --> StuddyBuddyRegistrationController: transferData(dataAccess, buddies, buddy)
+User -> "~#BackButton: Button" as GoBack: click
+GoBack -> StuddyBuddiesController: handleBack()
+User -> "~#LogOutButton: Button" as LogOut: click
+LogOut -> AppController: handleLogOut()
+User -> "~#LogINButton: Button" as LogIn: click
+LogIn -> LogInStuddyBuddyController: handleLogIn()
+LogInStuddyBuddyController -> LogInStuddyBuddyController: transferData(dataAccess, buddies)
+LogInStuddyBuddyController -> LogInStuddyBuddyController: userExists()
+LogInStuddyBuddyController -> LogInStuddyBuddyController: passwordIsCorrect()
+User -> "~#LogOutButton: Button" as LogOut: click
+LogOut -> AppController: handleLogOut()

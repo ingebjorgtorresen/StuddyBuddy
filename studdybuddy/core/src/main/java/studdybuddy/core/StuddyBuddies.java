@@ -77,11 +77,7 @@ public class StuddyBuddies implements Iterable<StuddyBuddy> {
    * @return the list that contains StuddyBuddy objects
    */
   public List<StuddyBuddy> getStuddyBuddies() {
-    List<StuddyBuddy> copy = new ArrayList<>();
-    for (StuddyBuddy buddy : studdyBuddies) {
-      copy.add(buddy);
-    }
-    return copy;
+    return new ArrayList<StuddyBuddy>(studdyBuddies);
   }
 
   /**
