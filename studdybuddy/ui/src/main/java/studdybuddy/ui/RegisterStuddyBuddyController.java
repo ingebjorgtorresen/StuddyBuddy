@@ -170,6 +170,7 @@ public class RegisterStuddyBuddyController {
    */
   @FXML
   public void handleRegister(ActionEvent event) throws IOException {
+    messageBox.setText("");
 
     if (checkBuddyExists()) {
       nameField.setStyle("-fx-prompt-text-fill: red; -fx-border-color: red;");
@@ -220,21 +221,21 @@ public class RegisterStuddyBuddyController {
       StuddyBuddy buddy = createNewStuddyBuddy();
       buddies.addStuddyBuddy(buddy);
       dataAccess.putStuddyBuddy(buddy);
-    }
-    
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
-      Parent parent = (Parent) loader.load();
-      StuddyBuddiesController buddiesController = loader.getController();
-      buddiesController.transferData(dataAccess, buddies, buddy);
-      Stage buddiesStage = new Stage();
-      buddiesStage.setScene(new Scene(parent));
-      buddiesStage.setTitle("StuddyBuddies");
-      buddiesStage.show();
-      Stage thisStage = (Stage) nameField.getScene().getWindow();
-      thisStage.close(); 
-    } catch (IOException | NullPointerException e) {
-      e.printStackTrace();
+
+      try {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("StuddyBuddies.fxml"));
+        Parent parent = (Parent) loader.load();
+        StuddyBuddiesController buddiesController = loader.getController();
+        buddiesController.transferData(dataAccess, buddies, buddy);
+        Stage buddiesStage = new Stage();
+        buddiesStage.setScene(new Scene(parent));
+        buddiesStage.setTitle("StuddyBuddies");
+        buddiesStage.show();
+        Stage thisStage = (Stage) nameField.getScene().getWindow();
+        thisStage.close(); 
+      } catch (IOException | NullPointerException e) {
+        e.printStackTrace();
+      }
     }
   }
 

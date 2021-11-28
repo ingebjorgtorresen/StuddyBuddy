@@ -3,6 +3,7 @@ package studdybuddy.ui;
 import java.io.IOException;
 import java.net.URL;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -110,7 +111,7 @@ public class StuddyBuddyRegistrationController {
     try {
       registration.setStartTime(startTimeField.getText());
       startTimeField.setStyle("-fx-border-color: grey;");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException | DateTimeParseException e) {
       startTimeField.setStyle("-fx-border-color: red;");
       startTimeField.clear();
       throw new IllegalStateException("Invalid start time.");
@@ -125,7 +126,7 @@ public class StuddyBuddyRegistrationController {
     try {
       registration.setEndTime(endTimeField.getText());
       endTimeField.setStyle("-fx-border-color: grey;");
-    } catch (IllegalArgumentException e) {
+    } catch (IllegalArgumentException | DateTimeParseException e) {
       endTimeField.setStyle("-fx-border-color: red;");
       endTimeField.clear();;
       throw new IllegalStateException("Invalid end time.");
@@ -146,7 +147,7 @@ public class StuddyBuddyRegistrationController {
       setDateFromInput(registration);
       buddy.addRegistration(registration);
       return true;
-    } catch (IllegalStateException e) {
+    } catch (IllegalStateException | NullPointerException e) {
       return false;
     }
 
