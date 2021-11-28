@@ -10,10 +10,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
-import studdybuddy.core.StuddyBuddyRegistration;
 import studdybuddy.json.StuddyBuddiesPersistence;
 
 /**
@@ -39,10 +39,6 @@ public class StuddyBuddiesService {
 
   public StuddyBuddies getStuddyBuddies() {
     return readBuddies();
-  }
-
-  public void setStuddyBuddies(StuddyBuddies buddies) {
-    this.buddies = buddies;
   }
 
   /**

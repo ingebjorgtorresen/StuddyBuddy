@@ -12,7 +12,7 @@ import studdybuddy.core.StuddyBuddies;
 import studdybuddy.core.StuddyBuddy;
 
 /**
- * Controller for Spring Boot Application. Base request mapping is "/api".
+ * Controller for Spring Boot Application. Base request mapping is "/studdybuddy".
  */
 @RestController
 @RequestMapping("/studdybuddy")
